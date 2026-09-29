@@ -84,20 +84,46 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Section heading pattern ── */
 .section-header {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto var(--space-3xl);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
 }
 
-.section-header h2 {
+.section-header-title {
+  flex: 1;
+}
+
+.section-header-title h2 {
   font-size: var(--fs-h2);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
-.section-header p {
+.section-header-title p {
   color: var(--color-grey-500);
-  font-size: var(--fs-body-lg);
-  line-height: var(--lh-relaxed);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  margin: 0;
+}
+
+.section-see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-brand);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.section-see-more:hover {
+  gap: 0.6rem;
+  color: var(--color-brand-dark);
 }
 
 /* ── Buttons ── */
