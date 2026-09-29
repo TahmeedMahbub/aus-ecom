@@ -75,7 +75,7 @@
             <div class="hero-label">${slide.label}</div>
             <h1 class="hero-headline">${slide.headline}</h1>
             <p class="hero-subtext">${slide.subtext}</p>
-            <a href="${slide.ctaLink}" class="btn btn-white btn-lg">${slide.cta}</a>
+            <a href="${slide.ctaLink}" class="btn btn-white">${slide.cta}</a>
           </div>
         </div>
       </div>

@@ -130,7 +130,7 @@ const HERO_SLIDES = [
     subtext: 'Discover a curated collection of premium fashion, handcrafted home decor, sustainable jute, and heirloom heritage pieces sourced directly from Bangladesh.',
     cta: 'Explore All Categories',
     ctaLink: '#categories-section',
-    image: 'assets/images/hero/hero-home.jpg',
+    image: 'assets/images/hero/hero-1.png',
   },
   {
     id: 2,
@@ -148,7 +148,7 @@ const HERO_SLIDES = [
     subtext: 'Pre-order from our limited quarterly batch and access exclusive artisan direct pricing with zero overproduction waste.',
     cta: 'View Pre-Order Drop',
     ctaLink: '#preorder-section',
-    image: 'assets/images/hero/hero-1.png',
+    image: 'assets/images/hero/hero-3.png',
   },
 ];
 
@@ -383,7 +383,7 @@ const PRODUCTS = [
     desc: 'Natural Eco-Fiber · Handcrafted Home Organization',
     price: 54.00,
     originalPrice: 75.00,
-    image: 'assets/images/hero/hero-home.jpg',
+    image: 'assets/images/lifestyle/furnitures.jpg',
     badge: 'limited',
     category: 'jute',
     colors: ['#D3B382', '#967850'],
