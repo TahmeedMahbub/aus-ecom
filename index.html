@@ -93,6 +93,7 @@
     </div>
   </div>
 
+  <main class="main-content">
   <!-- ═══════════════════════════════════════════════════════
        1. HERO / FEATURED COLLECTION
        ═══════════════════════════════════════════════════════ -->
@@ -112,38 +113,21 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       2. SHOP BY CATEGORY
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section categories-section" id="categories-section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-header-title">
-          <span class="section-kicker">Curated Collections</span>
-          <h2>Shop by Category</h2>
-          <p>Explore premium apparel, handcrafted home accents, sustainable jute, and cultural heirlooms.</p>
-        </div>
-        <a href="#products-section" class="section-see-more">See More &rarr;</a>
-      </div>
-      <div class="category-grid" id="category-grid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
        3. FEATURED / NEW DROPS (Filterable Grid)
        ═══════════════════════════════════════════════════════ -->
   <section class="section products-section" id="products-section">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-header-title">
-          <span class="section-kicker">Batch 04 Arrivals</span>
-          <h2>Featured & New Drops</h2>
-          <p>Meticulously sourced from Bangladesh's master craftspeople and premier ateliers.</p>
+        <div class="section-header-top">
+          <div class="section-header-title">
+            <span class="section-kicker">Batch 04 Arrivals</span>
+            <h2>Featured & New Drops</h2>
+          </div>
+          <a href="#categories-section" class="section-see-more">See More &rarr;</a>
         </div>
-        <a href="#categories-section" class="section-see-more">See More &rarr;</a>
+        <p class="section-header-desc">Meticulously sourced from Bangladesh's master craftspeople and premier ateliers.</p>
       </div>
-      
+
       <!-- Category Filter Tabs -->
       <div class="filter-tabs fade-up" id="product-filter-tabs">
         <button class="filter-btn active" data-filter="all">All Items</button>
@@ -156,6 +140,27 @@
       </div>
 
       <div class="product-grid" id="product-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       2. SHOP BY CATEGORY
+       ═══════════════════════════════════════════════════════ -->
+  <section class="section categories-section" id="categories-section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-header-top">
+          <div class="section-header-title">
+            <span class="section-kicker">Curated Collections</span>
+            <h2>Shop by Category</h2>
+          </div>
+          <a href="#products-section" class="section-see-more">See More &rarr;</a>
+        </div>
+        <p class="section-header-desc">Explore premium apparel, handcrafted home accents, sustainable jute, and cultural heirlooms.</p>
+      </div>
+      <div class="category-grid" id="category-grid">
         <!-- Rendered by JS -->
       </div>
     </div>
@@ -206,11 +211,13 @@
   <section class="section home-living-section" id="home-living-section">
     <div class="container">
       <div class="section-header fade-up" style="margin-bottom: var(--space-lg);">
-        <div class="section-header-title">
-          <span class="section-kicker">Curated Interiors</span>
-          <h2>Home & Living Collection</h2>
+        <div class="section-header-top">
+          <div class="section-header-title">
+            <span class="section-kicker">Curated Interiors</span>
+            <h2>Home & Living Collection</h2>
+          </div>
+          <a href="#products-section" class="section-see-more" data-filter-trigger="home-decor">See More &rarr;</a>
         </div>
-        <a href="#products-section" class="section-see-more" data-filter-trigger="home-decor">See More &rarr;</a>
       </div>
 
       <div class="editorial-banner fade-up">
@@ -310,12 +317,14 @@
   <section class="section bestsellers-section" id="bestsellers-section">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-header-title">
-          <span class="section-kicker">Most Loved Across Australia</span>
-          <h2>Best Sellers</h2>
-          <p>Top customer rated pieces combining comfort, craftsmanship, and enduring quality.</p>
+        <div class="section-header-top">
+          <div class="section-header-title">
+            <span class="section-kicker">Most Loved Across Australia</span>
+            <h2>Best Sellers</h2>
+          </div>
+          <a href="#products-section" class="section-see-more">See More &rarr;</a>
         </div>
-        <a href="#products-section" class="section-see-more">See More &rarr;</a>
+        <p class="section-header-desc">Top customer rated pieces combining comfort, craftsmanship, and enduring quality.</p>
       </div>
       <div class="bestsellers-grid" id="bestsellers-grid">
         <!-- Rendered by JS -->
@@ -379,11 +388,13 @@
   <section class="section preorder-steps-section" id="preorder-steps-section">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-header-title">
-          <span class="section-kicker">Transparent & Sustainable</span>
-          <h2>How Pre-Order Works</h2>
-          <p>A smarter, zero-waste way to shop authentic handcrafted goods.</p>
+        <div class="section-header-top">
+          <div class="section-header-title">
+            <span class="section-kicker">Transparent & Sustainable</span>
+            <h2>How Pre-Order Works</h2>
+          </div>
         </div>
+        <p class="section-header-desc">A smarter, zero-waste way to shop authentic handcrafted goods.</p>
       </div>
       <div class="preorder-steps-grid" id="preorder-steps-grid">
         <!-- Rendered by JS -->
@@ -400,11 +411,13 @@
   <section class="section reviews-section" id="reviews-section">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-header-title">
-          <span class="section-kicker">Verified Community Feedback</span>
-          <h2>Loved by Australian Homes</h2>
-          <p>Real experiences from our customers across Sydney, Melbourne, Brisbane, and Perth.</p>
+        <div class="section-header-top">
+          <div class="section-header-title">
+            <span class="section-kicker">Verified Community Feedback</span>
+            <h2>Loved by Australian Homes</h2>
+          </div>
         </div>
+        <p class="section-header-desc">Real experiences from our customers across Sydney, Melbourne, Brisbane, and Perth.</p>
       </div>
       <div class="reviews-grid" id="reviews-grid">
         <!-- Rendered by JS -->
@@ -454,6 +467,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ═══════════════════════════════════════════════════════
        FOOTER

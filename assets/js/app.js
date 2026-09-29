@@ -60,7 +60,7 @@
   };
 
   /* ══════════════════════════════════════════════════════════
-     1. RENDER HERO SLIDER
+     1. RENDER HERO SLIDER (11:4 Aspect Ratio + Touch/Mouse Swipe)
      ══════════════════════════════════════════════════════════ */
   function renderHero() {
     const heroEl = document.getElementById('hero');
@@ -88,19 +88,78 @@
     heroEl.innerHTML = `
       ${slidesHTML}
       <div class="hero-dots">${dotsHTML}</div>
-      <div class="hero-controls">
-        <button class="hero-arrow hero-prev" aria-label="Previous slide">${ICONS.arrowLeft}</button>
-        <button class="hero-arrow hero-next" aria-label="Next slide">${ICONS.arrowRight}</button>
-      </div>
     `;
 
-    heroEl.querySelector('.hero-prev').addEventListener('click', () => changeSlide(-1));
-    heroEl.querySelector('.hero-next').addEventListener('click', () => changeSlide(1));
     heroEl.querySelectorAll('.hero-dot').forEach(dot => {
       dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.dot)));
     });
 
+    initHeroSwipe(heroEl);
     startHeroAutoplay();
+  }
+
+  function initHeroSwipe(heroEl) {
+    let startX = 0;
+    let startY = 0;
+    let distX = 0;
+    let distY = 0;
+    const threshold = 35;
+
+    // Touch swipe gestures
+    heroEl.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      distX = 0;
+      distY = 0;
+    }, { passive: true });
+
+    heroEl.addEventListener('touchmove', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      const touch = e.touches[0];
+      distX = touch.clientX - startX;
+      distY = touch.clientY - startY;
+    }, { passive: true });
+
+    heroEl.addEventListener('touchend', () => {
+      if (Math.abs(distX) > Math.abs(distY) && Math.abs(distX) > threshold) {
+        if (distX < 0) {
+          changeSlide(1);
+        } else {
+          changeSlide(-1);
+        }
+      }
+    });
+
+    // Mouse drag gestures for desktop displays
+    let isDragging = false;
+    heroEl.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      distX = 0;
+    });
+
+    heroEl.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      distX = e.clientX - startX;
+    });
+
+    heroEl.addEventListener('mouseup', () => {
+      if (isDragging) {
+        if (Math.abs(distX) > threshold) {
+          if (distX < 0) {
+            changeSlide(1);
+          } else {
+            changeSlide(-1);
+          }
+        }
+        isDragging = false;
+      }
+    });
+
+    heroEl.addEventListener('mouseleave', () => {
+      isDragging = false;
+    });
   }
 
   function changeSlide(dir) {
@@ -139,10 +198,13 @@
     const el = document.getElementById('trust-strip');
     if (!el) return;
 
-    el.innerHTML = TRUST_ITEMS.map(item => `
+    // Render items twice so marquee animation loops infinitely on mobile
+    const itemsToRender = [...TRUST_ITEMS, ...TRUST_ITEMS];
+
+    el.innerHTML = itemsToRender.map(item => `
       <div class="trust-item fade-up visible">
         <div class="trust-icon">${ICONS[item.icon] || ICONS.flag}</div>
-        <div>
+        <div class="trust-content">
           <h4>${item.title}</h4>
           <p>${item.desc}</p>
         </div>
@@ -244,6 +306,9 @@
     let filtered = PRODUCTS;
     if (filter !== 'all') {
       filtered = PRODUCTS.filter(p => p.category === filter);
+    } else {
+      // Show 8 products (exactly 2 rows of 4 products on PC)
+      filtered = PRODUCTS.slice(0, 8);
     }
 
     if (filtered.length === 0) {

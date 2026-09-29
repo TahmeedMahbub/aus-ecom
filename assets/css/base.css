@@ -84,27 +84,38 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Section heading pattern ── */
 .section-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-lg);
   margin-bottom: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.section-header-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: var(--space-md);
+  width: 100%;
 }
 
 .section-header-title {
   flex: 1;
+  min-width: 0;
 }
 
 .section-header-title h2 {
   font-size: var(--fs-h2);
-  margin-bottom: var(--space-xs);
+  margin: 0;
+  color: var(--color-dark);
 }
 
-.section-header-title p {
+.section-header-desc {
   color: var(--color-grey-500);
   font-size: var(--fs-body);
   line-height: var(--lh-normal);
   margin: 0;
+  width: 100%;
 }
 
 .section-see-more {
