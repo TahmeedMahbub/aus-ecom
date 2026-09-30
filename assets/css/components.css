@@ -347,18 +347,17 @@
   background: hsla(0, 0%, 0%, 0.6);
   backdrop-filter: blur(5px);
   z-index: var(--z-modal);
-  display: flex;
+  display: none;
   align-items: flex-start;
   justify-content: center;
   padding-top: 5vh;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-base), visibility var(--transition-base);
+  transition: opacity var(--transition-base);
 }
 
 .search-overlay.open {
+  display: flex;
   opacity: 1;
-  visibility: visible;
 }
 
 .search-modal {
@@ -371,6 +370,7 @@
   flex-direction: column;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+  border: 1px solid var(--color-grey-200);
   transform: translateY(-20px);
   transition: transform var(--transition-base);
 }
@@ -469,6 +469,30 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.search-default-state {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.search-results-state {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.search-no-results-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  width: 100%;
 }
 
 /* Sections & Section Titles */
