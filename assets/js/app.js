@@ -109,6 +109,10 @@
      3. RENDER PRODUCT CARDS & FILTER TABS
      ══════════════════════════════════════════════════════════ */
   function createProductCardHTML(product) {
+    const originalPriceHTML = product.originalPrice
+      ? `<span class="original">${SITE.currency}${product.originalPrice.toFixed(2)}</span>`
+      : `<span class="original">&nbsp;</span>`;
+
     return `
       <div class="product-card fade-up visible" data-product-id="${product.id}">
         <div class="product-card-image">
@@ -117,17 +121,20 @@
           <button class="product-card-wishlist ${state.wishlist.includes(product.id) ? 'active' : ''}" data-wishlist-id="${product.id}" aria-label="Add to wishlist">
             ${state.wishlist.includes(product.id) ? ICONS.heartFill : ICONS.heart}
           </button>
-          <div class="product-card-quickadd">
-            <button class="btn" data-quickview-id="${product.id}">Quick View</button>
-          </div>
         </div>
         <div class="product-card-info">
           <div class="product-card-category">${CATEGORY_NAME_MAP[product.category] || product.category}</div>
           <div class="product-card-name">${product.name}</div>
           <div class="product-card-desc">${product.desc}</div>
-          <div class="product-card-price">
-            <span class="current">${SITE.currency}${product.price.toFixed(2)}</span>
-            ${product.originalPrice ? `<span class="original" style="margin-left: 0.35rem;">${SITE.currency}${product.originalPrice.toFixed(2)}</span>` : ''}
+          <div class="product-card-footer">
+            <div class="product-card-price">
+              ${originalPriceHTML}
+              <span class="current">${SITE.currency}${product.price.toFixed(2)}</span>
+            </div>
+            <button class="product-card-btn" data-view-details-id="${product.id}" aria-label="View details for ${product.name}">
+              <span class="btn-text-desktop">View Details</span>
+              <span class="btn-text-mobile">View</span>
+            </button>
           </div>
         </div>
       </div>
@@ -142,10 +149,10 @@
       });
     });
 
-    container.querySelectorAll('[data-quickview-id]').forEach(btn => {
+    container.querySelectorAll('[data-view-details-id]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        openQuickView(parseInt(btn.dataset.quickviewId));
+        openQuickView(parseInt(btn.dataset.viewDetailsId));
       });
     });
 

@@ -528,24 +528,71 @@
   color: #E2953B;
 }
 
-.product-card-price {
+.product-card-footer {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: var(--space-xs);
   margin-top: auto;
   padding-top: var(--space-xs);
 }
 
-.product-card-price .current {
-  font-size: 1.05rem;
-  font-weight: var(--fw-bold);
-  color: var(--color-black);
+.product-card-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
 }
 
 .product-card-price .original {
   font-size: var(--fs-small);
   color: var(--color-grey-400);
   text-decoration: line-through;
+  line-height: 1.2;
+  font-weight: var(--fw-medium);
+  min-height: 1.1em;
+}
+
+.product-card-price .current {
+  font-size: 1.05rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-black);
+  line-height: 1.2;
+}
+
+.product-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-brand);
+  background-color: transparent;
+  border: 1.5px solid var(--color-brand);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.product-card-btn:hover {
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-white);
+}
+
+.product-card-btn .btn-text-desktop {
+  display: inline;
+}
+
+.product-card-btn .btn-text-mobile {
+  display: none;
 }
 
 .product-card-colors {
@@ -1776,8 +1823,25 @@
     display: none;
   }
 
+  .product-card-price .original {
+    font-size: 0.725rem;
+  }
+
   .product-card-price .current {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+  }
+
+  .product-card-btn .btn-text-desktop {
+    display: none;
+  }
+
+  .product-card-btn .btn-text-mobile {
+    display: inline;
+  }
+
+  .product-card-btn {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.6875rem;
   }
 
   /* Filter Tabs horizontal scroll on mobile */
