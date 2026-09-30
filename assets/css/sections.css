@@ -2496,6 +2496,18 @@ textarea.form-control {
     align-items: flex-start;
     gap: 0.85rem;
   }
+  .launch-offer-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-md);
+  }
+  .launch-offer-content {
+    align-items: center;
+    gap: 0.5rem;
+  }
   .launch-offer-right {
     width: 100%;
     justify-content: space-between;
