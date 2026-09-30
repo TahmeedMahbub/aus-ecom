@@ -71,20 +71,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Section spacing ── */
 .section {
-  padding-top: var(--space-4xl);
-  padding-bottom: var(--space-4xl);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
 }
 
 @media (max-width: 768px) {
   .section {
-    padding-top: var(--space-3xl);
-    padding-bottom: var(--space-3xl);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
   }
 }
 
 /* ── Section heading pattern ── */
 .section-header {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -130,6 +130,7 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   flex-shrink: 0;
   transition: gap var(--transition-fast), color var(--transition-fast);
+  margin-bottom: 0.3rem;
 }
 
 .section-see-more:hover {

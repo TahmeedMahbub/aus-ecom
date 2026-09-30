@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bongo Curated — Bangladesh-Made Lifestyle & Fashion for Australia</title>
-  <meta name="description" content="Curated Bangladesh-made fashion, handcrafted home decor, sustainable jute products, artisan crafts and lifestyle goods delivered across Australia.">
-  <meta name="keywords" content="Bangladesh lifestyle Australia, Bangladeshi home decor, jute bags Australia, Nakshi Kantha, sustainable crafts Australia, South Asian fashion Australia">
+  <title>Bongo Curated — Bangladesh Made. Curated for Australia.</title>
+  <meta name="description" content="Discover thoughtfully selected fashion, home decor, jute, handcrafted pieces and gifts made in Bangladesh.">
+  <meta name="keywords" content="Bangladesh lifestyle Australia, Bangladeshi home decor, jute bags Australia, Nakshi Kantha, handcrafted fashion Australia">
   <meta name="author" content="Bongo Curated">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Bongo Curated — Bangladesh-Made Lifestyle & Fashion for Australia">
-  <meta property="og:description" content="Curated Bangladesh-made fashion, handcrafted home decor, sustainable jute products, artisan crafts and lifestyle goods delivered across Australia.">
+  <meta property="og:title" content="Bongo Curated — Bangladesh Made. Curated for Australia.">
+  <meta property="og:description" content="Discover thoughtfully selected fashion, home decor, jute, handcrafted pieces and gifts made in Bangladesh.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_AU">
 
@@ -33,9 +33,9 @@
   <!-- ═══════════════════════════════════════════════════════
        ANNOUNCEMENT BAR
        ═══════════════════════════════════════════════════════ -->
-  <div class="announcement-bar" id="announcement-bar">
-    <span>Free Australia-wide delivery on orders over A$99 · Pre-order Batch 04 Now Open</span>
-  </div>
+  <!-- <div class="announcement-bar" id="announcement-bar">
+    <span>Discover Bangladesh-made products, curated for Australia.</span>
+  </div> -->
 
   <!-- ═══════════════════════════════════════════════════════
        NAVBAR
@@ -82,50 +82,64 @@
        ═══════════════════════════════════════════════════════ -->
   <div class="search-overlay" id="search-overlay">
     <div class="search-overlay-inner">
-      <input type="text" class="search-overlay-input" id="search-input" placeholder="Search fashion, cushions, jute, brass, gifts..." aria-label="Search">
+      <input type="text" class="search-overlay-input" id="search-input" placeholder="Search fashion, home decor, jute, handicrafts, gifts..." aria-label="Search">
       <div class="search-overlay-suggestions" id="search-suggestions">
         <div class="suggestion-tag" data-search="Jute">Jute Bags</div>
         <div class="suggestion-tag" data-search="Nakshi">Nakshi Kantha</div>
         <div class="suggestion-tag" data-search="Linen">Linen Shirts</div>
         <div class="suggestion-tag" data-search="Cushion">Cushions</div>
-        <div class="suggestion-tag" data-search="Tee">Heavyweight Tees</div>
+        <div class="suggestion-tag" data-search="Brass">Brass Vessels</div>
       </div>
     </div>
   </div>
 
   <main class="main-content">
+
   <!-- ═══════════════════════════════════════════════════════
-       1. HERO / FEATURED COLLECTION
+       1. HERO SECTION
        ═══════════════════════════════════════════════════════ -->
   <section class="hero" id="hero">
     <!-- Rendered by JS -->
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       TRUST STRIP
+       LAUNCH OFFER STRIP (COMPACT)
        ═══════════════════════════════════════════════════════ -->
-  <section class="trust-strip">
+  <section class="launch-offer-strip" id="launch-offer-strip">
     <div class="container">
-      <div class="trust-strip-grid" id="trust-strip">
-        <!-- Rendered by JS -->
+      <div class="launch-offer-inner fade-up visible">
+        <div class="launch-offer-left">
+          <span class="launch-offer-eyebrow">LIMITED LAUNCH OFFER</span>
+          <div class="launch-offer-content">
+            <span class="launch-offer-discount">25% OFF</span>
+            <span class="launch-offer-text">Save 25% on selected products for a limited time.</span>
+          </div>
+        </div>
+
+        <div class="launch-offer-right">
+          <div class="launch-offer-timer" id="launch-offer-timer">
+            <!-- Rendered by JS -->
+          </div>
+          <a href="#products-section" class="btn btn-primary">Shop Now</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       3. FEATURED / NEW DROPS (Filterable Grid)
+       2. FEATURED COLLECTION
        ═══════════════════════════════════════════════════════ -->
   <section class="section products-section" id="products-section">
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-header-top">
           <div class="section-header-title">
-            <span class="section-kicker">Batch 04 Arrivals</span>
-            <h2>Featured & New Drops</h2>
+            <!-- <span class="section-kicker">CURATED SELECTION</span> -->
+            <h2>Featured Collection</h2>
           </div>
-          <a href="#categories-section" class="section-see-more">See More &rarr;</a>
+          <a href="#categories-section" class="section-see-more">Show More &rarr;</a>
         </div>
-        <p class="section-header-desc">Meticulously sourced from Bangladesh's master craftspeople and premier ateliers.</p>
+        <p class="section-header-desc">A selection of pieces we're excited to bring to Australia.</p>
       </div>
 
       <!-- Category Filter Tabs -->
@@ -133,10 +147,9 @@
         <button class="filter-btn active" data-filter="all">All Items</button>
         <button class="filter-btn" data-filter="fashion">Fashion</button>
         <button class="filter-btn" data-filter="home-decor">Home Decor</button>
-        <button class="filter-btn" data-filter="jute">Jute Products</button>
-        <button class="filter-btn" data-filter="handicrafts">Handicrafts</button>
-        <button class="filter-btn" data-filter="lifestyle">Lifestyle & Gifts</button>
-        <button class="filter-btn" data-filter="heritage">Heritage</button>
+        <button class="filter-btn" data-filter="jute">Jute</button>
+        <button class="filter-btn" data-filter="handicrafts">Handcrafted</button>
+        <button class="filter-btn" data-filter="lifestyle">Gifts</button>
       </div>
 
       <div class="product-grid" id="product-grid">
@@ -146,19 +159,19 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       2. SHOP BY CATEGORY
+       3. SHOP BY CATEGORY
        ═══════════════════════════════════════════════════════ -->
   <section class="section categories-section" id="categories-section">
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-header-top">
           <div class="section-header-title">
-            <span class="section-kicker">Curated Collections</span>
+            <!-- <span class="section-kicker">OUR RANGES</span> -->
             <h2>Shop by Category</h2>
           </div>
-          <a href="#products-section" class="section-see-more">See More &rarr;</a>
+          <a href="#products-section" class="section-see-more">View All Products &rarr;</a>
         </div>
-        <p class="section-header-desc">Explore premium apparel, handcrafted home accents, sustainable jute, and cultural heirlooms.</p>
+        <p class="section-header-desc">Explore fashion, home & living, natural jute, handcrafted pieces and thoughtful gifts.</p>
       </div>
       <div class="category-grid" id="category-grid">
         <!-- Rendered by JS -->
@@ -167,120 +180,30 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       7. LIMITED PRE-ORDER COLLECTION
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section preorder-drop-section" id="preorder-section">
-    <div class="container">
-      <div class="preorder-banner-card fade-up">
-        <div class="preorder-banner-header">
-          <div class="preorder-badge-pill">Limited Batch 04 · Pre-Order Open</div>
-          <h2>Exclusive Pre-Order Drops</h2>
-          <p>Reserve handcrafted items before production closes. Enjoy up to 35% early-bird savings with zero overproduction waste.</p>
-        </div>
-
-        <div class="drop-countdown" id="drop-countdown">
-          <!-- Rendered by JS -->
-        </div>
-
-        <div class="preorder-products-preview" id="preorder-products-preview">
-          <!-- Rendered by JS -->
-        </div>
-
-        <div class="preorder-banner-footer">
-          <div class="batch-status-box">
-            <div class="batch-status-header">
-              <span>Batch 04 Allocation</span>
-              <strong>84% Reserved</strong>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 84%"></div>
-            </div>
-            <small>Production begins immediately after drop closes. Dispatched directly from Melbourne.</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       4. BANGLADESH MADE (Spotlight Brand Story)
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section bangladesh-made" id="bangladesh-made-section">
-    <div class="container">
-      <div class="bangladesh-made-wrapper">
-        <div class="bangladesh-made-content fade-up">
-          <span class="section-kicker">Origin & Authenticity</span>
-          <h2>Bangladesh Made, Elevated for Australia</h2>
-          <p class="lead-text">
-            Bangladesh is the world leader in ethical garment innovation and home to centuries-old traditions of master weaving, terracotta pottery, and golden jute craft.
-          </p>
-          <p>
-            We curate and produce the finest goods directly with artisan collectives and sustainable export ateliers — bringing authentic craftsmanship, superior fits, and fair transparent pricing straight to your Australian doorstep.
-          </p>
-          
-          <div class="bangladesh-pillars-grid" id="bangladesh-pillars">
-            <!-- Rendered by JS -->
-          </div>
-
-          <a href="#community-section" class="btn btn-primary" style="margin-top: var(--space-xl)">Read Our Craft Story</a>
-        </div>
-
-        <div class="bangladesh-made-visual fade-up">
-          <div class="visual-card-stacked">
-            <img src="assets/images/lifestyle/craft-story.jpg" alt="Bangladeshi master artisan weaving traditional patterns" loading="lazy" class="main-visual">
-            <div class="floating-badge">
-              <span class="badge-icon">🌿</span>
-              <div>
-                <strong>100% Direct & Ethical</strong>
-                <p>Above living wages & zero middlemen</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       5. HOME & LIVING COLLECTION
+       5. HOME & LIVING
        ═══════════════════════════════════════════════════════ -->
   <section class="section home-living-section" id="home-living-section">
     <div class="container">
-      <div class="section-header fade-up" style="margin-bottom: var(--space-lg);">
-        <div class="section-header-top">
-          <div class="section-header-title">
-            <span class="section-kicker">Curated Interiors</span>
-            <h2>Home & Living Collection</h2>
-          </div>
-          <a href="#products-section" class="section-see-more" data-filter-trigger="home-decor">See More &rarr;</a>
-        </div>
-      </div>
-
       <div class="editorial-banner fade-up">
         <div class="editorial-content">
-          <span class="section-kicker kicker-light">Curated Interiors</span>
-          <h2>Home & Living Collection</h2>
-          <p>Infuse warmth and texture into your Australian living spaces with hand-embroidered Nakshi Kantha cushions, reclaimed mango wood vessels, and terracotta ceramics.</p>
-          <div class="editorial-tags">
-            <span>✓ 100% Handcrafted</span>
-            <span>✓ Natural Plant Dyes</span>
-            <span>✓ Organic Linens</span>
-          </div>
-          <a href="#products-section" class="btn btn-white" data-filter-trigger="home-decor">Shop Home Goods</a>
+          <span class="section-kicker kicker-light">CURATED INTERIORS</span>
+          <h2>Home & Living</h2>
+          <p>Bring warmth and character to your space with handcrafted pieces made in Bangladesh.</p>
+          <a href="#products-section" class="btn btn-white" data-filter-trigger="home-decor">Shop Home & Living</a>
         </div>
         <div class="editorial-image">
-          <img src="assets/images/lifestyle/furnitures.jpg" alt="Minimalist Australian living room with Bangladesh decor" loading="lazy">
+          <img src="assets/images/lifestyle/furnitures.jpg" alt="Australian living room with handcrafted Bangladesh decor" loading="lazy">
         </div>
       </div>
 
-      <div class="home-showcase-grid" id="home-showcase-grid">
+      <div class="home-showcase-grid" id="home-showcase-grid" style="margin-top: 2rem;">
         <!-- Rendered by JS -->
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       6. JUTE & NATURAL MATERIALS (The Golden Fiber)
+       6. JUTE & NATURAL
        ═══════════════════════════════════════════════════════ -->
   <section class="section jute-section" id="jute-section">
     <div class="container">
@@ -288,181 +211,108 @@
         <div class="jute-image-col fade-up">
           <div class="jute-hero-card">
             <img src="assets/images/lifestyle/jute-showcase.jpg" alt="Handcrafted Bangladesh Golden Jute Totes and Baskets" loading="lazy">
-            <div class="jute-tag-badge">The Golden Fiber of Bengal</div>
           </div>
         </div>
         <div class="jute-content-col fade-up">
-          <span class="section-kicker">Sustainable Living</span>
-          <h2>Jute & Natural Materials</h2>
+          <span class="section-kicker">NATURAL MATERIALS</span>
+          <h2>Jute & Natural</h2>
           <p class="lead-text">
-            Celebrated globally as the "Golden Fiber", Bangladesh jute is one of the strongest, most sustainable plant fibers on earth.
+            Discover versatile jute pieces made from one of Bangladesh's most distinctive natural materials.
           </p>
-          <p>
-            Our golden jute totes, braided storage baskets, and round floor mats are handwoven by artisan cooperatives in rural Bangladesh — blending organic durability with modern coastal Australian styling.
+          <a href="#products-section" class="btn btn-primary" data-filter-trigger="jute">Shop Jute</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       7. BANGLADESH STORY
+       ═══════════════════════════════════════════════════════ -->
+  <section class="section bangladesh-made" id="bangladesh-made-section">
+    <div class="container">
+      <div class="bangladesh-made-wrapper" style="grid-template-columns: 1.2fr 1fr; align-items: center;">
+        <div class="bangladesh-made-content fade-up">
+          <span class="section-kicker">OUR STORY</span>
+          <h2>Made in Bangladesh. Selected for Australia.</h2>
+          <p class="lead-text" style="font-size: 1rem; font-weight: 400; color: var(--color-grey-700); margin-bottom: 1.5rem;">
+            We discover distinctive products from Bangladesh and curate them for modern Australian lifestyles — from everyday fashion to handcrafted home pieces and thoughtful gifts.
           </p>
-          <ul class="jute-features-list">
-            <li><strong>100% Biodegradable & Carbon-Negative:</strong> Naturally renewable crop nurtured by monsoon river deltas.</li>
-            <li><strong>Durable & Heavy-Duty:</strong> Braided weave engineered for daily shopping, storage, and home use.</li>
-            <li><strong>Coastal Aesthetic:</strong> Natural golden tones that complement Australian wood and linen decors.</li>
-          </ul>
-          <a href="#products-section" class="btn btn-primary" data-filter-trigger="jute" style="margin-top: var(--space-md)">Explore Jute Collection</a>
+          <a href="#products-section" class="btn btn-primary">Our Story</a>
+        </div>
+
+        <div class="bangladesh-made-visual fade-up">
+          <div class="visual-card-stacked">
+            <img src="assets/images/lifestyle/craft-story.jpg" alt="Bangladeshi craft story" loading="lazy" class="main-visual">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       8. BEST SELLERS
+       8. REQUEST & GIFTS (DUAL CARDS)
        ═══════════════════════════════════════════════════════ -->
-  <section class="section bestsellers-section" id="bestsellers-section">
+  <section class="section request-gifting-section" id="request-gifting-section" style="padding: 4rem 0; background: var(--color-surface-card); border-top: 1px solid var(--color-grey-200); border-bottom: 1px solid var(--color-grey-200);">
     <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-header-top">
-          <div class="section-header-title">
-            <span class="section-kicker">Most Loved Across Australia</span>
-            <h2>Best Sellers</h2>
+      <div class="dual-cards-grid">
+        
+        <!-- Card 1: Request Something From Bangladesh -->
+        <div class="shop-your-way-card fade-up visible" id="request-section" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; padding: 2.25rem; height: 100%;">
+          <div>
+            <span class="section-kicker" style="margin-bottom: 0.5rem;">CAN'T FIND WHAT YOU'RE LOOKING FOR?</span>
+            <h2 style="font-family: var(--font-heading); font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin-bottom: 0.75rem; color: var(--color-dark);">Request Something From Bangladesh</h2>
+            <p style="color: var(--color-grey-700); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Tell us what you're looking for and we'll see if we can source it for you.
+            </p>
           </div>
-          <a href="#products-section" class="section-see-more">See More &rarr;</a>
+          <div>
+            <a href="mailto:hello@bongocurated.com.au?subject=Product%20Request" class="btn btn-primary btn-lg" style="width: 100%;">Make a Request</a>
+          </div>
         </div>
-        <p class="section-header-desc">Top customer rated pieces combining comfort, craftsmanship, and enduring quality.</p>
-      </div>
-      <div class="bestsellers-grid" id="bestsellers-grid">
-        <!-- Rendered by JS -->
+
+        <!-- Card 2: Thoughtful Gifts, for someone special -->
+        <div class="shop-your-way-card fade-up visible" id="gifting-section" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; padding: 2.25rem; height: 100%;">
+          <div>
+            <span class="section-kicker" style="margin-bottom: 0.5rem;">SPECIAL GIFTS</span>
+            <h2 style="font-family: var(--font-heading); font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin-bottom: 0.75rem; color: var(--color-dark);">Thoughtful Gifts, For Someone Special</h2>
+            <p style="color: var(--color-grey-700); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Discover unique pieces, with gift wrapping and a personal note available.
+            </p>
+          </div>
+          <div>
+            <a href="#products-section" class="btn btn-primary btn-lg" data-filter-trigger="lifestyle" style="width: 100%;">Send Gifts</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       9. WHY SHOP WITH US
+       10. DISCOVER SOMETHING DIFFERENT (SOCIAL PROOF)
        ═══════════════════════════════════════════════════════ -->
-  <section class="section why-us" id="why-us-section">
-    <div class="container">
-      <div class="why-us-grid">
-        <div class="why-us-image fade-up">
-          <img src="assets/images/products/artisan-brass.jpg" alt="Curated Bangladesh home crafts in Australia" loading="lazy">
-          <div class="why-us-stat-badge">
-            <span class="stat-num">100%</span>
-            <span class="stat-text">Artisan Direct & Ethically Sourced</span>
-          </div>
-        </div>
-        <div class="why-us-content fade-up">
-          <span class="section-kicker">The Bongo Curated Difference</span>
-          <h2>Thoughtfully Sourced for Modern Australian Homes</h2>
-          
-          <div class="why-us-point">
-            <div class="point-num">01</div>
-            <div>
-              <h4>Authentic Bangladesh Heritage</h4>
-              <p>Direct sourcing from generational craft hubs — Tangail textiles, Dhamrai brass, and Rajshahi silk cotton.</p>
-            </div>
-          </div>
-          <div class="why-us-point">
-            <div class="point-num">02</div>
-            <div>
-              <h4>Honest Direct-to-Consumer Prices</h4>
-              <p>We eliminate middlemen importers and unnecessary store markups, giving you premium items at fair prices.</p>
-            </div>
-          </div>
-          <div class="why-us-point">
-            <div class="point-num">03</div>
-            <div>
-              <h4>South Asian Fits + Australian Aesthetics</h4>
-              <p>Apparel patterned specifically for comfortable South Asian proportions, alongside minimalist coastal home designs.</p>
-            </div>
-          </div>
-          <div class="why-us-point">
-            <div class="point-num">04</div>
-            <div>
-              <h4>Seamless Australia-Wide Delivery</h4>
-              <p>Fast tracked shipping from our Melbourne depot, with free shipping over A$99 and 30-day hassle-free returns.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="section reviews-section" id="reviews-section" style="padding: 3rem 0; background: var(--color-surface-alt);">
+    <div class="container" style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <span class="section-kicker">OUR COMMITMENT</span>
+      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Discover Something Different</h2>
+      <p style="color: var(--color-grey-700); font-size: 1rem;">Thoughtfully selected Bangladesh-made products, brought to Australia.</p>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       10. HOW PRE-ORDER WORKS
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section preorder-steps-section" id="preorder-steps-section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-header-top">
-          <div class="section-header-title">
-            <span class="section-kicker">Transparent & Sustainable</span>
-            <h2>How Pre-Order Works</h2>
-          </div>
-        </div>
-        <p class="section-header-desc">A smarter, zero-waste way to shop authentic handcrafted goods.</p>
-      </div>
-      <div class="preorder-steps-grid" id="preorder-steps-grid">
-        <!-- Rendered by JS -->
-      </div>
-      <div class="preorder-quote-card fade-up">
-        <p>"By producing based on actual demand, we support artisan livelihoods with fair bulk orders, eliminate excess inventory waste, and pass substantial savings to you."</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       11. CUSTOMER REVIEWS
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section reviews-section" id="reviews-section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-header-top">
-          <div class="section-header-title">
-            <span class="section-kicker">Verified Community Feedback</span>
-            <h2>Loved by Australian Homes</h2>
-          </div>
-        </div>
-        <p class="section-header-desc">Real experiences from our customers across Sydney, Melbourne, Brisbane, and Perth.</p>
-      </div>
-      <div class="reviews-grid" id="reviews-grid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       12. COMMUNITY / BANGLADESH CRAFT STORY
-       ═══════════════════════════════════════════════════════ -->
-  <section class="community-section section" id="community-section">
-    <div class="community-bg" style="background-image: url('assets/images/lifestyle/craft-story.jpg')"></div>
-    <div class="community-overlay"></div>
-    <div class="container">
-      <div class="community-content fade-up">
-        <span class="section-kicker kicker-light">The Heritage Story</span>
-        <h2>Weaving Heritage into Australian Living.</h2>
-        <p>From the lush river deltas of Bangladesh to Australian living rooms and wardrobes — we are on a mission to celebrate world-class Bangladeshi craft, empower rural artisan women, and deliver enduring quality that feels like home.</p>
-        <div class="community-actions">
-          <a href="#products-section" class="btn btn-white">Shop The Collection</a>
-          <a href="#preorder-steps-section" class="btn btn-outline-white">Our Sustainable Model</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       13. NEWSLETTER / EARLY ACCESS
+       11. NEWSLETTER
        ═══════════════════════════════════════════════════════ -->
   <section class="section newsletter-section" id="newsletter-section">
     <div class="container">
       <div class="newsletter-card">
         <div class="newsletter-content">
-          <span class="section-kicker">VIP Access</span>
-          <h2>Get First Access to Batch Drops</h2>
-          <p>Subscribe for exclusive early-bird drop notifications, artisan craft stories, and receive A$10 off your first pre-order.</p>
+          <span class="section-kicker">STAY IN THE LOOP</span>
+          <h2>Stay in the Loop</h2>
+          <p>Be the first to know about new arrivals, special offers and upcoming collections.</p>
           <form class="newsletter-form" id="newsletter-form">
             <input type="email" class="newsletter-input" placeholder="Enter your email address" aria-label="Email address" required>
-            <button type="submit" class="btn btn-primary">Join Early Access</button>
+            <button type="submit" class="btn btn-primary">Join the List</button>
           </form>
-          <div class="newsletter-perks">
-            <span>✓ Early Drop Invitations</span>
-            <span>✓ Artisan Spotlights</span>
-            <span>✓ No Spam, Unsubscribe Anytime</span>
-          </div>
         </div>
       </div>
     </div>
@@ -479,7 +329,7 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-bottom-left">
-          &copy; 2026 Bongo Curated. Curated Bangladesh-made goods for Australia. ABN 48 619 283 104. Melbourne, Australia.
+          &copy; 2026 Bongo Curated. Curated Bangladesh-made goods for Australia.
         </div>
         <div class="footer-payment">
           <span class="footer-payment-icon">VISA</span>
@@ -487,7 +337,6 @@
           <span class="footer-payment-icon">AMEX</span>
           <span class="footer-payment-icon">Apple Pay</span>
           <span class="footer-payment-icon">Google Pay</span>
-          <span class="footer-payment-icon">Afterpay</span>
         </div>
       </div>
     </div>
@@ -529,11 +378,6 @@
           <div class="modal-sizes"></div>
         </div>
 
-        <div class="modal-badge-info" id="modal-badge-info">
-          <span>🌿 Handcrafted in Bangladesh</span>
-          <span>🚚 Ships to Australia</span>
-        </div>
-
         <button class="btn btn-primary btn-lg" id="modal-add-to-cart" style="width:100%; margin-top: 1rem">Add to Cart</button>
       </div>
     </div>
@@ -545,12 +389,8 @@
   <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
   <div class="cart-drawer" id="cart-drawer">
     <div class="cart-drawer-header">
-      <h3>Your Curated Bag</h3>
+      <h3>Your Shopping Bag</h3>
       <button id="cart-drawer-close" aria-label="Close cart">&times;</button>
-    </div>
-    <div class="cart-free-shipping-bar">
-      <div class="free-shipping-text" id="free-shipping-text">Add items for free AU shipping</div>
-      <div class="free-shipping-progress"><div class="progress-fill" id="shipping-progress-fill" style="width: 0%"></div></div>
     </div>
     <div class="cart-drawer-body" id="cart-drawer-body">
       <div class="cart-drawer-empty">
