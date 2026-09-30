@@ -163,6 +163,9 @@
     });
   }
 
+  window.createProductCardHTML = createProductCardHTML;
+  window.bindProductCardEvents = bindProductCardEvents;
+
   function renderProducts(filter = 'all') {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
@@ -259,22 +262,22 @@
             ${cat.megaMenu.map(col => `
               <div class="mega-menu-col">
                 <h4>${col.heading}</h4>
-                <ul>${col.links.map(l => `<li><a href="#products-section" data-filter="${l.slug}">${l.label}</a></li>`).join('')}</ul>
+                <ul>${col.links.map(l => `<li><a href="products.html?category=${l.slug}">${l.label}</a></li>`).join('')}</ul>
               </div>
             `).join('')}
           </div>
         `;
       }
-      const targetHref = cat.slug === 'preorder' ? '#preorder-section' : '#products-section';
+      const targetHref = `products.html?category=${cat.filterCategory}`;
       return `
         <li class="nav-item">
-          <a href="${targetHref}" class="nav-link" data-filter="${cat.filterCategory}">${cat.name}${cat.megaMenu ? ICONS.chevronDown : ''}</a>
+          <a href="${targetHref}" class="nav-link">${cat.name}${cat.megaMenu ? ICONS.chevronDown : ''}</a>
           ${megaHTML}
         </li>
       `;
     }).join('') + `
       <li class="nav-item">
-        <a href="#request-section" class="btn btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.75rem; margin-left: 0.5rem">Request From Bangladesh</a>
+        <a href="index.html#request-section" class="btn btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.75rem; margin-left: 0.5rem">Request From Bangladesh</a>
       </li>
     `;
 
@@ -285,14 +288,14 @@
           const allLinks = cat.megaMenu.flatMap(col => col.links);
           subHTML = `
             <div class="mobile-submenu">
-              ${allLinks.map(l => `<a href="#products-section" data-filter="${l.slug}">${l.label}</a>`).join('')}
+              ${allLinks.map(l => `<a href="products.html?category=${l.slug}">${l.label}</a>`).join('')}
             </div>
           `;
         }
-        const targetHref = cat.slug === 'preorder' ? '#preorder-section' : '#products-section';
+        const targetHref = `products.html?category=${cat.filterCategory}`;
         return `
           <div class="mobile-nav-item ${cat.megaMenu ? 'has-submenu' : ''}">
-            <a href="${targetHref}" class="mobile-nav-link" data-filter="${cat.filterCategory}">
+            <a href="${targetHref}" class="mobile-nav-link">
               ${cat.name}
               ${cat.megaMenu ? ICONS.chevronDown : ''}
             </a>
@@ -301,7 +304,7 @@
         `;
       }).join('') + `
         <div class="mobile-nav-item" style="padding: 1rem 0">
-          <a href="#request-section" class="btn btn-primary" style="width:100%" onclick="document.getElementById('mobile-nav-close').click()">Request From Bangladesh</a>
+          <a href="index.html#request-section" class="btn btn-primary" style="width:100%" onclick="document.getElementById('mobile-nav-close').click()">Request From Bangladesh</a>
         </div>
       `;
 
@@ -575,40 +578,267 @@
   /* ══════════════════════════════════════════════════════════
      SEARCH & NEWSLETTER
      ══════════════════════════════════════════════════════════ */
+  /* ══════════════════════════════════════════════════════════
+     SEARCH ENGINE (ECOMMERCE STANDARD)
+     ══════════════════════════════════════════════════════════ */
+  const SEARCH_MIN_CHARACTERS = 3;
+  const RECENT_SEARCHES_KEY = 'bongo_recent_searches';
+
+  function getRecentSearches() {
+    try {
+      const stored = localStorage.getItem(RECENT_SEARCHES_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      /* ignore */
+    }
+    return ['Linen Shirt', 'Nakshi Kantha', 'Jute Bag', 'Brass Vessel'];
+  }
+
+  function saveRecentSearches(searches) {
+    try {
+      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(searches.slice(0, 6)));
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function addRecentSearch(query) {
+    if (!query || query.length < SEARCH_MIN_CHARACTERS) return;
+    let searches = getRecentSearches();
+    searches = searches.filter(s => s.toLowerCase() !== query.toLowerCase());
+    searches.unshift(query);
+    saveRecentSearches(searches);
+  }
+
+  function removeRecentSearch(query) {
+    let searches = getRecentSearches();
+    searches = searches.filter(s => s.toLowerCase() !== query.toLowerCase());
+    saveRecentSearches(searches);
+    renderRecentSearches();
+  }
+
+  function clearAllRecentSearches() {
+    saveRecentSearches([]);
+    renderRecentSearches();
+  }
+
   function toggleSearch() {
     const overlay = document.getElementById('search-overlay');
+    if (!overlay) return;
+
     overlay.classList.toggle('open');
     if (overlay.classList.contains('open')) {
-      const input = overlay.querySelector('.search-overlay-input');
-      input.focus();
+      const input = document.getElementById('search-input');
+      if (input) {
+        input.value = '';
+        toggleClearInputBtn('');
+        input.focus();
+      }
+      renderRecentSearches();
+      renderSuggestedProducts();
+      handleSearchQuery('');
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
   }
 
+  function toggleClearInputBtn(val) {
+    const clearBtn = document.getElementById('search-clear-btn');
+    if (!clearBtn) return;
+    clearBtn.style.display = val && val.length > 0 ? 'flex' : 'none';
+  }
+
+  function renderRecentSearches() {
+    const container = document.getElementById('recent-searches-list');
+    const section = document.getElementById('recent-searches-section');
+    if (!container) return;
+
+    const searches = getRecentSearches();
+    if (searches.length === 0) {
+      if (section) section.style.display = 'none';
+      return;
+    }
+
+    if (section) section.style.display = 'flex';
+    container.innerHTML = searches.map(q => `
+      <span class="search-recent-tag" data-query="${q}">
+        <span>${q}</span>
+        <button class="remove-recent-btn" data-remove-query="${q}" aria-label="Remove search ${q}">&times;</button>
+      </span>
+    `).join('');
+
+    container.querySelectorAll('.search-recent-tag').forEach(tag => {
+      tag.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-recent-btn')) return;
+        const q = tag.dataset.query;
+        const input = document.getElementById('search-input');
+        if (input) {
+          input.value = q;
+          toggleClearInputBtn(q);
+          handleSearchQuery(q);
+        }
+      });
+    });
+
+    container.querySelectorAll('.remove-recent-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeRecentSearch(btn.dataset.removeQuery);
+      });
+    });
+  }
+
+  function renderSuggestedProducts() {
+    const container = document.getElementById('search-suggested-list');
+    if (!container) return;
+
+    const suggested = PRODUCTS.slice(0, 4);
+    container.innerHTML = suggested.map(p => `
+      <div class="search-result-item" data-search-product-id="${p.id}">
+        <img src="${p.image}" alt="${p.name}" class="search-result-thumb" loading="lazy">
+        <div class="search-result-info">
+          <div class="search-result-name">${p.name}</div>
+          <div class="search-result-meta">${CATEGORY_NAME_MAP[p.category] || p.category} · ${p.brand || 'Bongo Curated'}</div>
+        </div>
+        <div class="search-result-price">
+          <span class="current">${SITE.currency}${p.price.toFixed(2)}</span>
+          ${p.originalPrice ? `<span class="original">${SITE.currency}${p.originalPrice.toFixed(2)}</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+
+    bindSearchResultClickEvents(container);
+  }
+
+  function bindSearchResultClickEvents(container) {
+    container.querySelectorAll('[data-search-product-id]').forEach(item => {
+      item.addEventListener('click', () => {
+        const id = parseInt(item.dataset.searchProductId);
+        const input = document.getElementById('search-input');
+        if (input && input.value.trim().length >= SEARCH_MIN_CHARACTERS) {
+          addRecentSearch(input.value.trim());
+        }
+        toggleSearch();
+        openQuickView(id);
+      });
+    });
+  }
+
+  function handleSearchQuery(rawQuery) {
+    const q = rawQuery.trim().toLowerCase();
+    const defaultState = document.getElementById('search-default-state');
+    const resultsState = document.getElementById('search-results-state');
+    const noResultsState = document.getElementById('search-no-results-state');
+    const countEl = document.getElementById('search-results-count');
+    const listEl = document.getElementById('search-results-list');
+    const noResultsText = document.getElementById('no-results-text');
+
+    if (q.length < SEARCH_MIN_CHARACTERS) {
+      if (defaultState) defaultState.style.display = 'flex';
+      if (resultsState) resultsState.style.display = 'none';
+      if (noResultsState) noResultsState.style.display = 'none';
+      return;
+    }
+
+    if (defaultState) defaultState.style.display = 'none';
+
+    const matches = PRODUCTS.filter(p => {
+      const catName = (CATEGORY_NAME_MAP[p.category] || '').toLowerCase();
+      const brandName = (p.brand || '').toLowerCase();
+      return (
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        catName.includes(q) ||
+        brandName.includes(q) ||
+        p.desc.toLowerCase().includes(q)
+      );
+    });
+
+    if (matches.length > 0) {
+      if (noResultsState) noResultsState.style.display = 'none';
+      if (resultsState) resultsState.style.display = 'block';
+
+      if (countEl) {
+        countEl.textContent = `${matches.length} result${matches.length === 1 ? '' : 's'} for "${rawQuery.trim()}"`;
+      }
+
+      if (listEl) {
+        listEl.innerHTML = matches.map(p => `
+          <div class="search-result-item" data-search-product-id="${p.id}">
+            <img src="${p.image}" alt="${p.name}" class="search-result-thumb" loading="lazy">
+            <div class="search-result-info">
+              <div class="search-result-name">${p.name}</div>
+              <div class="search-result-meta">${CATEGORY_NAME_MAP[p.category] || p.category} · ${p.brand || 'Bongo Curated'}</div>
+            </div>
+            <div class="search-result-price">
+              <span class="current">${SITE.currency}${p.price.toFixed(2)}</span>
+              ${p.originalPrice ? `<span class="original">${SITE.currency}${p.originalPrice.toFixed(2)}</span>` : ''}
+            </div>
+          </div>
+        `).join('');
+
+        bindSearchResultClickEvents(listEl);
+      }
+    } else {
+      if (resultsState) resultsState.style.display = 'none';
+      if (noResultsState) noResultsState.style.display = 'block';
+      if (noResultsText) {
+        noResultsText.textContent = `We couldn't find any items matching "${rawQuery.trim()}".`;
+      }
+    }
+  }
+
   function initSearchSuggestions() {
     const input = document.getElementById('search-input');
+    const clearBtn = document.getElementById('search-clear-btn');
+    const closeBtn = document.getElementById('search-modal-close');
+    const clearRecentBtn = document.getElementById('clear-recent-searches-btn');
+    const browseAllBtn = document.getElementById('search-browse-all-btn');
+
     if (!input) return;
+
+    input.addEventListener('input', (e) => {
+      const val = e.target.value;
+      toggleClearInputBtn(val);
+      handleSearchQuery(val);
+    });
 
     input.addEventListener('keyup', (e) => {
       if (e.key === 'Enter') {
-        const q = input.value.trim().toLowerCase();
-        if (q) {
-          toggleSearch();
-          filterProducts('all');
-          document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+        const q = input.value.trim();
+        if (q.length >= SEARCH_MIN_CHARACTERS) {
+          addRecentSearch(q);
+          if (window.location.pathname.includes('products.html')) {
+            toggleSearch();
+            window.location.search = `?search=${encodeURIComponent(q)}`;
+          }
         }
       }
     });
 
-    document.querySelectorAll('.suggestion-tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        toggleSearch();
-        filterProducts('all');
-        document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        toggleClearInputBtn('');
+        input.focus();
+        handleSearchQuery('');
       });
-    });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', toggleSearch);
+    }
+
+    if (clearRecentBtn) {
+      clearRecentBtn.addEventListener('click', clearAllRecentSearches);
+    }
+
+    if (browseAllBtn) {
+      browseAllBtn.addEventListener('click', () => {
+        toggleSearch();
+      });
+    }
   }
 
   function toggleMobileNav() {

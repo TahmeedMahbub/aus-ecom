@@ -78,17 +78,59 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       SEARCH OVERLAY
+       SEARCH MODAL
        ═══════════════════════════════════════════════════════ -->
   <div class="search-overlay" id="search-overlay">
-    <div class="search-overlay-inner">
-      <input type="text" class="search-overlay-input" id="search-input" placeholder="Search fashion, home decor, jute, handicrafts, gifts..." aria-label="Search">
-      <div class="search-overlay-suggestions" id="search-suggestions">
-        <div class="suggestion-tag" data-search="Jute">Jute Bags</div>
-        <div class="suggestion-tag" data-search="Nakshi">Nakshi Kantha</div>
-        <div class="suggestion-tag" data-search="Linen">Linen Shirts</div>
-        <div class="suggestion-tag" data-search="Cushion">Cushions</div>
-        <div class="suggestion-tag" data-search="Brass">Brass Vessels</div>
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <div class="search-input-wrap">
+          <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          <input type="text" class="search-modal-input" id="search-input" placeholder="Search fashion, home decor, jute, handicrafts..." aria-label="Search catalog" autocomplete="off">
+          <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" style="display:none">&times;</button>
+        </div>
+        <button class="search-modal-close" id="search-modal-close" aria-label="Close search">&times;</button>
+      </div>
+
+      <div class="search-modal-body" id="search-modal-body">
+        <!-- Default State (Empty / Short Query) -->
+        <div class="search-default-state" id="search-default-state">
+          <!-- Recent Searches -->
+          <div class="search-section" id="recent-searches-section">
+            <div class="search-section-header">
+              <span class="search-section-title">Recent Searches</span>
+              <button class="search-clear-all-recent" id="clear-recent-searches-btn">Clear All</button>
+            </div>
+            <div class="search-tags-list" id="recent-searches-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Suggested Products -->
+          <div class="search-section">
+            <span class="search-section-title">Suggested Products</span>
+            <div class="search-suggested-list" id="search-suggested-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Results State -->
+        <div class="search-results-state" id="search-results-state" style="display:none">
+          <div class="search-results-count" id="search-results-count"></div>
+          <div class="search-results-list" id="search-results-list">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- No Results State -->
+        <div class="search-no-results-state" id="search-no-results-state" style="display:none">
+          <div class="no-results-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          </div>
+          <h3>No products found</h3>
+          <p id="no-results-text">We couldn't find any items matching your search.</p>
+          <a href="products.html" class="btn btn-primary btn-sm" id="search-browse-all-btn">Browse All Products</a>
+        </div>
       </div>
     </div>
   </div>
@@ -137,7 +179,7 @@
             <!-- <span class="section-kicker">CURATED SELECTION</span> -->
             <h2>Featured Collection</h2>
           </div>
-          <a href="#categories-section" class="section-see-more">Show More &rarr;</a>
+          <a href="./products.html" class="section-see-more">Show More &rarr;</a>
         </div>
         <p class="section-header-desc">A selection of pieces we're excited to bring to Australia.</p>
       </div>
@@ -169,7 +211,7 @@
             <!-- <span class="section-kicker">OUR RANGES</span> -->
             <h2>Shop by Category</h2>
           </div>
-          <a href="#products-section" class="section-see-more">View All Products &rarr;</a>
+          <a href="./products.html" class="section-see-more">View All Products &rarr;</a>
         </div>
         <p class="section-header-desc">Explore fashion, home & living, natural jute, handcrafted pieces and thoughtful gifts.</p>
       </div>
