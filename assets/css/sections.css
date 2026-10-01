@@ -483,7 +483,7 @@
 }
 
 .product-card-info {
-  padding: var(--space-md);
+  padding: var(--space-sm2);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -532,7 +532,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: var(--space-xs);
+  gap: 0.5rem;
   margin-top: auto;
   padding-top: var(--space-xs);
 }
@@ -542,10 +542,12 @@
   flex-direction: column;
   justify-content: flex-end;
   gap: 2px;
+  flex: 1;
+  min-width: 0;
 }
 
 .product-card-price .original {
-  font-size: var(--fs-small);
+  font-size: var(--fs-xs);
   color: var(--color-grey-400);
   text-decoration: line-through;
   line-height: 1.2;
@@ -564,7 +566,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.45rem 0.85rem;
+  padding: 0.45rem 0.5rem;
   font-family: var(--font-body);
   font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
@@ -2569,12 +2571,12 @@ textarea.form-control {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: var(--space-md);
-  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .listing-title-wrap {
-  max-width: 680px;
+  flex: 1;
+  max-width: 640px;
 }
 
 .listing-title {
@@ -2589,8 +2591,18 @@ textarea.form-control {
 .listing-desc {
   font-size: var(--fs-body);
   color: var(--color-grey-700);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   line-height: var(--lh-normal);
+}
+
+.listing-controls-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  align-self: flex-end;
+  flex-shrink: 0;
 }
 
 .listing-count {
@@ -2599,6 +2611,7 @@ textarea.form-control {
   color: var(--color-brand);
   text-transform: uppercase;
   letter-spacing: var(--ls-wide);
+  white-space: nowrap;
 }
 
 .listing-sort-wrap {
@@ -3022,14 +3035,43 @@ textarea.form-control {
   }
 }
 
-@media (max-width: 480px) {
-  .listing-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
+@media (max-width: 768px) {
+  .listing-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .listing-title-wrap {
+    flex: 1;
+    min-width: 0;
   }
 
   .listing-title {
     font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .listing-desc {
+    font-size: 0.85rem;
+  }
+
+  .listing-controls-right {
+    align-self: flex-start;
+    padding-top: 0.25rem;
+  }
+
+  .listing-count {
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .listing-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
   }
 }
 
