@@ -622,12 +622,36 @@
     renderRecentSearches();
   }
 
+  function handleMobileVisualViewport() {
+    const overlay = document.getElementById('search-overlay');
+    if (!overlay || !overlay.classList.contains('open')) return;
+
+    if (window.innerWidth <= 768) {
+      if (window.visualViewport) {
+        overlay.style.top = `${window.visualViewport.offsetTop}px`;
+        overlay.style.height = `${window.visualViewport.height}px`;
+      } else {
+        overlay.style.top = '0px';
+        overlay.style.height = '100dvh';
+      }
+      window.scrollTo(0, 0);
+    } else {
+      overlay.style.top = '';
+      overlay.style.height = '';
+    }
+  }
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleMobileVisualViewport);
+    window.visualViewport.addEventListener('scroll', handleMobileVisualViewport);
+  }
+
   function toggleSearch() {
     const overlay = document.getElementById('search-overlay');
     if (!overlay) return;
 
-    overlay.classList.toggle('open');
-    if (overlay.classList.contains('open')) {
+    const isOpen = overlay.classList.toggle('open');
+    if (isOpen) {
       const input = document.getElementById('search-input');
       if (input) {
         input.value = '';
@@ -637,9 +661,16 @@
       renderRecentSearches();
       renderSuggestedProducts();
       handleSearchQuery('');
+      document.body.classList.add('search-modal-open');
+      document.documentElement.classList.add('search-modal-open');
       document.body.style.overflow = 'hidden';
+      handleMobileVisualViewport();
     } else {
+      document.body.classList.remove('search-modal-open');
+      document.documentElement.classList.remove('search-modal-open');
       document.body.style.overflow = '';
+      overlay.style.top = '';
+      overlay.style.height = '';
     }
   }
 
