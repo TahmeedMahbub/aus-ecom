@@ -18,7 +18,10 @@
   margin-bottom: var(--space-4xl);
 }
 
-/* ════════════�.main-image-viewport {
+/* ══════════════════════════════════════════════════════════
+   MAIN GALLERY VIEWPORT & ZOOM
+   ══════════════════════════════════════════════════════════ */
+.main-image-viewport {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -29,6 +32,7 @@
   clip-path: inset(0 round var(--radius-md));
   cursor: crosshair;
   user-select: none;
+  isolation: isolate;
 }
 
 .main-image-viewport img {
@@ -218,26 +222,7 @@
   color: var(--color-grey-400);
   text-decoration: line-through;
   font-weight: var(--fw-medium);
-} fill: currentColor;
 }
-
-.rating-score-val {
-  font-weight: var(--fw-bold);
-  color: var(--color-black);
-}
-
-.rating-count-link {
-  color: var(--color-grey-500);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-}
-
-.rating-count-link:hover {
-  color: var(--color-brand);
-}
-
-/* Price Section */
 .detail-price-box {
   display: flex;
   align-items: baseline;
