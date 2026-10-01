@@ -179,6 +179,20 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-1px);
 }
 
+.btn-dark {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  border: 1.5px solid var(--color-dark);
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  border-color: var(--color-dark);
+}
+
 .btn-outline {
   background-color: transparent;
   color: var(--color-black);

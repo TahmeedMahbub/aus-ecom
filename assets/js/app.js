@@ -152,13 +152,15 @@
     container.querySelectorAll('[data-view-details-id]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        openQuickView(parseInt(btn.dataset.viewDetailsId));
+        const id = parseInt(btn.dataset.viewDetailsId);
+        window.location.href = `product-detail.html?id=${id}`;
       });
     });
 
     container.querySelectorAll('.product-card').forEach(card => {
       card.addEventListener('click', () => {
-        openQuickView(parseInt(card.dataset.productId));
+        const id = parseInt(card.dataset.productId);
+        window.location.href = `product-detail.html?id=${id}`;
       });
     });
   }
@@ -751,7 +753,7 @@
           addRecentSearch(input.value.trim());
         }
         toggleSearch();
-        openQuickView(id);
+        window.location.href = `product-detail.html?id=${id}`;
       });
     });
   }
@@ -1001,25 +1003,43 @@
     initSearchSuggestions();
 
     // Event bindings
-    document.getElementById('hamburger').addEventListener('click', toggleMobileNav);
-    document.getElementById('mobile-nav-close').addEventListener('click', toggleMobileNav);
-    document.getElementById('modal-close').addEventListener('click', closeQuickView);
-    document.getElementById('modal-overlay').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeQuickView();
-    });
+    const hamburger = document.getElementById('hamburger');
+    if (hamburger) hamburger.addEventListener('click', toggleMobileNav);
+
+    const mobileNavClose = document.getElementById('mobile-nav-close');
+    if (mobileNavClose) mobileNavClose.addEventListener('click', toggleMobileNav);
+
+    const modalClose = document.getElementById('modal-close');
+    if (modalClose) modalClose.addEventListener('click', closeQuickView);
+
+    const quickviewModal = document.getElementById('quickview-modal') || document.getElementById('modal-overlay');
+    if (quickviewModal) {
+      quickviewModal.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeQuickView();
+      });
+    }
     
-    document.getElementById('modal-add-to-cart').addEventListener('click', () => {
-      if (state.selectedModalProduct) {
-        addToCart(state.selectedModalProduct.id, state.selectedSize);
-      }
-    });
+    const modalAddToCart = document.getElementById('modal-add-to-cart');
+    if (modalAddToCart) {
+      modalAddToCart.addEventListener('click', () => {
+        if (state.selectedModalProduct) {
+          addToCart(state.selectedModalProduct.id, state.selectedSize);
+        }
+      });
+    }
 
-    document.getElementById('search-overlay').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) toggleSearch();
-    });
+    const searchOverlay = document.getElementById('search-overlay');
+    if (searchOverlay) {
+      searchOverlay.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) toggleSearch();
+      });
+    }
 
-    document.getElementById('cart-drawer-close').addEventListener('click', closeCart);
-    document.getElementById('cart-drawer-overlay').addEventListener('click', closeCart);
+    const cartDrawerClose = document.getElementById('cart-drawer-close');
+    if (cartDrawerClose) cartDrawerClose.addEventListener('click', closeCart);
+
+    const cartDrawerOverlay = document.getElementById('cart-drawer-overlay');
+    if (cartDrawerOverlay) cartDrawerOverlay.addEventListener('click', closeCart);
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {

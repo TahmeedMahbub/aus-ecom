@@ -12,6 +12,22 @@ const SITE = {
   countryCode: 'AU',
 };
 
+const CATEGORY_NAME_MAP = {
+  fashion: 'Fashion',
+  'home-decor': 'Home & Living',
+  jute: 'Jute',
+  handicrafts: 'Handcrafted',
+  lifestyle: 'Gifts',
+  preorder: 'Pre-order',
+};
+
+const BADGE_MAP = {
+  new: 'NEW',
+  launch: 'LAUNCH OFFER',
+  lowstock: 'LOW STOCK',
+  preorder: 'PRE-ORDER',
+};
+
 const NAV_CATEGORIES = [
   {
     name: 'New Arrivals',

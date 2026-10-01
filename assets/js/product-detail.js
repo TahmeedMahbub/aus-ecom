@@ -1,0 +1,617 @@
+/* ============================================================
+   PRODUCT DETAIL CONTROLLER — Bongo Curated
+   Handles dynamic product details rendering, gallery, zoom,
+   color/size pickers, accordions, pre-order, and recently viewed.
+   ============================================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Get Product ID / Slug from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  let productId = parseInt(urlParams.get('id'));
+  const productSlug = urlParams.get('slug');
+
+  if (!productId && productSlug) {
+    const foundBySlug = PRODUCTS.find(p => p.slug === productSlug);
+    if (foundBySlug) productId = foundBySlug.id;
+  }
+
+  // Fallback to Product #1 if invalid
+  let product = PRODUCTS.find(p => p.id === productId);
+  if (!product) {
+    product = PRODUCTS[0];
+  }
+
+  // Track Recently Viewed in localStorage
+  trackRecentlyViewed(product.id);
+
+  // Detail Page Local State
+  const detailState = {
+    product: product,
+    selectedColor: product.colors && product.colors.length > 0 ? product.colors[0] : null,
+    selectedSize: getInitialSize(product),
+    quantity: 1,
+    activeImgIndex: 0,
+    images: generateGalleryImages(product),
+  };
+
+  // 2. Initialize Component Render
+  renderBreadcrumb(product);
+  renderProductGallery(detailState);
+  renderProductInfo(detailState);
+  renderPreorderNotice(product);
+  renderAccordions(product);
+  renderRelatedProducts(product);
+  renderRecentlyViewed(product.id);
+
+  // 3. Setup Interactive Event Listeners
+  setupGalleryZoom();
+  setupQuantityPicker(detailState);
+  setupCtaButtons(detailState);
+  setupSizeGuideModal();
+  setupAccordionToggle();
+});
+
+/* ── Helper Functions ── */
+
+function getInitialSize(product) {
+  if (!product.sizes || product.sizes.length === 0) return null;
+  const available = product.sizes.filter(s => !(product.outOfStockSizes || []).includes(s));
+  return available.length > 0 ? available[0] : product.sizes[0];
+}
+
+function generateGalleryImages(product) {
+  const list = [product.image];
+  // Add additional realistic angles/variations from existing asset pool
+  if (product.category === 'fashion') {
+    if (product.image.includes('tshirt')) {
+      list.push('assets/images/products/tshirt-olive.png', 'assets/images/products/shirt-white.png');
+    } else if (product.image.includes('shirt')) {
+      list.push('assets/images/products/shirt-white.png', 'assets/images/products/tshirt-olive.png');
+    } else {
+      list.push('assets/images/products/trousers-khaki.png', 'assets/images/products/shirt-white.png');
+    }
+  } else if (product.category === 'home-decor') {
+    list.push('assets/images/products/nakshi-kantha.jpg', 'assets/images/products/artisan-brass.jpg');
+  } else if (product.category === 'jute') {
+    list.push('assets/images/products/jute-tote.jpg', 'assets/images/lifestyle/jute-showcase.jpg');
+  } else {
+    list.push('assets/images/products/leather-journal.jpg', 'assets/images/products/artisan-brass.jpg');
+  }
+  return list;
+}
+
+const COLOR_NAME_MAP = {
+  '#5C6B4F': 'Olive Green',
+  '#1A1A1A': 'Midnight Black',
+  '#F5F0E8': 'Natural Off-White',
+  '#FFFFFF': 'Pure White',
+  '#E8DDD0': 'Sand Beige',
+  '#8BA5B5': 'Sky Blue',
+  '#C4A882': 'Warm Khaki',
+  '#384D48': 'Deep Forest',
+  '#D8D1C5': 'Soft Linen',
+  '#D6C2A8': 'Desert Camel',
+  '#6F765F': 'Earthy Sage',
+  '#1B2A4A': 'Navy Blue',
+};
+
+/* ── Render Functions ── */
+
+function renderBreadcrumb(product) {
+  const catLink = document.getElementById('detail-breadcrumb-category-link');
+  const titleCurrent = document.getElementById('detail-breadcrumb-title');
+
+  const catName = CATEGORY_NAME_MAP[product.category] || 'Shop';
+  if (catLink) {
+    catLink.textContent = catName;
+    catLink.href = `products.html?category=${product.category}`;
+  }
+  if (titleCurrent) {
+    titleCurrent.textContent = product.name;
+  }
+}
+
+function renderProductGallery(detailState) {
+  const mainImg = document.getElementById('main-product-image');
+  const badgeWrap = document.getElementById('detail-badge-wrap');
+  const thumbnailsContainer = document.getElementById('detail-thumbnails-list');
+
+  if (mainImg) {
+    mainImg.src = detailState.images[detailState.activeImgIndex];
+    mainImg.alt = detailState.product.name;
+    mainImg.style.transform = 'scale(1)';
+    mainImg.style.transformOrigin = 'center center';
+  }
+
+  if (badgeWrap) {
+    const badgeText = BADGE_MAP[detailState.product.badge];
+    if (badgeText) {
+      badgeWrap.innerHTML = `<span class="badge ${detailState.product.badge}">${badgeText}</span>`;
+      badgeWrap.style.display = 'block';
+    } else {
+      badgeWrap.style.display = 'none';
+    }
+  }
+
+  if (thumbnailsContainer) {
+    thumbnailsContainer.innerHTML = detailState.images.map((imgUrl, idx) => `
+      <div class="gallery-thumb-item ${idx === detailState.activeImgIndex ? 'active' : ''}" data-thumb-index="${idx}">
+        <img src="${imgUrl}" alt="Product View ${idx + 1}" loading="lazy">
+      </div>
+    `).join('');
+
+    thumbnailsContainer.querySelectorAll('.gallery-thumb-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const idx = parseInt(item.dataset.thumbIndex);
+        detailState.activeImgIndex = idx;
+        renderProductGallery(detailState);
+      });
+    });
+  }
+
+  updateWishlistTriggerState(detailState.product.id);
+}
+
+function updateWishlistTriggerState(productId) {
+  const btn = document.getElementById('detail-wishlist-trigger');
+  if (!btn) return;
+  const wishlist = getStoredWishlist();
+  if (wishlist.includes(productId)) {
+    btn.classList.add('active');
+  } else {
+    btn.classList.remove('active');
+  }
+}
+
+function getStoredWishlist() {
+  try {
+    return JSON.parse(localStorage.getItem('bongo_wishlist')) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function renderProductInfo(detailState) {
+  const product = detailState.product;
+
+  // Eyebrow & Title
+  const eyebrowEl = document.getElementById('detail-eyebrow');
+  const titleEl = document.getElementById('detail-title');
+  const descEl = document.getElementById('detail-short-desc');
+
+  const catName = CATEGORY_NAME_MAP[product.category] || product.category;
+  const brandName = product.brand || 'Bongo Curated';
+
+  if (eyebrowEl) eyebrowEl.textContent = `${catName} · ${brandName}`;
+  if (titleEl) titleEl.textContent = product.name;
+  if (descEl) descEl.textContent = product.desc;
+
+  // Price
+  const offeredPriceEl = document.getElementById('detail-offered-price');
+  const originalPriceEl = document.getElementById('detail-original-price');
+  const discountPillEl = document.getElementById('detail-discount-pill');
+
+  if (offeredPriceEl) offeredPriceEl.textContent = `A$${product.price.toFixed(2)}`;
+
+  if (originalPriceEl) {
+    if (product.originalPrice && product.originalPrice > product.price) {
+      originalPriceEl.textContent = `A$${product.originalPrice.toFixed(2)}`;
+      originalPriceEl.style.display = 'inline';
+    } else {
+      originalPriceEl.style.display = 'none';
+    }
+  }
+
+  if (discountPillEl) {
+    if (product.originalPrice && product.originalPrice > product.price) {
+      const savings = product.originalPrice - product.price;
+      const pct = Math.round((savings / product.originalPrice) * 100);
+      discountPillEl.textContent = `SAVE ${pct}% (${SITE.currency}${savings.toFixed(2)})`;
+      discountPillEl.style.display = 'inline-block';
+    } else {
+      discountPillEl.style.display = 'none';
+    }
+  }
+
+  // Color Swatches
+  renderColorSwatches(detailState);
+
+  // Size Pills
+  renderSizePills(detailState);
+
+  // Availability Indicator
+  renderAvailabilityBadge(product);
+}
+
+function renderColorSwatches(detailState) {
+  const swatchesContainer = document.getElementById('detail-color-swatches');
+  const colorLabelEl = document.getElementById('selected-color-name');
+
+  if (!swatchesContainer) return;
+
+  if (colorLabelEl && detailState.selectedColor) {
+    colorLabelEl.textContent = COLOR_NAME_MAP[detailState.selectedColor] || detailState.selectedColor;
+  }
+
+  if (detailState.product.colors && detailState.product.colors.length > 0) {
+    swatchesContainer.innerHTML = detailState.product.colors.map(colorHex => `
+      <button class="detail-color-swatch-item ${colorHex === detailState.selectedColor ? 'active' : ''}" 
+              style="background-color: ${colorHex}" 
+              data-color-hex="${colorHex}" 
+              aria-label="Select color ${COLOR_NAME_MAP[colorHex] || colorHex}">
+      </button>
+    `).join('');
+
+    swatchesContainer.querySelectorAll('.detail-color-swatch-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        detailState.selectedColor = btn.dataset.colorHex;
+        renderColorSwatches(detailState);
+      });
+    });
+  } else {
+    document.getElementById('detail-color-group').style.display = 'none';
+  }
+}
+
+function renderSizePills(detailState) {
+  const sizesContainer = document.getElementById('detail-size-pills');
+  const sizeLabelEl = document.getElementById('selected-size-name');
+
+  if (!sizesContainer) return;
+
+  if (sizeLabelEl && detailState.selectedSize) {
+    sizeLabelEl.textContent = detailState.selectedSize;
+  }
+
+  const sizes = detailState.product.sizes || [];
+  const outOfStock = detailState.product.outOfStockSizes || [];
+
+  if (sizes.length > 0) {
+    sizesContainer.innerHTML = sizes.map(sizeStr => {
+      const isDisabled = outOfStock.includes(sizeStr);
+      const isActive = sizeStr === detailState.selectedSize;
+      return `
+        <button class="detail-size-pill ${isActive ? 'active' : ''} ${isDisabled ? 'disabled' : ''}" 
+                data-size="${sizeStr}" 
+                ${isDisabled ? 'disabled' : ''}>
+          ${sizeStr}
+        </button>
+      `;
+    }).join('');
+
+    sizesContainer.querySelectorAll('.detail-size-pill:not(.disabled)').forEach(btn => {
+      btn.addEventListener('click', () => {
+        detailState.selectedSize = btn.dataset.size;
+        renderSizePills(detailState);
+      });
+    });
+  } else {
+    document.getElementById('detail-size-group').style.display = 'none';
+  }
+}
+
+function renderAvailabilityBadge(product) {
+  const badgeEl = document.getElementById('detail-availability-wrap');
+  if (!badgeEl) return;
+
+  let dotClass = 'instock';
+  let statusText = 'In Stock — Ready to dispatch from Sydney';
+
+  if (product.badge === 'preorder' || product.availability === 'preorder') {
+    dotClass = 'preorder';
+    statusText = 'Pre-order Item — Expected Sydney dispatch late October 2026';
+  } else if (product.badge === 'lowstock' || product.availability === 'lowstock') {
+    dotClass = 'lowstock';
+    statusText = 'Low Stock — Only 3 left in Sydney warehouse';
+  }
+
+  badgeEl.innerHTML = `
+    <span class="availability-status-dot ${dotClass}"></span>
+    <span>${statusText}</span>
+  `;
+}
+
+function renderPreorderNotice(product) {
+  const container = document.getElementById('detail-preorder-notice');
+  if (!container) return;
+
+  if (product.badge === 'preorder' || product.availability === 'preorder') {
+    container.innerHTML = `
+      <div class="preorder-notice-header">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>PRE-ORDER ITEM — RESERVED BATCH ALLOCATION</span>
+      </div>
+      <div class="preorder-notice-body">
+        This item is currently handcrafted in small artisan batches in Dhaka. 
+        Securing your pre-order locks in batch priority with guaranteed dispatch from our Sydney warehouse by <span class="preorder-date-highlight">Late October 2026</span>.
+        Pay upfront or split into 4 interest-free instalments with Afterpay.
+      </div>
+    `;
+    container.style.display = 'flex';
+  } else {
+    container.style.display = 'none';
+  }
+}
+
+function renderAccordions(product) {
+  const accordionGroup = document.getElementById('detail-accordion-group');
+  if (!accordionGroup) return;
+
+  // Generate customized accordion content based on category
+  let fabMat = '100% OEKO-TEX Certified Combed Cotton (240GSM Heavyweight feel). Pre-shrunk weave with natural breathable density.';
+  let fitDim = 'Relaxed Australian fit. Designed with comfortable sleeve proportions and clean drop shoulder.';
+  let careText = 'Machine wash cold inside out with like colours. Line dry in shade. Warm iron if needed. Do not tumble dry.';
+  let whatsInc = `1x ${product.name}, 1x Bongo Curated Organic Storage Pouch.`;
+
+  if (product.category === 'home-decor') {
+    fabMat = 'Hand-selected terracotta, solid timber, brass and traditional Nakshi Kantha embroidered cotton textiles.';
+    fitDim = 'Dimensions: approx 45cm x 45cm / Craft weight: 650g.';
+    careText = 'Spot clean with damp cloth or gentle hand wash in cold water for embroidered textiles. Keep ceramic pieces dry.';
+    whatsInc = `1x ${product.name}, Authenticity & Craft Origin Tag.`;
+  } else if (product.category === 'jute') {
+    fabMat = '100% Natural Golden Jute Fiber sourced directly from Rajshahi, Bangladesh. Eco-friendly and 100% biodegradable.';
+    fitDim = 'Dimensions: 38cm (H) x 42cm (W) x 15cm (D). Handle drop: 24cm.';
+    careText = 'Wipe clean with a damp cloth. Avoid submerging in water. Allow to dry thoroughly in fresh air.';
+    whatsInc = `1x ${product.name}.`;
+  }
+
+  const accordionsData = [
+    {
+      title: 'Description & Craft Story',
+      content: `<p>Crafted in collaboration with skilled makers in Bangladesh and tailored specifically for the relaxed Australian lifestyle. ${product.desc}. Every piece honors traditional textile heritage while adhering to international ethical production standards.</p>`
+    },
+    {
+      title: 'Materials & Fabric',
+      content: `<p>${fabMat}</p>`
+    },
+    {
+      title: 'Dimensions & Fit',
+      content: `<p>${fitDim}</p>`
+    },
+    {
+      title: 'Care Instructions',
+      content: `<p>${careText}</p>`
+    },
+    {
+      title: "What's Included",
+      content: `<p>${whatsInc}</p>`
+    }
+  ];
+
+  accordionGroup.innerHTML = accordionsData.map((item, idx) => `
+    <div class="detail-accordion-item ${idx === 0 ? 'open' : ''}">
+      <button class="accordion-header-btn">
+        <span>${item.title}</span>
+        <svg class="accordion-icon-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+      </button>
+      <div class="accordion-content-panel" style="${idx === 0 ? 'max-height: 500px;' : ''}">
+        <div class="accordion-inner-body">
+          ${item.content}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRelatedProducts(currentProduct) {
+  const container = document.getElementById('related-products-grid');
+  if (!container) return;
+
+  const matches = PRODUCTS.filter(p => p.id !== currentProduct.id && (p.category === currentProduct.category || p.brand === currentProduct.brand)).slice(0, 4);
+
+  if (matches.length < 4) {
+    const fillers = PRODUCTS.filter(p => p.id !== currentProduct.id && !matches.includes(p)).slice(0, 4 - matches.length);
+    matches.push(...fillers);
+  }
+
+  container.innerHTML = matches.map(p => createProductCardHTML(p)).join('');
+  bindProductCardEvents(container);
+}
+
+function renderRecentlyViewed(currentId) {
+  const container = document.getElementById('recently-viewed-grid');
+  const section = document.getElementById('recently-viewed-section');
+  if (!container || !section) return;
+
+  try {
+    const list = JSON.parse(localStorage.getItem('bongo_recently_viewed')) || [];
+    const filteredIds = list.filter(id => id !== currentId).slice(0, 4);
+
+    if (filteredIds.length === 0) {
+      section.style.display = 'none';
+      return;
+    }
+
+    const items = filteredIds.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+
+    if (items.length === 0) {
+      section.style.display = 'none';
+      return;
+    }
+
+    section.style.display = 'block';
+    container.innerHTML = items.map(p => createProductCardHTML(p)).join('');
+    bindProductCardEvents(container);
+  } catch (e) {
+    section.style.display = 'none';
+  }
+}
+
+function trackRecentlyViewed(productId) {
+  try {
+    let list = JSON.parse(localStorage.getItem('bongo_recently_viewed')) || [];
+    list = list.filter(id => id !== productId);
+    list.unshift(productId);
+    localStorage.setItem('bongo_recently_viewed', JSON.stringify(list.slice(0, 8)));
+  } catch (e) {
+    // LocalStorage fallback
+  }
+}
+
+/* ── Interactive Setup ── */
+
+function setupGalleryZoom() {
+  const viewport = document.getElementById('main-product-image-container');
+  const img = document.getElementById('main-product-image');
+
+  if (!viewport || !img) return;
+
+  const isHoverable = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches && window.innerWidth > 768;
+
+  viewport.addEventListener('mouseenter', () => {
+    if (!isHoverable()) return;
+    img.style.transition = 'transform 0.15s ease-out, transform-origin 0.1s ease-out';
+    img.style.transform = 'scale(1.8)';
+  });
+
+  viewport.addEventListener('mousemove', (e) => {
+    if (!isHoverable()) return;
+    const rect = viewport.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    const clampedX = Math.max(0, Math.min(100, x));
+    const clampedY = Math.max(0, Math.min(100, y));
+
+    img.style.transformOrigin = `${clampedX}% ${clampedY}%`;
+  });
+
+  viewport.addEventListener('mouseleave', () => {
+    if (!isHoverable()) return;
+    img.style.transition = 'transform 0.25s ease-out';
+    img.style.transform = 'scale(1)';
+    img.style.transformOrigin = 'center center';
+  });
+}
+
+function setupQuantityPicker(detailState) {
+  const minusBtn = document.getElementById('qty-minus');
+  const plusBtn = document.getElementById('qty-plus');
+  const inputEl = document.getElementById('detail-qty-input');
+
+  if (!minusBtn || !plusBtn || !inputEl) return;
+
+  minusBtn.addEventListener('click', () => {
+    if (detailState.quantity > 1) {
+      detailState.quantity--;
+      inputEl.value = detailState.quantity;
+    }
+  });
+
+  plusBtn.addEventListener('click', () => {
+    if (detailState.quantity < 99) {
+      detailState.quantity++;
+      inputEl.value = detailState.quantity;
+    }
+  });
+
+  inputEl.addEventListener('change', () => {
+    let val = parseInt(inputEl.value);
+    if (isNaN(val) || val < 1) val = 1;
+    detailState.quantity = val;
+    inputEl.value = val;
+  });
+}
+
+function setupCtaButtons(detailState) {
+  const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
+  const buyNowBtn = document.getElementById('detail-buy-now-btn');
+  const wishlistBtn = document.getElementById('detail-wishlist-trigger');
+
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', () => {
+      executeAddToCart(detailState);
+    });
+  }
+
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener('click', () => {
+      executeAddToCart(detailState);
+      if (typeof toggleCartDrawer === 'function') {
+        toggleCartDrawer();
+      }
+    });
+  }
+
+  if (wishlistBtn) {
+    wishlistBtn.addEventListener('click', () => {
+      toggleWishlistItem(detailState.product.id);
+      updateWishlistTriggerState(detailState.product.id);
+    });
+  }
+}
+
+function executeAddToCart(detailState) {
+  if (typeof addToCart === 'function') {
+    addToCart(detailState.product.id, detailState.selectedColor, detailState.selectedSize, detailState.quantity);
+  } else {
+    // Fallback Cart Dispatch
+    let cart = JSON.parse(localStorage.getItem('bongo_cart')) || [];
+    const item = {
+      id: detailState.product.id,
+      color: detailState.selectedColor,
+      size: detailState.selectedSize,
+      quantity: detailState.quantity,
+    };
+    cart.push(item);
+    localStorage.setItem('bongo_cart', JSON.stringify(cart));
+    if (typeof showToast === 'function') {
+      showToast(`Added ${detailState.quantity}x ${detailState.product.name} to cart`);
+    }
+  }
+}
+
+function toggleWishlistItem(id) {
+  let wishlist = getStoredWishlist();
+  if (wishlist.includes(id)) {
+    wishlist = wishlist.filter(x => x !== id);
+    if (typeof showToast === 'function') showToast('Removed from Wishlist');
+  } else {
+    wishlist.push(id);
+    if (typeof showToast === 'function') showToast('Added to Wishlist');
+  }
+  localStorage.setItem('bongo_wishlist', JSON.stringify(wishlist));
+}
+
+function setupAccordionToggle() {
+  document.querySelectorAll('.detail-accordion-item').forEach(item => {
+    const btn = item.querySelector('.accordion-header-btn');
+    const panel = item.querySelector('.accordion-content-panel');
+    if (!btn || !panel) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      if (isOpen) {
+        item.classList.remove('open');
+        panel.style.maxHeight = '0';
+      } else {
+        item.classList.add('open');
+        panel.style.maxHeight = `${panel.scrollHeight + 40}px`;
+      }
+    });
+  });
+}
+
+function setupSizeGuideModal() {
+  const openBtn = document.getElementById('btn-open-size-guide');
+  const modalOverlay = document.getElementById('size-guide-modal');
+  const closeBtn = document.getElementById('size-guide-close');
+
+  if (!openBtn || !modalOverlay) return;
+
+  openBtn.addEventListener('click', () => {
+    modalOverlay.classList.add('open');
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modalOverlay.classList.remove('open');
+    });
+  }
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.classList.remove('open');
+    }
+  });
+}
