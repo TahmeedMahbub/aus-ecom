@@ -204,6 +204,16 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-white);
 }
 
+.btn-secondary-outline {
+  background-color: transparent;
+  color: var(--color-black);
+  border: 1.5px solid var(--color-brand-dark);
+}
+.btn-secondary-outline:hover {
+  background-color: var(--color-brand-dark);
+  color: var(--color-white);
+}
+
 .btn-outline-white {
   background-color: transparent;
   color: var(--color-white);

@@ -620,15 +620,17 @@ const FOOTER_LINKS = {
     { label: 'Pre-order', href: '#preorder-section' },
   ],
   help: [
+    { label: 'My Account', href: 'account.html' },
     { label: 'Shipping & Delivery', href: '#' },
     { label: 'Returns & Exchanges', href: '#' },
     { label: 'Size Guide', href: '#' },
     { label: 'FAQ', href: '#' },
-    { label: 'Contact Us', href: '#request-section' },
+    { label: 'Request Product Sourcing', href: 'request.html' },
+    { label: 'Contact Us', href: 'request.html' },
   ],
   about: [
-    { label: 'Our Story', href: '#bangladesh-made-section' },
-    { label: 'Made in Bangladesh', href: '#bangladesh-made-section' },
-    { label: 'Request From Bangladesh', href: '#request-section' },
+    { label: 'Our Story', href: 'index.html#bangladesh-made-section' },
+    { label: 'Made in Bangladesh', href: 'index.html#bangladesh-made-section' },
+    { label: 'Request From Bangladesh', href: 'request.html' },
   ],
 };
