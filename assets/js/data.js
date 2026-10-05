@@ -180,7 +180,7 @@ const CATEGORIES = [
   },
 ];
 
-const PRODUCTS = [
+const INITIAL_PRODUCTS = [
   // Fashion
   {
     id: 1,
@@ -605,8 +605,399 @@ const PRODUCTS = [
     outOfStockSizes: [], 
     slug: 'heritage-cotton-kurta', 
     availability: 'preorder', 
-  },
+  }
 ];
+
+/* ============================================================
+   DYNAMIC CATALOG DATA STORES (localStorage Synchronizer)
+   ============================================================ */
+
+// 1. CATEGORIES STORE
+const INITIAL_CATEGORIES = [
+  { id: 1, name: 'Fashion', slug: 'fashion', desc: 'Everyday clothing, relaxed fits, linen pieces and modern essentials.', image: 'assets/images/products/shirt-white.png', isDisabled: false },
+  { id: 2, name: 'Home & Living', slug: 'home-decor', desc: 'Handcrafted accents, textiles, ceramics and natural materials for modern spaces.', image: 'assets/images/products/nakshi-kantha.jpg', isDisabled: false },
+  { id: 3, name: 'Jute', slug: 'jute', desc: 'Practical and beautiful products made from Bangladesh\'s natural golden fiber.', image: 'assets/images/lifestyle/jute-showcase.jpg', isDisabled: false },
+  { id: 4, name: 'Handcrafted', slug: 'handicrafts', desc: 'Distinctive pieces made by skilled Bangladeshi makers and craftspeople.', image: 'assets/images/products/artisan-brass.jpg', isDisabled: false },
+  { id: 5, name: 'Gifts', slug: 'lifestyle', desc: 'Thoughtful products made even more special with gift wrapping and notes.', image: 'assets/images/products/leather-journal.jpg', isDisabled: false },
+];
+
+window.BongoCategories = {
+  KEY: 'bongo_categories_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_CATEGORIES);
+    return INITIAL_CATEGORIES;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    return this.getAll().find(c => c.id === parseInt(id));
+  },
+  getBySlug: function(slug) {
+    return this.getAll().find(c => c.slug === slug);
+  },
+  create: function(data) {
+    const list = this.getAll();
+    const newId = list.reduce((max, c) => c.id > max ? c.id : max, 0) + 1;
+    const slug = data.slug || (data.name || 'category').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const newCat = {
+      id: newId,
+      name: data.name || 'New Category',
+      slug: slug,
+      desc: data.desc || '',
+      image: data.image || 'assets/images/products/shirt-white.png',
+      isDisabled: data.isDisabled || false,
+      createdAt: new Date().toISOString()
+    };
+    list.unshift(newCat);
+    this.saveAll(list);
+    return newCat;
+  },
+  update: function(id, data) {
+    const list = this.getAll();
+    const idx = list.findIndex(c => c.id === parseInt(id));
+    if (idx === -1) return null;
+    const updated = { ...list[idx], ...data, updatedAt: new Date().toISOString() };
+    list[idx] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+  delete: function(id) {
+    const list = this.getAll().filter(c => c.id !== parseInt(id));
+    this.saveAll(list);
+    return true;
+  },
+  toggleStatus: function(id) {
+    const item = this.getById(id);
+    if (!item) return null;
+    return this.update(id, { isDisabled: !item.isDisabled });
+  },
+  resetToDefault: function() {
+    this.saveAll(INITIAL_CATEGORIES);
+    return INITIAL_CATEGORIES;
+  }
+};
+
+// 2. SUBCATEGORIES STORE
+const INITIAL_SUBCATEGORIES = [
+  { id: 1, name: "Men's Apparel", slug: "mens-apparel", categoryId: 1, categorySlug: "fashion", categoryName: "Fashion", desc: "T-Shirts, linen shirts, polos, and trousers for men.", image: "assets/images/products/tshirt-olive.png", isDisabled: false },
+  { id: 2, name: "Women's Apparel", slug: "womens-apparel", categoryId: 1, categorySlug: "fashion", categoryName: "Fashion", desc: "Tunics, dresses, and relaxed trousers for women.", image: "assets/images/products/shirt-white.png", isDisabled: false },
+  { id: 3, name: "Living & Dining Textiles", slug: "living-textiles", categoryId: 2, categorySlug: "home-decor", categoryName: "Home & Living", desc: "Nakshi Kantha cushions, runners, and tablecloths.", image: "assets/images/products/nakshi-kantha.jpg", isDisabled: false },
+  { id: 4, name: "Decorative Brassware & Ceramics", slug: "brassware-ceramics", categoryId: 2, categorySlug: "home-decor", categoryName: "Home & Living", desc: "Terracotta vessels, wood bowls, and lightware.", image: "assets/images/products/artisan-brass.jpg", isDisabled: false },
+  { id: 5, name: "Golden Fiber Bags & Baskets", slug: "jute-bags-baskets", categoryId: 3, categorySlug: "jute", categoryName: "Jute", desc: "Tote bags, braided storage baskets, and floor mats.", image: "assets/images/lifestyle/jute-showcase.jpg", isDisabled: false },
+  { id: 6, name: "Heirloom Weaves & Crafts", slug: "heirloom-crafts", categoryId: 4, categorySlug: "handicrafts", categoryName: "Handcrafted", desc: "Handspun Jamdani, quilts, and heritage crafts.", image: "assets/images/products/artisan-brass.jpg", isDisabled: false },
+  { id: 7, name: "Leather & Gift Sets", slug: "leather-gift-sets", categoryId: 5, categorySlug: "lifestyle", categoryName: "Gifts", desc: "Journals, desk sets, and curated gift boxes.", image: "assets/images/products/leather-journal.jpg", isDisabled: false },
+];
+
+window.BongoSubcategories = {
+  KEY: 'bongo_subcategories_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_SUBCATEGORIES);
+    return INITIAL_SUBCATEGORIES;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    return this.getAll().find(s => s.id === parseInt(id));
+  },
+  getByCategory: function(catIdOrSlug) {
+    return this.getAll().filter(s => s.categoryId === parseInt(catIdOrSlug) || s.categorySlug === catIdOrSlug);
+  },
+  create: function(data) {
+    const list = this.getAll();
+    const newId = list.reduce((max, s) => s.id > max ? s.id : max, 0) + 1;
+    const slug = data.slug || (data.name || 'subcategory').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    
+    // Resolve parent category
+    let parentCat = window.BongoCategories ? window.BongoCategories.getById(data.categoryId) : null;
+    if (!parentCat && window.BongoCategories) {
+      parentCat = window.BongoCategories.getBySlug(data.categorySlug);
+    }
+
+    const newSub = {
+      id: newId,
+      name: data.name || 'New Subcategory',
+      slug: slug,
+      categoryId: parentCat ? parentCat.id : (parseInt(data.categoryId) || 1),
+      categorySlug: parentCat ? parentCat.slug : (data.categorySlug || 'fashion'),
+      categoryName: parentCat ? parentCat.name : (data.categoryName || 'Fashion'),
+      desc: data.desc || '',
+      image: data.image || 'assets/images/products/shirt-white.png',
+      isDisabled: data.isDisabled || false,
+      createdAt: new Date().toISOString()
+    };
+    list.unshift(newSub);
+    this.saveAll(list);
+    return newSub;
+  },
+  update: function(id, data) {
+    const list = this.getAll();
+    const idx = list.findIndex(s => s.id === parseInt(id));
+    if (idx === -1) return null;
+
+    let parentCat = null;
+    if (data.categoryId && window.BongoCategories) {
+      parentCat = window.BongoCategories.getById(data.categoryId);
+    }
+
+    const updated = {
+      ...list[idx],
+      ...data,
+      categoryId: parentCat ? parentCat.id : (data.categoryId ? parseInt(data.categoryId) : list[idx].categoryId),
+      categorySlug: parentCat ? parentCat.slug : (data.categorySlug || list[idx].categorySlug),
+      categoryName: parentCat ? parentCat.name : (data.categoryName || list[idx].categoryName),
+      updatedAt: new Date().toISOString()
+    };
+    list[idx] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+  delete: function(id) {
+    const list = this.getAll().filter(s => s.id !== parseInt(id));
+    this.saveAll(list);
+    return true;
+  },
+  toggleStatus: function(id) {
+    const item = this.getById(id);
+    if (!item) return null;
+    return this.update(id, { isDisabled: !item.isDisabled });
+  },
+  resetToDefault: function() {
+    this.saveAll(INITIAL_SUBCATEGORIES);
+    return INITIAL_SUBCATEGORIES;
+  }
+};
+
+// 3. BRANDS STORE
+const INITIAL_BRANDS = [
+  { id: 1, name: 'Dhaka Weaves', slug: 'dhaka-weaves', logo: 'assets/images/products/shirt-white.png', desc: 'Organic cotton and pure flax linen apparel from Dhaka.', origin: 'Bangladesh', isDisabled: false },
+  { id: 2, name: 'Bongo Curated', slug: 'bongo-curated', logo: 'assets/images/products/tshirt-olive.png', desc: 'In-house signature line curated for Australia.', origin: 'Bangladesh & Australia', isDisabled: false },
+  { id: 3, name: 'Golden Fiber Co.', slug: 'golden-fiber-co', logo: 'assets/images/lifestyle/jute-showcase.jpg', desc: 'Sustainable golden fiber jute products.', origin: 'Bangladesh', isDisabled: false },
+  { id: 4, name: 'Nakshi Guild', slug: 'nakshi-guild', logo: 'assets/images/products/nakshi-kantha.jpg', desc: 'Heritage Nakshi Kantha textiles by rural artisans.', origin: 'Bangladesh', isDisabled: false },
+  { id: 5, name: 'Bengal Artisan Craft', slug: 'bengal-artisan-craft', logo: 'assets/images/products/artisan-brass.jpg', desc: 'Master brassmiths and woodcraft makers.', origin: 'Bangladesh', isDisabled: false },
+];
+
+window.BongoBrands = {
+  KEY: 'bongo_brands_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_BRANDS);
+    return INITIAL_BRANDS;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    return this.getAll().find(b => b.id === parseInt(id));
+  },
+  getBySlug: function(slug) {
+    return this.getAll().find(b => b.slug === slug);
+  },
+  create: function(data) {
+    const list = this.getAll();
+    const newId = list.reduce((max, b) => b.id > max ? b.id : max, 0) + 1;
+    const slug = data.slug || (data.name || 'brand').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const newBrand = {
+      id: newId,
+      name: data.name || 'New Brand',
+      slug: slug,
+      logo: data.logo || 'assets/images/products/shirt-white.png',
+      desc: data.desc || '',
+      origin: data.origin || 'Bangladesh',
+      isDisabled: data.isDisabled || false,
+      createdAt: new Date().toISOString()
+    };
+    list.unshift(newBrand);
+    this.saveAll(list);
+    return newBrand;
+  },
+  update: function(id, data) {
+    const list = this.getAll();
+    const idx = list.findIndex(b => b.id === parseInt(id));
+    if (idx === -1) return null;
+    const updated = { ...list[idx], ...data, updatedAt: new Date().toISOString() };
+    list[idx] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+  delete: function(id) {
+    const list = this.getAll().filter(b => b.id !== parseInt(id));
+    this.saveAll(list);
+    return true;
+  },
+  toggleStatus: function(id) {
+    const item = this.getById(id);
+    if (!item) return null;
+    return this.update(id, { isDisabled: !item.isDisabled });
+  },
+  resetToDefault: function() {
+    this.saveAll(INITIAL_BRANDS);
+    return INITIAL_BRANDS;
+  }
+};
+
+// 4. PRODUCTS STORE (EXPANDED SCHEMA WITH VARIANTS & SPECS)
+window.BongoProducts = {
+  STORAGE_KEY: 'bongo_products_v1',
+
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {
+      console.warn('Error reading bongo_products_v1 from localStorage:', e);
+    }
+    this.saveAll(INITIAL_PRODUCTS);
+    return INITIAL_PRODUCTS;
+  },
+
+  saveAll: function(items) {
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
+    } catch(e) {
+      console.error('Error saving products to localStorage:', e);
+    }
+    if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
+      PRODUCTS.length = 0;
+      PRODUCTS.push(...items);
+    }
+  },
+
+  getById: function(id) {
+    return this.getAll().find(p => p.id === parseInt(id));
+  },
+
+  create: function(productData) {
+    const list = this.getAll();
+    const newId = list.reduce((max, p) => p.id > max ? p.id : max, 0) + 1;
+    const slug = productData.slug || (productData.name || 'product').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const price = parseFloat(productData.price) || 0;
+    const origPrice = productData.originalPrice ? parseFloat(productData.originalPrice) : null;
+    const discount = (origPrice && origPrice > price) ? Math.round(((origPrice - price) / origPrice) * 100) : null;
+
+    const newProduct = {
+      id: newId,
+      sku: productData.sku || `SKU-BG-${newId.toString().padStart(4, '0')}`,
+      name: productData.name || 'Untitled Product',
+      slug: slug,
+      category: productData.category || 'fashion',
+      categoryId: productData.categoryId || null,
+      subcategory: productData.subcategory || '',
+      subcategoryId: productData.subcategoryId || null,
+      brand: productData.brand || 'Bongo Curated',
+      brandId: productData.brandId || null,
+      desc: productData.desc || '',
+      fullDesc: productData.fullDesc || productData.desc || '',
+      image: productData.image || 'assets/images/products/shirt-white.png',
+      images: Array.isArray(productData.images) ? productData.images : (productData.image ? [productData.image] : ['assets/images/products/shirt-white.png']),
+      price: price,
+      originalPrice: origPrice,
+      discountPercentage: discount,
+      trackStock: productData.trackStock !== undefined ? Boolean(productData.trackStock) : true,
+      stockQty: productData.stockQty !== undefined ? parseInt(productData.stockQty) : 25,
+      availability: productData.availability || 'instock',
+      badge: productData.badge || '',
+      isFeatured: productData.isFeatured || false,
+      isDisabled: productData.isDisabled || false,
+      isPreorder: productData.availability === 'preorder' || productData.isPreorder || false,
+      preorderSettings: productData.preorderSettings || { releaseDate: '', note: '' },
+      hasVariants: Boolean(productData.hasVariants),
+      variantType: productData.variantType || 'none',
+      variants: Array.isArray(productData.variants) ? productData.variants : [],
+      colors: Array.isArray(productData.colors) ? productData.colors : (productData.colors ? productData.colors.split(',').map(c => c.trim()).filter(Boolean) : []),
+      sizes: Array.isArray(productData.sizes) ? productData.sizes : (productData.sizes ? productData.sizes.split(',').map(s => s.trim()).filter(Boolean) : []),
+      specs: productData.specs || {
+        material: productData.material || '',
+        fabric: productData.fabric || '',
+        dimensions: productData.dimensions || '',
+        fit: productData.fit || '',
+        pattern: productData.pattern || '',
+        finish: productData.finish || '',
+        weight: productData.weight || '',
+        care: productData.care || ''
+      },
+      createdAt: new Date().toISOString()
+    };
+
+    list.unshift(newProduct);
+    this.saveAll(list);
+    return newProduct;
+  },
+
+  update: function(id, updatedFields) {
+    const list = this.getAll();
+    const index = list.findIndex(p => p.id === parseInt(id));
+    if (index === -1) return null;
+
+    const current = list[index];
+    const price = updatedFields.price !== undefined ? parseFloat(updatedFields.price) : current.price;
+    const origPrice = updatedFields.originalPrice !== undefined ? (updatedFields.originalPrice ? parseFloat(updatedFields.originalPrice) : null) : current.originalPrice;
+    const discount = (origPrice && origPrice > price) ? Math.round(((origPrice - price) / origPrice) * 100) : null;
+
+    const updated = {
+      ...current,
+      ...updatedFields,
+      price: price,
+      originalPrice: origPrice,
+      discountPercentage: discount,
+      colors: Array.isArray(updatedFields.colors) ? updatedFields.colors : (typeof updatedFields.colors === 'string' ? updatedFields.colors.split(',').map(c => c.trim()).filter(Boolean) : current.colors),
+      sizes: Array.isArray(updatedFields.sizes) ? updatedFields.sizes : (typeof updatedFields.sizes === 'string' ? updatedFields.sizes.split(',').map(s => s.trim()).filter(Boolean) : current.sizes),
+      specs: { ...current.specs, ...updatedFields.specs },
+      updatedAt: new Date().toISOString()
+    };
+
+    list[index] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+
+  delete: function(id) {
+    const list = this.getAll();
+    const filtered = list.filter(p => p.id !== parseInt(id));
+    this.saveAll(filtered);
+    return true;
+  },
+
+  toggleStatus: function(id) {
+    const product = this.getById(id);
+    if (!product) return null;
+    return this.update(id, { isDisabled: !product.isDisabled });
+  },
+
+  resetToDefault: function() {
+    this.saveAll(INITIAL_PRODUCTS);
+    return INITIAL_PRODUCTS;
+  }
+};
+
+// Global PRODUCTS array for storefront compatibility
+window.PRODUCTS = window.BongoProducts.getAll();
+var PRODUCTS = window.PRODUCTS;
+
 
 const FOOTER_LINKS = {
   shop: [

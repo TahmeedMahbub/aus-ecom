@@ -94,7 +94,8 @@
       listingState.hasMore = true;
     }
 
-    let result = [...PRODUCTS];
+    const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll() : PRODUCTS;
+    let result = sourceProducts.filter(p => !p.isDisabled);
 
     // Category Filter
     if (listingState.category !== 'all') {
@@ -109,11 +110,12 @@
     // Price Range Filter
     if (listingState.priceRanges.length > 0) {
       result = result.filter(p => {
+        const price = parseFloat(p.price) || 0;
         return listingState.priceRanges.some(range => {
-          if (range === 'under-30') return p.price < 30;
-          if (range === '30-40') return p.price >= 30 && p.price <= 40;
-          if (range === '40-50') return p.price > 40 && p.price <= 50;
-          if (range === '50-above') return p.price > 50;
+          if (range === 'under-30') return price < 30;
+          if (range === '30-40') return price >= 30 && price <= 40;
+          if (range === '40-50') return price > 40 && price <= 50;
+          if (range === '50-above') return price > 50;
           return true;
         });
       });
@@ -137,17 +139,17 @@
     // Search Query Filter
     if (listingState.searchQuery) {
       result = result.filter(p =>
-        p.name.toLowerCase().includes(listingState.searchQuery) ||
-        p.desc.toLowerCase().includes(listingState.searchQuery) ||
-        p.category.toLowerCase().includes(listingState.searchQuery)
+        (p.name || '').toLowerCase().includes(listingState.searchQuery) ||
+        (p.desc || '').toLowerCase().includes(listingState.searchQuery) ||
+        (p.category || '').toLowerCase().includes(listingState.searchQuery)
       );
     }
 
     // Sorting
     if (listingState.sort === 'price-low') {
-      result.sort((a, b) => a.price - b.price);
+      result.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
     } else if (listingState.sort === 'price-high') {
-      result.sort((a, b) => b.price - a.price);
+      result.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
     } else if (listingState.sort === 'newest') {
       result.sort((a, b) => (b.badge === 'new' ? 1 : 0) - (a.badge === 'new' ? 1 : 0) || b.id - a.id);
     }

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Component Showcase — Bongo Curated Admin</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Admin Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="admin-body">
+
+  <div class="admin-wrapper">
+
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <div class="brand-icon">B</div>
+          <div class="brand-text">
+            <span class="brand-title">Bongo Curated</span>
+            <span class="brand-subtitle">Admin Panel</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-body">
+        <div class="sidebar-group">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item">
+              <a href="index.html" class="sidebar-link">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></span>
+                  <span class="sidebar-link-text">Dashboard</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">Catalog</div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-item sidebar-group">
+              <div class="sidebar-link sidebar-group-header">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+                  <span class="sidebar-link-text">Catalog</span>
+                </div>
+                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              <ul class="sidebar-submenu">
+                <li><a href="products.html" class="submenu-link">Products</a></li>
+                <li><a href="categories.html" class="submenu-link">Categories</a></li>
+                <li><a href="subcategories.html" class="submenu-link">Subcategories</a></li>
+                <li><a href="brands.html" class="submenu-link">Brands</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group">
+          <div class="sidebar-group-title">Sales</div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-item sidebar-group">
+              <div class="sidebar-link sidebar-group-header">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></span>
+                  <span class="sidebar-link-text">Sales</span>
+                </div>
+                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              <ul class="sidebar-submenu">
+                <li><a href="orders.html" class="submenu-link">Orders</a></li>
+                <li><a href="customers.html" class="submenu-link">Customers</a></li>
+                <li><a href="abandoned-carts.html" class="submenu-link">Abandoned Carts</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sidebar-border);">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item">
+              <a href="components-demo.html" class="sidebar-link active">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
+                  <span class="sidebar-link-text">UI Showcase</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="admin-users.html" class="sidebar-user">
+          <div class="sidebar-avatar">TM</div>
+          <div class="sidebar-user-info">
+            <span class="user-name">Tahmeed Mahbub</span>
+            <span class="user-role">Super Admin</span>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <button type="button" class="mobile-toggle-btn" id="mobile-toggle-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+          <div class="header-search">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="admin-search-input" class="search-input" placeholder="Search components...">
+          </div>
+        </div>
+        <div class="header-right">
+          <a href="../index.html" target="_blank" class="storefront-link">View Storefront</a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-group">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+              <li class="breadcrumb-separator">/</li>
+              <li class="breadcrumb-item active">UI Component Library</li>
+            </ul>
+            <h1 class="page-title">Admin Foundation Components</h1>
+            <p class="page-subtitle">Interactive showcase of all reusable UI elements for extending modules later.</p>
+          </div>
+        </div>
+
+        <!-- 1. BUTTONS SECTION -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3 class="card-title">1. Buttons</h3>
+          </div>
+          <div class="card-body" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div>
+              <h4 style="font-size: 0.8125rem; color: var(--admin-text-muted); margin-bottom: 0.5rem;">Variants</h4>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button class="btn btn-primary">Primary Terracotta</button>
+                <button class="btn btn-secondary">Secondary White</button>
+                <button class="btn btn-outline-primary">Outline Brand</button>
+                <button class="btn btn-success">Success Green</button>
+                <button class="btn btn-danger">Danger Red</button>
+                <button class="btn btn-ghost">Ghost Text</button>
+              </div>
+            </div>
+            <div>
+              <h4 style="font-size: 0.8125rem; color: var(--admin-text-muted); margin-bottom: 0.5rem;">Sizes & Groups</h4>
+              <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                <button class="btn btn-sm btn-primary">Small Button</button>
+                <button class="btn btn-primary">Regular Button</button>
+                <button class="btn btn-lg btn-primary">Large Button</button>
+                
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-secondary">Left</button>
+                  <button class="btn btn-sm btn-secondary">Middle</button>
+                  <button class="btn btn-sm btn-secondary">Right</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. STATUS BADGES SECTION -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3 class="card-title">2. Status Badges</h3>
+          </div>
+          <div class="card-body">
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <span class="badge badge-success"><span class="badge-dot"></span> Active</span>
+              <span class="badge badge-warning"><span class="badge-dot"></span> Pending</span>
+              <span class="badge badge-info"><span class="badge-dot"></span> Processing</span>
+              <span class="badge badge-danger"><span class="badge-dot"></span> Cancelled</span>
+              <span class="badge badge-draft">Draft</span>
+              <span class="badge badge-purple">Bangladesh Request</span>
+              <span class="badge badge-success">In Stock</span>
+              <span class="badge badge-danger">Out of Stock</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. FORM CONTROLS & SWITCHES SECTION -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3 class="card-title">3. Form Controls & Switches</h3>
+          </div>
+          <div class="card-body" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+            <div class="form-group">
+              <label class="form-label">Standard Text Input</label>
+              <input type="text" class="form-control" placeholder="Enter product name...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Select Dropdown</label>
+              <select class="form-select">
+                <option>Select Category...</option>
+                <option>Jute & Handicrafts</option>
+                <option>Fashion & Apparel</option>
+                <option>Home Decor</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Switch Toggle</label>
+              <label class="form-switch" style="margin-top: 0.25rem;">
+                <input type="checkbox" checked>
+                <span class="switch-slider"></span>
+                <span class="switch-label">Feature on Homepage</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. MODALS & TOAST NOTIFICATIONS TEST -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3 class="card-title">4. Modals & Toast Triggers</h3>
+          </div>
+          <div class="card-body" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" data-admin-modal="showcase-modal">Open Reusable Modal</button>
+            <button class="btn btn-success" onclick="Admin.toast({title: 'Item Created', message: 'Category added to Catalog.', type: 'success'});">Trigger Success Toast</button>
+            <button class="btn btn-danger" onclick="Admin.toast({title: 'Delete Warning', message: 'Cannot remove default role.', type: 'danger'});">Trigger Danger Toast</button>
+            <button class="btn btn-warning" onclick="Admin.toast({title: 'Low Inventory', message: 'Jute Tote Bag has only 3 units left.', type: 'warning'});">Trigger Warning Toast</button>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="admin-footer">
+        <div>&copy; 2026 Bongo Curated Admin Foundation</div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Showcase Modal -->
+  <div class="modal-backdrop" id="showcase-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Foundation Modal Component</h3>
+        <button type="button" class="modal-close-btn" data-admin-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This modal is fully reusable across all admin submodules using <code>data-admin-modal="modal-id"</code> or <code>Admin.modal.show('modal-id')</code>.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-admin-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/admin-layout.js"></script>
+  <script src="js/admin-components.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+/* ============================================================
+   ADMIN PRODUCT FORM STYLES — Clean & Modern Ecommerce Admin
+   ============================================================ */
+
+.product-form-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .product-form-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-card {
+  background: var(--admin-card-bg, #FFFFFF);
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--admin-card-border, #E5E7EB);
+  box-shadow: var(--admin-shadow-xs, 0 1px 2px rgba(0,0,0,0.05));
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-card-title {
+  font-family: var(--font-heading, inherit);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--admin-text-main, #111827);
+  margin-bottom: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--admin-card-border, #E5E7EB);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 767.98px) {
+  .form-grid-2, .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Image Upload & Gallery UI */
+.image-upload-dropzone {
+  border: 2px dashed var(--admin-border-subtle, #D1D5DB);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.25rem;
+  text-align: center;
+  background: var(--admin-bg-hover, #F9FAFB);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.image-upload-dropzone:hover {
+  border-color: var(--color-primary, #6366F1);
+  background: rgba(99, 102, 241, 0.03);
+}
+
+.image-thumbnails-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.image-thumb-card {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--admin-card-border, #E5E7EB);
+  overflow: hidden;
+  background: #F3F4F6;
+}
+
+.image-thumb-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-thumb-card.is-main {
+  border: 2px solid var(--color-primary, #6366F1);
+}
+
+.main-tag {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  background: var(--color-primary, #6366F1);
+  color: #FFF;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 2px;
+  padding: 1px 0;
+}
+
+.thumb-remove-btn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.9);
+  color: #FFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.thumb-remove-btn:hover {
+  background: #DC2626;
+}
+
+/* Preset Image Modal / Drawer */
+.preset-images-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: var(--admin-bg-hover, #F9FAFB);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--admin-card-border, #E5E7EB);
+  margin-top: 0.75rem;
+}
+
+.preset-img-item {
+  width: 100%;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease;
+}
+
+.preset-img-item:hover {
+  transform: scale(1.05);
+  border-color: var(--color-primary, #6366F1);
+}
+
+/* Variants Table */
+.variant-table-container {
+  overflow-x: auto;
+  margin-top: 0.75rem;
+}
+
+.variant-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84375rem;
+}
+
+.variant-table th {
+  text-align: left;
+  padding: 0.5rem;
+  background: var(--admin-bg-hover, #F9FAFB);
+  color: var(--admin-text-muted, #6B7280);
+  font-weight: 600;
+  border-bottom: 1px solid var(--admin-card-border, #E5E7EB);
+}
+
+.variant-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--admin-card-border, #E5E7EB);
+  vertical-align: middle;
+}
+
+/* Optional Specs Accordion / Expandable */
+.optional-specs-toggle {
+  background: transparent;
+  border: 1px dashed var(--admin-border-subtle, #D1D5DB);
+  color: var(--color-primary, #6366F1);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-md, 8px);
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.optional-specs-toggle:hover {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+/* View Page Details */
+.view-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--admin-card-border, #E5E7EB);
+  font-size: 0.875rem;
+}
+
+.view-detail-label {
+  color: var(--admin-text-muted, #6B7280);
+  font-weight: 500;
+}
+
+.view-detail-value {
+  color: var(--admin-text-main, #111827);
+  font-weight: 600;
+}

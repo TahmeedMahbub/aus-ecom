@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products Management — Bongo Curated Admin</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Admin Stylesheets (Isolated) -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="css/products.css">
+</head>
+<body class="admin-body">
+
+  <div class="admin-wrapper">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">
+          <div class="brand-icon">B</div>
+          <div class="brand-text">
+            <span class="brand-title">Bongo Curated</span>
+            <span class="brand-subtitle">Admin Panel</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      </div>
+
+      <div class="sidebar-body">
+        <div class="sidebar-group">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item">
+              <a href="../index.html" class="sidebar-link" data-title="Dashboard">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></span>
+                  <span class="sidebar-link-text">Dashboard</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group open">
+          <div class="sidebar-group-title">Catalog</div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-item sidebar-group open">
+              <div class="sidebar-link sidebar-group-header" data-title="Catalog">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+                  <span class="sidebar-link-text">Catalog</span>
+                </div>
+                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              <ul class="sidebar-submenu" style="display: flex;">
+                <li><a href="index.html" class="submenu-link active">Products</a></li>
+                <li><a href="../categories.html" class="submenu-link">Categories</a></li>
+                <li><a href="../subcategories.html" class="submenu-link">Subcategories</a></li>
+                <li><a href="../brands.html" class="submenu-link">Brands</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="../admin-users.html" class="sidebar-user">
+          <div class="sidebar-avatar">TM</div>
+          <div class="sidebar-user-info">
+            <span class="user-name">Tahmeed Mahbub</span>
+            <span class="user-role">Super Admin</span>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <button type="button" class="mobile-toggle-btn" id="mobile-toggle-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+          <div class="header-search">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="admin-search-input" class="search-input" placeholder="Search products...">
+          </div>
+        </div>
+        <div class="header-right">
+          <a href="../../products.html" target="_blank" class="storefront-link">View Store Catalog</a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-group">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="../index.html">Admin</a></li>
+              <li class="breadcrumb-separator">/</li>
+              <li class="breadcrumb-item"><a href="#">Catalog</a></li>
+              <li class="breadcrumb-separator">/</li>
+              <li class="breadcrumb-item active">Products</li>
+            </ul>
+            <h1 class="page-title">
+              <span>Products Management</span>
+              <span class="badge badge-active"><span class="badge-dot"></span> Live Store</span>
+            </h1>
+            <p class="page-subtitle">Manage catalog items, pricing, inventory stock, and storefront visibility.</p>
+          </div>
+
+          <div class="page-actions">
+            <a href="create.html" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              + Add Product
+            </a>
+          </div>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+          <div class="card stat-card">
+            <div class="stat-header"><span class="stat-title">Total Products</span><div class="stat-icon brand">📦</div></div>
+            <div class="stat-body"><span class="stat-value" id="stat-total-products">0</span><span class="stat-trend positive">Catalog</span></div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-header"><span class="stat-title">Active Products</span><div class="stat-icon success">✅</div></div>
+            <div class="stat-body"><span class="stat-value" id="stat-active-products">0</span><span class="stat-trend positive">Live</span></div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-header"><span class="stat-title">In Stock</span><div class="stat-icon info">🟢</div></div>
+            <div class="stat-body"><span class="stat-value" id="stat-instock-products">0</span><span class="stat-trend positive">Ready</span></div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-header"><span class="stat-title">Disabled / Out of Stock</span><div class="stat-icon warning">🚫</div></div>
+            <div class="stat-body"><span class="stat-value" id="stat-disabled-products">0</span><span class="stat-trend negative">Attention</span></div>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="card">
+          <div class="card-header" style="flex-wrap: wrap; gap: 1rem;">
+            
+            <div class="filter-bar">
+              <div style="position: relative; min-width: 200px; flex: 1;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="product-search-input" class="form-control" placeholder="Search by name, SKU or brand..." style="padding-left: 2.25rem;">
+              </div>
+
+              <!-- Category Filter -->
+              <select id="product-category-filter" class="form-select" style="width: 150px;">
+                <option value="all">All Categories</option>
+              </select>
+
+              <!-- Brand Filter -->
+              <select id="product-brand-filter" class="form-select" style="width: 140px;">
+                <option value="all">All Brands</option>
+              </select>
+
+              <!-- Status Filter -->
+              <select id="product-status-filter" class="form-select" style="width: 130px;">
+                <option value="all">All Statuses</option>
+                <option value="active">Active Only</option>
+                <option value="disabled">Disabled Only</option>
+              </select>
+
+              <!-- Availability Filter -->
+              <select id="product-availability-filter" class="form-select" style="width: 140px;">
+                <option value="all">All Availability</option>
+                <option value="instock">In Stock</option>
+                <option value="lowstock">Low Stock</option>
+                <option value="preorder">Pre-Order</option>
+                <option value="outofstock">Out of Stock</option>
+              </select>
+
+              <button type="button" class="btn btn-ghost btn-sm" id="reset-filters-btn">Clear</button>
+            </div>
+
+            <!-- Sort Select -->
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 0.8125rem; color: var(--admin-text-muted); font-weight: 500;">Sort:</span>
+              <select id="product-sort-select" class="form-select" style="width: 150px;">
+                <option value="newest">Newest First</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name-az">Name: A–Z</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="table-responsive" id="products-table-container">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th style="width: 32px;"><input type="checkbox" class="form-checkbox table-select-all"></th>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Brand</th>
+                  <th>Price (AUD)</th>
+                  <th>Stock</th>
+                  <th>Availability</th>
+                  <th>Status</th>
+                  <th style="width: 150px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-table-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="products-empty-state" style="display: none; padding: 3.5rem 1.5rem; text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🔍</div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 700; color: var(--admin-text-main);">No Products Found</h3>
+            <p style="font-size: 0.875rem; color: var(--admin-text-muted); margin-bottom: 1.25rem;">No items matched your filter criteria.</p>
+            <button type="button" class="btn btn-secondary" onclick="$('#reset-filters-btn').click();">Clear Filters</button>
+          </div>
+
+          <div class="card-footer">
+            <span class="pagination-info" id="products-pagination-info">Showing products</span>
+            <div class="pagination-controls" id="products-pagination-controls"></div>
+          </div>
+        </div>
+
+      </main>
+      <footer class="admin-footer"><div>&copy; 2026 <strong>Bongo Curated Admin Panel</strong></div></footer>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="modal-backdrop" id="delete-confirm-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Product</h3>
+        <button type="button" class="modal-close-btn" data-admin-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-weight: 500;">Are you sure you want to delete <strong id="delete-product-name-target" style="color: var(--color-danger);">this product</strong>?</p>
+        <p style="font-size: 0.8125rem; color: var(--admin-text-muted);">This action will permanently remove the item from catalog.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-admin-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete Product</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../../assets/js/data.js"></script>
+  <script src="../js/admin-layout.js"></script>
+  <script src="../js/admin-components.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

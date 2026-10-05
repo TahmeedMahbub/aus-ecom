@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product — Bongo Curated Admin</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Admin Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="css/product-form.css">
+</head>
+<body class="admin-body">
+
+  <div class="admin-wrapper">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">
+          <div class="brand-icon">B</div>
+          <div class="brand-text">
+            <span class="brand-title">Bongo Curated</span>
+            <span class="brand-subtitle">Admin Panel</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      </div>
+
+      <div class="sidebar-body">
+        <div class="sidebar-group">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item">
+              <a href="../index.html" class="sidebar-link" data-title="Dashboard">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></span>
+                  <span class="sidebar-link-text">Dashboard</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-group open">
+          <div class="sidebar-group-title">Catalog</div>
+          <ul class="sidebar-menu">
+            <li class="sidebar-item sidebar-group open">
+              <div class="sidebar-link sidebar-group-header" data-title="Catalog">
+                <div class="sidebar-link-content">
+                  <span class="sidebar-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+                  <span class="sidebar-link-text">Catalog</span>
+                </div>
+                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              <ul class="sidebar-submenu" style="display: flex;">
+                <li><a href="index.html" class="submenu-link active">Products</a></li>
+                <li><a href="../categories.html" class="submenu-link">Categories</a></li>
+                <li><a href="../subcategories.html" class="submenu-link">Subcategories</a></li>
+                <li><a href="../brands.html" class="submenu-link">Brands</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="../admin-users.html" class="sidebar-user">
+          <div class="sidebar-avatar">TM</div>
+          <div class="sidebar-user-info">
+            <span class="user-name">Tahmeed Mahbub</span>
+            <span class="user-role">Super Admin</span>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <button type="button" class="mobile-toggle-btn" id="mobile-toggle-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+          <div class="header-search">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" class="search-input" placeholder="Search catalog...">
+          </div>
+        </div>
+        <div class="header-right">
+          <a href="../../products.html" target="_blank" class="storefront-link">View Store Catalog</a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <form id="product-full-form">
+
+          <!-- Page Header & Main Actions -->
+          <div class="page-header">
+            <div class="page-title-group">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../index.html">Admin</a></li>
+                <li class="breadcrumb-separator">/</li>
+                <li class="breadcrumb-item"><a href="index.html">Products</a></li>
+                <li class="breadcrumb-separator">/</li>
+                <li class="breadcrumb-item active">Add Product</li>
+              </ul>
+              <h1 class="page-title">Add Product</h1>
+            </div>
+
+            <div class="page-actions">
+              <a href="index.html" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary" id="header-save-product-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save Product
+              </button>
+            </div>
+          </div>
+
+          <div class="product-form-layout">
+            
+            <!-- LEFT COLUMN: Primary Details -->
+            <div>
+
+              <!-- 1. Basic Information -->
+              <div class="form-card">
+                <h2 class="form-card-title">Basic Information</h2>
+                
+                <div class="form-group">
+                  <label class="form-label required" for="form-product-name">Product Name</label>
+                  <input type="text" id="form-product-name" class="form-control" placeholder="e.g. Minimalist Linen Shirt" required>
+                </div>
+
+                <div class="form-grid-3" style="margin-top: 1rem;">
+                  <div class="form-group">
+                    <label class="form-label required" for="form-product-category">Category</label>
+                    <select id="form-product-category" class="form-select" required>
+                      <!-- Populated by JS -->
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="form-product-subcategory">Subcategory</label>
+                    <select id="form-product-subcategory" class="form-select">
+                      <!-- Populated by JS -->
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="form-product-brand">Brand</label>
+                    <select id="form-product-brand" class="form-select">
+                      <!-- Populated by JS -->
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                  <label class="form-label" for="form-product-desc">Short Description</label>
+                  <input type="text" id="form-product-desc" class="form-control" placeholder="Brief summary shown in product cards">
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                  <label class="form-label" for="form-product-full-desc">Description</label>
+                  <textarea id="form-product-full-desc" class="form-control" rows="4" placeholder="Detailed product story, craftsmanship, sizing recommendations..."></textarea>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                  <label class="form-label" for="form-product-slug">URL Slug</label>
+                  <input type="text" id="form-product-slug" class="form-control" placeholder="minimalist-linen-shirt">
+                </div>
+              </div>
+
+              <!-- 2. Product Images -->
+              <div class="form-card">
+                <h2 class="form-card-title">Product Images</h2>
+                
+                <!-- Dropzone / File Picker -->
+                <div class="image-upload-dropzone" id="trigger-file-upload-btn">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--color-primary, #6366F1); margin-bottom: 0.35rem;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  <div style="font-weight: 600; font-size: 0.875rem; color: var(--admin-text-main);">Click to Upload Images</div>
+                  <div style="font-size: 0.75rem; color: var(--admin-text-muted);">PNG, JPG, WEBP formats supported</div>
+                  <input type="file" id="image-file-input" accept="image/*" multiple style="display:none">
+                </div>
+
+                <!-- Thumbnails Container -->
+                <div class="image-thumbnails-grid" id="image-thumbnails-container">
+                  <!-- Dynamically rendered -->
+                </div>
+
+                <!-- Quick Presets & URL link -->
+                <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--admin-card-border);">
+                  <div style="font-size: 0.78125rem; font-weight: 600; color: var(--admin-text-muted); margin-bottom: 0.5rem;">Or select from store sample assets:</div>
+                  <div class="preset-images-picker" id="preset-images-picker">
+                    <!-- Populated by JS -->
+                  </div>
+
+                  <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+                    <input type="text" id="add-url-img-input" class="form-control form-control-sm" placeholder="Paste external image URL...">
+                    <button type="button" class="btn btn-secondary btn-sm" id="add-url-img-btn">+ Add URL</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Pricing & Inventory -->
+              <div class="form-card">
+                <h2 class="form-card-title">Pricing & Inventory</h2>
+
+                <div class="form-grid-3">
+                  <div class="form-group">
+                    <label class="form-label required" for="form-product-price">Regular Price (A$)</label>
+                    <input type="number" step="0.01" id="form-product-price" class="form-control" placeholder="49.99" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="form-product-orig-price">Sale Price (A$)</label>
+                    <input type="number" step="0.01" id="form-product-orig-price" class="form-control" placeholder="Optional sale price">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="form-product-sku">SKU Code</label>
+                    <input type="text" id="form-product-sku" class="form-control" placeholder="SKU-BG-1001">
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--admin-card-border);">
+                  <label class="checkbox-label" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" id="form-product-track-stock" class="form-checkbox" checked>
+                    <span style="font-weight: 600; font-size: 0.875rem;">Track inventory stock for this product</span>
+                  </label>
+
+                  <div class="form-group" id="stock-qty-wrapper" style="margin-top: 0.75rem; max-width: 240px;">
+                    <label class="form-label" for="form-product-stock-qty">Stock Quantity</label>
+                    <input type="number" id="form-product-stock-qty" class="form-control" value="25" min="0">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Options & Variants -->
+              <div class="form-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <h2 class="form-card-title" style="margin: 0; border: none; padding: 0;">Product Variants</h2>
+                </div>
+
+                <label class="checkbox-label" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; margin-bottom: 1rem;">
+                  <input type="checkbox" id="form-product-has-variants" class="form-checkbox">
+                  <span style="font-weight: 600; font-size: 0.875rem;">This product has multiple variants (e.g. size, color)</span>
+                </label>
+
+                <!-- Variants Panel (Hidden when switch is OFF) -->
+                <div id="variants-management-panel" style="display: none; padding-top: 1rem; border-top: 1px solid var(--admin-card-border);">
+                  
+                  <div class="form-grid-3" style="align-items: flex-end;">
+                    <div class="form-group">
+                      <label class="form-label" for="form-product-variant-type">Variant Type</label>
+                      <select id="form-product-variant-type" class="form-select">
+                        <option value="both">Color + Size</option>
+                        <option value="color">Color Only</option>
+                        <option value="size">Size Only</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Colors (comma separated)</label>
+                      <input type="text" id="form-product-colors" class="form-control form-control-sm" placeholder="e.g. White, Black, Olive">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Sizes (comma separated)</label>
+                      <input type="text" id="form-product-sizes" class="form-control form-control-sm" placeholder="e.g. S, M, L, XL">
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem;">
+                    <button type="button" class="btn btn-secondary btn-sm" id="auto-generate-variants-btn">⚡ Auto-Generate Variants</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="add-variant-row-btn">+ Add Row</button>
+                  </div>
+
+                  <!-- Variant Table -->
+                  <div class="variant-table-container">
+                    <table class="variant-table">
+                      <thead>
+                        <tr>
+                          <th>Color</th>
+                          <th>Size</th>
+                          <th>SKU</th>
+                          <th>Price (A$)</th>
+                          <th>Stock</th>
+                          <th style="width: 40px;"></th>
+                        </tr>
+                      </thead>
+                      <tbody id="variant-rows-container">
+                        <!-- Populated by JS -->
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- 5. Optional Product Specifications (Collapsible) -->
+              <div class="form-card" style="padding: 0; background: transparent; border: none; box-shadow: none;">
+                <button type="button" class="optional-specs-toggle" id="toggle-optional-specs-btn">
+                  <span>+ Add Product Specifications (Material, Fabric, Dimensions...)</span>
+                  <span class="specs-icon" style="font-size: 1.25rem;">+</span>
+                </button>
+
+                <div id="optional-specs-panel" class="form-card" style="display: none; margin-top: 0.75rem;">
+                  <h2 class="form-card-title">Technical Specifications</h2>
+                  
+                  <div class="form-grid-3">
+                    <div class="form-group">
+                      <label class="form-label" for="form-spec-material">Material</label>
+                      <input type="text" id="form-spec-material" class="form-control" placeholder="100% Organic Linen">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="form-spec-fabric">Fabric Type</label>
+                      <input type="text" id="form-spec-fabric" class="form-control" placeholder="Breathable Woven">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="form-spec-dimensions">Dimensions</label>
+                      <input type="text" id="form-spec-dimensions" class="form-control" placeholder="Chest: 40 inches">
+                    </div>
+                  </div>
+
+                  <div class="form-grid-3" style="margin-top: 1rem;">
+                    <div class="form-group">
+                      <label class="form-label" for="form-spec-fit">Fit</label>
+                      <input type="text" id="form-spec-fit" class="form-control" placeholder="Relaxed Fit">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="form-spec-pattern">Pattern</label>
+                      <input type="text" id="form-spec-pattern" class="form-control" placeholder="Solid / Plain">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="form-spec-weight">Weight</label>
+                      <input type="text" id="form-spec-weight" class="form-control" placeholder="280g">
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label" for="form-spec-care">Care Instructions</label>
+                    <input type="text" id="form-spec-care" class="form-control" placeholder="Machine wash cold, dry flat">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Publishing & Visibility -->
+            <div>
+
+              <div class="form-card">
+                <h2 class="form-card-title">Product Visibility</h2>
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                  
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer;">
+                    <input type="checkbox" id="form-product-active" class="form-checkbox" checked>
+                    <div>
+                      <div style="font-weight: 600; font-size: 0.875rem;">Active</div>
+                      <div style="font-size: 0.75rem; color: var(--admin-text-muted);">Visible in store catalog and search</div>
+                    </div>
+                  </label>
+
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer;">
+                    <input type="checkbox" id="form-product-featured" class="form-checkbox">
+                    <div>
+                      <div style="font-weight: 600; font-size: 0.875rem;">Featured Product</div>
+                      <div style="font-size: 0.75rem; color: var(--admin-text-muted);">Show in homepage featured collection</div>
+                    </div>
+                  </label>
+
+                  <hr style="border-color: var(--admin-card-border); margin: 0.25rem 0;">
+
+                  <div class="form-group">
+                    <label class="form-label" for="form-product-availability">Availability Status</label>
+                    <select id="form-product-availability" class="form-select">
+                      <option value="instock">In Stock</option>
+                      <option value="lowstock">Low Stock</option>
+                      <option value="preorder">Pre-Order</option>
+                      <option value="outofstock">Out of Stock</option>
+                    </select>
+                  </div>
+
+                  <!-- Pre-Order Settings Panel (Conditional) -->
+                  <div id="preorder-details-panel" style="display: none; padding: 0.75rem; background: var(--admin-bg-hover); border-radius: var(--radius-md); border: 1px solid var(--admin-card-border);">
+                    <div class="form-group">
+                      <label class="form-label">Dispatch Date</label>
+                      <input type="date" id="form-preorder-date" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group" style="margin-top: 0.5rem;">
+                      <label class="form-label">Pre-order Note</label>
+                      <input type="text" id="form-preorder-note" class="form-control form-control-sm" placeholder="Ships in 2 weeks">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </form>
+      </main>
+      <footer class="admin-footer"><div>&copy; 2026 <strong>Bongo Curated Admin Panel</strong></div></footer>
+    </div>
+  </div>
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../../assets/js/data.js"></script>
+  <script src="../js/admin-layout.js"></script>
+  <script src="../js/admin-components.js"></script>
+  <script src="js/product-form.js"></script>
+</body>
+</html>

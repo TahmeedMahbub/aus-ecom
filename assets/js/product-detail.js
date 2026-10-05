@@ -10,16 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let productId = parseInt(urlParams.get('id'));
   const productSlug = urlParams.get('slug');
 
+  const allProducts = window.BongoProducts ? window.BongoProducts.getAll() : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
   if (!productId && productSlug) {
-    const foundBySlug = PRODUCTS.find(p => p.slug === productSlug);
+    const foundBySlug = allProducts.find(p => p.slug === productSlug);
     if (foundBySlug) productId = foundBySlug.id;
   }
 
-  // Fallback to Product #1 if invalid
-  let product = PRODUCTS.find(p => p.id === productId);
+  // Fallback to active product if invalid
+  let product = allProducts.find(p => p.id === productId);
   if (!product) {
-    product = PRODUCTS[0];
+    product = allProducts.find(p => !p.isDisabled) || allProducts[0];
   }
+
+  if (!product) return;
 
   // Track Recently Viewed in localStorage
   trackRecentlyViewed(product.id);
@@ -53,6 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Helper Functions ── */
 
+function fixImgPath(src) {
+  if (!src) return 'assets/images/products/shirt-white.png';
+  if (src.startsWith('../../assets/')) return src.replace('../../assets/', 'assets/');
+  return src;
+}
+
 function getInitialSize(product) {
   if (!product.sizes || product.sizes.length === 0) return null;
   const available = product.sizes.filter(s => !(product.outOfStockSizes || []).includes(s));
@@ -60,22 +69,14 @@ function getInitialSize(product) {
 }
 
 function generateGalleryImages(product) {
-  const list = [product.image];
-  // Add additional realistic angles/variations from existing asset pool
-  if (product.category === 'fashion') {
-    if (product.image.includes('tshirt')) {
-      list.push('assets/images/products/tshirt-olive.png', 'assets/images/products/shirt-white.png');
-    } else if (product.image.includes('shirt')) {
-      list.push('assets/images/products/shirt-white.png', 'assets/images/products/tshirt-olive.png');
-    } else {
-      list.push('assets/images/products/trousers-khaki.png', 'assets/images/products/shirt-white.png');
-    }
-  } else if (product.category === 'home-decor') {
-    list.push('assets/images/products/nakshi-kantha.jpg', 'assets/images/products/artisan-brass.jpg');
-  } else if (product.category === 'jute') {
-    list.push('assets/images/products/jute-tote.jpg', 'assets/images/lifestyle/jute-showcase.jpg');
-  } else {
-    list.push('assets/images/products/leather-journal.jpg', 'assets/images/products/artisan-brass.jpg');
+  let list = [];
+  if (Array.isArray(product.images) && product.images.length > 0) {
+    list = product.images.map(img => fixImgPath(img));
+  } else if (product.image) {
+    list = [fixImgPath(product.image)];
+  }
+  if (list.length === 0) {
+    list = ['assets/images/products/shirt-white.png'];
   }
   return list;
 }
@@ -129,8 +130,10 @@ function renderProductGallery(detailState) {
   const thumbnailsContainer = document.getElementById('detail-thumbnails-list');
 
   if (mainImg) {
-    mainImg.src = detailState.images[detailState.activeImgIndex];
-    mainImg.alt = detailState.product.name;
+    const imgUrl = fixImgPath(detailState.images[detailState.activeImgIndex]);
+    mainImg.src = imgUrl;
+    mainImg.alt = detailState.product.name || 'Product Image';
+    mainImg.onerror = function() { this.src = 'assets/images/products/shirt-white.png'; };
     mainImg.style.transform = 'scale(1)';
     mainImg.style.transformOrigin = 'center center';
   }
@@ -148,7 +151,7 @@ function renderProductGallery(detailState) {
   if (thumbnailsContainer) {
     thumbnailsContainer.innerHTML = detailState.images.map((imgUrl, idx) => `
       <div class="gallery-thumb-item ${idx === detailState.activeImgIndex ? 'active' : ''}" data-thumb-index="${idx}">
-        <img src="${imgUrl}" alt="Product View ${idx + 1}" loading="lazy">
+        <img src="${fixImgPath(imgUrl)}" alt="Product View ${idx + 1}" loading="lazy" onerror="this.src='assets/images/products/shirt-white.png';">
       </div>
     `).join('');
 
@@ -197,23 +200,26 @@ function renderProductInfo(detailState) {
   const titleEl = document.getElementById('detail-title');
   const descEl = document.getElementById('detail-short-desc');
 
-  const catName = CATEGORY_NAME_MAP[product.category] || product.category;
+  const catName = CATEGORY_NAME_MAP[product.category] || product.category || 'General';
   const brandName = product.brand || 'Bongo Curated';
 
   if (eyebrowEl) eyebrowEl.textContent = `${catName} · ${brandName}`;
-  if (titleEl) titleEl.textContent = product.name;
-  if (descEl) descEl.textContent = product.desc;
+  if (titleEl) titleEl.textContent = product.name || 'Product Details';
+  if (descEl) descEl.textContent = product.desc || '';
 
   // Price
   const offeredPriceEl = document.getElementById('detail-offered-price');
   const originalPriceEl = document.getElementById('detail-original-price');
   const discountPillEl = document.getElementById('detail-discount-pill');
 
-  if (offeredPriceEl) offeredPriceEl.textContent = `A$${product.price.toFixed(2)}`;
+  const numPrice = parseFloat(product.price) || 0;
+  const numOrigPrice = product.originalPrice ? parseFloat(product.originalPrice) : null;
+
+  if (offeredPriceEl) offeredPriceEl.textContent = `A$${numPrice.toFixed(2)}`;
 
   if (originalPriceEl) {
-    if (product.originalPrice && product.originalPrice > product.price) {
-      originalPriceEl.textContent = `A$${product.originalPrice.toFixed(2)}`;
+    if (numOrigPrice && numOrigPrice > numPrice) {
+      originalPriceEl.textContent = `A$${numOrigPrice.toFixed(2)}`;
       originalPriceEl.style.display = 'inline';
     } else {
       originalPriceEl.style.display = 'none';
@@ -221,9 +227,9 @@ function renderProductInfo(detailState) {
   }
 
   if (discountPillEl) {
-    if (product.originalPrice && product.originalPrice > product.price) {
-      const savings = product.originalPrice - product.price;
-      const pct = Math.round((savings / product.originalPrice) * 100);
+    if (numOrigPrice && numOrigPrice > numPrice) {
+      const savings = numOrigPrice - numPrice;
+      const pct = Math.round((savings / numOrigPrice) * 100);
       discountPillEl.textContent = `SAVE ${pct}% (${SITE.currency}${savings.toFixed(2)})`;
       discountPillEl.style.display = 'inline-block';
     } else {

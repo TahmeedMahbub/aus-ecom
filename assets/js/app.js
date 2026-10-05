@@ -341,30 +341,41 @@
   /* ══════════════════════════════════════════════════════════
      3. RENDER PRODUCT CARDS & FILTER TABS
      ══════════════════════════════════════════════════════════ */
+  function fixImgPath(src) {
+    if (!src) return 'assets/images/products/shirt-white.png';
+    if (src.startsWith('../../assets/')) return src.replace('../../assets/', 'assets/');
+    return src;
+  }
+
   function createProductCardHTML(product) {
-    const originalPriceHTML = product.originalPrice
-      ? `<span class="original">${SITE.currency}${product.originalPrice.toFixed(2)}</span>`
+    const numPrice = parseFloat(product.price) || 0;
+    const numOrigPrice = product.originalPrice ? parseFloat(product.originalPrice) : null;
+
+    const originalPriceHTML = (numOrigPrice && numOrigPrice > numPrice)
+      ? `<span class="original">${SITE.currency}${numOrigPrice.toFixed(2)}</span>`
       : `<span class="original">&nbsp;</span>`;
+
+    const imgPath = fixImgPath(product.image);
 
     return `
       <div class="product-card fade-up visible" data-product-id="${product.id}">
         <div class="product-card-image">
-          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <img src="${imgPath}" alt="${product.name || 'Product'}" loading="lazy" onerror="this.src='assets/images/products/shirt-white.png';">
           <div class="product-card-badge">${BADGE_MAP[product.badge] || ''}</div>
           <button class="product-card-wishlist ${state.wishlist.includes(product.id) ? 'active' : ''}" data-wishlist-id="${product.id}" aria-label="Add to wishlist">
             ${state.wishlist.includes(product.id) ? ICONS.heartFill : ICONS.heart}
           </button>
         </div>
         <div class="product-card-info">
-          <div class="product-card-category">${CATEGORY_NAME_MAP[product.category] || product.category}</div>
-          <div class="product-card-name">${product.name}</div>
-          <div class="product-card-desc">${product.desc}</div>
+          <div class="product-card-category">${CATEGORY_NAME_MAP[product.category] || product.category || 'General'}</div>
+          <div class="product-card-name">${product.name || 'Product'}</div>
+          <div class="product-card-desc">${product.desc || ''}</div>
           <div class="product-card-footer">
             <div class="product-card-price">
               ${originalPriceHTML}
-              <span class="current">${SITE.currency}${product.price.toFixed(2)}</span>
+              <span class="current">${SITE.currency}${numPrice.toFixed(2)}</span>
             </div>
-            <button class="product-card-btn" data-view-details-id="${product.id}" aria-label="View details for ${product.name}">
+            <button class="product-card-btn" data-view-details-id="${product.id}" aria-label="View details for ${product.name || 'Product'}">
               <span class="btn-text-desktop">View Details</span>
               <span class="btn-text-mobile">View</span>
             </button>
@@ -405,11 +416,13 @@
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
-    let filtered = PRODUCTS;
+    const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll() : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+    let filtered = sourceProducts.filter(p => !p.isDisabled);
+
     if (filter === 'preorder') {
-      filtered = PRODUCTS.filter(p => p.badge === 'preorder');
+      filtered = filtered.filter(p => p.badge === 'preorder' || p.availability === 'preorder');
     } else if (filter !== 'all') {
-      filtered = PRODUCTS.filter(p => p.category === filter);
+      filtered = filtered.filter(p => p.category === filter);
     }
 
     if (filtered.length === 0) {
@@ -460,21 +473,20 @@
     const grid = document.getElementById('home-showcase-grid');
     if (!grid) return;
 
-    const homeProducts = PRODUCTS.filter(p => p.category === 'home-decor' || p.id === 8 || p.id === 9).slice(0, 4);
+    const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll().filter(p => !p.isDisabled) : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+    const homeProducts = sourceProducts.filter(p => p.category === 'home-decor' || p.id === 8 || p.id === 9).slice(0, 4);
     grid.innerHTML = homeProducts.map(p => createProductCardHTML(p)).join('');
     bindProductCardEvents(grid);
   }
 
-  /* ══════════════════════════════════════════════════════════
-     5. RENDER PREORDER CARDS
-     ══════════════════════════════════════════════════════════ */
   function renderPreorderPreview() {
     const previewGrid = document.getElementById('preorder-products-preview');
     if (!previewGrid) return;
 
-    const preorderProducts = PRODUCTS.filter(p => p.badge === 'preorder').slice(0, 4);
+    const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll().filter(p => !p.isDisabled) : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+    const preorderProducts = sourceProducts.filter(p => p.badge === 'preorder' || p.availability === 'preorder').slice(0, 4);
     if (preorderProducts.length === 0) {
-      previewGrid.innerHTML = PRODUCTS.slice(0, 3).map(p => createProductCardHTML({...p, badge: 'preorder'})).join('');
+      previewGrid.innerHTML = sourceProducts.slice(0, 3).map(p => createProductCardHTML({...p, badge: 'preorder'})).join('');
     } else {
       previewGrid.innerHTML = preorderProducts.map(p => createProductCardHTML(p)).join('');
     }

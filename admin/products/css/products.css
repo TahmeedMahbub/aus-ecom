@@ -1,0 +1,40 @@
+/* ============================================================
+   ADMIN PRODUCT LIST STYLES — Bongo Curated Admin Panel
+   ============================================================ */
+
+.table-row-disabled {
+  opacity: 0.65;
+  background-color: rgba(243, 244, 246, 0.5);
+}
+
+.table-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background-color: var(--admin-body-bg);
+  border: 1px solid var(--admin-card-border);
+}
+
+.product-title-link {
+  font-weight: 600;
+  color: var(--admin-text-main);
+  text-decoration: none;
+}
+
+.product-title-link:hover {
+  color: var(--admin-brand);
+}
+
+.filter-bar {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  flex: 1;
+  align-items: center;
+}
+
+.action-buttons-group {
+  display: flex;
+  gap: 0.35rem;
+}
