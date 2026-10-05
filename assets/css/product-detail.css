@@ -309,23 +309,38 @@
 }
 
 .size-guide-trigger-btn {
-  background: none;
-  border: none;
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-semibold);
-  color: var(--color-grey-700);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  background-color: var(--color-brand-light);
+  color: var(--color-brand-dark);
+  border: 1.5px solid var(--color-brand);
+  font-size: 0.8125rem;
+  font-weight: var(--fw-bold);
+  border-radius: 9999px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0;
-  transition: color var(--transition-fast);
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1.5px 4px rgba(204, 122, 63, 0.18);
+}
+
+.size-guide-trigger-btn svg {
+  width: 15px;
+  height: 15px;
+  stroke: var(--color-brand);
+  transition: stroke var(--transition-fast);
 }
 
 .size-guide-trigger-btn:hover {
-  color: var(--color-brand);
+  background-color: var(--color-brand);
+  color: #ffffff;
+  border-color: var(--color-brand);
+  box-shadow: 0 4px 12px rgba(204, 122, 63, 0.35);
+  transform: translateY(-1px);
+}
+
+.size-guide-trigger-btn:hover svg {
+  stroke: #ffffff;
 }
 
 .detail-color-swatches-list {
@@ -760,6 +775,32 @@
   }
 }
 
+@media (max-width: 768px) {
+  .detail-cta-row {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    gap: 0.75rem;
+  }
+
+  .detail-quantity-picker {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .detail-actions-wrap {
+    display: contents;
+  }
+
+  #detail-add-to-cart-btn {
+    width: 100%;
+  }
+
+  #detail-buy-now-btn {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
 @media (max-width: 576px) {
   .detail-price-box {
     align-items: center;
@@ -782,19 +823,6 @@
     display: inline-flex;
     align-items: center;
     line-height: 1;
-  }
-
-  .detail-cta-row {
-    flex-direction: column;
-  }
-
-  .detail-quantity-picker {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .detail-actions-wrap {
-    flex-direction: column;
   }
 
   .gallery-thumbnails-row {
