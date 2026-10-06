@@ -425,6 +425,27 @@
   object-fit: cover;
   background-color: var(--admin-body-bg);
   border: 1px solid var(--admin-card-border);
+  flex-shrink: 0;
+}
+
+.table-thumb-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background-color: var(--admin-body-bg);
+  border: 1px solid var(--admin-card-border);
+  flex-shrink: 0;
+}
+
+.table-thumb-xs {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background-color: var(--admin-body-bg);
+  border: 1px solid var(--admin-card-border);
+  flex-shrink: 0;
 }
 
 .table-media-info {
@@ -804,3 +825,132 @@ textarea.form-control {
 .toast-close:hover {
   color: var(--admin-text-main);
 }
+
+/* ── 8. SALES MODULE SPECIFIC STYLES ── */
+.badge-confirmed { background-color: #DBEAFE; color: #1D4ED8; }
+.badge-delivered { background-color: #D1FAE5; color: #047857; }
+.badge-refunded { background-color: #F3F4F6; color: #4B5563; }
+.badge-paid { background-color: #D1FAE5; color: #047857; }
+.badge-failed { background-color: #FEE2E2; color: #B91C1C; }
+.badge-recovered { background-color: #D1FAE5; color: #047857; }
+.badge-abandoned { background-color: #FEF3C7; color: #B45309; }
+.badge-email-sent { background-color: #E0E7FF; color: #4338CA; }
+.badge-expired { background-color: #E5E7EB; color: #4B5563; }
+
+/* Timeline Component */
+.order-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  padding-left: 1.75rem;
+}
+.order-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.625rem;
+  width: 2px;
+  background-color: var(--admin-card-border);
+}
+.timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.timeline-marker {
+  position: absolute;
+  left: -1.75rem;
+  top: 0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 2px solid var(--admin-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  z-index: 1;
+}
+.timeline-item.active .timeline-marker {
+  background-color: var(--admin-brand);
+  color: #FFFFFF;
+  box-shadow: 0 0 0 3px var(--admin-brand-light);
+}
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.timeline-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--admin-text-main);
+}
+.timeline-time {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+.timeline-desc {
+  font-size: 0.8125rem;
+  color: var(--admin-text-muted);
+  background-color: var(--admin-body-bg);
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-md);
+  margin-top: 0.25rem;
+  border: 1px solid var(--admin-card-border);
+}
+.timeline-author {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--admin-brand);
+}
+
+/* Customer Profile Avatar */
+.customer-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--admin-brand-light), #FDF4EB);
+  color: var(--admin-brand-dark);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  border: 2px solid var(--admin-card-border);
+}
+
+.customer-avatar-lg {
+  width: 64px;
+  height: 64px;
+  font-size: 1.5rem;
+}
+
+/* Print Invoice Layout */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-invoice-container, #printable-invoice-container * {
+    visibility: visible;
+  }
+  #printable-invoice-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 2rem;
+    background: #FFF;
+    color: #000;
+  }
+  .admin-sidebar, .admin-header, .page-header, .admin-footer, .btn, .no-print {
+    display: none !important;
+  }
+}
+

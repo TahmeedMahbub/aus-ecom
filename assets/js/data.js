@@ -998,6 +998,1295 @@ window.BongoProducts = {
 window.PRODUCTS = window.BongoProducts.getAll();
 var PRODUCTS = window.PRODUCTS;
 
+/* ============================================================
+   SALES MODULE DATA STORES (CUSTOMERS, ORDERS, ABANDONED CARTS)
+   ============================================================ */
+
+// 5. INITIAL CUSTOMERS DATA
+const INITIAL_CUSTOMERS = [
+  {
+    id: 1,
+    name: 'Sarah Jenkins',
+    email: 'sarah.j@example.com.au',
+    phone: '+61 412 345 678',
+    avatar: 'SJ',
+    joinedDate: '2025-11-15T10:00:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Sarah Jenkins',
+      street: '42 George Street',
+      address2: 'Suite 4B',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2000',
+      country: 'Australia',
+      phone: '+61 412 345 678'
+    },
+    billingAddress: {
+      recipientName: 'Sarah Jenkins',
+      street: '42 George Street',
+      address2: 'Suite 4B',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2000',
+      country: 'Australia',
+      phone: '+61 412 345 678'
+    },
+    notes: 'VIP customer. Prefers eco-friendly packaging.',
+    wishlist: [22, 23]
+  },
+  {
+    id: 2,
+    name: 'Liam Hemsworth',
+    email: 'liam.h@melbourne.vic.gov.au',
+    phone: '+61 423 789 012',
+    avatar: 'LH',
+    joinedDate: '2026-01-20T14:22:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Liam Hemsworth',
+      street: '158 Collins Street',
+      address2: '',
+      city: 'Melbourne',
+      state: 'VIC',
+      postcode: '3000',
+      country: 'Australia',
+      phone: '+61 423 789 012'
+    },
+    billingAddress: {
+      recipientName: 'Liam Hemsworth',
+      street: '158 Collins Street',
+      address2: '',
+      city: 'Melbourne',
+      state: 'VIC',
+      postcode: '3000',
+      country: 'Australia',
+      phone: '+61 423 789 012'
+    },
+    notes: '',
+    wishlist: [21]
+  },
+  {
+    id: 3,
+    name: 'Emma Watson-Smith',
+    email: 'emma.ws@outlook.com.au',
+    phone: '+61 434 567 890',
+    avatar: 'EW',
+    joinedDate: '2025-08-10T09:15:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Emma Watson-Smith',
+      street: '89 Queen Street',
+      address2: 'Apt 12',
+      city: 'Brisbane',
+      state: 'QLD',
+      postcode: '4000',
+      country: 'Australia',
+      phone: '+61 434 567 890'
+    },
+    billingAddress: {
+      recipientName: 'Emma Watson-Smith',
+      street: '89 Queen Street',
+      address2: 'Apt 12',
+      city: 'Brisbane',
+      state: 'QLD',
+      postcode: '4000',
+      country: 'Australia',
+      phone: '+61 434 567 890'
+    },
+    notes: 'Frequent buyer of organic cotton apparel.',
+    wishlist: [24, 26]
+  },
+  {
+    id: 4,
+    name: 'Oliver Taylor',
+    email: 'oliver.taylor@gmail.com',
+    phone: '+61 445 123 789',
+    avatar: 'OT',
+    joinedDate: '2026-03-05T11:40:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Oliver Taylor',
+      street: '14 St Georges Terrace',
+      address2: '',
+      city: 'Perth',
+      state: 'WA',
+      postcode: '6000',
+      country: 'Australia',
+      phone: '+61 445 123 789'
+    },
+    billingAddress: {
+      recipientName: 'Oliver Taylor',
+      street: '14 St Georges Terrace',
+      address2: '',
+      city: 'Perth',
+      state: 'WA',
+      postcode: '6000',
+      country: 'Australia',
+      phone: '+61 445 123 789'
+    },
+    notes: '',
+    wishlist: []
+  },
+  {
+    id: 5,
+    name: 'Charlotte Brown',
+    email: 'charlotte.b@fastmail.com',
+    phone: '+61 456 234 567',
+    avatar: 'CB',
+    joinedDate: '2026-02-14T16:05:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Charlotte Brown',
+      street: '72 King William St',
+      address2: '',
+      city: 'Adelaide',
+      state: 'SA',
+      postcode: '5000',
+      country: 'Australia',
+      phone: '+61 456 234 567'
+    },
+    billingAddress: {
+      recipientName: 'Charlotte Brown',
+      street: '72 King William St',
+      address2: '',
+      city: 'Adelaide',
+      state: 'SA',
+      postcode: '5000',
+      country: 'Australia',
+      phone: '+61 456 234 567'
+    },
+    notes: '',
+    wishlist: [25]
+  },
+  {
+    id: 6,
+    name: 'Jack MacIntyre',
+    email: 'jack.mac@sydneytech.edu.au',
+    phone: '+61 467 890 123',
+    avatar: 'JM',
+    joinedDate: '2026-04-01T08:30:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Jack MacIntyre',
+      street: '200 Broadway',
+      address2: 'Level 2',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2008',
+      country: 'Australia',
+      phone: '+61 467 890 123'
+    },
+    billingAddress: {
+      recipientName: 'Jack MacIntyre',
+      street: '200 Broadway',
+      address2: 'Level 2',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2008',
+      country: 'Australia',
+      phone: '+61 467 890 123'
+    },
+    notes: 'Created active cart recently.',
+    wishlist: [26, 24]
+  },
+  {
+    id: 7,
+    name: 'Sophie Nguyen',
+    email: 'sophie.nguyen@designco.com.au',
+    phone: '+61 478 901 234',
+    avatar: 'SN',
+    joinedDate: '2025-09-18T13:45:00.000Z',
+    isDisabled: false,
+    shippingAddress: {
+      recipientName: 'Sophie Nguyen',
+      street: '55 Elizabeth Street',
+      address2: '',
+      city: 'Hobart',
+      state: 'TAS',
+      postcode: '7000',
+      country: 'Australia',
+      phone: '+61 478 901 234'
+    },
+    billingAddress: {
+      recipientName: 'Sophie Nguyen',
+      street: '55 Elizabeth Street',
+      address2: '',
+      city: 'Hobart',
+      state: 'TAS',
+      postcode: '7000',
+      country: 'Australia',
+      phone: '+61 478 901 234'
+    },
+    notes: 'Prefers Express Courier shipping.',
+    wishlist: [22]
+  },
+  {
+    id: 8,
+    name: 'Harrison Forde',
+    email: 'harrison.f@gmail.com',
+    phone: '+61 489 012 345',
+    avatar: 'HF',
+    joinedDate: '2026-03-12T17:10:00.000Z',
+    isDisabled: true,
+    shippingAddress: {
+      recipientName: 'Harrison Forde',
+      street: '10 Constitution Ave',
+      address2: '',
+      city: 'Canberra',
+      state: 'ACT',
+      postcode: '2601',
+      country: 'Australia',
+      phone: '+61 489 012 345'
+    },
+    billingAddress: {
+      recipientName: 'Harrison Forde',
+      street: '10 Constitution Ave',
+      address2: '',
+      city: 'Canberra',
+      state: 'ACT',
+      postcode: '2601',
+      country: 'Australia',
+      phone: '+61 489 012 345'
+    },
+    notes: 'Account suspended following order cancellation request.',
+    wishlist: []
+  }
+];
+
+// 6. INITIAL ORDERS DATA
+const INITIAL_ORDERS = [
+  {
+    id: 1008,
+    orderNumber: '#ORD-2026-1008',
+    createdAt: '2026-10-04T10:15:00.000Z',
+    customerId: 1,
+    customerName: 'Sarah Jenkins',
+    customerEmail: 'sarah.j@example.com.au',
+    customerPhone: '+61 412 345 678',
+    orderStatus: 'Delivered',
+    paymentStatus: 'Paid',
+    paymentMethod: 'Credit Card (Stripe)',
+    transactionId: 'ch_3M92837492831',
+    trackingNumber: 'AUS-948271039',
+    shippingMethod: 'Standard Shipping (AU Post)',
+    shippingFee: 10.00,
+    discount: 10.00,
+    discountCode: 'SPRING10',
+    subtotal: 94.00,
+    tax: 8.40,
+    total: 94.00,
+    items: [
+      {
+        productId: 22,
+        productName: 'Lightweight Cotton Summer Shirt',
+        sku: 'SKU-BG-0022',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'White',
+        variantSize: 'L',
+        unitPrice: 36.00,
+        quantity: 2,
+        lineTotal: 72.00
+      },
+      {
+        productId: 25,
+        productName: 'Organic Cotton Ribbed Tank',
+        sku: 'SKU-BG-0025',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Olive',
+        variantSize: 'M',
+        unitPrice: 22.00,
+        quantity: 1,
+        lineTotal: 22.00
+      }
+    ],
+    itemCount: 3,
+    shippingAddress: {
+      recipientName: 'Sarah Jenkins',
+      street: '42 George Street',
+      address2: 'Suite 4B',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2000',
+      country: 'Australia',
+      phone: '+61 412 345 678'
+    },
+    billingAddress: {
+      recipientName: 'Sarah Jenkins',
+      street: '42 George Street',
+      address2: 'Suite 4B',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2000',
+      country: 'Australia',
+      phone: '+61 412 345 678'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order placed by customer online', timestamp: '2026-10-04T10:15:00.000Z', author: 'System' },
+      { status: 'Confirmed', note: 'Payment verified via Stripe', timestamp: '2026-10-04T10:16:30.000Z', author: 'System' },
+      { status: 'Processing', note: 'Dispatched to Sydney Fulfillment Depot', timestamp: '2026-10-04T11:30:00.000Z', author: 'Tahmeed M.' },
+      { status: 'Shipped', note: 'Australia Post tracking generated: AUS-948271039', timestamp: '2026-10-04T14:20:00.000Z', author: 'Tahmeed M.' },
+      { status: 'Delivered', note: 'Delivered to recipient address front door', timestamp: '2026-10-06T09:10:00.000Z', author: 'AU Post' }
+    ]
+  },
+  {
+    id: 1007,
+    orderNumber: '#ORD-2026-1007',
+    createdAt: '2026-10-04T08:45:00.000Z',
+    customerId: 3,
+    customerName: 'Emma Watson-Smith',
+    customerEmail: 'emma.ws@outlook.com.au',
+    customerPhone: '+61 434 567 890',
+    orderStatus: 'Shipped',
+    paymentStatus: 'Paid',
+    paymentMethod: 'PayPal',
+    transactionId: 'PP-981273918273',
+    trackingNumber: 'AUS-983710294',
+    shippingMethod: 'Express Courier',
+    shippingFee: 0.00,
+    discount: 0.00,
+    discountCode: '',
+    subtotal: 87.00,
+    tax: 7.91,
+    total: 87.00,
+    items: [
+      {
+        productId: 26,
+        productName: 'Heritage Cotton Kurta',
+        sku: 'SKU-BG-0026',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'White',
+        variantSize: 'M',
+        unitPrice: 48.00,
+        quantity: 1,
+        lineTotal: 48.00
+      },
+      {
+        productId: 23,
+        productName: 'Washed Cotton Casual Shirt',
+        sku: 'SKU-BG-0023',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'Khaki',
+        variantSize: 'L',
+        unitPrice: 39.00,
+        quantity: 1,
+        lineTotal: 39.00
+      }
+    ],
+    itemCount: 2,
+    shippingAddress: {
+      recipientName: 'Emma Watson-Smith',
+      street: '89 Queen Street',
+      address2: 'Apt 12',
+      city: 'Brisbane',
+      state: 'QLD',
+      postcode: '4000',
+      country: 'Australia',
+      phone: '+61 434 567 890'
+    },
+    billingAddress: {
+      recipientName: 'Emma Watson-Smith',
+      street: '89 Queen Street',
+      address2: 'Apt 12',
+      city: 'Brisbane',
+      state: 'QLD',
+      postcode: '4000',
+      country: 'Australia',
+      phone: '+61 434 567 890'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order placed via PayPal Express', timestamp: '2026-10-04T08:45:00.000Z', author: 'System' },
+      { status: 'Confirmed', note: 'Payment captured', timestamp: '2026-10-04T08:46:00.000Z', author: 'System' },
+      { status: 'Processing', note: 'Items packed and labeled', timestamp: '2026-10-04T10:00:00.000Z', author: 'Tahmeed M.' },
+      { status: 'Shipped', note: 'Handed to Express Courier: AUS-983710294', timestamp: '2026-10-04T13:15:00.000Z', author: 'Tahmeed M.' }
+    ]
+  },
+  {
+    id: 1006,
+    orderNumber: '#ORD-2026-1006',
+    createdAt: '2026-10-03T16:20:00.000Z',
+    customerId: 2,
+    customerName: 'Liam Hemsworth',
+    customerEmail: 'liam.h@melbourne.vic.gov.au',
+    customerPhone: '+61 423 789 012',
+    orderStatus: 'Processing',
+    paymentStatus: 'Paid',
+    paymentMethod: 'Credit Card (Stripe)',
+    transactionId: 'ch_3M92837492832',
+    trackingNumber: '',
+    shippingMethod: 'Standard Shipping (AU Post)',
+    shippingFee: 12.00,
+    discount: 0.00,
+    discountCode: '',
+    subtotal: 84.00,
+    tax: 8.73,
+    total: 96.00,
+    items: [
+      {
+        productId: 24,
+        productName: 'Cotton Lounge Shorts',
+        sku: 'SKU-BG-0024',
+        image: 'assets/images/products/trousers-khaki.png',
+        variantColor: 'Khaki',
+        variantSize: 'M',
+        unitPrice: 26.00,
+        quantity: 2,
+        lineTotal: 52.00
+      },
+      {
+        productId: 20,
+        productName: 'Textured Cotton Henley',
+        sku: 'SKU-BG-0020',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Olive',
+        variantSize: 'L',
+        unitPrice: 32.00,
+        quantity: 1,
+        lineTotal: 32.00
+      }
+    ],
+    itemCount: 3,
+    shippingAddress: {
+      recipientName: 'Liam Hemsworth',
+      street: '158 Collins Street',
+      address2: '',
+      city: 'Melbourne',
+      state: 'VIC',
+      postcode: '3000',
+      country: 'Australia',
+      phone: '+61 423 789 012'
+    },
+    billingAddress: {
+      recipientName: 'Liam Hemsworth',
+      street: '158 Collins Street',
+      address2: '',
+      city: 'Melbourne',
+      state: 'VIC',
+      postcode: '3000',
+      country: 'Australia',
+      phone: '+61 423 789 012'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order placed by customer', timestamp: '2026-10-03T16:20:00.000Z', author: 'System' },
+      { status: 'Confirmed', note: 'Payment verified', timestamp: '2026-10-03T16:21:00.000Z', author: 'System' },
+      { status: 'Processing', note: 'Sent to packing desk', timestamp: '2026-10-04T09:00:00.000Z', author: 'Tahmeed M.' }
+    ]
+  },
+  {
+    id: 1005,
+    orderNumber: '#ORD-2026-1005',
+    createdAt: '2026-10-03T11:05:00.000Z',
+    customerId: 5,
+    customerName: 'Charlotte Brown',
+    customerEmail: 'charlotte.b@fastmail.com',
+    customerPhone: '+61 456 234 567',
+    orderStatus: 'Confirmed',
+    paymentStatus: 'Paid',
+    paymentMethod: 'Afterpay',
+    transactionId: 'AP-819238192',
+    trackingNumber: '',
+    shippingMethod: 'Standard Shipping (AU Post)',
+    shippingFee: 10.00,
+    discount: 0.00,
+    discountCode: '',
+    subtotal: 96.00,
+    tax: 9.64,
+    total: 106.00,
+    items: [
+      {
+        productId: 26,
+        productName: 'Heritage Cotton Kurta',
+        sku: 'SKU-BG-0026',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'White',
+        variantSize: 'L',
+        unitPrice: 48.00,
+        quantity: 2,
+        lineTotal: 96.00
+      }
+    ],
+    itemCount: 2,
+    shippingAddress: {
+      recipientName: 'Charlotte Brown',
+      street: '72 King William St',
+      address2: '',
+      city: 'Adelaide',
+      state: 'SA',
+      postcode: '5000',
+      country: 'Australia',
+      phone: '+61 456 234 567'
+    },
+    billingAddress: {
+      recipientName: 'Charlotte Brown',
+      street: '72 King William St',
+      address2: '',
+      city: 'Adelaide',
+      state: 'SA',
+      postcode: '5000',
+      country: 'Australia',
+      phone: '+61 456 234 567'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order submitted with Afterpay', timestamp: '2026-10-03T11:05:00.000Z', author: 'System' },
+      { status: 'Confirmed', note: 'Afterpay transaction authorized', timestamp: '2026-10-03T11:06:00.000Z', author: 'System' }
+    ]
+  },
+  {
+    id: 1004,
+    orderNumber: '#ORD-2026-1004',
+    createdAt: '2026-10-02T19:40:00.000Z',
+    customerId: 4,
+    customerName: 'Oliver Taylor',
+    customerEmail: 'oliver.taylor@gmail.com',
+    customerPhone: '+61 445 123 789',
+    orderStatus: 'Pending',
+    paymentStatus: 'Pending',
+    paymentMethod: 'Bank Transfer (EFT)',
+    transactionId: 'PENDING_EFT',
+    trackingNumber: '',
+    shippingMethod: 'Standard Shipping (AU Post)',
+    shippingFee: 10.00,
+    discount: 0.00,
+    discountCode: '',
+    subtotal: 78.00,
+    tax: 8.00,
+    total: 88.00,
+    items: [
+      {
+        productId: 23,
+        productName: 'Washed Cotton Casual Shirt',
+        sku: 'SKU-BG-0023',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'Blue',
+        variantSize: 'XL',
+        unitPrice: 39.00,
+        quantity: 2,
+        lineTotal: 78.00
+      }
+    ],
+    itemCount: 2,
+    shippingAddress: {
+      recipientName: 'Oliver Taylor',
+      street: '14 St Georges Terrace',
+      address2: '',
+      city: 'Perth',
+      state: 'WA',
+      postcode: '6000',
+      country: 'Australia',
+      phone: '+61 445 123 789'
+    },
+    billingAddress: {
+      recipientName: 'Oliver Taylor',
+      street: '14 St Georges Terrace',
+      address2: '',
+      city: 'Perth',
+      state: 'WA',
+      postcode: '6000',
+      country: 'Australia',
+      phone: '+61 445 123 789'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Awaiting EFT transfer confirmation from bank', timestamp: '2026-10-02T19:40:00.000Z', author: 'System' }
+    ]
+  },
+  {
+    id: 1003,
+    orderNumber: '#ORD-2026-1003',
+    createdAt: '2026-10-01T14:10:00.000Z',
+    customerId: 7,
+    customerName: 'Sophie Nguyen',
+    customerEmail: 'sophie.nguyen@designco.com.au',
+    customerPhone: '+61 478 901 234',
+    orderStatus: 'Delivered',
+    paymentStatus: 'Paid',
+    paymentMethod: 'Apple Pay',
+    transactionId: 'APL-102938102',
+    trackingNumber: 'AUS-771029381',
+    shippingMethod: 'Express Courier',
+    shippingFee: 0.00,
+    discount: 10.00,
+    discountCode: 'WELCOME10',
+    subtotal: 110.00,
+    tax: 9.09,
+    total: 100.00,
+    items: [
+      {
+        productId: 21,
+        productName: 'Classic Cotton Crewneck',
+        sku: 'SKU-BG-0021',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Off-White',
+        variantSize: 'S',
+        unitPrice: 28.00,
+        quantity: 3,
+        lineTotal: 84.00
+      },
+      {
+        productId: 24,
+        productName: 'Cotton Lounge Shorts',
+        sku: 'SKU-BG-0024',
+        image: 'assets/images/products/trousers-khaki.png',
+        variantColor: 'Black',
+        variantSize: 'S',
+        unitPrice: 26.00,
+        quantity: 1,
+        lineTotal: 26.00
+      }
+    ],
+    itemCount: 4,
+    shippingAddress: {
+      recipientName: 'Sophie Nguyen',
+      street: '55 Elizabeth Street',
+      address2: '',
+      city: 'Hobart',
+      state: 'TAS',
+      postcode: '7000',
+      country: 'Australia',
+      phone: '+61 478 901 234'
+    },
+    billingAddress: {
+      recipientName: 'Sophie Nguyen',
+      street: '55 Elizabeth Street',
+      address2: '',
+      city: 'Hobart',
+      state: 'TAS',
+      postcode: '7000',
+      country: 'Australia',
+      phone: '+61 478 901 234'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order placed via Apple Pay', timestamp: '2026-10-01T14:10:00.000Z', author: 'System' },
+      { status: 'Confirmed', note: 'Payment verified', timestamp: '2026-10-01T14:11:00.000Z', author: 'System' },
+      { status: 'Processing', note: 'Packed', timestamp: '2026-10-01T16:00:00.000Z', author: 'Tahmeed M.' },
+      { status: 'Shipped', note: 'Express tracking: AUS-771029381', timestamp: '2026-10-01T18:00:00.000Z', author: 'Tahmeed M.' },
+      { status: 'Delivered', note: 'Delivered to Tasmania recipient', timestamp: '2026-10-03T11:20:00.000Z', author: 'AU Post' }
+    ]
+  },
+  {
+    id: 1002,
+    orderNumber: '#ORD-2026-1002',
+    createdAt: '2026-09-29T09:30:00.000Z',
+    customerId: 8,
+    customerName: 'Harrison Forde',
+    customerEmail: 'harrison.f@gmail.com',
+    customerPhone: '+61 489 012 345',
+    orderStatus: 'Cancelled',
+    paymentStatus: 'Refunded',
+    paymentMethod: 'Credit Card (Stripe)',
+    transactionId: 'ch_3M92837492833',
+    trackingNumber: '',
+    shippingMethod: 'Standard Shipping (AU Post)',
+    shippingFee: 10.00,
+    discount: 0.00,
+    discountCode: '',
+    subtotal: 44.00,
+    tax: 4.91,
+    total: 54.00,
+    items: [
+      {
+        productId: 25,
+        productName: 'Organic Cotton Ribbed Tank',
+        sku: 'SKU-BG-0025',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Black',
+        variantSize: 'M',
+        unitPrice: 22.00,
+        quantity: 2,
+        lineTotal: 44.00
+      }
+    ],
+    itemCount: 2,
+    shippingAddress: {
+      recipientName: 'Harrison Forde',
+      street: '10 Constitution Ave',
+      address2: '',
+      city: 'Canberra',
+      state: 'ACT',
+      postcode: '2601',
+      country: 'Australia',
+      phone: '+61 489 012 345'
+    },
+    billingAddress: {
+      recipientName: 'Harrison Forde',
+      street: '10 Constitution Ave',
+      address2: '',
+      city: 'Canberra',
+      state: 'ACT',
+      postcode: '2601',
+      country: 'Australia',
+      phone: '+61 489 012 345'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order placed online', timestamp: '2026-09-29T09:30:00.000Z', author: 'System' },
+      { status: 'Cancelled', note: 'Cancelled by admin per customer email request. Full refund issued.', timestamp: '2026-09-29T11:00:00.000Z', author: 'Tahmeed M.' }
+    ]
+  },
+  {
+    id: 1001,
+    orderNumber: '#ORD-2026-1001',
+    createdAt: '2026-09-25T15:50:00.000Z',
+    customerId: 1,
+    customerName: 'Sarah Jenkins',
+    customerEmail: 'sarah.j@example.com.au',
+    customerPhone: '+61 412 345 678',
+    orderStatus: 'Refunded',
+    paymentStatus: 'Refunded',
+    paymentMethod: 'Credit Card (Stripe)',
+    transactionId: 'ch_3M92837492834',
+    trackingNumber: 'AUS-102938475',
+    shippingMethod: 'Standard Shipping (AU Post)',
+    shippingFee: 10.00,
+    discount: 0.00,
+    discountCode: '',
+    subtotal: 32.00,
+    tax: 3.82,
+    total: 42.00,
+    items: [
+      {
+        productId: 20,
+        productName: 'Textured Cotton Henley',
+        sku: 'SKU-BG-0020',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Sand',
+        variantSize: 'L',
+        unitPrice: 32.00,
+        quantity: 1,
+        lineTotal: 32.00
+      }
+    ],
+    itemCount: 1,
+    shippingAddress: {
+      recipientName: 'Sarah Jenkins',
+      street: '42 George Street',
+      address2: 'Suite 4B',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2000',
+      country: 'Australia',
+      phone: '+61 412 345 678'
+    },
+    billingAddress: {
+      recipientName: 'Sarah Jenkins',
+      street: '42 George Street',
+      address2: 'Suite 4B',
+      city: 'Sydney',
+      state: 'NSW',
+      postcode: '2000',
+      country: 'Australia',
+      phone: '+61 412 345 678'
+    },
+    timeline: [
+      { status: 'Pending', note: 'Order placed', timestamp: '2026-09-25T15:50:00.000Z', author: 'System' },
+      { status: 'Delivered', note: 'Delivered to Sydney', timestamp: '2026-09-28T10:00:00.000Z', author: 'AU Post' },
+      { status: 'Refunded', note: 'Item returned due to wrong size request. Refunded A$42.00 via Stripe.', timestamp: '2026-09-30T14:15:00.000Z', author: 'Tahmeed M.' }
+    ]
+  }
+];
+
+// 7. INITIAL ABANDONED CARTS DATA
+const INITIAL_ABANDONED_CARTS = [
+  {
+    id: 1,
+    cartRef: '#CART-9842',
+    createdAt: '2026-10-05T15:30:00.000Z',
+    lastActivity: '2026-10-05T15:42:00.000Z',
+    customerId: 6,
+    customerName: 'Jack MacIntyre',
+    customerEmail: 'jack.mac@sydneytech.edu.au',
+    customerPhone: '+61 467 890 123',
+    location: 'Sydney, NSW',
+    cartStatus: 'Abandoned',
+    abandonedStep: 'Shipping Step',
+    recoveryToken: 'rec_tok_9842',
+    subtotal: 74.00,
+    shippingFee: 10.00,
+    estimatedTax: 6.73,
+    totalValue: 84.00,
+    itemCount: 2,
+    items: [
+      {
+        productId: 26,
+        productName: 'Heritage Cotton Kurta',
+        sku: 'SKU-BG-0026',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'White',
+        variantSize: 'L',
+        price: 48.00,
+        quantity: 1,
+        lineTotal: 48.00
+      },
+      {
+        productId: 24,
+        productName: 'Cotton Lounge Shorts',
+        sku: 'SKU-BG-0024',
+        image: 'assets/images/products/trousers-khaki.png',
+        variantColor: 'Khaki',
+        variantSize: 'L',
+        price: 26.00,
+        quantity: 1,
+        lineTotal: 26.00
+      }
+    ],
+    recoveryLog: [
+      { event: 'Cart Created', timestamp: '2026-10-05T15:30:00.000Z' },
+      { event: 'Reached Shipping Address Step', timestamp: '2026-10-05T15:42:00.000Z' }
+    ]
+  },
+  {
+    id: 2,
+    cartRef: '#CART-9841',
+    createdAt: '2026-10-04T16:10:00.000Z',
+    lastActivity: '2026-10-04T16:25:00.000Z',
+    customerId: 3,
+    customerName: 'Emma Watson-Smith',
+    customerEmail: 'emma.ws@outlook.com.au',
+    customerPhone: '+61 434 567 890',
+    location: 'Brisbane, QLD',
+    cartStatus: 'Email Sent',
+    abandonedStep: 'Payment Info Page',
+    recoveryToken: 'rec_tok_9841',
+    subtotal: 106.00,
+    shippingFee: 10.00,
+    estimatedTax: 9.64,
+    totalValue: 116.00,
+    itemCount: 3,
+    items: [
+      {
+        productId: 23,
+        productName: 'Washed Cotton Casual Shirt',
+        sku: 'SKU-BG-0023',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'Navy',
+        variantSize: 'M',
+        price: 39.00,
+        quantity: 2,
+        lineTotal: 78.00
+      },
+      {
+        productId: 21,
+        productName: 'Classic Cotton Crewneck',
+        sku: 'SKU-BG-0021',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Black',
+        variantSize: 'M',
+        price: 28.00,
+        quantity: 1,
+        lineTotal: 28.00
+      }
+    ],
+    recoveryLog: [
+      { event: 'Cart Created', timestamp: '2026-10-04T16:10:00.000Z' },
+      { event: 'Reached Payment Page', timestamp: '2026-10-04T16:25:00.000Z' },
+      { event: 'Recovery Email Sent by Admin', timestamp: '2026-10-05T09:00:00.000Z' }
+    ]
+  },
+  {
+    id: 3,
+    cartRef: '#CART-9840',
+    createdAt: '2026-10-04T11:00:00.000Z',
+    lastActivity: '2026-10-04T11:15:00.000Z',
+    customerId: null,
+    customerName: 'Amanda Cross (Guest)',
+    customerEmail: 'amanda.cross@gmail.com',
+    customerPhone: '+61 491 234 567',
+    location: 'Melbourne, VIC',
+    cartStatus: 'Abandoned',
+    abandonedStep: 'Cart Review',
+    recoveryToken: 'rec_tok_9840',
+    subtotal: 140.00,
+    shippingFee: 10.00,
+    estimatedTax: 12.72,
+    totalValue: 150.00,
+    itemCount: 5,
+    items: [
+      {
+        productId: 20,
+        productName: 'Textured Cotton Henley',
+        sku: 'SKU-BG-0020',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'Olive',
+        variantSize: 'XL',
+        price: 32.00,
+        quantity: 3,
+        lineTotal: 96.00
+      },
+      {
+        productId: 25,
+        productName: 'Organic Cotton Ribbed Tank',
+        sku: 'SKU-BG-0025',
+        image: 'assets/images/products/tshirt-olive.png',
+        variantColor: 'White',
+        variantSize: 'L',
+        price: 22.00,
+        quantity: 2,
+        lineTotal: 44.00
+      }
+    ],
+    recoveryLog: [
+      { event: 'Cart Created', timestamp: '2026-10-04T11:00:00.000Z' },
+      { event: 'Abandoned on Cart Review', timestamp: '2026-10-04T11:15:00.000Z' }
+    ]
+  },
+  {
+    id: 4,
+    cartRef: '#CART-9839',
+    createdAt: '2026-10-02T10:00:00.000Z',
+    lastActivity: '2026-10-02T10:30:00.000Z',
+    customerId: 2,
+    customerName: 'Liam Hemsworth',
+    customerEmail: 'liam.h@melbourne.vic.gov.au',
+    customerPhone: '+61 423 789 012',
+    location: 'Melbourne, VIC',
+    cartStatus: 'Recovered',
+    abandonedStep: 'Payment Info Page',
+    recoveryToken: 'rec_tok_9839',
+    subtotal: 36.00,
+    shippingFee: 10.00,
+    estimatedTax: 3.27,
+    totalValue: 46.00,
+    itemCount: 1,
+    items: [
+      {
+        productId: 22,
+        productName: 'Lightweight Cotton Summer Shirt',
+        sku: 'SKU-BG-0022',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'Blue',
+        variantSize: 'L',
+        price: 36.00,
+        quantity: 1,
+        lineTotal: 36.00
+      }
+    ],
+    recoveryLog: [
+      { event: 'Cart Created', timestamp: '2026-10-02T10:00:00.000Z' },
+      { event: 'Email Link Clicked & Converted', timestamp: '2026-10-03T16:20:00.000Z' }
+    ]
+  },
+  {
+    id: 5,
+    cartRef: '#CART-9838',
+    createdAt: '2026-09-30T09:00:00.000Z',
+    lastActivity: '2026-09-30T09:20:00.000Z',
+    customerId: null,
+    customerName: 'David Wilson (Guest)',
+    customerEmail: 'david.wilson@hotmail.com',
+    customerPhone: '+61 498 765 432',
+    location: 'Perth, WA',
+    cartStatus: 'Expired',
+    abandonedStep: 'Shipping Step',
+    recoveryToken: 'rec_tok_9838',
+    subtotal: 48.00,
+    shippingFee: 10.00,
+    estimatedTax: 4.36,
+    totalValue: 58.00,
+    itemCount: 1,
+    items: [
+      {
+        productId: 26,
+        productName: 'Heritage Cotton Kurta',
+        sku: 'SKU-BG-0026',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'White',
+        variantSize: 'XL',
+        price: 48.00,
+        quantity: 1,
+        lineTotal: 48.00
+      }
+    ],
+    recoveryLog: [
+      { event: 'Cart Created', timestamp: '2026-09-30T09:00:00.000Z' },
+      { event: 'Expired after 5 days inactivity', timestamp: '2026-10-05T09:00:00.000Z' }
+    ]
+  },
+  {
+    id: 6,
+    cartRef: '#CART-9837',
+    createdAt: '2026-09-28T14:00:00.000Z',
+    lastActivity: '2026-09-28T14:15:00.000Z',
+    customerId: 7,
+    customerName: 'Sophie Nguyen',
+    customerEmail: 'sophie.nguyen@designco.com.au',
+    customerPhone: '+61 478 901 234',
+    location: 'Hobart, TAS',
+    cartStatus: 'Email Sent',
+    abandonedStep: 'Cart Review',
+    recoveryToken: 'rec_tok_9837',
+    subtotal: 65.00,
+    shippingFee: 10.00,
+    estimatedTax: 5.91,
+    totalValue: 75.00,
+    itemCount: 2,
+    items: [
+      {
+        productId: 23,
+        productName: 'Washed Cotton Casual Shirt',
+        sku: 'SKU-BG-0023',
+        image: 'assets/images/products/shirt-white.png',
+        variantColor: 'Olive',
+        variantSize: 'S',
+        price: 39.00,
+        quantity: 1,
+        lineTotal: 39.00
+      },
+      {
+        productId: 24,
+        productName: 'Cotton Lounge Shorts',
+        sku: 'SKU-BG-0024',
+        image: 'assets/images/products/trousers-khaki.png',
+        variantColor: 'Olive',
+        variantSize: 'S',
+        price: 26.00,
+        quantity: 1,
+        lineTotal: 26.00
+      }
+    ],
+    recoveryLog: [
+      { event: 'Cart Created', timestamp: '2026-09-28T14:00:00.000Z' },
+      { event: 'Reminder Email Dispatched', timestamp: '2026-09-29T10:00:00.000Z' }
+    ]
+  }
+];
+
+// STORE MANAGERS FOR SALES MODULES
+window.BongoCustomers = {
+  STORAGE_KEY: 'bongo_customers_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_CUSTOMERS);
+    return INITIAL_CUSTOMERS;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    return this.getAll().find(c => c.id === parseInt(id));
+  },
+  getByEmail: function(email) {
+    return this.getAll().find(c => c.email.toLowerCase() === (email || '').toLowerCase());
+  },
+  create: function(data) {
+    const list = this.getAll();
+    const newId = list.reduce((max, c) => c.id > max ? c.id : max, 0) + 1;
+    const initials = (data.name || 'C').split(' ').map(n => n[0]).join('').toUpperCase();
+    const newCust = {
+      id: newId,
+      name: data.name || 'New Customer',
+      email: data.email || '',
+      phone: data.phone || '',
+      avatar: initials || 'CU',
+      joinedDate: new Date().toISOString(),
+      isDisabled: Boolean(data.isDisabled),
+      shippingAddress: data.shippingAddress || { recipientName: data.name, street: '', address2: '', city: '', state: '', postcode: '', country: 'Australia', phone: data.phone },
+      billingAddress: data.billingAddress || { recipientName: data.name, street: '', address2: '', city: '', state: '', postcode: '', country: 'Australia', phone: data.phone },
+      notes: data.notes || '',
+      wishlist: data.wishlist || []
+    };
+    list.unshift(newCust);
+    this.saveAll(list);
+    return newCust;
+  },
+  update: function(id, data) {
+    const list = this.getAll();
+    const idx = list.findIndex(c => c.id === parseInt(id));
+    if (idx === -1) return null;
+    const updated = { ...list[idx], ...data, updatedAt: new Date().toISOString() };
+    list[idx] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+  delete: function(id) {
+    const list = this.getAll().filter(c => c.id !== parseInt(id));
+    this.saveAll(list);
+    return true;
+  },
+  toggleStatus: function(id) {
+    const item = this.getById(id);
+    if (!item) return null;
+    return this.update(id, { isDisabled: !item.isDisabled });
+  },
+  resetToDefault: function() {
+    this.saveAll(INITIAL_CUSTOMERS);
+    return INITIAL_CUSTOMERS;
+  }
+};
+
+window.BongoOrders = {
+  STORAGE_KEY: 'bongo_orders_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_ORDERS);
+    return INITIAL_ORDERS;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    if (!id) return null;
+    const cleanIdStr = id.toString().replace('#', '').replace('ORD-2026-', '').replace('ORD-', '');
+    const cleanIdNum = parseInt(cleanIdStr);
+    return this.getAll().find(o => o.id === cleanIdNum || o.id === parseInt(id) || o.orderNumber.replace('#', '') === id.toString().replace('#', ''));
+  },
+  getByCustomerId: function(customerId) {
+    return this.getAll().filter(o => o.customerId === parseInt(customerId));
+  },
+  updateStatus: function(id, newStatus, note, author = 'Admin') {
+    const order = this.getById(id);
+    if (!order) return null;
+    const timeline = order.timeline || [];
+    timeline.push({
+      status: newStatus,
+      note: note || `Order status updated to ${newStatus}`,
+      timestamp: new Date().toISOString(),
+      author: author
+    });
+    return this.update(order.id, { orderStatus: newStatus, timeline: timeline });
+  },
+  updatePaymentStatus: function(id, newPaymentStatus, note, author = 'Admin') {
+    const order = this.getById(id);
+    if (!order) return null;
+    const timeline = order.timeline || [];
+    timeline.push({
+      status: order.orderStatus,
+      paymentStatus: newPaymentStatus,
+      note: note || `Payment status updated to ${newPaymentStatus}`,
+      timestamp: new Date().toISOString(),
+      author: author
+    });
+    return this.update(order.id, { paymentStatus: newPaymentStatus, timeline: timeline });
+  },
+  cancelOrder: function(id, reason, author = 'Admin') {
+    const order = this.getById(id);
+    if (!order) return null;
+    const timeline = order.timeline || [];
+    timeline.push({
+      status: 'Cancelled',
+      note: `Order cancelled by ${author}. Reason: ${reason || 'Not specified'}`,
+      timestamp: new Date().toISOString(),
+      author: author
+    });
+    const updateData = { orderStatus: 'Cancelled', timeline: timeline };
+    if (order.paymentStatus === 'Paid') {
+      updateData.paymentStatus = 'Refunded';
+    }
+    return this.update(order.id, updateData);
+  },
+  refundOrder: function(id, refundAmount, reason, author = 'Admin') {
+    const order = this.getById(id);
+    if (!order) return null;
+    const timeline = order.timeline || [];
+    timeline.push({
+      status: 'Refunded',
+      paymentStatus: 'Refunded',
+      note: `Refund of A$${parseFloat(refundAmount || order.total).toFixed(2)} processed. Reason: ${reason || 'Customer request'}`,
+      timestamp: new Date().toISOString(),
+      author: author
+    });
+    return this.update(order.id, { orderStatus: 'Refunded', paymentStatus: 'Refunded', timeline: timeline });
+  },
+  addTimelineNote: function(id, note, author = 'Admin') {
+    const order = this.getById(id);
+    if (!order) return null;
+    const timeline = order.timeline || [];
+    timeline.push({
+      status: order.orderStatus,
+      note: note,
+      timestamp: new Date().toISOString(),
+      author: author
+    });
+    return this.update(order.id, { timeline: timeline });
+  },
+  update: function(id, data) {
+    const list = this.getAll();
+    const idx = list.findIndex(o => o.id === parseInt(id));
+    if (idx === -1) return null;
+    const updated = { ...list[idx], ...data, updatedAt: new Date().toISOString() };
+    list[idx] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+  delete: function(id) {
+    const list = this.getAll().filter(o => o.id !== parseInt(id));
+    this.saveAll(list);
+    return true;
+  },
+  resetToDefault: function() {
+    this.saveAll(INITIAL_ORDERS);
+    return INITIAL_ORDERS;
+  }
+};
+
+window.BongoAbandonedCarts = {
+  STORAGE_KEY: 'bongo_abandoned_carts_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_ABANDONED_CARTS);
+    return INITIAL_ABANDONED_CARTS;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    if (!id) return null;
+    const cleanIdStr = id.toString().replace('#', '').replace('CART-', '');
+    const cleanIdNum = parseInt(cleanIdStr);
+    return this.getAll().find(c => c.id === cleanIdNum || c.id === parseInt(id) || c.cartRef.replace('#', '') === id.toString().replace('#', ''));
+  },
+  getByCustomerId: function(customerId) {
+    return this.getAll().find(c => c.customerId === parseInt(customerId));
+  },
+  sendReminder: function(id, author = 'Admin') {
+    const cart = this.getById(id);
+    if (!cart) return null;
+    const log = cart.recoveryLog || [];
+    log.push({ event: `Recovery Email Sent by ${author}`, timestamp: new Date().toISOString() });
+    return this.update(cart.id, { cartStatus: 'Email Sent', recoveryLog: log });
+  },
+  markAsRecovered: function(id) {
+    const cart = this.getById(id);
+    if (!cart) return null;
+    const log = cart.recoveryLog || [];
+    log.push({ event: 'Cart Marked as Recovered by Admin', timestamp: new Date().toISOString() });
+    return this.update(cart.id, { cartStatus: 'Recovered', recoveryLog: log });
+  },
+  update: function(id, data) {
+    const list = this.getAll();
+    const idx = list.findIndex(c => c.id === parseInt(id));
+    if (idx === -1) return null;
+    const updated = { ...list[idx], ...data, updatedAt: new Date().toISOString() };
+    list[idx] = updated;
+    this.saveAll(list);
+    return updated;
+  },
+  delete: function(id) {
+    const list = this.getAll().filter(c => c.id !== parseInt(id));
+    this.saveAll(list);
+    return true;
+  },
+  resetToDefault: function() {
+    this.saveAll(INITIAL_ABANDONED_CARTS);
+    return INITIAL_ABANDONED_CARTS;
+  }
+};
+
 
 const FOOTER_LINKS = {
   shop: [

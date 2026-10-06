@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Admin Stylesheets (Isolated) -->
+  <!-- Admin Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="css/components.css">
@@ -83,10 +83,10 @@
         </div>
 
         <!-- Sales Group -->
-        <div class="sidebar-group">
+        <div class="sidebar-group open">
           <div class="sidebar-group-title">Sales</div>
           <ul class="sidebar-menu">
-            <li class="sidebar-item sidebar-group">
+            <li class="sidebar-item sidebar-group open">
               <div class="sidebar-link sidebar-group-header" data-title="Sales">
                 <div class="sidebar-link-content">
                   <span class="sidebar-icon">
@@ -96,10 +96,10 @@
                 </div>
                 <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </div>
-              <ul class="sidebar-submenu">
-                <li><a href="orders.html" class="submenu-link">Orders <span class="sidebar-badge badge-warning">12</span></a></li>
+              <ul class="sidebar-submenu" style="display: flex;">
+                <li><a href="orders.html" class="submenu-link">Orders</a></li>
                 <li><a href="customers.html" class="submenu-link">Customers</a></li>
-                <li><a href="abandoned-carts.html" class="submenu-link">Abandoned Carts</a></li>
+                <li><a href="abandoned-carts.html" class="submenu-link active">Abandoned Carts</a></li>
               </ul>
             </li>
           </ul>
@@ -123,138 +123,6 @@
                 <li><a href="reviews.html" class="submenu-link">Reviews</a></li>
                 <li><a href="wishlist.html" class="submenu-link">Wishlist</a></li>
               </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Requests Group -->
-        <div class="sidebar-group">
-          <div class="sidebar-group-title">Requests</div>
-          <ul class="sidebar-menu">
-            <li class="sidebar-item sidebar-group">
-              <div class="sidebar-link sidebar-group-header" data-title="Requests">
-                <div class="sidebar-link-content">
-                  <span class="sidebar-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                  </span>
-                  <span class="sidebar-link-text">Requests</span>
-                </div>
-                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </div>
-              <ul class="sidebar-submenu">
-                <li><a href="requests-bd.html" class="submenu-link">Request From Bangladesh <span class="sidebar-badge badge-brand">New</span></a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Marketing Group -->
-        <div class="sidebar-group">
-          <div class="sidebar-group-title">Marketing</div>
-          <ul class="sidebar-menu">
-            <li class="sidebar-item sidebar-group">
-              <div class="sidebar-link sidebar-group-header" data-title="Marketing">
-                <div class="sidebar-link-content">
-                  <span class="sidebar-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                  </span>
-                  <span class="sidebar-link-text">Marketing</span>
-                </div>
-                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </div>
-              <ul class="sidebar-submenu">
-                <li><a href="banners.html" class="submenu-link">Banners</a></li>
-                <li><a href="collections.html" class="submenu-link">Collections</a></li>
-                <li><a href="discounts.html" class="submenu-link">Offers / Discounts</a></li>
-                <li><a href="coupons.html" class="submenu-link">Coupons</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Content Group -->
-        <div class="sidebar-group">
-          <div class="sidebar-group-title">Content</div>
-          <ul class="sidebar-menu">
-            <li class="sidebar-item sidebar-group">
-              <div class="sidebar-link sidebar-group-header" data-title="Content">
-                <div class="sidebar-link-content">
-                  <span class="sidebar-icon">
-                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                  </span>
-                  <span class="sidebar-link-text">Content</span>
-                </div>
-                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </div>
-              <ul class="sidebar-submenu">
-                <li><a href="content-homepage.html" class="submenu-link">Homepage</a></li>
-                <li><a href="content-pages.html" class="submenu-link">Pages</a></li>
-                <li><a href="content-navigation.html" class="submenu-link">Navigation</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Settings Group -->
-        <div class="sidebar-group">
-          <div class="sidebar-group-title">Settings</div>
-          <ul class="sidebar-menu">
-            <li class="sidebar-item sidebar-group">
-              <div class="sidebar-link sidebar-group-header" data-title="Settings">
-                <div class="sidebar-link-content">
-                  <span class="sidebar-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                  </span>
-                  <span class="sidebar-link-text">Settings</span>
-                </div>
-                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </div>
-              <ul class="sidebar-submenu">
-                <li><a href="settings-store.html" class="submenu-link">Store Settings</a></li>
-                <li><a href="settings-shipping.html" class="submenu-link">Shipping</a></li>
-                <li><a href="settings-payment.html" class="submenu-link">Payment</a></li>
-                <li><a href="settings-tax.html" class="submenu-link">Tax</a></li>
-                <li><a href="settings-returns.html" class="submenu-link">Returns</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Administration Group -->
-        <div class="sidebar-group">
-          <div class="sidebar-group-title">Administration</div>
-          <ul class="sidebar-menu">
-            <li class="sidebar-item sidebar-group">
-              <div class="sidebar-link sidebar-group-header" data-title="Administration">
-                <div class="sidebar-link-content">
-                  <span class="sidebar-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                  </span>
-                  <span class="sidebar-link-text">Administration</span>
-                </div>
-                <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </div>
-              <ul class="sidebar-submenu">
-                <li><a href="admin-users.html" class="submenu-link">Admin Users</a></li>
-                <li><a href="roles-permissions.html" class="submenu-link">Roles & Permissions</a></li>
-                <li><a href="activity-log.html" class="submenu-link">Activity Log</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Showcase Link -->
-        <div class="sidebar-group" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--sidebar-border);">
-          <ul class="sidebar-menu">
-            <li class="sidebar-item">
-              <a href="components-demo.html" class="sidebar-link" data-title="UI Foundation Showcase" style="background: rgba(204, 122, 63, 0.15); color: var(--admin-brand);">
-                <div class="sidebar-link-content">
-                  <span class="sidebar-icon">
-                    <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                  </span>
-                  <span class="sidebar-link-text">UI Showcase</span>
-                </div>
-              </a>
             </li>
           </ul>
         </div>
@@ -286,53 +154,18 @@
           
           <div class="header-search">
             <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="admin-search-input" class="search-input" placeholder="Search Abandoned Carts...">
-            <span class="search-shortcut">ctrl+k</span>
+            <input type="text" class="search-input" placeholder="Search carts...">
           </div>
         </div>
 
         <div class="header-right">
-          <a href="../index.html" target="_blank" class="storefront-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-            <span>View Storefront</span>
-          </a>
-
-          <div class="dropdown-wrapper">
-            <button type="button" class="header-action-btn" data-admin-toggle="dropdown" data-target="notification-dropdown">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-              <span class="notification-badge"></span>
-            </button>
-            <div class="dropdown-menu" id="notification-dropdown">
-              <div class="dropdown-header">
-                <div class="dropdown-user-name">Notifications</div>
-              </div>
-              <a href="orders.html" class="dropdown-item">New Order received ($145.00)</a>
-            </div>
-          </div>
-
-          <div class="dropdown-wrapper">
-            <button type="button" class="user-profile-btn" data-admin-toggle="dropdown" data-target="user-dropdown">
-              <div class="header-avatar">TM</div>
-              <div class="user-info-text d-none d-sm-block">
-                <div class="user-name-title">Tahmeed M.</div>
-                <div class="user-role-title">Super Admin</div>
-              </div>
-            </button>
-            <div class="dropdown-menu" id="user-dropdown">
-              <div class="dropdown-header">
-                <div class="dropdown-user-name">Tahmeed Mahbub</div>
-              </div>
-              <a href="admin-users.html" class="dropdown-item">Account & Profile</a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item text-danger" onclick="Admin.toast({title: 'Logged Out', message: 'Signed out.', type: 'info'});">Sign Out</a>
-            </div>
-          </div>
+          <a href="../index.html" target="_blank" class="storefront-link">View Storefront</a>
         </div>
       </header>
 
       <main class="admin-content">
 
-        <!-- Page Header & Breadcrumbs -->
+        <!-- Page Header -->
         <div class="page-header">
           <div class="page-title-group">
             <ul class="breadcrumb">
@@ -342,57 +175,131 @@
               <li class="breadcrumb-separator">/</li>
               <li class="breadcrumb-item active">Abandoned Carts</li>
             </ul>
-            <h1 class="page-title">Abandoned Carts</h1>
-            <p class="page-subtitle">Monitor unrecovered carts and trigger recovery email sequences.</p>
+            <h1 class="page-title">Abandoned Cart Recovery</h1>
+            <p class="page-subtitle">Track incomplete checkout sessions, analyze dropped items, and recover sales.</p>
           </div>
 
           <div class="page-actions">
-            <button type="button" class="btn btn-secondary" onclick="Admin.toast({title: 'Filter Applied', message: 'Refreshed Abandoned Carts view.', type: 'info'});">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-              Filter
-            </button>
-            <button type="button" class="btn btn-primary" onclick="Admin.toast({title: 'Abandoned Carts', message: 'Module implementation ready for expansion.', type: 'success'});">
-              Send Recovery Alert
+            <button type="button" class="btn btn-secondary" id="reset-cart-filters-btn">
+              Reset Filters
             </button>
           </div>
         </div>
 
-        <!-- Module Placeholder Container -->
+        <!-- 1. Stats Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="card" style="padding: 1.25rem;">
+            <div style="font-size: 0.8125rem; color: var(--admin-text-muted); font-weight: 500; margin-bottom: 0.35rem;">Total Abandoned Carts</div>
+            <div style="font-size: 1.75rem; font-weight: 700; font-family: var(--font-heading); color: var(--admin-text-main);" id="stat-total-abandoned-carts">6</div>
+            <div style="font-size: 0.75rem; color: var(--color-warning); margin-top: 0.35rem;">Tracked checkout sessions</div>
+          </div>
+
+          <div class="card" style="padding: 1.25rem;">
+            <div style="font-size: 0.8125rem; color: var(--admin-text-muted); font-weight: 500; margin-bottom: 0.35rem;">Potential Revenue</div>
+            <div style="font-size: 1.75rem; font-weight: 700; font-family: var(--font-heading); color: var(--color-warning);" id="stat-potential-revenue">A$483.00</div>
+            <div style="font-size: 0.75rem; color: var(--admin-text-muted); margin-top: 0.35rem;">Total unrecovered cart value</div>
+          </div>
+
+          <div class="card" style="padding: 1.25rem;">
+            <div style="font-size: 0.8125rem; color: var(--admin-text-muted); font-weight: 500; margin-bottom: 0.35rem;">Recovered Carts</div>
+            <div style="font-size: 1.75rem; font-weight: 700; font-family: var(--font-heading); color: var(--color-success);" id="stat-recovered-carts">1</div>
+            <div style="font-size: 0.75rem; color: var(--color-success); margin-top: 0.35rem;">Successfully converted</div>
+          </div>
+
+          <div class="card" style="padding: 1.25rem;">
+            <div style="font-size: 0.8125rem; color: var(--admin-text-muted); font-weight: 500; margin-bottom: 0.35rem;">Recovery Rate</div>
+            <div style="font-size: 1.75rem; font-weight: 700; font-family: var(--font-heading); color: var(--admin-brand);" id="stat-recovery-rate">17%</div>
+            <div style="font-size: 0.75rem; color: var(--color-success); margin-top: 0.35rem;">Conversion percentage</div>
+          </div>
+        </div>
+
+        <!-- 2. Controls & Table Card -->
         <div class="card">
-          <div class="card-header">
-            <div class="card-title-group">
-              <h3 class="card-title">Abandoned Carts Module Foundation</h3>
-              <span class="card-subtitle">Ready for module-by-module expansion</span>
-            </div>
-            <span class="badge badge-active"><span class="badge-dot"></span> Module Foundation Ready</span>
-          </div>
-
-          <div class="card-body">
-            <div style="padding: 2.5rem 1rem; text-align: center; max-width: 520px; margin: 0 auto;">
-              <div style="width: 56px; height: 56px; border-radius: 50%; background-color: var(--admin-brand-light); color: var(--admin-brand); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.5rem;">
-                ⚙️
-              </div>
-              <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--admin-text-main); margin-bottom: 0.5rem;">
-                Abandoned Carts Page Shell Ready
-              </h3>
-              <p style="font-size: 0.875rem; color: var(--admin-text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
-                The structural foundation, responsive sidebar, topbar search, active route tracking, and reusable UI component links for <strong>Abandoned Carts</strong> are established. Individual business logic & full dataset view will be implemented in upcoming module phases.
-              </p>
+          <div class="card-header" style="flex-wrap: wrap; gap: 1rem;">
+            
+            <!-- Filter Bar -->
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; flex: 1; align-items: center;">
               
-              <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-                <button class="btn btn-primary" onclick="Admin.toast({title: 'Action Triggered', message: 'Testing button on Abandoned Carts page.', type: 'success'});">
-                  Test Module Action
-                </button>
-                <a href="components-demo.html" class="btn btn-secondary">
-                  Explore Reusable UI Components
-                </a>
+              <!-- Search -->
+              <div style="position: relative; min-width: 240px; flex: 1;">
+                <input type="text" id="cart-search-input" class="form-input" placeholder="Search customer, email, or cart ref..." style="padding-left: 2.25rem; height: 38px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
               </div>
+
+              <!-- Date Filter -->
+              <select id="cart-date-filter" class="form-select" style="width: auto; height: 38px;">
+                <option value="all">All Dates</option>
+                <option value="today">Today</option>
+                <option value="7days">Last 7 Days</option>
+                <option value="30days">Last 30 Days</option>
+              </select>
+
+              <!-- Value Filter -->
+              <select id="cart-value-filter" class="form-select" style="width: auto; height: 38px;">
+                <option value="all">All Values</option>
+                <option value="under50">Under A$50</option>
+                <option value="50to150">A$50 — A$150</option>
+                <option value="over150">Over A$150</option>
+              </select>
+
+              <!-- Customer Type Filter -->
+              <select id="cart-customer-filter" class="form-select" style="width: auto; height: 38px;">
+                <option value="all">All Customer Types</option>
+                <option value="registered">Registered Only</option>
+                <option value="guest">Guest Customers Only</option>
+              </select>
             </div>
+
+            <!-- Sort dropdown -->
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 0.8125rem; color: var(--admin-text-muted); white-space: nowrap;">Sort by:</span>
+              <select id="cart-sort-by" class="form-select" style="width: auto; height: 38px;">
+                <option value="date-desc">Last Activity (Newest)</option>
+                <option value="date-asc">Last Activity (Oldest)</option>
+                <option value="value-desc">Cart Value (High to Low)</option>
+                <option value="value-asc">Cart Value (Low to High)</option>
+              </select>
+            </div>
+
           </div>
 
-          <div class="card-footer">
-            <span class="pagination-info">Module Route: <code>admin/abandoned-carts.html</code></span>
-            <span class="badge badge-neutral">Status: Ready for Feature Module phase</span>
+          <div class="card-body" style="padding: 0;">
+            
+            <div id="carts-table-container" class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px;"><input type="checkbox" class="table-select-all form-checkbox"></th>
+                    <th>Cart Ref</th>
+                    <th>Customer</th>
+                    <th>Cart Items</th>
+                    <th>Cart Value</th>
+                    <th>Last Activity</th>
+                    <th>Status</th>
+                    <th style="text-align: right; padding-right: 1.5rem;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="carts-table-body">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="carts-empty-state" style="display: none; padding: 3.5rem 1rem; text-align: center;">
+              <div style="width: 56px; height: 56px; border-radius: 50%; background-color: var(--admin-body-bg); color: var(--admin-text-muted); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">
+                🛒
+              </div>
+              <h4 style="font-weight: 600; color: var(--admin-text-main); margin-bottom: 0.25rem;">No Abandoned Carts Found</h4>
+              <p style="font-size: 0.8125rem; color: var(--admin-text-muted); max-width: 380px; margin: 0 auto 1rem;">
+                No abandoned checkout sessions match your active search and filter options.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="card-footer" id="carts-pagination" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <!-- Pagination via JS -->
           </div>
         </div>
 
@@ -406,9 +313,12 @@
 
   </div>
 
+  <!-- Scripts -->
   <script src="js/jquery.min.js"></script>
+  <script src="../assets/js/data.js"></script>
   <script src="js/admin-layout.js"></script>
   <script src="js/admin-components.js"></script>
+  <script src="js/admin-abandoned-carts.js"></script>
 
 </body>
 </html>
