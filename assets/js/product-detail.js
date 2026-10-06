@@ -346,7 +346,7 @@ function renderPreorderNotice(product) {
         <span>PRE-ORDER ITEM — RESERVED BATCH ALLOCATION</span>
       </div>
       <div class="preorder-notice-body">
-        This item is currently handcrafted in small artisan batches in Dhaka. 
+        This item is currently handcrafted in small artisan batches by master craftspeople. 
         Securing your pre-order locks in batch priority with guaranteed dispatch from our Sydney warehouse by <span class="preorder-date-highlight">Late October 2026</span>.
         Pay upfront or split into 4 interest-free instalments with Afterpay.
       </div>
@@ -373,7 +373,7 @@ function renderAccordions(product) {
     careText = 'Spot clean with damp cloth or gentle hand wash in cold water for embroidered textiles. Keep ceramic pieces dry.';
     whatsInc = `1x ${product.name}, Authenticity & Craft Origin Tag.`;
   } else if (product.category === 'jute') {
-    fabMat = '100% Natural Golden Jute Fiber sourced directly from Rajshahi, Bangladesh. Eco-friendly and 100% biodegradable.';
+    fabMat = '100% Natural Golden Jute Fiber thoughtfully sourced from regional artisan communities. Eco-friendly and 100% biodegradable.';
     fitDim = 'Dimensions: 38cm (H) x 42cm (W) x 15cm (D). Handle drop: 24cm.';
     careText = 'Wipe clean with a damp cloth. Avoid submerging in water. Allow to dry thoroughly in fresh air.';
     whatsInc = `1x ${product.name}.`;
@@ -382,7 +382,7 @@ function renderAccordions(product) {
   const accordionsData = [
     {
       title: 'Description & Craft Story',
-      content: `<p>Crafted in collaboration with skilled makers in Bangladesh and tailored specifically for the relaxed Australian lifestyle. ${product.desc}. Every piece honors traditional textile heritage while adhering to international ethical production standards.</p>`
+      content: `<p>Crafted in collaboration with skilled master artisans and tailored specifically for the relaxed Australian lifestyle. ${product.desc}. Every piece honors traditional textile heritage while adhering to international ethical production standards.</p>`
     },
     {
       title: 'Materials & Fabric',

@@ -34,11 +34,11 @@
   };
 
   const CATEGORY_DESC_MAP = {
-    all: 'Thoughtfully selected Bangladesh-made apparel, home decor, natural jute goods, and artisan handcrafted pieces curated for Australian living.',
-    fashion: 'Everyday clothing, relaxed fits, pure flax linen shirts, and modern apparel essentials made in Bangladesh.',
+    all: 'Thoughtfully selected apparel, home decor, natural jute goods, and artisan handcrafted pieces curated for Australian living.',
+    fashion: 'Everyday clothing, relaxed fits, pure flax linen shirts, and modern apparel essentials crafted for comfort and longevity.',
     'home-decor': 'Handcrafted textiles, Nakshi Kantha cushions, earthenware ceramics, and decorative accents for modern spaces.',
-    jute: 'Practical and elegant accessories, tote bags, and storage baskets crafted from Bangladesh\'s golden natural fiber.',
-    handicrafts: 'Heirloom weaves, hammered brassware, and distinctive artisanal collectibles by skilled Bangladeshi craftspeople.',
+    jute: 'Practical and elegant accessories, tote bags, and storage baskets crafted from natural golden fiber.',
+    handicrafts: 'Heirloom weaves, hammered brassware, and distinctive artisanal collectibles by master craftspeople.',
     lifestyle: 'Thoughtful full-grain leather journals, desk sets, and unique gift collections wrapped with care.',
   };
 

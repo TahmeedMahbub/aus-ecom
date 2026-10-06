@@ -1,6 +1,6 @@
 /* ============================================================
    APP.JS — Bongo Curated Main Application
-   Bangladesh-Made Lifestyle & Fashion Curated for Australia
+   Artisan Lifestyle & Fashion Curated for Australia
    ============================================================ */
 
 (function () {
@@ -515,7 +515,7 @@
           </div>
         `;
       }
-      const targetHref = `products.html?category=${cat.filterCategory}`;
+      const targetHref = cat.customUrl || (cat.filterCategory ? `products.html?category=${cat.filterCategory}` : 'products.html');
       return `
         <li class="nav-item">
           <a href="${targetHref}" class="nav-link">${cat.name}${cat.megaMenu ? ICONS.chevronDown : ''}</a>
@@ -535,7 +535,7 @@
             </div>
           `;
         }
-        const targetHref = `products.html?category=${cat.filterCategory}`;
+        const targetHref = cat.customUrl || (cat.filterCategory ? `products.html?category=${cat.filterCategory}` : 'products.html');
         return `
           <div class="mobile-nav-item ${cat.megaMenu ? 'has-submenu' : ''}">
             <a href="${targetHref}" class="mobile-nav-link">
@@ -546,8 +546,11 @@
           </div>
         `;
       }).join('') + `
-        <div class="mobile-nav-item" style="padding: 1rem 0">
-          <a href="request.html" class="btn btn-primary" style="width:100%" onclick="document.getElementById('mobile-nav-close').click()">Request From Bangladesh</a>
+        <div class="mobile-nav-item" style="padding: 0.5rem 0 0.25rem 0">
+          <a href="bulk-order.html" class="btn btn-outline" style="width:100%" onclick="document.getElementById('mobile-nav-close').click()">Bulk & Corporate Orders</a>
+        </div>
+        <div class="mobile-nav-item" style="padding: 0.25rem 0 1rem 0">
+          <a href="request.html" class="btn btn-primary" style="width:100%" onclick="document.getElementById('mobile-nav-close').click()">Request Custom Sourcing</a>
         </div>
       `;
 
@@ -858,7 +861,7 @@
       body.innerHTML = `
         <div class="auth-header">
           <h3 class="auth-title">Welcome Back</h3>
-          <p class="auth-subtitle">Log in to manage your Australian orders and saved Bangladeshi items</p>
+          <p class="auth-subtitle">Log in to manage your Australian orders and saved items</p>
         </div>
         <div class="auth-tabs">
           <button class="auth-tab-btn active" data-tab="login">Sign In</button>
@@ -899,7 +902,7 @@
       body.innerHTML = `
         <div class="auth-header">
           <h3 class="auth-title">Create an Account</h3>
-          <p class="auth-subtitle">Join Bongo Curated for fast checkout and Bangladesh sourcing</p>
+          <p class="auth-subtitle">Join Bongo Curated for fast checkout and custom sourcing</p>
         </div>
         <div class="auth-tabs">
           <button class="auth-tab-btn" data-tab="login">Sign In</button>
@@ -1106,7 +1109,7 @@
     footerGrid.innerHTML = `
       <div class="footer-brand">
         <div class="brand-name">${SITE.brandName}</div>
-        <p>An Australian ecommerce store offering thoughtfully curated products made in Bangladesh — from fashion and handcrafted decor to natural jute and gifts.</p>
+        <p>An Australian ecommerce brand offering thoughtfully curated lifestyle pieces — from fashion and handcrafted decor to natural jute items and gifts.</p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">${ICONS.facebook}</a>
           <a href="#" aria-label="Instagram">${ICONS.instagram}</a>
@@ -1296,7 +1299,7 @@
         <div class="wishlist-drawer-empty">
           <div class="wishlist-empty-icon">${ICONS.heart}</div>
           <h4 class="wishlist-empty-title">Your wishlist is empty</h4>
-          <p class="wishlist-empty-desc">Discover Bangladesh-made items curated for Australian living and save your favorites for later.</p>
+          <p class="wishlist-empty-desc">Discover artisan items curated for Australian living and save your favorites for later.</p>
           <button class="btn btn-primary wishlist-empty-cta" id="wishlist-empty-continue">Continue Shopping</button>
         </div>
       `;
@@ -1781,7 +1784,7 @@
         <div class="cart-drawer-empty">
           <div class="cart-empty-icon">${ICONS.bag}</div>
           <h4 class="cart-empty-title">Your cart is empty</h4>
-          <p class="cart-empty-desc">Discover Bangladesh-made items curated for Australian living.</p>
+          <p class="cart-empty-desc">Discover handcrafted items curated for Australian living.</p>
           <button class="btn btn-primary cart-empty-cta" id="cart-empty-continue">Continue Shopping</button>
         </div>
       `;

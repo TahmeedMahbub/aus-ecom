@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account — Bongo Curated Australia</title>
-  <meta name="description" content="Manage your Bongo Curated profile, Australian orders, saved wishlist items, and custom Bangladesh sourcing requests.">
+  <meta name="description" content="Manage your Bongo Curated profile, Australian orders, saved wishlist items, and custom sourcing requests.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
        ═══════════════════════════════════════════════════════ -->
   <div class="announcement-bar" id="announcement-bar">
     <div class="container announcement-bar-inner">
-      <span class="announcement-text">✈️ Direct Cargo from Dhaka to Sydney & Melbourne · Express Australian Delivery</span>
+      <span class="announcement-text">✈️ Express Australian Delivery · Seamless Door-to-Door Shipping</span>
     </div>
   </div>
 
@@ -89,7 +89,7 @@
     <div id="account-unauth-view" style="display:none; max-width:440px; margin:var(--space-xl) auto;">
       <div class="account-card-panel" style="text-align:center;">
         <h3 class="auth-title" style="margin-bottom:8px">Access Your Account</h3>
-        <p class="auth-subtitle" style="margin-bottom:var(--space-md)">Sign in or create an account to view your Australian orders, saved items, and Bangladesh sourcing requests.</p>
+        <p class="auth-subtitle" style="margin-bottom:var(--space-md)">Sign in or create an account to view your Australian orders, saved items, and custom sourcing requests.</p>
         <div style="display:flex; flex-direction:column; gap:var(--space-xs)">
           <button class="btn btn-primary" onclick="openAuthModal('login')">Sign In</button>
           <button class="btn btn-secondary" onclick="openAuthModal('register')">Create Account</button>
@@ -216,8 +216,11 @@
         <div class="account-tab-content-panel" id="tab-panel-requests">
           <div class="account-card-panel">
             <div class="account-panel-header">
-              <h3 class="account-panel-title">Bangladesh Sourcing Requests</h3>
-              <a href="request.html" class="btn btn-primary btn-sm">+ New Request</a>
+              <h3 class="account-panel-title">Sourcing & Bulk Order Requests</h3>
+              <div style="display:flex; gap:0.5rem;">
+                <a href="request.html" class="btn btn-outline btn-sm">+ Custom Request</a>
+                <a href="bulk-order.html" class="btn btn-primary btn-sm">+ Bulk Order</a>
+              </div>
             </div>
             <div id="account-requests-list">
               <!-- Rendered by JS -->
@@ -237,7 +240,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>&copy; 2026 Bongo Curated Australia. Curated Bangladeshi craftsmanship for Australian living.</p>
+        <p>&copy; 2026 Bongo Curated Australia. Curated artisan craftsmanship for Australian living.</p>
       </div>
     </div>
   </footer>
@@ -480,7 +483,7 @@
           wishlistGridEl.innerHTML = `
             <div style="text-align:center; padding:var(--space-lg) 0">
               <p style="color:var(--color-grey-600); margin-bottom:var(--space-md)">Your wishlist is empty.</p>
-              <a href="products.html" class="btn btn-primary">Discover Bangladeshi Crafts</a>
+              <a href="products.html" class="btn btn-primary">Discover Artisan Crafts</a>
             </div>
           `;
         } else {
@@ -539,35 +542,62 @@
         }
       }
 
-      // Populate Sourcing Requests Tab
+      // Populate Sourcing & Bulk Requests Tab
       const requestsListEl = document.getElementById('account-requests-list');
       if (requestsListEl) {
         const reqs = curr.requests || [];
-        if (reqs.length === 0) {
+        const bulkReqs = window.BongoBulkRequests ? window.BongoBulkRequests.getAll().filter(b => b.contactInfo && curr.email && b.contactInfo.toLowerCase().includes(curr.email.toLowerCase())) : [];
+
+        if (reqs.length === 0 && bulkReqs.length === 0) {
           requestsListEl.innerHTML = `
             <div style="text-align:center; padding:var(--space-lg) 0">
-              <p style="color:var(--color-grey-600); margin-bottom:var(--space-md)">You haven't submitted any custom Bangladesh sourcing requests yet.</p>
-              <a href="request.html" class="btn btn-primary">Submit a Request</a>
+              <p style="color:var(--color-grey-600); margin-bottom:var(--space-md)">You haven't submitted any custom sourcing or bulk order requests yet.</p>
+              <div style="display:flex; gap:0.75rem; justify-content:center;">
+                <a href="request.html" class="btn btn-outline">Submit Custom Sourcing</a>
+                <a href="bulk-order.html" class="btn btn-primary">Request Bulk Order</a>
+              </div>
             </div>
           `;
         } else {
-          requestsListEl.innerHTML = reqs.map(r => `
-            <div class="request-hist-card">
-              <div class="request-hist-header">
-                <div>
-                  <span class="request-hist-title">${r.title}</span>
-                  <div class="request-hist-meta">Request ID: ${r.id} · Submitted ${r.date}</div>
+          let html = '';
+          if (bulkReqs.length > 0) {
+            html += `<h4 style="font-family:var(--font-heading); font-size:var(--fs-body); margin-bottom:0.75rem; color:var(--color-dark);">Your Bulk Order Requests:</h4>`;
+            html += bulkReqs.map(br => `
+              <div class="request-hist-card" style="border: 1px solid var(--color-grey-300); background: var(--color-surface-card); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+                <div class="request-hist-header" style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                  <div>
+                    <span class="request-hist-title" style="font-weight:bold; color:var(--color-brand);">${br.requestNumber} (${br.totalUnits} Units)</span>
+                    <div class="request-hist-meta" style="font-size:var(--fs-xs); color:var(--color-grey-600);">Submitted ${new Date(br.createdAt).toLocaleDateString('en-AU')} · Postcode: ${br.postcode}</div>
+                  </div>
+                  <span class="order-status-badge ${br.status.toLowerCase().replace(' ', '-')}" style="padding:0.2rem 0.6rem; border-radius:99px; font-weight:bold; font-size:var(--fs-xs); background:var(--color-surface-alt);">${br.status}</span>
                 </div>
-                <span class="order-status-badge ${r.status.toLowerCase().replace(' ', '-')}">${r.status}</span>
+                <div style="font-size:var(--fs-xs); color:var(--color-grey-700);">
+                  <strong>Items:</strong> ${br.items ? br.items.map(i => i.name + ' (' + i.variants.map(v => v.color + '/' + v.size + ' x ' + v.qty).join(', ') + ')').join('; ') : '-'}
+                </div>
               </div>
-              <div style="font-size:var(--fs-xs); color:var(--color-grey-700); margin-bottom:8px">
-                <div><strong>Quantity:</strong> ${r.qty} | <strong>Preferred Variant:</strong> ${r.colorSize || 'Any'}</div>
-                <div><strong>Delivery Postcode:</strong> ${r.postcode}</div>
-                ${r.link ? `<div><strong>Link:</strong> <a href="${r.link}" target="_blank" style="color:var(--color-brand)">${r.link}</a></div>` : ''}
-                ${r.details ? `<div style="margin-top:4px"><strong>Details:</strong> ${r.details}</div>` : ''}
+            `).join('');
+          }
+          if (reqs.length > 0) {
+            html += `<h4 style="font-family:var(--font-heading); font-size:var(--fs-body); margin:1.25rem 0 0.75rem 0; color:var(--color-dark);">Your Custom Sourcing Requests:</h4>`;
+            html += reqs.map(r => `
+              <div class="request-hist-card">
+                <div class="request-hist-header">
+                  <div>
+                    <span class="request-hist-title">${r.title}</span>
+                    <div class="request-hist-meta">Request ID: ${r.id} · Submitted ${r.date}</div>
+                  </div>
+                  <span class="order-status-badge ${r.status.toLowerCase().replace(' ', '-')}">${r.status}</span>
+                </div>
+                <div style="font-size:var(--fs-xs); color:var(--color-grey-700); margin-bottom:8px">
+                  <div><strong>Quantity:</strong> ${r.qty} | <strong>Preferred Variant:</strong> ${r.colorSize || 'Any'}</div>
+                  <div><strong>Delivery Postcode:</strong> ${r.postcode}</div>
+                  ${r.link ? `<div><strong>Link:</strong> <a href="${r.link}" target="_blank" style="color:var(--color-brand)">${r.link}</a></div>` : ''}
+                  ${r.details ? `<div style="margin-top:4px"><strong>Details:</strong> ${r.details}</div>` : ''}
+                </div>
               </div>
-            </div>
-          `).join('');
+            `).join('');
+          }
+          requestsListEl.innerHTML = html;
         }
       }
 

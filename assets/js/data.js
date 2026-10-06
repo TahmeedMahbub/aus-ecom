@@ -5,8 +5,8 @@
 
 const SITE = {
   brandName: 'Bongo Curated',
-  tagline: 'Bangladesh Made. Curated for Australia.',
-  announcementMessage: 'Discover Bangladesh-made products, curated for Australia.',
+  tagline: 'Artisan Crafted. Curated for Australia.',
+  announcementMessage: 'Discover distinctive handcrafted pieces, curated for Australia.',
   announcementLink: '#products-section',
   currency: 'A$',
   countryCode: 'AU',
@@ -126,14 +126,21 @@ const NAV_CATEGORIES = [
     filterCategory: 'preorder',
     megaMenu: null,
   },
+  {
+    name: 'Bulk Orders',
+    slug: 'bulk-orders',
+    filterCategory: 'bulk',
+    customUrl: 'bulk-order.html',
+    megaMenu: null,
+  },
 ];
 
 const HERO_SLIDES = [
   {
     id: 1,
-    label: 'BANGLADESH MADE · CURATED FOR AUSTRALIA',
-    headline: 'Bangladesh Made. Curated for Australia.',
-    subtext: 'Discover thoughtfully selected fashion, home decor, jute, handcrafted pieces and gifts made in Bangladesh.',
+    label: 'ARTISAN CRAFTED · CURATED FOR AUSTRALIA',
+    headline: 'Thoughtfully Crafted. Curated for Australia.',
+    subtext: 'Discover thoughtfully selected fashion, home decor, natural jute, handcrafted pieces and gifts for modern living.',
     cta: 'Shop Collection',
     ctaLink: '#products-section',
     secondaryCta: 'Explore Categories',
@@ -160,14 +167,14 @@ const CATEGORIES = [
   {
     name: 'Jute',
     slug: 'jute',
-    desc: 'Practical and beautiful products made from Bangladesh\'s natural golden fiber.',
+    desc: 'Practical and beautiful products crafted from natural golden jute fiber.',
     image: 'assets/images/lifestyle/jute-showcase.jpg',
     gradient: 'linear-gradient(135deg, #B58A55, #6E4D25)',
   },
   {
     name: 'Handcrafted',
     slug: 'handicrafts',
-    desc: 'Distinctive pieces made by skilled Bangladeshi makers and craftspeople.',
+    desc: 'Distinctive pieces made by skilled master artisans and craftspeople.',
     image: 'assets/images/products/artisan-brass.jpg',
     gradient: 'linear-gradient(135deg, #7D6B58, #473B2F)',
   },
@@ -191,7 +198,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/tshirt-olive.png',
     badge: 'new',
     category: 'fashion',
-    brand: 'Dhaka Weaves',
+    brand: 'Heritage Weaves',
     colors: ['#5C6B4F', '#1A1A1A', '#F5F0E8'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     outOfStockSizes: [],
@@ -207,7 +214,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/shirt-white.png',
     badge: 'launch',
     category: 'fashion',
-    brand: 'Dhaka Weaves',
+    brand: 'Heritage Weaves',
     colors: ['#FFFFFF', '#E8DDD0', '#8BA5B5'],
     sizes: ['S', 'M', 'L', 'XL', '2XL'],
     outOfStockSizes: ['S'],
@@ -223,7 +230,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/trousers-khaki.png',
     badge: 'lowstock',
     category: 'fashion',
-    brand: 'Dhaka Weaves',
+    brand: 'Heritage Weaves',
     colors: ['#C4A882', '#1A1A1A', '#3A3A3A'],
     sizes: ['30', '32', '34', '36', '38'],
     outOfStockSizes: [],
@@ -255,7 +262,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/shirt-white.png',
     badge: 'new',
     category: 'fashion',
-    brand: 'Dhaka Weaves',
+    brand: 'Heritage Weaves',
     colors: ['#FFFFFF', '#C4A882'],
     sizes: ['S', 'M', 'L', 'XL'],
     outOfStockSizes: [],
@@ -273,7 +280,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/nakshi-kantha.jpg',
     badge: 'new',
     category: 'home-decor',
-    brand: 'Bengal Craft Co.',
+    brand: 'Artisan Craft Co.',
     colors: ['#D6C2A8', '#8C4F3B', '#384D48'],
     sizes: ['45x45 cm', '50x50 cm'],
     outOfStockSizes: [],
@@ -289,7 +296,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/artisan-brass.jpg',
     badge: 'launch',
     category: 'home-decor',
-    brand: 'Bengal Craft Co.',
+    brand: 'Artisan Craft Co.',
     colors: ['#A06F43', '#5E3A1C'],
     sizes: ['25 cm', '32 cm'],
     outOfStockSizes: [],
@@ -305,7 +312,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/lifestyle/jute-showcase.jpg',
     badge: 'new',
     category: 'home-decor',
-    brand: 'Bengal Craft Co.',
+    brand: 'Artisan Craft Co.',
     colors: ['#8C4F3B', '#D6C2A8'],
     sizes: ['Medium', 'Large'],
     outOfStockSizes: [],
@@ -317,7 +324,7 @@ const INITIAL_PRODUCTS = [
   {
     id: 9,
     name: 'Handwoven Golden Jute Round Tote',
-    desc: '100% Bangladesh Golden Jute · Cotton Lining',
+    desc: '100% Natural Golden Jute · Cotton Lining',
     price: 36.00,
     originalPrice: 49.00,
     image: 'assets/images/lifestyle/jute-showcase.jpg',
@@ -373,7 +380,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/artisan-brass.jpg',
     badge: 'new',
     category: 'handicrafts',
-    brand: 'Bengal Craft Co.',
+    brand: 'Artisan Craft Co.',
     colors: ['#C5A059', '#7D6331'],
     sizes: ['Standard Duo'],
     outOfStockSizes: [],
@@ -439,7 +446,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/artisan-brass.jpg',
     badge: 'launch',
     category: 'home-decor',
-    brand: 'Bengal Craft Co.',
+    brand: 'Artisan Craft Co.',
     colors: ['#384D48', '#D6C2A8'],
     sizes: ['Teapot + 4 Cups'],
     outOfStockSizes: [],
@@ -455,7 +462,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/shirt-white.png', 
     badge: 'new', 
     category: 'fashion', 
-    brand: 'Dhaka Weaves', 
+    brand: 'Heritage Weaves', 
     colors: ['#FFFFFF', '#D8D1C5', '#1B2A4A'], 
     sizes: ['S', 'M', 'L', 'XL', '2XL'], 
     outOfStockSizes: [], 
@@ -471,7 +478,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/shirt-white.png', 
     badge: 'launch', 
     category: 'fashion', 
-    brand: 'Dhaka Weaves', 
+    brand: 'Heritage Weaves', 
     colors: ['#C4A882', '#5C6B4F', '#1A1A1A'], 
     sizes: ['S', 'M', 'L', 'XL'], 
     outOfStockSizes: [], 
@@ -503,7 +510,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/tshirt-olive.png', 
     badge: 'lowstock', 
     category: 'fashion', 
-    brand: 'Dhaka Weaves', 
+    brand: 'Heritage Weaves', 
     colors: ['#6F765F', '#D6C2A8', '#1A1A1A'], 
     sizes: ['S', 'M', 'L', 'XL'], 
     outOfStockSizes: [], 
@@ -535,7 +542,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/shirt-white.png', 
     badge: 'new', 
     category: 'fashion', 
-    brand: 'Dhaka Weaves', 
+    brand: 'Heritage Weaves', 
     colors: ['#FFFFFF', '#8BA5B5', '#C4A882'], 
     sizes: ['S', 'M', 'L', 'XL'], 
     outOfStockSizes: [], 
@@ -551,7 +558,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/shirt-white.png', 
     badge: 'launch', 
     category: 'fashion', 
-    brand: 'Dhaka Weaves', 
+    brand: 'Heritage Weaves', 
     colors: ['#D8D1C5', '#6F765F', '#384D48'], 
     sizes: ['S', 'M', 'L', 'XL', '2XL'], 
     outOfStockSizes: [], 
@@ -583,7 +590,7 @@ const INITIAL_PRODUCTS = [
     image: 'assets/images/products/tshirt-olive.png', 
     badge: 'new', 
     category: 'fashion', 
-    brand: 'Dhaka Weaves', 
+    brand: 'Heritage Weaves', 
     colors: ['#F5F0E8', '#1A1A1A', '#6F765F'], 
     sizes: ['S', 'M', 'L', 'XL'], 
     outOfStockSizes: [], 
@@ -616,13 +623,13 @@ const INITIAL_PRODUCTS = [
 const INITIAL_CATEGORIES = [
   { id: 1, name: 'Fashion', slug: 'fashion', desc: 'Everyday clothing, relaxed fits, linen pieces and modern essentials.', image: 'assets/images/products/shirt-white.png', isDisabled: false },
   { id: 2, name: 'Home & Living', slug: 'home-decor', desc: 'Handcrafted accents, textiles, ceramics and natural materials for modern spaces.', image: 'assets/images/products/nakshi-kantha.jpg', isDisabled: false },
-  { id: 3, name: 'Jute', slug: 'jute', desc: 'Practical and beautiful products made from Bangladesh\'s natural golden fiber.', image: 'assets/images/lifestyle/jute-showcase.jpg', isDisabled: false },
-  { id: 4, name: 'Handcrafted', slug: 'handicrafts', desc: 'Distinctive pieces made by skilled Bangladeshi makers and craftspeople.', image: 'assets/images/products/artisan-brass.jpg', isDisabled: false },
+  { id: 3, name: 'Jute', slug: 'jute', desc: 'Practical and beautiful products crafted from natural golden jute fiber.', image: 'assets/images/lifestyle/jute-showcase.jpg', isDisabled: false },
+  { id: 4, name: 'Handcrafted', slug: 'handicrafts', desc: 'Distinctive pieces made by skilled master artisans and craftspeople.', image: 'assets/images/products/artisan-brass.jpg', isDisabled: false },
   { id: 5, name: 'Gifts', slug: 'lifestyle', desc: 'Thoughtful products made even more special with gift wrapping and notes.', image: 'assets/images/products/leather-journal.jpg', isDisabled: false },
 ];
 
 window.BongoCategories = {
-  KEY: 'bongo_categories_v1',
+  KEY: 'bongo_categories_v2',
   getAll: function() {
     try {
       const stored = localStorage.getItem(this.KEY);
@@ -785,15 +792,15 @@ window.BongoSubcategories = {
 
 // 3. BRANDS STORE
 const INITIAL_BRANDS = [
-  { id: 1, name: 'Dhaka Weaves', slug: 'dhaka-weaves', logo: 'assets/images/products/shirt-white.png', desc: 'Organic cotton and pure flax linen apparel from Dhaka.', origin: 'Bangladesh', isDisabled: false },
-  { id: 2, name: 'Bongo Curated', slug: 'bongo-curated', logo: 'assets/images/products/tshirt-olive.png', desc: 'In-house signature line curated for Australia.', origin: 'Bangladesh & Australia', isDisabled: false },
-  { id: 3, name: 'Golden Fiber Co.', slug: 'golden-fiber-co', logo: 'assets/images/lifestyle/jute-showcase.jpg', desc: 'Sustainable golden fiber jute products.', origin: 'Bangladesh', isDisabled: false },
-  { id: 4, name: 'Nakshi Guild', slug: 'nakshi-guild', logo: 'assets/images/products/nakshi-kantha.jpg', desc: 'Heritage Nakshi Kantha textiles by rural artisans.', origin: 'Bangladesh', isDisabled: false },
-  { id: 5, name: 'Bengal Artisan Craft', slug: 'bengal-artisan-craft', logo: 'assets/images/products/artisan-brass.jpg', desc: 'Master brassmiths and woodcraft makers.', origin: 'Bangladesh', isDisabled: false },
+  { id: 1, name: 'Heritage Weaves', slug: 'heritage-weaves', logo: 'assets/images/products/shirt-white.png', desc: 'Organic cotton and pure flax linen apparel.', origin: 'Artisan Crafted', isDisabled: false },
+  { id: 2, name: 'Bongo Curated', slug: 'bongo-curated', logo: 'assets/images/products/tshirt-olive.png', desc: 'In-house signature line curated for Australia.', origin: 'Curated for Australia', isDisabled: false },
+  { id: 3, name: 'Golden Fiber Co.', slug: 'golden-fiber-co', logo: 'assets/images/lifestyle/jute-showcase.jpg', desc: 'Sustainable golden fiber jute products.', origin: 'Thoughtfully Sourced', isDisabled: false },
+  { id: 4, name: 'Nakshi Guild', slug: 'nakshi-guild', logo: 'assets/images/products/nakshi-kantha.jpg', desc: 'Heritage Nakshi Kantha textiles by master artisans.', origin: 'Artisan Crafted', isDisabled: false },
+  { id: 5, name: 'Heritage Artisan Craft', slug: 'heritage-artisan-craft', logo: 'assets/images/products/artisan-brass.jpg', desc: 'Master brassmiths and woodcraft makers.', origin: 'Artisan Crafted', isDisabled: false },
 ];
 
 window.BongoBrands = {
-  KEY: 'bongo_brands_v1',
+  KEY: 'bongo_brands_v2',
   getAll: function() {
     try {
       const stored = localStorage.getItem(this.KEY);
@@ -824,7 +831,7 @@ window.BongoBrands = {
       slug: slug,
       logo: data.logo || 'assets/images/products/shirt-white.png',
       desc: data.desc || '',
-      origin: data.origin || 'Bangladesh',
+      origin: data.origin || 'Artisan Crafted',
       isDisabled: data.isDisabled || false,
       createdAt: new Date().toISOString()
     };
@@ -859,7 +866,7 @@ window.BongoBrands = {
 
 // 4. PRODUCTS STORE (EXPANDED SCHEMA WITH VARIANTS & SPECS)
 window.BongoProducts = {
-  STORAGE_KEY: 'bongo_products_v1',
+  STORAGE_KEY: 'bongo_products_v2',
 
   getAll: function() {
     try {
@@ -2287,6 +2294,267 @@ window.BongoAbandonedCarts = {
   }
 };
 
+// 6. BULK ORDERS REQUEST STORE
+const INITIAL_BULK_REQUESTS = [
+  {
+    id: 101,
+    requestNumber: 'BULK-1001',
+    customerName: 'Sarah Jenkins',
+    contactInfo: 'sarah.j@eventcraft.com.au',
+    phone: '0412 345 678',
+    postcode: '2000',
+    suburb: 'Sydney NSW',
+    targetDate: '2026-11-15',
+    notes: 'Need custom gift packaging and ribbon wrapping for annual corporate gala.',
+    status: 'Pending',
+    adminNotes: 'Initial inquiry received. Preparing volume quote for linen apparel.',
+    createdAt: '2026-10-05T14:30:00Z',
+    items: [
+      {
+        id: 1,
+        productId: 1,
+        name: 'Pure Flax Linen Shirt',
+        category: 'fashion',
+        image: 'assets/images/products/tshirt-olive.png',
+        isCustom: false,
+        variants: [
+          { color: 'Crisp White', size: 'L', qty: 30 },
+          { color: 'Olive Green', size: 'M', qty: 20 },
+          { color: 'Olive Green', size: 'L', qty: 25 }
+        ]
+      },
+      {
+        id: 2,
+        productId: 9,
+        name: 'Handwoven Golden Jute Round Tote',
+        category: 'jute',
+        image: 'assets/images/lifestyle/jute-showcase.jpg',
+        isCustom: false,
+        variants: [
+          { color: 'Natural Golden', size: 'Standard', qty: 75 }
+        ]
+      }
+    ],
+    totalUnits: 150
+  },
+  {
+    id: 102,
+    requestNumber: 'BULK-1002',
+    customerName: 'Marcus Vance',
+    contactInfo: 'm.vance@vancedesign.com.au',
+    phone: '0499 111 222',
+    postcode: '3000',
+    suburb: 'Melbourne VIC',
+    targetDate: '2026-12-01',
+    notes: 'Corporate holiday gift boxes for tier 1 clients.',
+    status: 'Quoted',
+    adminNotes: 'Discount quote sent via email (15% bulk rate applied).',
+    createdAt: '2026-10-04T09:15:00Z',
+    items: [
+      {
+        id: 1,
+        productId: 7,
+        name: 'Nakshi Kantha Embroidered Cushion Cover',
+        category: 'home-decor',
+        image: 'assets/images/products/nakshi-kantha.jpg',
+        isCustom: false,
+        variants: [
+          { color: 'Terracotta Red', size: '45x45 cm', qty: 40 }
+        ]
+      },
+      {
+        id: 2,
+        productId: null,
+        name: 'Custom Engraved Brass Coasters (Unlisted Item)',
+        category: 'handicrafts',
+        image: 'assets/images/products/artisan-brass.jpg',
+        isCustom: true,
+        customSpecs: 'Solid brass coasters with laser-etched corporate logo, set of 4 in velvet pouch',
+        variants: [
+          { color: 'Antique Brass', size: '10cm Round', qty: 40 }
+        ]
+      }
+    ],
+    totalUnits: 80
+  }
+];
+
+window.BongoBulkRequests = {
+  STORAGE_KEY: 'bongo_bulk_requests_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_BULK_REQUESTS);
+    return INITIAL_BULK_REQUESTS;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    if (!id) return null;
+    const cleanId = id.toString().replace('BULK-', '');
+    return this.getAll().find(r => r.id === parseInt(cleanId) || r.requestNumber === id || r.requestNumber === `BULK-${cleanId}`);
+  },
+  create: function(data) {
+    const list = this.getAll();
+    const newId = list.reduce((max, r) => r.id > max ? r.id : max, 100) + 1;
+    const reqNum = `BULK-${1000 + newId}`;
+    
+    let totalUnits = 0;
+    if (Array.isArray(data.items)) {
+      data.items.forEach(item => {
+        if (Array.isArray(item.variants)) {
+          item.variants.forEach(v => {
+            totalUnits += (parseInt(v.qty) || 0);
+          });
+        }
+      });
+    }
+
+    const newReq = {
+      id: newId,
+      requestNumber: reqNum,
+      customerName: data.customerName || 'Valued Customer',
+      contactInfo: data.contactInfo || '',
+      phone: data.phone || '',
+      postcode: data.postcode || '',
+      suburb: data.suburb || '',
+      targetDate: data.targetDate || '',
+      notes: data.notes || '',
+      status: 'Pending',
+      adminNotes: '',
+      createdAt: new Date().toISOString(),
+      items: data.items || [],
+      totalUnits: totalUnits
+    };
+
+    list.unshift(newReq);
+    this.saveAll(list);
+    return newReq;
+  },
+  updateStatus: function(id, status, adminNotes = null) {
+    const list = this.getAll();
+    const cleanId = id.toString().replace('BULK-', '');
+    const req = list.find(r => r.id === parseInt(cleanId) || r.requestNumber === id);
+    if (!req) return null;
+    if (status) req.status = status;
+    if (adminNotes !== null) req.adminNotes = adminNotes;
+    req.updatedAt = new Date().toISOString();
+    this.saveAll(list);
+    return req;
+  }
+};
+
+const INITIAL_SOURCING_REQUESTS = [
+  {
+    id: 201,
+    requestNumber: 'SRC-1001',
+    customerName: 'Anika Rahman',
+    contactInfo: 'anika.r@gmail.com.au',
+    phone: '0411 222 333',
+    postcode: '2000',
+    suburb: 'Sydney NSW',
+    itemName: 'Handwoven Royal Blue Jamdani Saree with Fine Zari Motif',
+    productLink: 'https://instagram.com/p/sample-jamdani',
+    colorSize: 'Royal Blue & Gold Zari · Standard 5.5m',
+    qty: 2,
+    details: 'Need authentic hand-loomed Jamdani for a family wedding in late November. Premium cotton silk mix preferred.',
+    images: ['assets/images/products/shirt-white.png'],
+    status: 'Pending',
+    adminNotes: 'Inquiry received. Checking with artisan weaver guild in Narayanganj.',
+    estimatedPrice: 'A$185.00',
+    createdAt: '2026-10-06T10:15:00Z'
+  },
+  {
+    id: 202,
+    requestNumber: 'SRC-1002',
+    customerName: 'David Miller',
+    contactInfo: 'david.miller@designstudio.com.au',
+    phone: '0488 444 555',
+    postcode: '3000',
+    suburb: 'Melbourne VIC',
+    itemName: 'Vintage Brass Hammered Floor Planter & Brass Pitcher Set',
+    productLink: '',
+    colorSize: 'Antique Brass Finish · Large 40cm height',
+    qty: 5,
+    details: 'Custom decor for boutique hotel lobby in Melbourne. Must be solid brass with lacquered protective coat.',
+    images: ['assets/images/products/artisan-brass.jpg'],
+    status: 'Quoted',
+    adminNotes: 'Sourced from master metalwork workshop. Quote sent: A$140/piece including freight.',
+    estimatedPrice: 'A$700.00',
+    createdAt: '2026-10-04T16:30:00Z'
+  }
+];
+
+window.BongoSourcingRequests = {
+  STORAGE_KEY: 'bongo_sourcing_requests_v1',
+  getAll: function() {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    this.saveAll(INITIAL_SOURCING_REQUESTS);
+    return INITIAL_SOURCING_REQUESTS;
+  },
+  saveAll: function(items) {
+    try { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items)); } catch(e) {}
+  },
+  getById: function(id) {
+    if (!id) return null;
+    const cleanId = id.toString().replace('SRC-', '');
+    return this.getAll().find(r => r.id === parseInt(cleanId) || r.requestNumber === id || r.requestNumber === `SRC-${cleanId}`);
+  },
+  create: function(data) {
+    const list = this.getAll();
+    const newId = list.reduce((max, r) => r.id > max ? r.id : max, 200) + 1;
+    const reqNum = `SRC-${1000 + newId}`;
+
+    const newReq = {
+      id: newId,
+      requestNumber: reqNum,
+      customerName: data.customerName || 'Valued Customer',
+      contactInfo: data.contactInfo || '',
+      phone: data.phone || '',
+      postcode: data.postcode || '',
+      suburb: data.suburb || '',
+      itemName: data.itemName || 'Custom Product Sourcing',
+      productLink: data.productLink || '',
+      colorSize: data.colorSize || '',
+      qty: parseInt(data.qty) || 1,
+      details: data.details || '',
+      images: data.images || [],
+      status: 'Pending',
+      adminNotes: '',
+      estimatedPrice: 'TBD',
+      createdAt: new Date().toISOString()
+    };
+
+    list.unshift(newReq);
+    this.saveAll(list);
+    return newReq;
+  },
+  updateStatus: function(id, status, adminNotes = null, estimatedPrice = null) {
+    const list = this.getAll();
+    const cleanId = id.toString().replace('SRC-', '');
+    const req = list.find(r => r.id === parseInt(cleanId) || r.requestNumber === id);
+    if (!req) return null;
+    if (status) req.status = status;
+    if (adminNotes !== null) req.adminNotes = adminNotes;
+    if (estimatedPrice !== null) req.estimatedPrice = estimatedPrice;
+    req.updatedAt = new Date().toISOString();
+    this.saveAll(list);
+    return req;
+  }
+};
+
 
 const FOOTER_LINKS = {
   shop: [
@@ -2306,11 +2574,13 @@ const FOOTER_LINKS = {
     { label: 'Size Guide', href: '#' },
     { label: 'FAQ', href: '#' },
     { label: 'Request Product Sourcing', href: 'request.html' },
+    { label: 'Bulk & Corporate Orders', href: 'bulk-order.html' },
     { label: 'Contact Us', href: 'request.html' },
   ],
   about: [
     { label: 'Our Story', href: 'index.html#bangladesh-made-section' },
-    { label: 'Made in Bangladesh', href: 'index.html#bangladesh-made-section' },
-    { label: 'Request From Bangladesh', href: 'request.html' },
+    { label: 'Artisan Heritage', href: 'index.html#bangladesh-made-section' },
+    { label: 'Custom Sourcing', href: 'request.html' },
+    { label: 'Bulk Orders', href: 'bulk-order.html' },
   ],
 };
