@@ -1,11 +1,12 @@
 /* ==========================================
    ADMIN BEIGE AMBIENCE - CUSTOM THEME STYLES
+   Refined Typography Hierarchy & Light Background
    ========================================== */
 
 :root {
-  /* Warm Beige Palette Variables */
-  --beige-bg-main: #FAF7F2;
-  --beige-bg-alt: #F4EFE6;
+  /* Warm Beige Palette & Surface Variables */
+  --beige-bg-main: #FCFBF8;
+  --beige-bg-alt: #F7F4EE;
   --beige-bg-card: #FFFFFF;
   --beige-bg-sidebar: #F3EEE6;
   --beige-sidebar-active: #E5DDD3;
@@ -16,16 +17,18 @@
   --beige-topbar-muted: #C5B8AC;
   --beige-topbar-hover: #342A24;
   
-  --beige-text-dark: #2A211D;
-  --beige-text-muted: #7A6E66;
+  /* Strict Typography Hierarchy Colors */
+  --beige-text-primary: #211C17;    /* Primary / Important text & titles */
+  --beige-text-secondary: #625B53;  /* Secondary / Supporting text */
+  --beige-text-muted: #8A837A;      /* Low-priority metadata & dates */
   --beige-text-light: #FAF7F2;
   
   --beige-primary-accent: #7E5B44;
   --beige-primary-hover: #674936;
   --beige-primary-light: #F2EBE4;
   
-  --beige-border-subtle: #E8E2D8;
-  --beige-border-medium: #DCD4C8;
+  --beige-border-subtle: #E8E2D9;
+  --beige-border-medium: #DDD6CB;
   
   /* Status Colors - Muted & Harmonized */
   --beige-status-pending-bg: #FDF6E9;
@@ -42,15 +45,16 @@
   /* Materialize Variable Overrides */
   --bs-primary: #7E5B44;
   --bs-primary-rgb: 126, 91, 68;
-  --bs-body-bg: #FAF7F2;
-  --bs-body-color: #2A211D;
+  --bs-body-bg: #FCFBF8;
+  --bs-body-color: #211C17;
 }
 
 /* Base resets & typography */
 body, html {
   background-color: var(--beige-bg-main) !important;
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Layout Page Background */
@@ -60,6 +64,51 @@ body, html {
 .content-wrapper {
   background-color: var(--beige-bg-main) !important;
 }
+
+/* ==========================================
+   TYPOGRAPHY HIERARCHY OVERRIDES
+   ========================================== */
+
+/* 1. Primary / Important Text (Titles, Names, IDs, Metrics) */
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.card-title,
+.fw-bold,
+.text-dark,
+.product-name,
+.customer-name,
+.order-id {
+  color: var(--beige-text-primary) !important;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+  font-weight: 700 !important;
+  letter-spacing: -0.015em;
+}
+
+h5, h6, .h5, .h6, .card-title {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+}
+
+/* 2. Secondary / Supporting Text */
+.text-secondary,
+.card-subtitle,
+.form-label,
+.secondary-info {
+  color: var(--beige-text-secondary) !important;
+  font-weight: 500;
+}
+
+/* 3. Muted / Metadata Text (Strictly for low priority metadata & timestamps) */
+.text-muted,
+.metadata-text,
+.fs-9.text-muted,
+.timeline-date {
+  color: var(--beige-text-muted) !important;
+  font-weight: 400;
+}
+
 
 /* ==========================================
    FIXED TOP BAR (NAVBAR)
@@ -180,18 +229,18 @@ body, html {
 }
 
 .app-brand .app-brand-text {
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em;
 }
 
 .app-brand .layout-menu-toggle {
-  color: var(--beige-text-muted) !important;
+  color: var(--beige-text-secondary) !important;
 }
 
 /* Menu Section Headers */
 .menu-header-text {
-  color: var(--beige-text-muted) !important;
+  color: var(--beige-text-secondary) !important;
   font-size: 0.72rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -200,7 +249,7 @@ body, html {
 
 /* Menu Items & Links */
 .menu-vertical .menu-item .menu-link {
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
   font-weight: 500 !important;
   border-radius: 6px !important;
   margin: 0.15rem 0.75rem !important;
@@ -209,13 +258,13 @@ body, html {
 }
 
 .menu-vertical .menu-item .menu-link .menu-icon {
-  color: var(--beige-text-muted) !important;
+  color: var(--beige-text-secondary) !important;
 }
 
 /* Hover State */
 .menu-vertical .menu-item:not(.active) > .menu-link:hover {
   background-color: var(--beige-sidebar-hover) !important;
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
 }
 
 .menu-vertical .menu-item:not(.active) > .menu-link:hover .menu-icon {
@@ -226,7 +275,7 @@ body, html {
 .menu-vertical .menu-item.active > .menu-link,
 .menu-vertical .menu-sub .menu-item.active > .menu-link {
   background-color: var(--beige-sidebar-active) !important;
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
   font-weight: 600 !important;
 }
 
@@ -247,7 +296,7 @@ body, html {
 
 /* Menu Toggle Arrow */
 .menu-vertical .menu-item .menu-toggle::after {
-  color: var(--beige-text-muted) !important;
+  color: var(--beige-text-secondary) !important;
 }
 
 
@@ -258,12 +307,12 @@ body, html {
   background-color: var(--beige-bg-card) !important;
   border: 1px solid var(--beige-border-subtle) !important;
   border-radius: 10px !important;
-  box-shadow: 0 2px 8px rgba(42, 33, 29, 0.03) !important;
+  box-shadow: 0 2px 8px rgba(33, 28, 23, 0.03) !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 14px rgba(42, 33, 29, 0.05) !important;
+  box-shadow: 0 4px 14px rgba(33, 28, 23, 0.05) !important;
 }
 
 .card-header {
@@ -273,18 +322,25 @@ body, html {
 }
 
 .card-title {
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
   font-weight: 600 !important;
 }
 
 .card-subtitle {
-  color: var(--beige-text-muted) !important;
+  color: var(--beige-text-secondary) !important;
   font-size: 0.8125rem !important;
+  font-weight: 500 !important;
 }
 
 /* Overview Card Custom Styles */
 .overview-card {
   padding: 1.25rem;
+}
+
+.overview-card .card-metric-label {
+  color: var(--beige-text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: 0.8125rem !important;
 }
 
 .overview-icon {
@@ -304,13 +360,13 @@ body, html {
    TABLES
    ========================================== */
 .table {
-  color: var(--beige-text-dark) !important;
+  color: var(--beige-text-primary) !important;
   margin-bottom: 0;
 }
 
 .table th {
-  background-color: #F7F3EB !important;
-  color: var(--beige-text-muted) !important;
+  background-color: #F7F4EE !important;
+  color: var(--beige-text-secondary) !important;
   font-size: 0.75rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -381,8 +437,8 @@ body, html {
 
 .badge.bg-label-secondary {
   background-color: #F4EFE6 !important;
-  color: #7A6E66 !important;
-  border: 1px solid rgba(122, 110, 102, 0.2) !important;
+  color: #625B53 !important;
+  border: 1px solid rgba(98, 91, 83, 0.2) !important;
   font-weight: 600;
   padding: 0.35rem 0.65rem;
 }
@@ -396,6 +452,7 @@ body, html {
   background-color: var(--beige-primary-accent) !important;
   border-color: var(--beige-primary-accent) !important;
   color: var(--beige-text-light) !important;
+  font-weight: 600 !important;
 }
 
 .btn-primary:hover,
@@ -411,14 +468,14 @@ body, html {
   border-radius: 6px;
   border: 1px solid var(--beige-border-medium);
   background: transparent;
-  color: var(--beige-text-muted);
-  font-weight: 500;
+  color: var(--beige-text-secondary);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .time-filter-btn:hover {
-  color: var(--beige-text-dark);
+  color: var(--beige-text-primary);
   background-color: var(--beige-bg-alt);
 }
 
@@ -426,6 +483,21 @@ body, html {
   background-color: var(--beige-primary-accent);
   color: var(--beige-text-light);
   border-color: var(--beige-primary-accent);
+}
+
+/* Form Labels & Controls */
+.form-label {
+  color: var(--beige-text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.form-control, .form-select {
+  border-color: var(--beige-border-medium) !important;
+  color: var(--beige-text-primary) !important;
+}
+
+.form-control::placeholder {
+  color: var(--beige-text-muted) !important;
 }
 
 /* User Avatar & Details */
