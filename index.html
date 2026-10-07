@@ -1,536 +1,1030 @@
 <!DOCTYPE html>
-<html lang="en-AU">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bongo Curated — Artisan Crafted. Curated for Australia.</title>
-  <meta name="description" content="Discover thoughtfully selected fashion, home decor, natural jute, handcrafted pieces and gifts curated for Australian living.">
-  <meta name="keywords" content="artisan lifestyle Australia, handcrafted home decor, jute bags Australia, Nakshi Kantha, handcrafted fashion Australia">
-  <meta name="author" content="Bongo Curated">
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="assets/"
+  data-template="vertical-menu-template">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Bongo Curated — Artisan Crafted. Curated for Australia.">
-  <meta property="og:description" content="Discover thoughtfully selected fashion, home decor, natural jute, handcrafted pieces and gifts curated for Australian living.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_AU">
+    <title>Dashboard | Aus Ecom Admin</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23CC7A3F'/><path d='M35 50 L45 60 L65 40' stroke='%23FFF' stroke-width='8' fill='none'/></svg>">
+    <meta name="description" content="Aus Ecom Admin Panel Foundation" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/sections.css">
-</head>
-<body>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
 
-  <!-- ═══════════════════════════════════════════════════════
-       ANNOUNCEMENT BAR
-       ═══════════════════════════════════════════════════════ -->
-  <!-- <div class="announcement-bar" id="announcement-bar">
-    <span>Discover distinctive handcrafted pieces, curated for Australia.</span>
-  </div> -->
+    <!-- Icons -->
+    <link rel="stylesheet" href="assets/vendor/fonts/materialdesignicons.css" />
+    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
 
-  <!-- ═══════════════════════════════════════════════════════
-       NAVBAR
-       ═══════════════════════════════════════════════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="container navbar-inner">
-      <!-- Hamburger (mobile) -->
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="assets/css/demo.css" />
+    
+    <!-- Custom Beige Ambience CSS -->
+    <link rel="stylesheet" href="assets/css/admin-beige.css" />
 
-      <!-- Brand -->
-      <a href="#" class="navbar-brand">
-        <span class="brand-name">Bongo Curated</span>
-      </a>
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
 
-      <!-- Desktop Nav -->
-      <ul class="navbar-nav" id="nav-items">
-        <!-- Rendered by JS -->
-      </ul>
+    <!-- Helpers -->
+    <script src="assets/vendor/js/helpers.js"></script>
 
-      <!-- Actions -->
-      <div class="navbar-actions" id="navbar-actions">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </nav>
+    <!-- Template customizer & Config -->
+    <script src="assets/vendor/js/template-customizer.js"></script>
+    <script src="assets/js/config.js"></script>
+  </head>
 
-  <!-- ═══════════════════════════════════════════════════════
-       MOBILE NAV PANEL
-       ═══════════════════════════════════════════════════════ -->
-  <div class="mobile-nav" id="mobile-nav">
-    <div class="mobile-nav-header">
-      <span class="brand-name">Bongo Curated</span>
-      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&times;</button>
-    </div>
-    <div id="mobile-nav-items">
-      <!-- Rendered by JS -->
-    </div>
-  </div>
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        
+        <!-- SIDEBAR -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link gap-2 align-items-center">
+              <span class="app-brand-logo demo" style="color: #7E5B44;">
+                <i class="mdi mdi-storefront-outline fs-3"></i>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-1" style="color: #2A211D; letter-spacing: -0.01em;">AUS ECOM</span>
+            </a>
 
-  <!-- ═══════════════════════════════════════════════════════
-       SEARCH MODAL
-       ═══════════════════════════════════════════════════════ -->
-  <div class="search-overlay" id="search-overlay">
-    <div class="search-modal">
-      <div class="search-modal-header">
-        <div class="search-input-wrap">
-          <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-          <input type="text" class="search-modal-input" id="search-input" placeholder="Search fashion, home decor, jute, handicrafts..." aria-label="Search catalog" autocomplete="off">
-          <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" style="display:none">&times;</button>
-        </div>
-        <button class="search-modal-close" id="search-modal-close" aria-label="Close search">&times;</button>
-      </div>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block">
+              <i class="mdi mdi-chevron-left mdi-24px align-middle"></i>
+            </a>
+          </div>
 
-      <div class="search-modal-body" id="search-modal-body">
-        <!-- Default State (Empty / Short Query) -->
-        <div class="search-default-state" id="search-default-state">
-          <!-- Recent Searches -->
-          <div class="search-section" id="recent-searches-section">
-            <div class="search-section-header">
-              <span class="search-section-title">Recent Searches</span>
-              <button class="search-clear-all-recent" id="clear-recent-searches-btn">Clear All</button>
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-2">
+            
+            <!-- Dashboard -->
+            <li class="menu-item active">
+              <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-view-dashboard-outline"></i>
+                <div>Dashboard</div>
+              </a>
+            </li>
+
+            <!-- Catalog -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-package-variant-closed"></i>
+                <div>Catalog</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="products.html" class="menu-link">
+                    <div>Products</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="categories.html" class="menu-link">
+                    <div>Categories</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="subcategories.html" class="menu-link">
+                    <div>Subcategories</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="brands.html" class="menu-link">
+                    <div>Brands</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Sales -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-cart-outline"></i>
+                <div>Sales</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Orders</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Customers</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Abandoned Carts</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Requests -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-hand-shake-outline"></i>
+                <div>Requests</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Sourcing Requests</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Bulk Orders</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Marketing -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-bullhorn-outline"></i>
+                <div>Marketing</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Banners</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Collections</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Offers / Discounts</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Coupons</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Content -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-web"></i>
+                <div>Content</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Homepage</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Pages</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Navigation</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Reviews -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-star-outline"></i>
+                <div>Reviews</div>
+              </a>
+            </li>
+
+            <!-- Wishlist -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-heart-outline"></i>
+                <div>Wishlist</div>
+              </a>
+            </li>
+
+            <!-- Settings -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
+                <div>Settings</div>
+              </a>
+            </li>
+
+          </ul>
+        </aside>
+        <!-- / SIDEBAR -->
+
+        <!-- LAYOUT PAGE -->
+        <div class="layout-page">
+          
+          <!-- FIXED TOP BAR -->
+          <nav
+            class="layout-navbar navbar navbar-expand-xl align-items-center"
+            id="layout-navbar">
+            <div class="container-fluid d-flex align-items-center justify-content-between px-0">
+              
+              <!-- Left Side: Toggle & Breadcrumb -->
+              <div class="d-flex align-items-center gap-3">
+                <a class="nav-item nav-link px-0 me-xl-4 d-xl-none layout-menu-toggle" href="javascript:void(0)">
+                  <i class="mdi mdi-menu mdi-24px"></i>
+                </a>
+                <a class="nav-item nav-link px-0 me-3 d-none d-xl-block layout-menu-toggle" href="javascript:void(0)">
+                  <i class="mdi mdi-menu mdi-24px"></i>
+                </a>
+                <div class="d-none d-sm-flex align-items-center">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 py-0" style="font-size: 0.875rem;">
+                      <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+
+              <!-- Center Search (Optional Quick Context) -->
+              <div class="d-none d-md-flex align-items-center position-relative" style="width: 280px;">
+                <i class="mdi mdi-magnify position-absolute start-0 ms-3" style="color: var(--beige-topbar-muted); font-size: 1.1rem;"></i>
+                <input
+                  type="text"
+                  class="form-control topbar-search ps-5"
+                  placeholder="Search catalog, orders..."
+                  aria-label="Search" />
+              </div>
+
+              <!-- Right Side: Profile & Notifications -->
+              <div class="d-flex align-items-center gap-3">
+                
+                <!-- Notification Dropdown -->
+                <div class="dropdown">
+                  <a class="nav-link position-relative p-1" href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="mdi mdi-bell-outline fs-4"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle" style="width: 8px; height: 8px;"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end py-2" style="min-width: 280px;">
+                    <li class="dropdown-header d-flex align-items-center justify-content-between border-bottom pb-2 mb-2">
+                      <span class="fw-semibold text-light fs-7">Notifications</span>
+                      <span class="badge bg-label-warning fs-8">3 New</span>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:void(0)">
+                        <i class="mdi mdi-cart-check text-success fs-5"></i>
+                        <div>
+                          <p class="mb-0 fs-8 fw-medium">New Order #ORD-9482</p>
+                          <small style="color: var(--beige-topbar-muted);">2 mins ago</small>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:void(0)">
+                        <i class="mdi mdi-alert-circle-outline text-warning fs-5"></i>
+                        <div>
+                          <p class="mb-0 fs-8 fw-medium">Low stock alert: Brass Candle Holder</p>
+                          <small style="color: var(--beige-topbar-muted);">1 hour ago</small>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:void(0)">
+                        <i class="mdi mdi-clipboard-text-outline text-info fs-5"></i>
+                        <div>
+                          <p class="mb-0 fs-8 fw-medium">New Sourcing Request #REQ-2041</p>
+                          <small style="color: var(--beige-topbar-muted);">3 hours ago</small>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="dropdown">
+                  <a class="nav-link d-flex align-items-center gap-2 p-0" href="javascript:void(0)" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="avatar avatar-online">
+                      <span class="avatar-initial rounded-circle fw-bold" style="background-color: var(--beige-primary-accent); color: var(--beige-text-light);">A</span>
+                    </div>
+                    <div class="d-none d-lg-block text-start">
+                      <span class="user-avatar-text d-block lh-1">Admin User</span>
+                      <span class="user-role-text">Store Manager</span>
+                    </div>
+                    <i class="mdi mdi-chevron-down d-none d-lg-block" style="color: var(--beige-topbar-muted);"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end py-2">
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-2" href="javascript:void(0)">
+                        <i class="mdi mdi-account-outline fs-5"></i> My Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-2" href="javascript:void(0)">
+                        <i class="mdi mdi-cog-outline fs-5"></i> Settings
+                      </a>
+                    </li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="javascript:void(0)">
+                        <i class="mdi mdi-logout fs-5"></i> Log Out
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+
             </div>
-            <div class="search-tags-list" id="recent-searches-list">
-              <!-- Rendered dynamically -->
+          </nav>
+          <!-- / FIXED TOP BAR -->
+
+          <!-- CONTENT WRAPPER -->
+          <div class="content-wrapper">
+            <div class="container-xxl flex-grow-1 container-p-y">
+              
+              <!-- Dashboard Page Header -->
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                  <h4 class="fw-bold mb-1" style="color: var(--beige-text-dark); letter-spacing: -0.01em;">Ecommerce Overview</h4>
+                  <p class="text-muted mb-0 fs-7">Welcome back, here is your store activity summary today.</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge" style="background-color: var(--beige-primary-light); color: var(--beige-primary-accent); font-weight: 500; padding: 0.5rem 0.85rem; border-radius: 6px;">
+                    <i class="mdi mdi-calendar-blank-outline me-1"></i> Oct 07, 2026
+                  </span>
+                </div>
+              </div>
+
+              <!-- 1. OVERVIEW CARDS (4 CARDS) -->
+              <div class="row g-4 mb-4">
+                <!-- Total Sales -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="card overview-card h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <span class="text-muted fs-7 fw-medium">Total Sales</span>
+                      <div class="overview-icon">
+                        <i class="mdi mdi-currency-usd"></i>
+                      </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="color: var(--beige-text-dark);">$128,450.00</h3>
+                    <div class="d-flex align-items-center gap-1 fs-8">
+                      <span class="badge bg-label-success"><i class="mdi mdi-arrow-up-thin"></i> 14.2%</span>
+                      <span class="text-muted">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Orders -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="card overview-card h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <span class="text-muted fs-7 fw-medium">Orders</span>
+                      <div class="overview-icon">
+                        <i class="mdi mdi-cart-outline"></i>
+                      </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="color: var(--beige-text-dark);">1,420</h3>
+                    <div class="d-flex align-items-center gap-1 fs-8">
+                      <span class="badge bg-label-success"><i class="mdi mdi-arrow-up-thin"></i> 8.1%</span>
+                      <span class="text-muted">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Customers -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="card overview-card h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <span class="text-muted fs-7 fw-medium">Customers</span>
+                      <div class="overview-icon">
+                        <i class="mdi mdi-account-group-outline"></i>
+                      </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="color: var(--beige-text-dark);">3,850</h3>
+                    <div class="d-flex align-items-center gap-1 fs-8">
+                      <span class="badge bg-label-success"><i class="mdi mdi-arrow-up-thin"></i> 12.4%</span>
+                      <span class="text-muted">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Products -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="card overview-card h-100">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <span class="text-muted fs-7 fw-medium">Active Products</span>
+                      <div class="overview-icon">
+                        <i class="mdi mdi-package-variant-closed"></i>
+                      </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="color: var(--beige-text-dark);">486</h3>
+                    <div class="d-flex align-items-center gap-1 fs-8">
+                      <span class="badge bg-label-info">+5 New</span>
+                      <span class="text-muted">added this week</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. SALES OVERVIEW CHART & 4. ORDER STATUS OVERVIEW -->
+              <div class="row g-4 mb-4">
+                
+                <!-- Sales Overview Chart -->
+                <div class="col-12 col-lg-8">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                      <div>
+                        <h5 class="card-title mb-0">Sales Overview</h5>
+                        <small class="card-subtitle">Revenue performance & trends</small>
+                      </div>
+                      <!-- Time Filter Buttons -->
+                      <div class="d-flex align-items-center gap-1" id="timeFilterGroup">
+                        <button type="button" class="time-filter-btn" data-period="7d">7 Days</button>
+                        <button type="button" class="time-filter-btn active" data-period="30d">30 Days</button>
+                        <button type="button" class="time-filter-btn" data-period="3m">3 Months</button>
+                        <button type="button" class="time-filter-btn" data-period="1y">1 Year</button>
+                      </div>
+                    </div>
+                    <div class="card-body pt-3">
+                      <div id="salesOverviewChart" style="min-height: 310px;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Order Status Overview -->
+                <div class="col-12 col-lg-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                      <h5 class="card-title mb-0">Order Status</h5>
+                      <small class="card-subtitle">Breakdown of current order pipeline</small>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between gap-3 pt-3">
+                      
+                      <!-- Pending -->
+                      <div>
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                          <span class="fs-8 fw-medium text-dark"><i class="mdi mdi-clock-outline me-1 text-warning"></i> Pending</span>
+                          <span class="fs-8 fw-bold" style="color: var(--beige-status-pending-text);">42 orders (3%)</span>
+                        </div>
+                        <div class="status-progress-bg">
+                          <div class="status-progress-bar" style="width: 3%; background-color: var(--beige-status-pending-text);"></div>
+                        </div>
+                      </div>
+
+                      <!-- Processing -->
+                      <div>
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                          <span class="fs-8 fw-medium text-dark"><i class="mdi mdi-cog-sync-outline me-1 text-info"></i> Processing</span>
+                          <span class="fs-8 fw-bold" style="color: var(--beige-status-processing-text);">88 orders (6%)</span>
+                        </div>
+                        <div class="status-progress-bg">
+                          <div class="status-progress-bar" style="width: 6%; background-color: var(--beige-status-processing-text);"></div>
+                        </div>
+                      </div>
+
+                      <!-- Shipped -->
+                      <div>
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                          <span class="fs-8 fw-medium text-dark"><i class="mdi mdi-truck-delivery-outline me-1" style="color: var(--beige-primary-accent);"></i> Shipped</span>
+                          <span class="fs-8 fw-bold" style="color: var(--beige-primary-accent);">154 orders (11%)</span>
+                        </div>
+                        <div class="status-progress-bg">
+                          <div class="status-progress-bar" style="width: 11%; background-color: var(--beige-primary-accent);"></div>
+                        </div>
+                      </div>
+
+                      <!-- Delivered -->
+                      <div>
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                          <span class="fs-8 fw-medium text-dark"><i class="mdi mdi-check-circle-outline me-1 text-success"></i> Delivered</span>
+                          <span class="fs-8 fw-bold" style="color: var(--beige-status-delivered-text);">1,086 orders (76%)</span>
+                        </div>
+                        <div class="status-progress-bg">
+                          <div class="status-progress-bar" style="width: 76%; background-color: var(--beige-status-delivered-text);"></div>
+                        </div>
+                      </div>
+
+                      <!-- Cancelled -->
+                      <div>
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                          <span class="fs-8 fw-medium text-dark"><i class="mdi mdi-close-circle-outline me-1 text-danger"></i> Cancelled</span>
+                          <span class="fs-8 fw-bold" style="color: var(--beige-status-cancelled-text);">50 orders (4%)</span>
+                        </div>
+                        <div class="status-progress-bg">
+                          <div class="status-progress-bar" style="width: 4%; background-color: var(--beige-status-cancelled-text);"></div>
+                        </div>
+                      </div>
+
+                      <div class="p-3 mt-2 rounded" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle);">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <span class="fs-8 text-muted">Fulfillment Rate</span>
+                          <span class="fs-7 fw-bold" style="color: var(--beige-text-dark);">96.0%</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 3. RECENT ORDERS & 5. TOP PRODUCTS -->
+              <div class="row g-4 mb-4">
+                
+                <!-- Recent Orders -->
+                <div class="col-12 col-xl-8">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <div>
+                        <h5 class="card-title mb-0">Recent Orders</h5>
+                        <small class="card-subtitle">Latest customer purchases</small>
+                      </div>
+                      <a href="javascript:void(0)" class="btn btn-sm btn-outline-beige">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle">
+                        <thead>
+                          <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th class="text-end">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><span class="fw-bold" style="color: var(--beige-primary-accent);">#ORD-9482</span></td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2">
+                                <div class="avatar avatar-xs">
+                                  <span class="avatar-initial rounded-circle bg-label-secondary">EV</span>
+                                </div>
+                                <div>
+                                  <div class="fw-medium text-dark">Eleanor Vance</div>
+                                  <small class="text-muted">eleanor@example.com</small>
+                                </div>
+                              </div>
+                            </td>
+                            <td>Oct 07, 2026</td>
+                            <td class="fw-bold">$340.00</td>
+                            <td><span class="badge bg-label-success">Delivered</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><span class="fw-bold" style="color: var(--beige-primary-accent);">#ORD-9481</span></td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2">
+                                <div class="avatar avatar-xs">
+                                  <span class="avatar-initial rounded-circle bg-label-secondary">LT</span>
+                                </div>
+                                <div>
+                                  <div class="fw-medium text-dark">Liam Thorne</div>
+                                  <small class="text-muted">liam.t@example.com</small>
+                                </div>
+                              </div>
+                            </td>
+                            <td>Oct 07, 2026</td>
+                            <td class="fw-bold">$125.50</td>
+                            <td><span class="badge bg-label-info">Processing</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><span class="fw-bold" style="color: var(--beige-primary-accent);">#ORD-9480</span></td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2">
+                                <div class="avatar avatar-xs">
+                                  <span class="avatar-initial rounded-circle bg-label-secondary">SC</span>
+                                </div>
+                                <div>
+                                  <div class="fw-medium text-dark">Sophia Chen</div>
+                                  <small class="text-muted">sophia.c@example.com</small>
+                                </div>
+                              </div>
+                            </td>
+                            <td>Oct 06, 2026</td>
+                            <td class="fw-bold">$890.00</td>
+                            <td><span class="badge bg-label-warning">Pending</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><span class="fw-bold" style="color: var(--beige-primary-accent);">#ORD-9479</span></td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2">
+                                <div class="avatar avatar-xs">
+                                  <span class="avatar-initial rounded-circle bg-label-secondary">MB</span>
+                                </div>
+                                <div>
+                                  <div class="fw-medium text-dark">Marcus Brody</div>
+                                  <small class="text-muted">marcus@example.com</small>
+                                </div>
+                              </div>
+                            </td>
+                            <td>Oct 06, 2026</td>
+                            <td class="fw-bold">$210.00</td>
+                            <td><span class="badge bg-label-primary">Shipped</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td><span class="fw-bold" style="color: var(--beige-primary-accent);">#ORD-9478</span></td>
+                            <td>
+                              <div class="d-flex align-items-center gap-2">
+                                <div class="avatar avatar-xs">
+                                  <span class="avatar-initial rounded-circle bg-label-secondary">HA</span>
+                                </div>
+                                <div>
+                                  <div class="fw-medium text-dark">Hannah Abbott</div>
+                                  <small class="text-muted">hannah.a@example.com</small>
+                                </div>
+                              </div>
+                            </td>
+                            <td>Oct 05, 2026</td>
+                            <td class="fw-bold">$45.00</td>
+                            <td><span class="badge bg-label-danger">Cancelled</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Top Products -->
+                <div class="col-12 col-xl-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                      <h5 class="card-title mb-0">Top Products</h5>
+                      <small class="card-subtitle">Best sellers by total revenue</small>
+                    </div>
+                    <div class="card-body pt-3">
+                      <div class="d-flex flex-column gap-3">
+                        
+                        <!-- Product 1 -->
+                        <div class="d-flex align-items-center justify-content-between p-2 rounded" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle);">
+                          <div class="d-flex align-items-center gap-2">
+                            <div class="avatar avatar-sm">
+                              <span class="avatar-initial rounded" style="background-color: var(--beige-primary-light); color: var(--beige-primary-accent);"><i class="mdi mdi-chair-rolling"></i></span>
+                            </div>
+                            <div>
+                              <div class="fw-bold text-dark fs-8">Oak Dining Table</div>
+                              <small class="text-muted">142 units sold</small>
+                            </div>
+                          </div>
+                          <span class="fw-bold fs-8" style="color: var(--beige-primary-accent);">$56,800</span>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="d-flex align-items-center justify-content-between p-2 rounded" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle);">
+                          <div class="d-flex align-items-center gap-2">
+                            <div class="avatar avatar-sm">
+                              <span class="avatar-initial rounded" style="background-color: var(--beige-primary-light); color: var(--beige-primary-accent);"><i class="mdi mdi-cup-outline"></i></span>
+                            </div>
+                            <div>
+                              <div class="fw-bold text-dark fs-8">Artisan Tea Set</div>
+                              <small class="text-muted">310 units sold</small>
+                            </div>
+                          </div>
+                          <span class="fw-bold fs-8" style="color: var(--beige-primary-accent);">$18,600</span>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="d-flex align-items-center justify-content-between p-2 rounded" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle);">
+                          <div class="d-flex align-items-center gap-2">
+                            <div class="avatar avatar-sm">
+                              <span class="avatar-initial rounded" style="background-color: var(--beige-primary-light); color: var(--beige-primary-accent);"><i class="mdi mdi-texture"></i></span>
+                            </div>
+                            <div>
+                              <div class="fw-bold text-dark fs-8">Beige Linen Blanket</div>
+                              <small class="text-muted">275 units sold</small>
+                            </div>
+                          </div>
+                          <span class="fw-bold fs-8" style="color: var(--beige-primary-accent);">$13,750</span>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="d-flex align-items-center justify-content-between p-2 rounded" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle);">
+                          <div class="d-flex align-items-center gap-2">
+                            <div class="avatar avatar-sm">
+                              <span class="avatar-initial rounded" style="background-color: var(--beige-primary-light); color: var(--beige-primary-accent);"><i class="mdi mdi-flower-outline"></i></span>
+                            </div>
+                            <div>
+                              <div class="fw-bold text-dark fs-8">Handcrafted Clay Vase</div>
+                              <small class="text-muted">198 units sold</small>
+                            </div>
+                          </div>
+                          <span class="fw-bold fs-8" style="color: var(--beige-primary-accent);">$9,900</span>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 6. RECENT REQUESTS & 7. LOW STOCK PRODUCTS -->
+              <div class="row g-4">
+                
+                <!-- Recent Requests -->
+                <div class="col-12 col-lg-7">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <div>
+                        <h5 class="card-title mb-0">Recent Requests</h5>
+                        <small class="card-subtitle">Sourcing & bulk order inquiries</small>
+                      </div>
+                      <a href="javascript:void(0)" class="btn btn-sm btn-outline-beige">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle">
+                        <thead>
+                          <tr>
+                            <th>Request ID</th>
+                            <th>Type</th>
+                            <th>Customer</th>
+                            <th>Status</th>
+                            <th class="text-end">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><span class="fw-bold text-dark">#REQ-2041</span></td>
+                            <td><span class="badge bg-label-secondary">Sourcing</span></td>
+                            <td>Aura Living Studio</td>
+                            <td><span class="badge bg-label-warning">Pending Review</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><span class="fw-bold text-dark">#REQ-2040</span></td>
+                            <td><span class="badge bg-label-primary">Bulk Order</span></td>
+                            <td>Nordic Interiors Co.</td>
+                            <td><span class="badge bg-label-success">Quoted</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><span class="fw-bold text-dark">#REQ-2039</span></td>
+                            <td><span class="badge bg-label-primary">Bulk Order</span></td>
+                            <td>Urban Design Lab</td>
+                            <td><span class="badge bg-label-info">In Discussion</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><span class="fw-bold text-dark">#REQ-2038</span></td>
+                            <td><span class="badge bg-label-secondary">Sourcing</span></td>
+                            <td>Habitat Craft Inc.</td>
+                            <td><span class="badge bg-label-secondary">Closed</span></td>
+                            <td class="text-end">
+                              <button type="button" class="btn btn-sm btn-icon btn-outline-beige"><i class="mdi mdi-eye-outline"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Low Stock Products -->
+                <div class="col-12 col-lg-5">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <div>
+                        <h5 class="card-title mb-0">Low Stock Products</h5>
+                        <small class="card-subtitle">Items requiring reorder</small>
+                      </div>
+                      <span class="badge bg-label-danger">4 Alerts</span>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle">
+                        <thead>
+                          <tr>
+                            <th>Product</th>
+                            <th>Stock</th>
+                            <th class="text-end">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div class="fw-medium text-dark fs-8">Brass Candle Holder</div>
+                              <small class="text-muted">SKU: DEC-BRS-02</small>
+                            </td>
+                            <td><span class="fw-bold text-danger">2 left</span></td>
+                            <td class="text-end"><span class="badge bg-label-danger">Critical</span></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="fw-medium text-dark fs-8">Wool Knit Pillow</div>
+                              <small class="text-muted">SKU: TEX-WOL-14</small>
+                            </td>
+                            <td><span class="fw-bold text-warning">4 left</span></td>
+                            <td class="text-end"><span class="badge bg-label-warning">Low Stock</span></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="fw-medium text-dark fs-8">Walnut Coffee Table</div>
+                              <small class="text-muted">SKU: FUR-WAL-09</small>
+                            </td>
+                            <td><span class="fw-bold text-warning">5 left</span></td>
+                            <td class="text-end"><span class="badge bg-label-warning">Low Stock</span></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="fw-medium text-dark fs-8">Handwoven Jute Rug</div>
+                              <small class="text-muted">SKU: TEX-JUT-01</small>
+                            </td>
+                            <td><span class="fw-bold text-danger">3 left</span></td>
+                            <td class="text-end"><span class="badge bg-label-danger">Critical</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
+            <!-- / CONTENT CONTAINER -->
+
+            <!-- FOOTER -->
+            <footer class="content-footer footer bg-footer-theme" style="background-color: var(--beige-bg-main) !important; border-top: 1px solid var(--beige-border-subtle);">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0 fs-8 text-muted">
+                  © 2026 Aus Ecom Admin Panel. Built with Materialize Foundation.
+                </div>
+                <div class="fs-8 text-muted">
+                  Beige Ambience Architecture
+                </div>
+              </div>
+            </footer>
+            <!-- / FOOTER -->
+
           </div>
-
-          <!-- Suggested Products -->
-          <div class="search-section">
-            <span class="search-section-title">Suggested Products</span>
-            <div class="search-suggested-list" id="search-suggested-list">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
+          <!-- / CONTENT WRAPPER -->
         </div>
-
-        <!-- Live Results State -->
-        <div class="search-results-state" id="search-results-state" style="display:none">
-          <div class="search-results-count" id="search-results-count"></div>
-          <div class="search-results-list" id="search-results-list">
-            <!-- Rendered dynamically -->
-          </div>
-        </div>
-
-        <!-- No Results State -->
-        <div class="search-no-results-state" id="search-no-results-state" style="display:none">
-          <div class="no-results-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-          </div>
-          <h3>No products found</h3>
-          <p id="no-results-text">We couldn't find any items matching your search.</p>
-          <a href="products.html" class="btn btn-primary btn-sm" id="search-browse-all-btn">Browse All Products</a>
-        </div>
+        <!-- / LAYOUT PAGE -->
       </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-  </div>
+    <!-- / Layout wrapper -->
 
-  <main class="main-content">
+    <!-- CORE JS -->
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets/vendor/libs/popper/popper.js"></script>
+    <script src="assets/vendor/js/bootstrap.js"></script>
+    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
 
-  <!-- ═══════════════════════════════════════════════════════
-       1. HERO SECTION
-       ═══════════════════════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <!-- Rendered by JS -->
-  </section>
+    <script src="assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="assets/vendor/js/menu.js"></script>
 
-  <!-- ═══════════════════════════════════════════════════════
-       LAUNCH OFFER STRIP (COMPACT)
-       ═══════════════════════════════════════════════════════ -->
-  <section class="launch-offer-strip" id="launch-offer-strip">
-    <div class="container">
-      <div class="launch-offer-inner fade-up visible">
-        <div class="launch-offer-left">
-          <span class="launch-offer-eyebrow">LIMITED LAUNCH OFFER</span>
-          <div class="launch-offer-content">
-            <span class="launch-offer-discount">25% OFF</span>
-            <span class="launch-offer-text">Save 25% on selected products for a limited time.</span>
-          </div>
-        </div>
+    <!-- VENDORS JS -->
+    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
-        <div class="launch-offer-right">
-          <div class="launch-offer-timer" id="launch-offer-timer">
-            <!-- Rendered by JS -->
-          </div>
-          <a href="#products-section" class="btn btn-primary">Shop Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- MAIN JS -->
+    <script src="assets/js/main.js"></script>
 
-  <!-- ═══════════════════════════════════════════════════════
-       2. FEATURED COLLECTION
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section products-section" id="products-section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-header-top">
-          <div class="section-header-title">
-            <!-- <span class="section-kicker">CURATED SELECTION</span> -->
-            <h2>Featured Collection</h2>
-          </div>
-          <a href="./products.html" class="section-see-more">Show More &rarr;</a>
-        </div>
-        <p class="section-header-desc">A selection of pieces we're excited to bring to Australia.</p>
-      </div>
+    <!-- DASHBOARD INITIALIZATION JS -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Sales Chart Datasets
+        const chartData = {
+          '7d': {
+            categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            series: [{ name: 'Revenue ($)', data: [1840, 2450, 2100, 3150, 4200, 5600, 4900] }]
+          },
+          '30d': {
+            categories: ['Sep 08', 'Sep 15', 'Sep 22', 'Sep 29', 'Oct 06'],
+            series: [{ name: 'Revenue ($)', data: [22400, 28900, 24800, 38200, 42950] }]
+          },
+          '3m': {
+            categories: ['August', 'September', 'October'],
+            series: [{ name: 'Revenue ($)', data: [94500, 112800, 128450] }]
+          },
+          '1y': {
+            categories: ['Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026 (Est)'],
+            series: [{ name: 'Revenue ($)', data: [280000, 315000, 362000, 440000] }]
+          }
+        };
 
-      <!-- Category Filter Tabs -->
-      <div class="filter-tabs fade-up" id="product-filter-tabs">
-        <button class="filter-btn active" data-filter="all">All Items</button>
-        <button class="filter-btn" data-filter="fashion">Fashion</button>
-        <button class="filter-btn" data-filter="home-decor">Home Decor</button>
-        <button class="filter-btn" data-filter="jute">Jute</button>
-        <button class="filter-btn" data-filter="handicrafts">Handcrafted</button>
-        <button class="filter-btn" data-filter="lifestyle">Gifts</button>
-      </div>
+        const chartOptions = {
+          chart: {
+            height: 310,
+            type: 'area',
+            toolbar: { show: false },
+            sparkline: { enabled: false },
+            fontFamily: 'Inter, sans-serif'
+          },
+          colors: ['#7E5B44'],
+          dataLabels: { enabled: false },
+          stroke: { curve: 'smooth', width: 3 },
+          fill: {
+            type: 'gradient',
+            gradient: {
+              shadeIntensity: 1,
+              opacityFrom: 0.45,
+              opacityTo: 0.05,
+              stops: [0, 95, 100]
+            }
+          },
+          grid: {
+            borderColor: '#E8E2D8',
+            strokeDashArray: 4,
+            padding: { top: 10, right: 10, bottom: 0, left: 10 }
+          },
+          xaxis: {
+            categories: chartData['30d'].categories,
+            labels: { style: { colors: '#7A6E66', fontSize: '12px' } },
+            axisBorder: { show: false },
+            axisTicks: { show: false }
+          },
+          yaxis: {
+            labels: {
+              style: { colors: '#7A6E66', fontSize: '12px' },
+              formatter: function (val) {
+                return '$' + val.toLocaleString();
+              }
+            }
+          },
+          tooltip: {
+            theme: 'dark',
+            y: {
+              formatter: function (val) {
+                return '$' + val.toLocaleString();
+              }
+            }
+          }
+        };
 
-      <div class="product-grid" id="product-grid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
+        const chartEl = document.querySelector('#salesOverviewChart');
+        if (chartEl) {
+          const chart = new ApexCharts(chartEl, chartOptions);
+          chart.render();
+          chart.updateSeries(chartData['30d'].series);
 
-  <!-- ═══════════════════════════════════════════════════════
-       3. SHOP BY CATEGORY
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section categories-section" id="categories-section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-header-top">
-          <div class="section-header-title">
-            <!-- <span class="section-kicker">OUR RANGES</span> -->
-            <h2>Shop by Category</h2>
-          </div>
-          <a href="./products.html" class="section-see-more">View All Products &rarr;</a>
-        </div>
-        <p class="section-header-desc">Explore fashion, home & living, natural jute, handcrafted pieces and thoughtful gifts.</p>
-      </div>
-      <div class="category-grid" id="category-grid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       5. HOME & LIVING
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section home-living-section" id="home-living-section">
-    <div class="container">
-      <div class="editorial-banner fade-up">
-        <div class="editorial-content">
-          <span class="section-kicker kicker-light">CURATED INTERIORS</span>
-          <h2>Home & Living</h2>
-          <p>Bring warmth and character to your space with thoughtfully handcrafted pieces.</p>
-          <a href="#products-section" class="btn btn-white" data-filter-trigger="home-decor">Shop Home & Living</a>
-        </div>
-        <div class="editorial-image">
-          <img src="assets/images/lifestyle/furnitures.jpg" alt="Australian living room with handcrafted artisan decor" loading="lazy">
-        </div>
-      </div>
-
-      <div class="home-showcase-grid" id="home-showcase-grid" style="margin-top: 2rem;">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       6. JUTE & NATURAL
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section jute-section" id="jute-section">
-    <div class="container">
-      <div class="jute-wrapper">
-        <div class="jute-image-col fade-up">
-          <div class="jute-hero-card">
-            <img src="assets/images/lifestyle/jute-showcase.jpg" alt="Handcrafted Golden Jute Totes and Baskets" loading="lazy">
-          </div>
-        </div>
-        <div class="jute-content-col fade-up">
-          <span class="section-kicker">NATURAL MATERIALS</span>
-          <h2>Jute & Natural</h2>
-          <p class="lead-text">
-            Discover versatile jute pieces crafted from natural golden fiber.
-          </p>
-          <a href="#products-section" class="btn btn-primary" data-filter-trigger="jute">Shop Jute</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       7. ARTISAN STORY
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section bangladesh-made" id="bangladesh-made-section">
-    <div class="container">
-      <div class="bangladesh-made-wrapper" style="grid-template-columns: 1.2fr 1fr; align-items: center;">
-        <div class="bangladesh-made-content fade-up">
-          <span class="section-kicker">OUR STORY</span>
-          <h2>Thoughtfully Crafted. Selected for Australia.</h2>
-          <p class="lead-text" style="font-size: 1rem; font-weight: 400; color: var(--color-grey-700); margin-bottom: 1.5rem;">
-            We discover distinctive South Asian-inspired pieces and curate them for modern Australian lifestyles — from everyday fashion to handcrafted home accents and thoughtful gifts.
-          </p>
-          <a href="#products-section" class="btn btn-primary">Our Story</a>
-        </div>
-
-        <div class="bangladesh-made-visual fade-up">
-          <div class="visual-card-stacked">
-            <img src="assets/images/lifestyle/craft-story.jpg" alt="Artisan craft story" loading="lazy" class="main-visual">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       8. REQUEST & GIFTS (DUAL CARDS)
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section request-gifting-section" id="request-gifting-section" style="padding: 4rem 0; background: var(--color-surface-card); border-top: 1px solid var(--color-grey-200); border-bottom: 1px solid var(--color-grey-200);">
-    <div class="container">
-      <div class="dual-cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;">
-        
-        <!-- Card 1: Request Custom Sourcing -->
-        <div class="shop-your-way-card fade-up visible" id="request-section" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; padding: 2.25rem; height: 100%;">
-          <div>
-            <span class="section-kicker" style="margin-bottom: 0.5rem;">LOOKING FOR SOMETHING UNIQUE?</span>
-            <h2 style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2vw, 1.6rem); margin-bottom: 0.75rem; color: var(--color-dark);">Request Custom Sourcing</h2>
-            <p style="color: var(--color-grey-700); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-              Have a custom piece or unlisted item in mind? Tell us what you're looking for and we’ll source it.
-            </p>
-          </div>
-          <div>
-            <a href="request.html" class="btn btn-primary btn-lg" style="width: 100%;">Make a Request</a>
-          </div>
-        </div>
-
-        <!-- Card 2: Bulk & Corporate Orders -->
-        <div class="shop-your-way-card fade-up visible" id="bulk-orders-card" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; padding: 2.25rem; height: 100%;">
-          <div>
-            <span class="section-kicker" style="margin-bottom: 0.5rem;">VOLUME & EVENTS</span>
-            <h2 style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2vw, 1.6rem); margin-bottom: 0.75rem; color: var(--color-dark);">Bulk & Corporate Orders</h2>
-            <p style="color: var(--color-grey-700); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-              Planning a wedding, corporate gift set, or retail order? Request special volume pricing & custom variants.
-            </p>
-          </div>
-          <div>
-            <a href="bulk-order.html" class="btn btn-primary btn-lg" style="width: 100%;">Request Bulk Order</a>
-          </div>
-        </div>
-
-        <!-- Card 3: Thoughtful Gifts -->
-        <!-- <div class="shop-your-way-card fade-up visible" id="gifting-section" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; padding: 2.25rem; height: 100%;">
-          <div>
-            <span class="section-kicker" style="margin-bottom: 0.5rem;">SPECIAL GIFTS</span>
-            <h2 style="font-family: var(--font-heading); font-size: clamp(1.3rem, 2vw, 1.6rem); margin-bottom: 0.75rem; color: var(--color-dark);">Thoughtful Gifts, For Someone Special</h2>
-            <p style="color: var(--color-grey-700); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-              Discover unique artisan pieces, with gift wrapping and personal notes available.
-            </p>
-          </div>
-          <div>
-            <a href="#products-section" class="btn btn-outline btn-lg" data-filter-trigger="lifestyle" style="width: 100%;">Send Gifts</a>
-          </div>
-        </div> -->
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       10. DISCOVER SOMETHING DIFFERENT (SOCIAL PROOF)
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section reviews-section" id="reviews-section" style="padding: 3rem 0; background: var(--color-surface-alt);">
-    <div class="container" style="text-align: center; max-width: 640px; margin: 0 auto;">
-      <span class="section-kicker">OUR COMMITMENT</span>
-      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Discover Something Different</h2>
-      <p style="color: var(--color-grey-700); font-size: 1rem;">Thoughtfully selected artisan products, brought to Australia.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       11. NEWSLETTER
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section newsletter-section" id="newsletter-section">
-    <div class="container">
-      <div class="newsletter-card">
-        <div class="newsletter-content">
-          <span class="section-kicker">STAY IN THE LOOP</span>
-          <h2>Stay in the Loop</h2>
-          <p>Be the first to know about new arrivals, special offers and upcoming collections.</p>
-          <form class="newsletter-form" id="newsletter-form">
-            <input type="email" class="newsletter-input" placeholder="Enter your email address" aria-label="Email address" required>
-            <button type="submit" class="btn btn-primary">Join the List</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-  </main>
-
-  <!-- ═══════════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid" id="footer-grid">
-        <!-- Rendered by JS -->
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-bottom-left">
-          &copy; 2026 Bongo Curated. Curated artisan goods for Australia.
-        </div>
-        <div class="footer-payment">
-          <span class="footer-payment-icon">VISA</span>
-          <span class="footer-payment-icon">Mastercard</span>
-          <span class="footer-payment-icon">AMEX</span>
-          <span class="footer-payment-icon">Apple Pay</span>
-          <span class="footer-payment-icon">Google Pay</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ═══════════════════════════════════════════════════════
-       BOTTOM MOBILE NAV
-       ═══════════════════════════════════════════════════════ -->
-  <nav class="bottom-nav" id="bottom-nav">
-    <div class="bottom-nav-inner" id="bottom-nav-inner">
-      <!-- Rendered by JS -->
-    </div>
-  </nav>
-
-  <!-- ═══════════════════════════════════════════════════════
-       QUICK VIEW MODAL
-       ═══════════════════════════════════════════════════════ -->
-  <div class="modal-overlay" id="modal-overlay">
-    <div class="modal" id="quick-view-modal">
-      <div class="modal-image" style="position:relative">
-        <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
-        <img src="" alt="" id="modal-product-img">
-      </div>
-      <div class="modal-content">
-        <div>
-          <div class="modal-category-tag" id="modal-category-tag">Fashion</div>
-          <h3 class="modal-title"></h3>
-          <p class="modal-subtitle"></p>
-        </div>
-        <div class="modal-price"></div>
-        
-        <div class="modal-options-section" id="modal-colors-wrap">
-          <p class="modal-option-label">Colour / Finish</p>
-          <div class="modal-colors"></div>
-        </div>
-        
-        <div class="modal-options-section" id="modal-sizes-wrap">
-          <p class="modal-option-label">Size / Dimension</p>
-          <div class="modal-sizes"></div>
-        </div>
-
-        <button class="btn btn-primary btn-lg" id="modal-add-to-cart" style="width:100%; margin-top: 1rem">Add to Cart</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       VARIANT SELECTION MODAL (Wishlist Add to Cart)
-       ═══════════════════════════════════════════════════════ -->
-  <div class="modal-overlay" id="variant-modal-overlay">
-    <div class="modal variant-modal" id="variant-selection-modal">
-      <div class="modal-image" style="position:relative">
-        <button class="modal-close" id="variant-modal-close" aria-label="Close modal">&times;</button>
-        <img src="" alt="" id="variant-modal-img">
-      </div>
-      <div class="modal-content">
-        <div>
-          <div class="modal-category-tag" id="variant-modal-category">Fashion</div>
-          <h3 class="modal-title" id="variant-modal-title">Product Name</h3>
-          <p class="modal-subtitle" id="variant-modal-subtitle">Artisan Crafted · Curated for Australia</p>
-        </div>
-        <div class="modal-price" id="variant-modal-price">
-          <span class="current">A$0.00</span>
-        </div>
-        
-        <div class="modal-options-section" id="variant-modal-colors-wrap">
-          <p class="modal-option-label">Color: <span id="variant-modal-selected-color" style="font-weight:var(--fw-semibold); color:var(--color-dark)"></span></p>
-          <div class="modal-colors" id="variant-modal-colors"></div>
-        </div>
-        
-        <div class="modal-options-section" id="variant-modal-sizes-wrap">
-          <p class="modal-option-label">Size: <span id="variant-modal-selected-size" style="font-weight:var(--fw-semibold); color:var(--color-dark)"></span></p>
-          <div class="modal-sizes" id="variant-modal-sizes"></div>
-        </div>
-
-        <div class="modal-options-section" id="variant-modal-qty-wrap">
-          <p class="modal-option-label">Quantity</p>
-          <div class="cart-quantity-selector" style="height: 38px;">
-            <button class="cart-qty-btn" id="variant-qty-minus" style="width:36px; height:38px;" type="button">&minus;</button>
-            <span class="cart-qty-value" id="variant-qty-value" style="min-width:36px; font-size:1rem;">1</span>
-            <button class="cart-qty-btn" id="variant-qty-plus" style="width:36px; height:38px;" type="button">+</button>
-          </div>
-        </div>
-
-        <div id="variant-modal-error" style="color:var(--color-danger); font-size:var(--fs-xs); display:none; margin-top: -0.5rem;">Please select required options</div>
-
-        <button class="btn btn-primary btn-lg" id="variant-modal-confirm-btn" style="width:100%; margin-top: 0.5rem" type="button">Add to Cart</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       CART DRAWER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-drawer-header">
-      <div class="cart-drawer-title-group">
-        <h3>Your Cart</h3>
-        <span class="cart-drawer-count-badge" id="cart-drawer-count">0 Items</span>
-      </div>
-      <button id="cart-drawer-close" aria-label="Close cart">&times;</button>
-    </div>
-    <div class="cart-drawer-body" id="cart-drawer-body">
-      <div class="cart-drawer-empty">
-        <p>Your cart is empty</p>
-      </div>
-    </div>
-    <div class="cart-drawer-footer" id="cart-drawer-footer"></div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       WISHLIST DRAWER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="wishlist-drawer-overlay" id="wishlist-drawer-overlay"></div>
-  <div class="wishlist-drawer" id="wishlist-drawer">
-    <div class="wishlist-drawer-header">
-      <div class="wishlist-drawer-title-group">
-        <h3>Wishlist</h3>
-        <span class="wishlist-drawer-count-badge" id="wishlist-drawer-count">0 Items</span>
-      </div>
-      <button id="wishlist-drawer-close" aria-label="Close wishlist">&times;</button>
-    </div>
-    <div class="wishlist-drawer-body" id="wishlist-drawer-body">
-      <div class="wishlist-drawer-empty">
-        <p>Your wishlist is empty</p>
-      </div>
-    </div>
-    <div class="wishlist-drawer-footer" id="wishlist-drawer-footer"></div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       TOAST CONTAINER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="toast-container" id="toast-container"></div>
-
-  <!-- Scripts -->
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/app.js"></script>
-</body>
+          // Time filter interactive buttons
+          const filterButtons = document.querySelectorAll('#timeFilterGroup .time-filter-btn');
+          filterButtons.forEach(btn => {
+            btn.addEventListener('click', function () {
+              filterButtons.forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              const period = this.getAttribute('data-period');
+              if (chartData[period]) {
+                chart.updateOptions({
+                  xaxis: { categories: chartData[period].categories }
+                });
+                chart.updateSeries(chartData[period].series);
+              }
+            });
+          });
+        }
+      });
+    </script>
+  </body>
 </html>

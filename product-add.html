@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="assets/"
+  data-template="vertical-menu-template">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Add Product | Aus Ecom Admin</title>
+    <meta name="description" content="Create New Product" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="assets/vendor/fonts/materialdesignicons.css" />
+    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="assets/css/demo.css" />
+    
+    <!-- Custom Beige Ambience CSS -->
+    <link rel="stylesheet" href="assets/css/admin-beige.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Helpers -->
+    <script src="assets/vendor/js/helpers.js"></script>
+    <script src="assets/vendor/js/template-customizer.js"></script>
+    <script src="assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        
+        <!-- SIDEBAR -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link gap-2 align-items-center">
+              <span class="app-brand-logo demo" style="color: #7E5B44;">
+                <i class="mdi mdi-storefront-outline fs-3"></i>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-1" style="color: #2A211D; letter-spacing: -0.01em;">AUS ECOM</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block">
+              <i class="mdi mdi-chevron-left mdi-24px align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-2">
+            <li class="menu-item"><a href="index.html" class="menu-link"><i class="menu-icon tf-icons mdi mdi-view-dashboard-outline"></i><div>Dashboard</div></a></li>
+            <li class="menu-item active open">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-package-variant-closed"></i>
+                <div>Catalog</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item active"><a href="products.html" class="menu-link"><div>Products</div></a></li>
+                <li class="menu-item"><a href="categories.html" class="menu-link"><div>Categories</div></a></li>
+                <li class="menu-item"><a href="subcategories.html" class="menu-link"><div>Subcategories</div></a></li>
+                <li class="menu-item"><a href="brands.html" class="menu-link"><div>Brands</div></a></li>
+              </ul>
+            </li>
+            <li class="menu-item"><a href="javascript:void(0);" class="menu-link menu-toggle"><i class="menu-icon tf-icons mdi mdi-cart-outline"></i><div>Sales</div></a>
+              <ul class="menu-sub">
+                <li class="menu-item"><a href="admin/orders.html" class="menu-link"><div>Orders</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Customers</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Abandoned Carts</div></a></li>
+              </ul>
+            </li>
+            <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><i class="menu-icon tf-icons mdi mdi-star-outline"></i><div>Reviews</div></a></li>
+            <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><i class="menu-icon tf-icons mdi mdi-cog-outline"></i><div>Settings</div></a></li>
+          </ul>
+        </aside>
+        <!-- / SIDEBAR -->
+
+        <!-- LAYOUT PAGE -->
+        <div class="layout-page">
+          
+          <!-- FIXED TOP BAR -->
+          <nav class="layout-navbar navbar navbar-expand-xl align-items-center" id="layout-navbar">
+            <div class="container-fluid d-flex align-items-center justify-content-between px-0">
+              <div class="d-flex align-items-center gap-3">
+                <a class="nav-item nav-link px-0 me-3 layout-menu-toggle" href="javascript:void(0)">
+                  <i class="mdi mdi-menu mdi-24px"></i>
+                </a>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb mb-0 py-0" style="font-size: 0.875rem;">
+                    <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+                    <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+                  </ol>
+                </nav>
+              </div>
+
+              <div class="d-flex align-items-center gap-3">
+                <a href="products.html" class="btn btn-sm btn-outline-secondary">Back to Products</a>
+              </div>
+            </div>
+          </nav>
+          <!-- / FIXED TOP BAR -->
+
+          <!-- CONTENT WRAPPER -->
+          <div class="content-wrapper">
+            <div class="container-xxl flex-grow-1 container-p-y pb-5">
+              
+              <form id="productForm">
+                
+                <!-- Page Header -->
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                  <div>
+                    <h4 class="fw-bold mb-1" style="color: var(--beige-text-dark);">Create New Product</h4>
+                    <p class="text-muted mb-0 fs-7">Configure product specifications, media, pricing, colors, sizes, and variants.</p>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <a href="products.html" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-beige"><i class="mdi mdi-check me-1"></i> Save & Publish Product</button>
+                  </div>
+                </div>
+
+                <div class="row g-4">
+                  
+                  <!-- Left Main Column (Cards 1-7) -->
+                  <div class="col-12 col-lg-8">
+                    
+                    <!-- 1. Basic Information -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-information-outline me-2 text-primary"></i> Basic Information</h5>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Product Name <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" placeholder="e.g. Minimalist Oak Dining Table" required id="productName">
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-12 col-md-4">
+                            <label class="form-label fw-bold fs-8">Category <span class="text-danger">*</span></label>
+                            <select class="form-select" required id="productCategory">
+                              <option value="">Select Category</option>
+                              <option value="Furniture" selected>Furniture</option>
+                              <option value="Home & Living">Home & Living</option>
+                              <option value="Textiles">Textiles</option>
+                              <option value="Decor">Decor</option>
+                              <option value="Apparel">Apparel</option>
+                            </select>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <label class="form-label fw-bold fs-8">Subcategory</label>
+                            <select class="form-select" id="productSubcategory">
+                              <option value="">Select Subcategory</option>
+                              <option value="Dining Tables" selected>Dining Tables</option>
+                              <option value="Chairs">Chairs</option>
+                              <option value="Tea Sets">Tea Sets</option>
+                              <option value="Blankets">Blankets</option>
+                              <option value="Lighting">Lighting</option>
+                            </select>
+                          </div>
+                          <div class="col-12 col-md-4">
+                            <label class="form-label fw-bold fs-8">Brand</label>
+                            <select class="form-select" id="productBrand">
+                              <option value="">Select Brand</option>
+                              <option value="Aus Living" selected>Aus Living</option>
+                              <option value="Craft & Co">Craft & Co</option>
+                              <option value="Nordic Studio">Nordic Studio</option>
+                              <option value="Artisan Heritage">Artisan Heritage</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Short Description</label>
+                          <textarea class="form-control" rows="2" placeholder="Brief 1-2 sentence overview shown in product summary..."></textarea>
+                        </div>
+
+                        <div>
+                          <label class="form-label fw-bold fs-8">Full Description</label>
+                          <textarea class="form-control" rows="5" placeholder="Detailed product story, craftsmanship, and specs..."></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 2. Product Media -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3 d-flex align-items-center justify-content-between">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-image-multiple-outline me-2 text-primary"></i> Product Media</h5>
+                        <small class="text-muted">High resolution JPG/PNG recommended</small>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Main Image</label>
+                          <div class="border rounded p-4 text-center" style="background-color: var(--beige-bg-alt); border-style: dashed !important;">
+                            <i class="mdi mdi-cloud-upload-outline fs-1 text-muted mb-2"></i>
+                            <p class="mb-1 fw-medium fs-8 text-dark">Click or Drag & Drop Main Image</p>
+                            <small class="text-muted">Supports JPG, PNG, WEBP up to 5MB</small>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label class="form-label fw-bold fs-8">Additional Gallery Images</label>
+                          <div class="d-flex flex-wrap gap-2 mb-2">
+                            <!-- Preview 1 -->
+                            <div class="position-relative border rounded p-1 bg-white" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-chair-rolling fs-2 text-muted"></i>
+                              <button type="button" class="btn btn-danger btn-icon position-absolute top-0 end-0 p-0" style="width: 18px; height: 18px; transform: translate(30%, -30%);"><i class="mdi mdi-close fs-9"></i></button>
+                            </div>
+                            <!-- Preview 2 -->
+                            <div class="position-relative border rounded p-1 bg-white" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-table fs-2 text-muted"></i>
+                              <button type="button" class="btn btn-danger btn-icon position-absolute top-0 end-0 p-0" style="width: 18px; height: 18px; transform: translate(30%, -30%);"><i class="mdi mdi-close fs-9"></i></button>
+                            </div>
+                            <!-- Upload Plus Box -->
+                            <div class="border rounded p-1 text-center cursor-pointer" style="width: 80px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--beige-bg-alt); border-style: dashed !important;">
+                              <i class="mdi mdi-plus fs-4 text-muted"></i>
+                              <small class="fs-9 text-muted">Add Image</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. Colors & Swatches -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3 d-flex align-items-center justify-content-between">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-palette-outline me-2 text-primary"></i> Colors & Swatches</h5>
+                        <button type="button" class="btn btn-sm btn-outline-beige" id="btnAddColor"><i class="mdi mdi-plus me-1"></i> Add Color</button>
+                      </div>
+                      <div class="card-body pt-3">
+                        <p class="fs-8 text-muted mb-3">Define visual color swatches and color names. The customer-facing view uses these swatches for color selection.</p>
+                        
+                        <div id="colorsContainer">
+                          
+                          <!-- Color Item 1 -->
+                          <div class="d-flex align-items-center gap-2 p-2 rounded border mb-2 color-item-row" style="background-color: var(--beige-bg-alt); border-color: var(--beige-border-subtle);">
+                            <input type="color" class="form-control form-control-color border-0 p-0 color-picker-input" value="#6F765F" title="Choose color" style="width: 36px; height: 36px; cursor: pointer;">
+                            <span class="color-swatch-circle rounded-circle border" style="width: 24px; height: 24px; background-color: #6F765F; display: inline-block;"></span>
+                            <input type="text" class="form-control form-control-sm color-name-input" value="Olive Green">
+                            <input type="text" class="form-control form-control-sm color-hex-input" value="#6F765F" style="width: 100px;">
+                            <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-color"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
+                          </div>
+
+                          <!-- Color Item 2 -->
+                          <div class="d-flex align-items-center gap-2 p-2 rounded border mb-2 color-item-row" style="background-color: var(--beige-bg-alt); border-color: var(--beige-border-subtle);">
+                            <input type="color" class="form-control form-control-color border-0 p-0 color-picker-input" value="#3B2B23" title="Choose color" style="width: 36px; height: 36px; cursor: pointer;">
+                            <span class="color-swatch-circle rounded-circle border" style="width: 24px; height: 24px; background-color: #3B2B23; display: inline-block;"></span>
+                            <input type="text" class="form-control form-control-sm color-name-input" value="Espresso Walnut">
+                            <input type="text" class="form-control form-control-sm color-hex-input" value="#3B2B23" style="width: 100px;">
+                            <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-color"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 4. Sizes -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-ruler-square me-2 text-primary"></i> Size Options</h5>
+                      </div>
+                      <div class="card-body pt-3">
+                        <p class="fs-8 text-muted mb-3">Select active sizes available for this product or type custom dimensions.</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="6-Seater" checked> 6-Seater (180cm)
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="8-Seater" checked> 8-Seater (220cm)
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="10-Seater"> 10-Seater (260cm)
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="XS"> XS
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="S"> S
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="M"> M
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="L"> L
+                          </label>
+                          <label class="btn btn-sm btn-outline-beige d-flex align-items-center gap-1">
+                            <input type="checkbox" class="form-check-input size-chip-checkbox" value="XL"> XL
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 5. Variants Matrix -->
+                    <div class="card mb-4" id="cardVariants">
+                      <div class="card-header border-bottom py-3 d-flex align-items-center justify-content-between">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-grid me-2 text-primary"></i> Product Variants Matrix</h5>
+                        <button type="button" class="btn btn-sm btn-outline-beige" id="btnGenerateVariants"><i class="mdi mdi-refresh me-1"></i> Regenerate Matrix</button>
+                      </div>
+                      <div class="card-body p-0">
+                        <div class="table-responsive">
+                          <table class="table align-middle mb-0 fs-8">
+                            <thead>
+                              <tr>
+                                <th>Color</th>
+                                <th>Size</th>
+                                <th>SKU</th>
+                                <th>Regular Price ($)</th>
+                                <th>Sale Price ($)</th>
+                                <th>Stock</th>
+                                <th>Active</th>
+                                <th class="text-end">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody id="variantsTableBody">
+                              
+                              <!-- Variant Row 1 -->
+                              <tr class="variant-tr align-middle">
+                                <td>
+                                  <div class="d-flex align-items-center gap-2">
+                                    <span class="rounded-circle border" style="width: 18px; height: 18px; background-color: #6F765F; display: inline-block;"></span>
+                                    <span class="fw-medium text-dark fs-8">Olive Green</span>
+                                  </div>
+                                </td>
+                                <td><span class="badge bg-label-secondary fs-8">6-Seater</span></td>
+                                <td><input type="text" class="form-control form-control-sm" value="FUR-OAK-OLV-6S"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="400.00"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="340.00"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="20"></td>
+                                <td>
+                                  <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                  </div>
+                                </td>
+                                <td class="text-end">
+                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-variant"><i class="mdi mdi-close fs-5"></i></button>
+                                </td>
+                              </tr>
+
+                              <!-- Variant Row 2 -->
+                              <tr class="variant-tr align-middle">
+                                <td>
+                                  <div class="d-flex align-items-center gap-2">
+                                    <span class="rounded-circle border" style="width: 18px; height: 18px; background-color: #6F765F; display: inline-block;"></span>
+                                    <span class="fw-medium text-dark fs-8">Olive Green</span>
+                                  </div>
+                                </td>
+                                <td><span class="badge bg-label-secondary fs-8">8-Seater</span></td>
+                                <td><input type="text" class="form-control form-control-sm" value="FUR-OAK-OLV-8S"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="450.00"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="390.00"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="12"></td>
+                                <td>
+                                  <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                  </div>
+                                </td>
+                                <td class="text-end">
+                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-variant"><i class="mdi mdi-close fs-5"></i></button>
+                                </td>
+                              </tr>
+
+                              <!-- Variant Row 3 -->
+                              <tr class="variant-tr align-middle">
+                                <td>
+                                  <div class="d-flex align-items-center gap-2">
+                                    <span class="rounded-circle border" style="width: 18px; height: 18px; background-color: #3B2B23; display: inline-block;"></span>
+                                    <span class="fw-medium text-dark fs-8">Espresso Walnut</span>
+                                  </div>
+                                </td>
+                                <td><span class="badge bg-label-secondary fs-8">6-Seater</span></td>
+                                <td><input type="text" class="form-control form-control-sm" value="FUR-OAK-ESP-6S"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="400.00"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="340.00"></td>
+                                <td><input type="number" class="form-control form-control-sm" value="10"></td>
+                                <td>
+                                  <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                  </div>
+                                </td>
+                                <td class="text-end">
+                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-variant"><i class="mdi mdi-close fs-5"></i></button>
+                                </td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 6. Size Guide Builder -->
+                    <div class="card mb-4" id="cardSizeGuide">
+                      <div class="card-header border-bottom py-3 d-flex align-items-center justify-content-between">
+                        <h5 class="card-title mb-0 fs-6"><table class="mdi mdi-table-furniture me-2 text-primary"></table> Optional Size Guide Chart</h5>
+                        <button type="button" class="btn btn-sm btn-outline-beige" id="btnAddSizeGuideRow"><i class="mdi mdi-plus me-1"></i> Add Measurement Row</button>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Size Guide Title</label>
+                          <input type="text" class="form-control" value="Dining Table Dimension Chart">
+                        </div>
+
+                        <div class="table-responsive">
+                          <table class="table align-middle fs-8 border mb-0">
+                            <thead>
+                              <tr>
+                                <th>Size</th>
+                                <th>Length (cm)</th>
+                                <th>Width (cm)</th>
+                                <th>Seating Capacity</th>
+                                <th class="text-end">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody id="sizeGuideTableBody">
+                              <tr>
+                                <td><input type="text" class="form-control form-control-sm" value="6-Seater"></td>
+                                <td><input type="text" class="form-control form-control-sm" value="180 cm"></td>
+                                <td><input type="text" class="form-control form-control-sm" value="90 cm"></td>
+                                <td><input type="text" class="form-control form-control-sm" value="6 Persons"></td>
+                                <td class="text-end">
+                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-sg-row"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><input type="text" class="form-control form-control-sm" value="8-Seater"></td>
+                                <td><input type="text" class="form-control form-control-sm" value="220 cm"></td>
+                                <td><input type="text" class="form-control form-control-sm" value="100 cm"></td>
+                                <td><input type="text" class="form-control form-control-sm" value="8 Persons"></td>
+                                <td class="text-end">
+                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-sg-row"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 7. Product Attributes & Specs -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3 d-flex align-items-center justify-content-between">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-tune-vertical me-2 text-primary"></i> Product Attributes & Details</h5>
+                        <button type="button" class="btn btn-sm btn-outline-beige" id="btnAddAttribute"><i class="mdi mdi-plus me-1"></i> Add Custom Attribute</button>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="row g-3 mb-3">
+                          <div class="col-12 col-md-6">
+                            <label class="form-label fs-8 fw-bold">Material</label>
+                            <input type="text" class="form-control" value="Solid Natural Oak Wood">
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <label class="form-label fs-8 fw-bold">Finish</label>
+                            <input type="text" class="form-control" value="Matte Oil Finish">
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <label class="form-label fs-8 fw-bold">Weight</label>
+                            <input type="text" class="form-control" value="48 kg">
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <label class="form-label fs-8 fw-bold">Care Instructions</label>
+                            <input type="text" class="form-control" value="Wipe clean with soft damp cloth. Avoid harsh chemicals.">
+                          </div>
+                        </div>
+
+                        <!-- Dynamic Attributes Container -->
+                        <div id="attributesContainer">
+                          <!-- Row 1 -->
+                          <div class="row g-2 mb-2 align-items-center attribute-row">
+                            <div class="col-5">
+                              <input type="text" class="form-control form-control-sm" value="What's Included">
+                            </div>
+                            <div class="col-6">
+                              <input type="text" class="form-control form-control-sm" value="1x Dining Table, Assembly Hardware & Manual">
+                            </div>
+                            <div class="col-1 text-end">
+                              <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-attr"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- Right Sidebar Column (Toggles, Base Price, Inventory, Pre-order) -->
+                  <div class="col-12 col-lg-4">
+                    
+                    <!-- Feature Toggles Card -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-toggle-switch-outline me-2 text-primary"></i> Feature Switches</h5>
+                      </div>
+                      <div class="card-body pt-3 d-flex flex-column gap-3">
+                        
+                        <!-- Toggle Has Variants -->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <div class="fw-bold fs-8 text-dark">Has Variants</div>
+                            <small class="text-muted">Color & Size combinations</small>
+                          </div>
+                          <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" id="toggleVariants" checked>
+                          </div>
+                        </div>
+
+                        <!-- Toggle Stock Tracking -->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <div class="fw-bold fs-8 text-dark">Stock Tracking</div>
+                            <small class="text-muted">Track available inventory count</small>
+                          </div>
+                          <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" id="toggleStock" checked>
+                          </div>
+                        </div>
+
+                        <!-- Toggle Sale Offer -->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <div class="fw-bold fs-8 text-dark">On Sale / Offer</div>
+                            <small class="text-muted">Enable promotional discount pricing</small>
+                          </div>
+                          <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" id="toggleSale" checked>
+                          </div>
+                        </div>
+
+                        <!-- Toggle Pre-order -->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <div class="fw-bold fs-8 text-dark">Pre-order</div>
+                            <small class="text-muted">Accept advance reservations</small>
+                          </div>
+                          <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" id="togglePreorder">
+                          </div>
+                        </div>
+
+                        <!-- Toggle Size Guide -->
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div>
+                            <div class="fw-bold fs-8 text-dark">Size Guide</div>
+                            <small class="text-muted">Show measurement table to customers</small>
+                          </div>
+                          <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" id="toggleSizeGuide" checked>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <!-- Base Pricing Card -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-currency-usd me-2 text-primary"></i> Base Pricing</h5>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Regular Price ($) <span class="text-danger">*</span></label>
+                          <input type="number" step="0.01" class="form-control" value="400.00" id="regularPrice" required>
+                        </div>
+
+                        <div class="mb-3 sale-price-field">
+                          <label class="form-label fw-bold fs-8">Sale / Offer Price ($)</label>
+                          <input type="number" step="0.01" class="form-control" value="340.00">
+                          <small class="text-muted fs-9">Automatically displays 15% OFF badge</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Base Inventory Card -->
+                    <div class="card mb-4" id="cardStock">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-clipboard-text-outline me-2 text-primary"></i> Inventory & SKU</h5>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Base SKU <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" value="FUR-OAK-01" id="productSku" required>
+                        </div>
+
+                        <div class="mb-3" id="baseStockField" style="display: none;">
+                          <label class="form-label fw-bold fs-8">Base Stock Quantity</label>
+                          <input type="number" class="form-control" value="42">
+                        </div>
+
+                        <div>
+                          <label class="form-label fw-bold fs-8">Stock Availability Status</label>
+                          <select class="form-select">
+                            <option value="In Stock" selected>In Stock</option>
+                            <option value="Low Stock">Low Stock Alert</option>
+                            <option value="Out of Stock">Out of Stock</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Pre-order Card (Hidden by default unless enabled) -->
+                    <div class="card mb-4" id="cardPreorder" style="display: none;">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-clock-fast me-2 text-primary"></i> Pre-order Settings</h5>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Estimated Dispatch Date</label>
+                          <input type="date" class="form-control" value="2026-11-15">
+                        </div>
+                        <div>
+                          <label class="form-label fw-bold fs-8">Pre-order Banner Notice</label>
+                          <input type="text" class="form-control" value="Pre-order item: Ships in 3-4 weeks from order placement.">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Product Status Card -->
+                    <div class="card mb-4">
+                      <div class="card-header border-bottom py-3">
+                        <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-check-circle-outline me-2 text-primary"></i> Publishing Status</h5>
+                      </div>
+                      <div class="card-body pt-3">
+                        <div class="mb-3">
+                          <label class="form-label fw-bold fs-8">Status</label>
+                          <select class="form-select">
+                            <option value="Active" selected>Active (Published)</option>
+                            <option value="Draft">Draft (Hidden)</option>
+                            <option value="Archived">Archived</option>
+                          </select>
+                        </div>
+                        <button type="submit" class="btn btn-beige w-100"><i class="mdi mdi-content-save me-1"></i> Save Product</button>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </form>
+
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="content-footer footer bg-footer-theme" style="background-color: var(--beige-bg-main) !important; border-top: 1px solid var(--beige-border-subtle);">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0 fs-8 text-muted">
+                  © 2026 Aus Ecom Admin Catalog. Built with Materialize Foundation.
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+
+    <!-- CORE JS -->
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets/vendor/libs/popper/popper.js"></script>
+    <script src="assets/vendor/js/bootstrap.js"></script>
+    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="assets/vendor/js/menu.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- CATALOG SPECIFIC JS -->
+    <script src="assets/js/catalog.js"></script>
+  </body>
+</html>

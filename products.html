@@ -1,560 +1,591 @@
 <!DOCTYPE html>
-<html lang="en-AU">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Products — Bongo Curated | Artisan Crafted, Curated for Australia</title>
-  <meta name="description" content="Discover handcrafted fashion, home decor, natural jute products, artisan pieces and gifts curated for Australia.">
-  <meta name="keywords" content="artisan lifestyle Australia, handcrafted home decor, jute bags Australia, Nakshi Kantha, handcrafted fashion Australia">
-  <meta name="author" content="Bongo Curated">
+<html
+  lang="en"
+  class="light-style layout-navbar-fixed layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="assets/"
+  data-template="vertical-menu-template">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="All Products — Bongo Curated">
-  <meta property="og:description" content="Discover handcrafted fashion, home decor, natural jute products, artisan pieces and gifts curated for Australia.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_AU">
+    <title>Products | Aus Ecom Admin</title>
+    <meta name="description" content="Manage Product Catalog" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23CC7A3F'/><path d='M35 50 L45 60 L65 40' stroke='%23FFF' stroke-width='8' fill='none'/></svg>">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/sections.css">
-</head>
-<body>
+    <!-- Icons -->
+    <link rel="stylesheet" href="assets/vendor/fonts/materialdesignicons.css" />
+    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
 
-  <!-- ═══════════════════════════════════════════════════════
-       NAVBAR
-       ═══════════════════════════════════════════════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="container navbar-inner">
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="assets/css/demo.css" />
+    
+    <!-- Custom Beige Ambience CSS -->
+    <link rel="stylesheet" href="assets/css/admin-beige.css" />
 
-      <a href="index.html" class="navbar-brand">
-        <span class="brand-name">Bongo Curated</span>
-        <span class="brand-mark"></span>
-      </a>
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-      <ul class="navbar-nav" id="nav-items">
-        <!-- Rendered by JS -->
-      </ul>
+    <!-- Helpers -->
+    <script src="assets/vendor/js/helpers.js"></script>
+    <script src="assets/vendor/js/template-customizer.js"></script>
+    <script src="assets/js/config.js"></script>
+  </head>
 
-      <div class="navbar-actions" id="navbar-actions">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </nav>
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        
+        <!-- SIDEBAR -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link gap-2 align-items-center">
+              <span class="app-brand-logo demo" style="color: #7E5B44;">
+                <i class="mdi mdi-storefront-outline fs-3"></i>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-1" style="color: #2A211D; letter-spacing: -0.01em;">AUS ECOM</span>
+            </a>
 
-  <!-- ═══════════════════════════════════════════════════════
-       MOBILE NAV PANEL
-       ═══════════════════════════════════════════════════════ -->
-  <div class="mobile-nav" id="mobile-nav">
-    <div class="mobile-nav-header">
-      <span class="brand-name">Bongo Curated</span>
-      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&times;</button>
-    </div>
-    <div id="mobile-nav-items">
-      <!-- Rendered by JS -->
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       SEARCH MODAL
-       ═══════════════════════════════════════════════════════ -->
-  <div class="search-overlay" id="search-overlay">
-    <div class="search-modal">
-      <div class="search-modal-header">
-        <div class="search-input-wrap">
-          <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-          <input type="text" class="search-modal-input" id="search-input" placeholder="Search fashion, home decor, jute, handicrafts..." aria-label="Search catalog" autocomplete="off">
-          <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" style="display:none">&times;</button>
-        </div>
-        <button class="search-modal-close" id="search-modal-close" aria-label="Close search">&times;</button>
-      </div>
-
-      <div class="search-modal-body" id="search-modal-body">
-        <!-- Default State (Empty / Short Query) -->
-        <div class="search-default-state" id="search-default-state">
-          <!-- Recent Searches -->
-          <div class="search-section" id="recent-searches-section">
-            <div class="search-section-header">
-              <span class="search-section-title">Recent Searches</span>
-              <button class="search-clear-all-recent" id="clear-recent-searches-btn">Clear All</button>
-            </div>
-            <div class="search-tags-list" id="recent-searches-list">
-              <!-- Rendered dynamically -->
-            </div>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block">
+              <i class="mdi mdi-chevron-left mdi-24px align-middle"></i>
+            </a>
           </div>
 
-          <!-- Suggested Products -->
-          <div class="search-section">
-            <span class="search-section-title">Suggested Products</span>
-            <div class="search-suggested-list" id="search-suggested-list">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
-        </div>
+          <div class="menu-inner-shadow"></div>
 
-        <!-- Live Results State -->
-        <div class="search-results-state" id="search-results-state" style="display:none">
-          <div class="search-results-count" id="search-results-count"></div>
-          <div class="search-results-list" id="search-results-list">
-            <!-- Rendered dynamically -->
-          </div>
-        </div>
+          <ul class="menu-inner py-2">
+            
+            <!-- Dashboard -->
+            <li class="menu-item">
+              <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-view-dashboard-outline"></i>
+                <div>Dashboard</div>
+              </a>
+            </li>
 
-        <!-- No Results State -->
-        <div class="search-no-results-state" id="search-no-results-state" style="display:none">
-          <div class="no-results-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-          </div>
-          <h3>No products found</h3>
-          <p id="no-results-text">We couldn't find any items matching your search.</p>
-          <a href="products.html" class="btn btn-primary btn-sm" id="search-browse-all-btn">Browse All Products</a>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- Catalog -->
+            <li class="menu-item active open">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-package-variant-closed"></i>
+                <div>Catalog</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item active">
+                  <a href="products.html" class="menu-link">
+                    <div>Products</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="categories.html" class="menu-link">
+                    <div>Categories</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="subcategories.html" class="menu-link">
+                    <div>Subcategories</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="brands.html" class="menu-link">
+                    <div>Brands</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-  <!-- ═══════════════════════════════════════════════════════
-       PRODUCT LISTING MAIN SECTION
-       ═══════════════════════════════════════════════════════ -->
-  <main class="main-content">
-    <section class="listing-page-section">
-      <div class="container">
+            <!-- Sales -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-cart-outline"></i>
+                <div>Sales</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="admin/orders.html" class="menu-link">
+                    <div>Orders</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Customers</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Abandoned Carts</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-        <!-- Breadcrumb -->
-        <div class="breadcrumb">
-          <a href="index.html">Home</a>
-          <span class="breadcrumb-sep">/</span>
-          <a href="products.html">Shop</a>
-          <span class="breadcrumb-sep">/</span>
-          <span class="breadcrumb-current" id="breadcrumb-current">All Products</span>
-        </div>
+            <!-- Requests -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-hand-shake-outline"></i>
+                <div>Requests</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Sourcing Requests</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link">
+                    <div>Bulk Orders</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-        <!-- Header Bar -->
-        <header class="listing-header">
-          <div class="listing-header-top">
-            <div class="listing-title-wrap">
-              <h1 class="listing-title" id="listing-title">All Products</h1>
-              <!-- <p class="listing-desc" id="listing-desc">Explore our curated collection of artisan-crafted products designed for Australian living.</p> -->
-            </div>
+            <!-- Marketing -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-bullhorn-outline"></i>
+                <div>Marketing</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Banners</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Collections</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Offers / Discounts</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Coupons</div></a></li>
+              </ul>
+            </li>
 
-            <div class="listing-controls-right">
-              <div class="listing-count" id="listing-count">Showing products</div>
-              <!-- Sort Dropdown (Desktop) -->
-              <div class="listing-sort-wrap">
-                <label for="sort-select" class="listing-sort-label">Sort By:</label>
-                <select id="sort-select" class="sort-select">
-                  <option value="featured">Featured</option>
-                  <option value="newest">Newest First</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </header>
+            <!-- Content -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-web"></i>
+                <div>Content</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Homepage</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Pages</div></a></li>
+                <li class="menu-item"><a href="javascript:void(0);" class="menu-link"><div>Navigation</div></a></li>
+              </ul>
+            </li>
 
-        <!-- Mobile Controls (Filter and Sort side by side) -->
-        <div class="mobile-filter-bar">
-          <button class="btn-mobile-filter" id="btn-open-mobile-filter">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m-9.75 0h9.75"/></svg>
-            Filter <span class="filter-badge-count" id="filter-badge-count" style="display:none">0</span>
-          </button>
+            <!-- Reviews -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-star-outline"></i>
+                <div>Reviews</div>
+              </a>
+            </li>
+
+            <!-- Wishlist -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-heart-outline"></i>
+                <div>Wishlist</div>
+              </a>
+            </li>
+
+            <!-- Settings -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons mdi mdi-cog-outline"></i>
+                <div>Settings</div>
+              </a>
+            </li>
+
+          </ul>
+        </aside>
+        <!-- / SIDEBAR -->
+
+        <!-- LAYOUT PAGE -->
+        <div class="layout-page">
           
-          <select id="mobile-sort-select" class="sort-select" style="flex:1">
-            <option value="featured">Sort: Featured</option>
-            <option value="newest">Sort: Newest</option>
-            <option value="price-low">Sort: Price Low–High</option>
-            <option value="price-high">Sort: Price High–Low</option>
-          </select>
-        </div>
-
-        <!-- Main Listing Layout Grid -->
-        <div class="listing-layout">
-
-          <!-- Left Sidebar Filters (Desktop) -->
-          <aside class="listing-sidebar">
-            <div class="sidebar-header">
-              <span class="sidebar-title">Filters</span>
-              <button class="clear-all-link clear-all-filters-btn">Clear All</button>
-            </div>
-
-            <!-- Category Filter -->
-            <div class="filter-group">
-              <div class="filter-group-title">Category</div>
-              <div class="filter-options-list">
-                <label class="filter-checkbox-label">
-                  <input type="radio" name="sidebar-category" value="all" data-filter-category checked>
-                  <span>All Products</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="radio" name="sidebar-category" value="fashion" data-filter-category>
-                  <span>Fashion</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="radio" name="sidebar-category" value="home-decor" data-filter-category>
-                  <span>Home & Living</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="radio" name="sidebar-category" value="jute" data-filter-category>
-                  <span>Jute</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="radio" name="sidebar-category" value="handicrafts" data-filter-category>
-                  <span>Handcrafted</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="radio" name="sidebar-category" value="lifestyle" data-filter-category>
-                  <span>Gifts</span>
-                </label>
+          <!-- FIXED TOP BAR -->
+          <nav class="layout-navbar navbar navbar-expand-xl align-items-center" id="layout-navbar">
+            <div class="container-fluid d-flex align-items-center justify-content-between px-0">
+              
+              <!-- Left Side -->
+              <div class="d-flex align-items-center gap-3">
+                <a class="nav-item nav-link px-0 me-xl-4 d-xl-none layout-menu-toggle" href="javascript:void(0)">
+                  <i class="mdi mdi-menu mdi-24px"></i>
+                </a>
+                <a class="nav-item nav-link px-0 me-3 d-none d-xl-block layout-menu-toggle" href="javascript:void(0)">
+                  <i class="mdi mdi-menu mdi-24px"></i>
+                </a>
+                <div class="d-none d-sm-flex align-items-center">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 py-0" style="font-size: 0.875rem;">
+                      <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+                      <li class="breadcrumb-item"><a href="javascript:void(0);">Catalog</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Products</li>
+                    </ol>
+                  </nav>
+                </div>
               </div>
-            </div>
 
-            <!-- Brand Filter -->
-            <div class="filter-group">
-              <div class="filter-group-title">Brand / Maker</div>
-              <div class="filter-options-list">
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="Bongo Curated" data-filter-brand>
-                  <span>Bongo Curated</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="Heritage Weaves" data-filter-brand>
-                  <span>Heritage Weaves</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="Sonali Jute" data-filter-brand>
-                  <span>Sonali Jute</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="Artisan Craft Co." data-filter-brand>
-                  <span>Artisan Craft Co.</span>
-                </label>
+              <!-- Right Side -->
+              <div class="d-flex align-items-center gap-3">
+                <div class="dropdown">
+                  <a class="nav-link position-relative p-1" href="javascript:void(0)" data-bs-toggle="dropdown">
+                    <i class="mdi mdi-bell-outline fs-4"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle" style="width: 8px; height: 8px;"></span>
+                  </a>
+                </div>
+
+                <div class="dropdown">
+                  <a class="nav-link d-flex align-items-center gap-2 p-0" href="javascript:void(0)" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <span class="avatar-initial rounded-circle fw-bold" style="background-color: var(--beige-primary-accent); color: var(--beige-text-light);">A</span>
+                    </div>
+                    <div class="d-none d-lg-block text-start">
+                      <span class="user-avatar-text d-block lh-1">Admin User</span>
+                      <span class="user-role-text">Store Manager</span>
+                    </div>
+                  </a>
+                </div>
               </div>
-            </div>
 
-            <!-- Price Range Filter -->
-            <div class="filter-group">
-              <div class="filter-group-title">Price Range</div>
-              <div class="filter-options-list">
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="under-30" data-filter-price>
-                  <span>Under A$30</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="30-40" data-filter-price>
-                  <span>A$30 – A$40</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="40-50" data-filter-price>
-                  <span>A$40 – A$50</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="50-above" data-filter-price>
-                  <span>A$50 & Above</span>
-                </label>
+            </div>
+          </nav>
+          <!-- / FIXED TOP BAR -->
+
+          <!-- CONTENT WRAPPER -->
+          <div class="content-wrapper">
+            <div class="container-xxl flex-grow-1 container-p-y">
+              
+              <!-- Page Title & Header Actions -->
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                  <h4 class="fw-bold mb-1" style="color: var(--beige-text-dark);">Products Catalog</h4>
+                  <p class="text-muted mb-0 fs-7">Manage your store products, pricing, stock, colors, and variant options.</p>
+                </div>
+                <div>
+                  <a href="product-add.html" class="btn btn-beige d-flex align-items-center gap-1">
+                    <i class="mdi mdi-plus fs-5"></i> Add New Product
+                  </a>
+                </div>
               </div>
-            </div>
 
-            <!-- Size Filter -->
-            <div class="filter-group">
-              <div class="filter-group-title">Size</div>
-              <div class="filter-size-grid">
-                <button class="size-pill" data-size="S">S</button>
-                <button class="size-pill" data-size="M">M</button>
-                <button class="size-pill" data-size="L">L</button>
-                <button class="size-pill" data-size="XL">XL</button>
-                <button class="size-pill" data-size="2XL">2XL</button>
-                <button class="size-pill" data-size="3XL">3XL</button>
-                <button class="size-pill" data-size="45x45 cm">45x45cm</button>
-                <button class="size-pill" data-size="Medium">Medium</button>
-                <button class="size-pill" data-size="Large">Large</button>
+              <!-- Filters Card -->
+              <div class="card mb-4">
+                <div class="card-body p-3">
+                  <div class="row g-3">
+                    
+                    <!-- Search Input -->
+                    <div class="col-12 col-md-4">
+                      <div class="input-group input-group-merge">
+                        <span class="input-group-text bg-white border-end-0"><i class="mdi mdi-magnify"></i></span>
+                        <input type="text" class="form-control border-start-0 ps-0" placeholder="Search by name, SKU..." id="searchProduct">
+                      </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="col-6 col-md-2">
+                      <select class="form-select" id="filterCategory">
+                        <option value="">All Categories</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Home & Living">Home & Living</option>
+                        <option value="Textiles">Textiles</option>
+                        <option value="Decor">Decor</option>
+                        <option value="Apparel">Apparel</option>
+                      </select>
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div class="col-6 col-md-2">
+                      <select class="form-select" id="filterBrand">
+                        <option value="">All Brands</option>
+                        <option value="Aus Living">Aus Living</option>
+                        <option value="Craft & Co">Craft & Co</option>
+                        <option value="Nordic Studio">Nordic Studio</option>
+                        <option value="Artisan Heritage">Artisan Heritage</option>
+                      </select>
+                    </div>
+
+                    <!-- Status Filter -->
+                    <div class="col-6 col-md-2">
+                      <select class="form-select" id="filterStatus">
+                        <option value="">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Archived">Archived</option>
+                      </select>
+                    </div>
+
+                    <!-- Stock Filter -->
+                    <div class="col-6 col-md-2">
+                      <select class="form-select" id="filterStock">
+                        <option value="">All Stock</option>
+                        <option value="In Stock">In Stock</option>
+                        <option value="Low Stock">Low Stock</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <!-- Color Swatches Filter -->
-            <div class="filter-group">
-              <div class="filter-group-title">Color</div>
-              <div class="filter-color-grid">
-                <button class="color-swatch-btn" data-color="#5C6B4F" style="background-color:#5C6B4F" title="Olive"></button>
-                <button class="color-swatch-btn" data-color="#FFFFFF" style="background-color:#FFFFFF; border: 1px solid #ccc" title="White"></button>
-                <button class="color-swatch-btn" data-color="#C4A882" style="background-color:#C4A882" title="Khaki"></button>
-                <button class="color-swatch-btn" data-color="#1B2A4A" style="background-color:#1B2A4A" title="Navy"></button>
-                <button class="color-swatch-btn" data-color="#D6C2A8" style="background-color:#D6C2A8" title="Sand"></button>
-                <button class="color-swatch-btn" data-color="#C5A059" style="background-color:#C5A059" title="Brass"></button>
-                <button class="color-swatch-btn" data-color="#6B3E26" style="background-color:#6B3E26" title="Brown"></button>
-                <button class="color-swatch-btn" data-color="#C8A870" style="background-color:#C8A870" title="Natural Jute"></button>
+              <!-- Products Table Card -->
+              <div class="card">
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle mb-0">
+                    <thead>
+                      <tr>
+                        <th style="width: 40px;"><input type="checkbox" class="form-check-input"></th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Variants</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      <!-- Row 1 -->
+                      <tr>
+                        <td><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="rounded border p-1 bg-white" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-chair-rolling fs-3" style="color: var(--beige-primary-accent);"></i>
+                            </div>
+                            <div>
+                              <a href="product-edit.html" class="fw-bold text-dark fs-8 hover-underline">Minimalist Oak Dining Table</a>
+                              <div class="text-muted fs-8">SKU: <span class="fw-medium">FUR-OAK-01</span></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fw-medium text-dark fs-8">Furniture</div>
+                          <small class="text-muted">Dining Tables</small>
+                        </td>
+                        <td><span class="badge bg-label-secondary fs-8">Aus Living</span></td>
+                        <td>
+                          <div>
+                            <span class="fw-bold text-dark">$340.00</span>
+                            <small class="text-muted text-decoration-line-through me-1">$400.00</small>
+                            <span class="badge bg-label-danger fs-9">15% OFF</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="badge bg-label-primary fs-8">6 Variants</span>
+                          <div class="fs-9 text-muted">2 Colors, 3 Sizes</div>
+                        </td>
+                        <td><span class="badge bg-label-success fs-8">42 in stock</span></td>
+                        <td><span class="badge bg-label-success fs-8">Active</span></td>
+                        <td class="text-end">
+                          <div class="d-flex align-items-center justify-content-end gap-1">
+                            <a href="product-edit.html" class="btn btn-sm btn-icon btn-outline-beige" title="Edit"><i class="mdi mdi-pencil-outline fs-6"></i></a>
+                            <button type="button" class="btn btn-sm btn-icon btn-outline-beige text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline fs-6"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Row 2 -->
+                      <tr>
+                        <td><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="rounded border p-1 bg-white" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-cup-outline fs-3" style="color: var(--beige-primary-accent);"></i>
+                            </div>
+                            <div>
+                              <a href="product-edit.html" class="fw-bold text-dark fs-8 hover-underline">Ceramic Artisan Tea Set</a>
+                              <div class="text-muted fs-8">SKU: <span class="fw-medium">HOM-TEA-04</span></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fw-medium text-dark fs-8">Home & Living</div>
+                          <small class="text-muted">Tea Sets</small>
+                        </td>
+                        <td><span class="badge bg-label-secondary fs-8">Craft & Co</span></td>
+                        <td><span class="fw-bold text-dark">$60.00</span></td>
+                        <td>
+                          <span class="badge bg-label-primary fs-8">3 Colors</span>
+                          <div class="fs-9 text-muted">No sizes</div>
+                        </td>
+                        <td><span class="badge bg-label-success fs-8">15 in stock</span></td>
+                        <td><span class="badge bg-label-success fs-8">Active</span></td>
+                        <td class="text-end">
+                          <div class="d-flex align-items-center justify-content-end gap-1">
+                            <a href="product-edit.html" class="btn btn-sm btn-icon btn-outline-beige" title="Edit"><i class="mdi mdi-pencil-outline fs-6"></i></a>
+                            <button type="button" class="btn btn-sm btn-icon btn-outline-beige text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline fs-6"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Row 3 -->
+                      <tr>
+                        <td><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="rounded border p-1 bg-white" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-texture fs-3" style="color: var(--beige-primary-accent);"></i>
+                            </div>
+                            <div>
+                              <a href="product-edit.html" class="fw-bold text-dark fs-8 hover-underline">Linen Throw Blanket (Beige)</a>
+                              <div class="text-muted fs-8">SKU: <span class="fw-medium">TEX-BLN-12</span></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fw-medium text-dark fs-8">Textiles</div>
+                          <small class="text-muted">Blankets & Throws</small>
+                        </td>
+                        <td><span class="badge bg-label-secondary fs-8">Nordic Studio</span></td>
+                        <td><span class="fw-bold text-dark">$50.00</span></td>
+                        <td>
+                          <span class="badge bg-label-primary fs-8">8 Variants</span>
+                          <div class="fs-9 text-muted">4 Colors, 2 Sizes</div>
+                        </td>
+                        <td><span class="badge bg-label-success fs-8">88 in stock</span></td>
+                        <td><span class="badge bg-label-success fs-8">Active</span></td>
+                        <td class="text-end">
+                          <div class="d-flex align-items-center justify-content-end gap-1">
+                            <a href="product-edit.html" class="btn btn-sm btn-icon btn-outline-beige" title="Edit"><i class="mdi mdi-pencil-outline fs-6"></i></a>
+                            <button type="button" class="btn btn-sm btn-icon btn-outline-beige text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline fs-6"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Row 4 -->
+                      <tr>
+                        <td><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="rounded border p-1 bg-white" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-flower-outline fs-3" style="color: var(--beige-primary-accent);"></i>
+                            </div>
+                            <div>
+                              <a href="product-edit.html" class="fw-bold text-dark fs-8 hover-underline">Artisan Brass Candle Holder</a>
+                              <div class="text-muted fs-8">SKU: <span class="fw-medium">DEC-BRS-02</span></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fw-medium text-dark fs-8">Decor</div>
+                          <small class="text-muted">Lighting</small>
+                        </td>
+                        <td><span class="badge bg-label-secondary fs-8">Artisan Heritage</span></td>
+                        <td><span class="fw-bold text-dark">$45.00</span></td>
+                        <td><span class="text-muted fs-8">No variants</span></td>
+                        <td><span class="badge bg-label-danger fs-8">2 left (Low)</span></td>
+                        <td><span class="badge bg-label-success fs-8">Active</span></td>
+                        <td class="text-end">
+                          <div class="d-flex align-items-center justify-content-end gap-1">
+                            <a href="product-edit.html" class="btn btn-sm btn-icon btn-outline-beige" title="Edit"><i class="mdi mdi-pencil-outline fs-6"></i></a>
+                            <button type="button" class="btn btn-sm btn-icon btn-outline-beige text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline fs-6"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Row 5 -->
+                      <tr>
+                        <td><input type="checkbox" class="form-check-input"></td>
+                        <td>
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="rounded border p-1 bg-white" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                              <i class="mdi mdi-seat-recline-extra fs-3" style="color: var(--beige-primary-accent);"></i>
+                            </div>
+                            <div>
+                              <a href="product-edit.html" class="fw-bold text-dark fs-8 hover-underline">Scandinavia Lounge Chair</a>
+                              <div class="text-muted fs-8">SKU: <span class="fw-medium">FUR-CHR-09</span></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fw-medium text-dark fs-8">Furniture</div>
+                          <small class="text-muted">Chairs</small>
+                        </td>
+                        <td><span class="badge bg-label-secondary fs-8">Aus Living</span></td>
+                        <td><span class="fw-bold text-dark">$350.00</span></td>
+                        <td><span class="badge bg-label-info fs-8">Pre-order</span></td>
+                        <td><span class="badge bg-label-secondary fs-8">0 (Pre-order)</span></td>
+                        <td><span class="badge bg-label-secondary fs-8">Draft</span></td>
+                        <td class="text-end">
+                          <div class="d-flex align-items-center justify-content-end gap-1">
+                            <a href="product-edit.html" class="btn btn-sm btn-icon btn-outline-beige" title="Edit"><i class="mdi mdi-pencil-outline fs-6"></i></a>
+                            <button type="button" class="btn btn-sm btn-icon btn-outline-beige text-danger" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="mdi mdi-trash-can-outline fs-6"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Pagination Card Footer -->
+                <div class="card-footer d-flex align-items-center justify-content-between border-top py-3">
+                  <div class="fs-8 text-muted">Showing 1 to 5 of 486 products</div>
+                  <nav aria-label="Products Pagination">
+                    <ul class="pagination pagination-sm mb-0">
+                      <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+                      <li class="page-item active"><a class="page-link" href="#" style="background-color: var(--beige-primary-accent); border-color: var(--beige-primary-accent);">1</a></li>
+                      <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link text-dark" href="#">Next</a></li>
+                    </ul>
+                  </nav>
+                </div>
               </div>
+
             </div>
 
-            <!-- Availability Filter -->
-            <div class="filter-group">
-              <div class="filter-group-title">Availability</div>
-              <div class="filter-options-list">
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="instock" data-filter-availability>
-                  <span>In Stock</span>
-                </label>
-                <label class="filter-checkbox-label">
-                  <input type="checkbox" value="preorder" data-filter-availability>
-                  <span>Pre-order</span>
-                </label>
+            <!-- FOOTER -->
+            <footer class="content-footer footer bg-footer-theme" style="background-color: var(--beige-bg-main) !important; border-top: 1px solid var(--beige-border-subtle);">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0 fs-8 text-muted">
+                  © 2026 Aus Ecom Admin Catalog. Built with Materialize Foundation.
+                </div>
               </div>
-            </div>
-
-            <button class="btn btn-outline clear-all-filters-btn" style="width:100%; margin-top: 0.5rem">Clear All Filters</button>
-          </aside>
-
-          <!-- Right Content Area -->
-          <div class="listing-content">
-            <!-- 4-Column Product Grid -->
-            <div class="listing-grid" id="listing-products-grid">
-              <!-- Rendered dynamically by JS -->
-            </div>
-
-            <!-- Infinite Scroll Sentinel -->
-            <div class="infinite-scroll-sentinel" id="infinite-scroll-sentinel">
-              <div class="loading-spinner"></div>
-            </div>
-
-            <!-- Empty State -->
-            <div class="listing-empty-state" id="listing-empty-state" style="display:none">
-              <h3>No products found</h3>
-              <p>Try adjusting your filter criteria or clearing selected filters to see more results.</p>
-              <button class="btn btn-primary clear-all-filters-btn">Clear All Filters</button>
-            </div>
+            </footer>
           </div>
         </div>
-
       </div>
-    </section>
-  </main>
-
-  <!-- ═══════════════════════════════════════════════════════
-       MOBILE FILTER DRAWER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="filter-drawer-overlay" id="filter-drawer-overlay"></div>
-  <div class="filter-drawer" id="filter-drawer">
-    <div class="filter-drawer-header">
-      <h3>Filters</h3>
-      <button class="filter-drawer-close" id="filter-drawer-close" aria-label="Close filters">&times;</button>
-    </div>
-    <div class="filter-drawer-body">
-      <div class="filter-group">
-        <div class="filter-group-title">Category</div>
-        <div class="filter-options-list">
-          <label class="filter-checkbox-label"><input type="radio" name="mobile-category" value="all" data-filter-category checked><span>All Products</span></label>
-          <label class="filter-checkbox-label"><input type="radio" name="mobile-category" value="fashion" data-filter-category><span>Fashion</span></label>
-          <label class="filter-checkbox-label"><input type="radio" name="mobile-category" value="home-decor" data-filter-category><span>Home & Living</span></label>
-          <label class="filter-checkbox-label"><input type="radio" name="mobile-category" value="jute" data-filter-category><span>Jute</span></label>
-          <label class="filter-checkbox-label"><input type="radio" name="mobile-category" value="handicrafts" data-filter-category><span>Handcrafted</span></label>
-          <label class="filter-checkbox-label"><input type="radio" name="mobile-category" value="lifestyle" data-filter-category><span>Gifts</span></label>
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-group-title">Brand / Maker</div>
-        <div class="filter-options-list">
-          <label class="filter-checkbox-label"><input type="checkbox" value="Bongo Curated" data-filter-brand><span>Bongo Curated</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="Heritage Weaves" data-filter-brand><span>Heritage Weaves</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="Sonali Jute" data-filter-brand><span>Sonali Jute</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="Artisan Craft Co." data-filter-brand><span>Artisan Craft Co.</span></label>
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-group-title">Price Range</div>
-        <div class="filter-options-list">
-          <label class="filter-checkbox-label"><input type="checkbox" value="under-30" data-filter-price><span>Under A$30</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="30-40" data-filter-price><span>A$30 – A$40</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="40-50" data-filter-price><span>A$40 – A$50</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="50-above" data-filter-price><span>A$50 & Above</span></label>
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-group-title">Availability</div>
-        <div class="filter-options-list">
-          <label class="filter-checkbox-label"><input type="checkbox" value="instock" data-filter-availability><span>In Stock</span></label>
-          <label class="filter-checkbox-label"><input type="checkbox" value="preorder" data-filter-availability><span>Pre-order</span></label>
-        </div>
-      </div>
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
 
-    <div class="filter-drawer-footer">
-      <button class="btn btn-outline clear-all-filters-btn" style="flex:1">Clear All</button>
-      <button class="btn btn-primary" id="btn-apply-mobile-filter" style="flex:1">Apply Filters</button>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid" id="footer-grid">
-        <!-- Rendered by JS -->
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-bottom-left">
-          &copy; 2026 Bongo Curated. Curated artisan goods for Australia.
-        </div>
-        <div class="footer-payment">
-          <span class="footer-payment-icon">VISA</span>
-          <span class="footer-payment-icon">Mastercard</span>
-          <span class="footer-payment-icon">AMEX</span>
-          <span class="footer-payment-icon">Apple Pay</span>
-          <span class="footer-payment-icon">Google Pay</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ═══════════════════════════════════════════════════════
-       BOTTOM MOBILE NAV
-       ═══════════════════════════════════════════════════════ -->
-  <nav class="bottom-nav" id="bottom-nav">
-    <div class="bottom-nav-inner" id="bottom-nav-inner">
-      <!-- Rendered by JS -->
-    </div>
-  </nav>
-
-  <!-- ═══════════════════════════════════════════════════════
-       QUICK VIEW MODAL
-       ═══════════════════════════════════════════════════════ -->
-  <div class="modal-overlay" id="modal-overlay">
-    <div class="modal" id="quick-view-modal">
-      <div class="modal-image" style="position:relative">
-        <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
-        <img src="" alt="" id="modal-product-img">
-      </div>
-      <div class="modal-content">
-        <div>
-          <div class="modal-category-tag" id="modal-category-tag">Fashion</div>
-          <h3 class="modal-title"></h3>
-          <p class="modal-subtitle"></p>
-        </div>
-        <div class="modal-price"></div>
-        
-        <div class="modal-options-section" id="modal-colors-wrap">
-          <p class="modal-option-label">Colour / Finish</p>
-          <div class="modal-colors"></div>
-        </div>
-        
-        <div class="modal-options-section" id="modal-sizes-wrap">
-          <p class="modal-option-label">Size / Dimension</p>
-          <div class="modal-sizes"></div>
-        </div>
-
-        <button class="btn btn-primary btn-lg" id="modal-add-to-cart" style="width:100%; margin-top: 1rem">Add to Cart</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       VARIANT SELECTION MODAL (Wishlist Add to Cart)
-       ═══════════════════════════════════════════════════════ -->
-  <div class="modal-overlay" id="variant-modal-overlay">
-    <div class="modal variant-modal" id="variant-selection-modal">
-      <div class="modal-image" style="position:relative">
-        <button class="modal-close" id="variant-modal-close" aria-label="Close modal">&times;</button>
-        <img src="" alt="" id="variant-modal-img">
-      </div>
-      <div class="modal-content">
-        <div>
-          <div class="modal-category-tag" id="variant-modal-category">Fashion</div>
-          <h3 class="modal-title" id="variant-modal-title">Product Name</h3>
-          <p class="modal-subtitle" id="variant-modal-subtitle">Artisan Crafted · Curated for Australia</p>
-        </div>
-        <div class="modal-price" id="variant-modal-price">
-          <span class="current">A$0.00</span>
-        </div>
-        
-        <div class="modal-options-section" id="variant-modal-colors-wrap">
-          <p class="modal-option-label">Color: <span id="variant-modal-selected-color" style="font-weight:var(--fw-semibold); color:var(--color-dark)"></span></p>
-          <div class="modal-colors" id="variant-modal-colors"></div>
-        </div>
-        
-        <div class="modal-options-section" id="variant-modal-sizes-wrap">
-          <p class="modal-option-label">Size: <span id="variant-modal-selected-size" style="font-weight:var(--fw-semibold); color:var(--color-dark)"></span></p>
-          <div class="modal-sizes" id="variant-modal-sizes"></div>
-        </div>
-
-        <div class="modal-options-section" id="variant-modal-qty-wrap">
-          <p class="modal-option-label">Quantity</p>
-          <div class="cart-quantity-selector" style="height: 38px;">
-            <button class="cart-qty-btn" id="variant-qty-minus" style="width:36px; height:38px;" type="button">&minus;</button>
-            <span class="cart-qty-value" id="variant-qty-value" style="min-width:36px; font-size:1rem;">1</span>
-            <button class="cart-qty-btn" id="variant-qty-plus" style="width:36px; height:38px;" type="button">+</button>
+    <!-- Small Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+          <div class="modal-header border-bottom pb-2">
+            <h5 class="modal-title fs-6 fw-bold">Delete Product?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body py-3 fs-8 text-muted">
+            Are you sure you want to remove this product from your catalog? This action cannot be undone.
+          </div>
+          <div class="modal-footer border-top pt-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Delete</button>
           </div>
         </div>
-
-        <div id="variant-modal-error" style="color:var(--color-danger); font-size:var(--fs-xs); display:none; margin-top: -0.5rem;">Please select required options</div>
-
-        <button class="btn btn-primary btn-lg" id="variant-modal-confirm-btn" style="width:100%; margin-top: 0.5rem" type="button">Add to Cart</button>
       </div>
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       CART DRAWER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-drawer-header">
-      <div class="cart-drawer-title-group">
-        <h3>Your Cart</h3>
-        <span class="cart-drawer-count-badge" id="cart-drawer-count">0 Items</span>
-      </div>
-      <button id="cart-drawer-close" aria-label="Close cart">&times;</button>
-    </div>
-    <div class="cart-drawer-body" id="cart-drawer-body">
-      <div class="cart-drawer-empty">
-        <p>Your cart is empty</p>
-      </div>
-    </div>
-    <div class="cart-drawer-footer" id="cart-drawer-footer"></div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       WISHLIST DRAWER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="wishlist-drawer-overlay" id="wishlist-drawer-overlay"></div>
-  <div class="wishlist-drawer" id="wishlist-drawer">
-    <div class="wishlist-drawer-header">
-      <div class="wishlist-drawer-title-group">
-        <h3>Wishlist</h3>
-        <span class="wishlist-drawer-count-badge" id="wishlist-drawer-count">0 Items</span>
-      </div>
-      <button id="wishlist-drawer-close" aria-label="Close wishlist">&times;</button>
-    </div>
-    <div class="wishlist-drawer-body" id="wishlist-drawer-body">
-      <div class="wishlist-drawer-empty">
-        <p>Your wishlist is empty</p>
-      </div>
-    </div>
-    <div class="wishlist-drawer-footer" id="wishlist-drawer-footer"></div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       TOAST CONTAINER
-       ═══════════════════════════════════════════════════════ -->
-  <div class="toast-container" id="toast-container"></div>
-
-  <!-- Scripts -->
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/app.js"></script>
-  <script src="assets/js/products.js"></script>
-</body>
+    <!-- CORE JS -->
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets/vendor/libs/popper/popper.js"></script>
+    <script src="assets/vendor/js/bootstrap.js"></script>
+    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="assets/vendor/js/menu.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>
