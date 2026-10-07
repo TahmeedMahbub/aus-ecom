@@ -624,3 +624,160 @@ if (typeof $ !== 'undefined') {
     }
   });
 }
+
+/**
+ * Table Row Click Interaction Feature
+ * Makes table rows clickable if they contain a "View" action button/link.
+ */
+(function initTableClickableRows() {
+  function getTableRowViewUrl(tr) {
+    if (!tr || tr.tagName !== 'TR') return null;
+
+    // 1. Look for explicit View / Details / Preview buttons or links inside the row
+    const viewActionSelectors = [
+      'a[title*="View" i]',
+      'a[title*="Preview" i]',
+      'a[title*="Details" i]',
+      'button[title*="View" i]',
+      'button[title*="Preview" i]',
+      'button[title*="Details" i]',
+      'a[aria-label*="View" i]',
+      'a[aria-label*="Preview" i]'
+    ];
+
+    for (const selector of viewActionSelectors) {
+      try {
+        const el = tr.querySelector(selector);
+        if (el) {
+          const url = el.getAttribute('href') || el.getAttribute('data-url') || el.getAttribute('data-href');
+          if (url && url !== '#' && !url.startsWith('javascript:')) {
+            return url;
+          }
+        }
+      } catch (e) {}
+    }
+
+    // 2. Check for eye icons directly inside links or buttons
+    const eyeIcon = tr.querySelector('.mdi-eye, .mdi-eye-outline, .fa-eye');
+    if (eyeIcon) {
+      const parentLink = eyeIcon.closest('a[href], button[data-url], [data-href]');
+      if (parentLink) {
+        const url = parentLink.getAttribute('href') || parentLink.getAttribute('data-url') || parentLink.getAttribute('data-href');
+        if (url && url !== '#' && !url.startsWith('javascript:')) {
+          return url;
+        }
+      }
+    }
+
+    // 3. Dropdown items or buttons with text starting with or equal to "View" or "Preview"
+    const linksAndButtons = Array.from(tr.querySelectorAll('a[href], button'));
+    for (const el of linksAndButtons) {
+      const text = el.textContent.trim().toLowerCase();
+      const title = (el.getAttribute('title') || '').toLowerCase();
+      if (text === 'view' || text === 'preview' || text.startsWith('view ') || text.startsWith('preview ') || title.includes('view') || title.includes('preview')) {
+        const url = el.getAttribute('href') || el.getAttribute('data-url');
+        if (url && url !== '#' && !url.startsWith('javascript:')) {
+          return url;
+        }
+      }
+    }
+
+    // 4. Check for links in the row pointing to dedicated View/Details pages
+    const detailsLink = tr.querySelector(`
+      a[href*="order-details.html"],
+      a[href*="sourcing-request-details.html"],
+      a[href*="customer-details.html"],
+      a[href*="cart-details.html"],
+      a[href*="bulk-order-details.html"],
+      a[href*="app-invoice-preview.html"],
+      a[href*="app-user-view"]
+    `);
+
+    if (detailsLink) {
+      const url = detailsLink.getAttribute('href');
+      if (url && url !== '#' && !url.startsWith('javascript:')) {
+        return url;
+      }
+    }
+
+    return null;
+  }
+
+  function markClickableRows() {
+    const rows = document.querySelectorAll('table tbody tr');
+    rows.forEach(tr => {
+      const url = getTableRowViewUrl(tr);
+      if (url) {
+        tr.classList.add('clickable-row');
+        tr.setAttribute('data-view-url', url);
+      } else {
+        tr.classList.remove('clickable-row');
+        tr.removeAttribute('data-view-url');
+      }
+    });
+  }
+
+  // Handle row click
+  document.addEventListener('click', function (event) {
+    const tr = event.target.closest('tr.clickable-row');
+    if (!tr) return;
+
+    const url = tr.getAttribute('data-view-url') || getTableRowViewUrl(tr);
+    if (!url) return;
+
+    // Do NOT trigger if click was on interactive controls inside the row
+    const interactiveEl = event.target.closest(`
+      a,
+      button,
+      input,
+      select,
+      textarea,
+      label,
+      .dropdown,
+      .dropdown-toggle,
+      .dropdown-menu,
+      .form-check,
+      .form-switch,
+      .delete-record,
+      [data-bs-toggle],
+      [onclick]
+    `);
+
+    if (interactiveEl) {
+      return;
+    }
+
+    // Do not trigger if user is highlighting/selecting text
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) {
+      return;
+    }
+
+    if (event.metaKey || event.ctrlKey) {
+      window.open(url, '_blank');
+    } else {
+      window.location.href = url;
+    }
+  });
+
+  // Run on DOM content loaded and window load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', markClickableRows);
+  } else {
+    markClickableRows();
+  }
+
+  window.addEventListener('load', markClickableRows);
+
+  // MutationObserver to automatically support dynamically updated tables (DataTables, pagination, AJAX, etc.)
+  if (window.MutationObserver) {
+    let timeoutId;
+    const observer = new MutationObserver(function () {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(markClickableRows, 50);
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+})();
+

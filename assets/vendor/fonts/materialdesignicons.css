@@ -14385,6 +14385,10 @@
   content: "\F0E48";
 }
 
+.mdi-hands-pray::before {
+  content: "\F1A3A";
+}
+
 .mdi-hand-wash::before {
   content: "\F157F";
 }

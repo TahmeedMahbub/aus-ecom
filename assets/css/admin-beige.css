@@ -386,6 +386,28 @@ h5, h6, .h5, .h6, .card-title {
   background-color: #FAF6F0 !important;
 }
 
+/* Clickable Table Rows with View Action */
+tr.clickable-row {
+  cursor: pointer !important;
+  transition: background-color 0.15s ease-in-out;
+}
+
+tr.clickable-row:hover,
+tr.clickable-row:hover > td,
+tr.clickable-row:hover > th {
+  background-color: #F3EBE1 !important;
+}
+
+tr.clickable-row a,
+tr.clickable-row button,
+tr.clickable-row input,
+tr.clickable-row select,
+tr.clickable-row label,
+tr.clickable-row .dropdown-toggle {
+  cursor: pointer;
+}
+
+
 
 /* ==========================================
    STATUS BADGES
