@@ -220,6 +220,12 @@ h5, h6, .h5, .h6, .card-title {
   border-right: 1px solid var(--beige-border-subtle) !important;
 }
 
+.menu-inner-shadow,
+.bg-menu-theme .menu-inner-shadow,
+.menu.bg-primary .menu-inner-shadow {
+  background: linear-gradient(#CC7A3F 5%, rgba(204, 122, 63, 0.75) 45%, rgba(204, 122, 63, 0.2) 80%, transparent) !important;
+}
+
 /* App Brand Section */
 .app-brand {
   background-color: #FAF6F0 !important;

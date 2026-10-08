@@ -632,7 +632,7 @@ button.list-group-item-primary.active {
   color: #fff;
 }
 .menu.bg-primary .menu-inner-shadow {
-  background: linear-gradient(#666cff 5%, rgba(102, 108, 255, 0.75) 45%, rgba(102, 108, 255, 0.2) 80%, transparent);
+  background: linear-gradient(#CC7A3F 5%, rgba(204, 122, 63, 0.75) 45%, rgba(204, 122, 63, 0.2) 80%, transparent);
 }
 .menu.bg-primary .menu-text {
   color: #fff;
@@ -1250,7 +1250,7 @@ li.ui-timepicker-selected,
   color: #fff;
 }
 .bg-menu-theme .menu-inner-shadow {
-  background: linear-gradient(#f7f7f9 5%, rgba(247, 247, 249, 0.75) 45%, rgba(247, 247, 249, 0.2) 80%, transparent);
+  background: linear-gradient(#CC7A3F 5%, rgba(204, 122, 63, 0.75) 45%, rgba(204, 122, 63, 0.2) 80%, transparent);
 }
 .bg-menu-theme .menu-text {
   color: #636578;
