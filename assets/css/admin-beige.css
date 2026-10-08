@@ -9,7 +9,7 @@
   --beige-bg-alt: #F7F4EE;
   --beige-bg-card: #FFFFFF;
   --beige-bg-sidebar: #F3EEE6;
-  --beige-sidebar-active: #E5DDD3;
+  --beige-sidebar-active: #D8C4B0;
   --beige-sidebar-hover: #EBE4DC;
   
   --beige-topbar-bg: #231C18;
@@ -271,16 +271,60 @@ h5, h6, .h5, .h6, .card-title {
   color: var(--beige-primary-accent) !important;
 }
 
-/* Active State */
+/* Active State - Darker, highlighted, crisp dark text (No white text!) */
+.bg-menu-theme .menu-item.active > .menu-link,
+.bg-menu-theme .menu-item.active:not(.open) > .menu-link:not(.menu-toggle),
+.bg-menu-theme .menu-item.active:not(.open) > .menu-link:not(.menu-toggle)::before,
+.bg-menu-theme.menu-vertical .menu-item.active > .menu-link,
 .menu-vertical .menu-item.active > .menu-link,
-.menu-vertical .menu-sub .menu-item.active > .menu-link {
+.menu-vertical .menu-sub .menu-item.active > .menu-link,
+.menu-item.active > .menu-link {
   background-color: var(--beige-sidebar-active) !important;
   color: var(--beige-text-primary) !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
+  box-shadow: inset 4px 0 0 var(--beige-primary-accent), 0 2px 5px rgba(33, 28, 23, 0.08) !important;
 }
 
-.menu-vertical .menu-item.active > .menu-link .menu-icon {
+/* Force text inside menu links (e.g. <div> or <span>) to be dark text, NOT white text */
+.bg-menu-theme .menu-item.active > .menu-link div,
+.bg-menu-theme .menu-item.active > .menu-link span,
+.bg-menu-theme .menu-item.active:not(.open) > .menu-link:not(.menu-toggle) div,
+.bg-menu-theme .menu-item.active:not(.open) > .menu-link:not(.menu-toggle) span,
+.menu-vertical .menu-item.active > .menu-link div,
+.menu-vertical .menu-item.active > .menu-link span,
+.menu-item.active > .menu-link div,
+.menu-item.active > .menu-link span {
+  color: var(--beige-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+/* Highlight Menu Icons & Bullets for Active Items */
+.menu-vertical .menu-item.active > .menu-link .menu-icon,
+.bg-menu-theme .menu-item.active > .menu-link .menu-icon,
+.bg-menu-theme .menu-item.active:not(.open) > .menu-link:not(.menu-toggle) .menu-icon {
   color: var(--beige-primary-accent) !important;
+}
+
+.bg-menu-theme .menu-item.active > .menu-link::before,
+.bg-menu-theme .menu-item.active:not(.open) > .menu-link:not(.menu-toggle)::before,
+.menu-vertical .menu-item.active > .menu-link::before {
+  background-color: var(--beige-primary-accent) !important;
+  color: var(--beige-primary-accent) !important;
+}
+
+/* Parent open category dropdown header when expanded */
+.menu-vertical .menu-item.active.open > .menu-link,
+.bg-menu-theme .menu-item.active.open > .menu-link {
+  background-color: #E8DDD0 !important;
+  color: var(--beige-text-primary) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.menu-vertical .menu-item.active.open > .menu-link div,
+.bg-menu-theme .menu-item.active.open > .menu-link div {
+  color: var(--beige-text-primary) !important;
+  font-weight: 600 !important;
 }
 
 /* Menu Submenu */
