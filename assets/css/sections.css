@@ -283,7 +283,7 @@
   }
 }
 
-/* Mobile: Strict 3:1 Aspect Ratio, Single-Line Bottom-Left Title, Entirely Clickable */
+/* Mobile: 2:1 Aspect Ratio, Single-Line Bottom-Left Title & Inline Bottom-Right Swipe Indicators */
 @media (max-width: 768px) {
   .hero-section {
     padding-top: 0.6rem;
@@ -294,19 +294,19 @@
     padding-right: 0.75rem;
   }
   .hero {
-    /* Strict 3:1 ratio — never a square or tall card */
-    aspect-ratio: 3 / 1 !important;
+    /* 2:1 Aspect ratio on mobile */
+    aspect-ratio: 2 / 1 !important;
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    border-radius: 8px;
+    border-radius: 10px;
   }
   .hero-slide {
     display: block;
     cursor: pointer;
   }
   .hero-content {
-    padding: 0 0.85rem 0.55rem 0.85rem !important;
+    padding: 0 0.85rem 0.65rem 0.85rem !important;
     align-items: flex-end !important; /* Bottom positioned */
     height: 100% !important;
   }
@@ -314,22 +314,46 @@
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 72px 0 0 !important; /* Spacing so title never overlaps with swipe indicator */
     transform: none !important;
     opacity: 1 !important;
   }
-  /* Hide description, eyebrow/label, and CTA buttons on mobile */
-  .hero-label,
+  /* Hide description and CTA buttons on mobile */
   .hero-subtext,
   .hero-ctas {
     display: none !important;
   }
+  /* Show hero-label at top-left of mobile banner */
+  .hero-label {
+    display: inline-flex !important;
+    position: absolute !important;
+    top: 0.65rem !important;
+    left: 0.85rem !important;
+    font-size: clamp(0.58rem, 2.4vw, 0.64rem) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #F1D4B6 !important;
+    background: hsla(25, 35%, 12%, 0.65) !important;
+    padding: 0.2rem 0.55rem !important;
+    border-radius: var(--radius-full) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border: 1px solid hsla(30, 40%, 80%, 0.22) !important;
+    margin: 0 !important;
+    z-index: 3 !important;
+    max-width: calc(100% - 1.7rem) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    pointer-events: none;
+  }
   /* Show only title, positioned at bottom-left on a single line, truncated with ellipsis */
   .hero-headline {
     font-family: var(--font-heading);
-    font-size: clamp(0.72rem, 3.4vw, 0.95rem) !important;
+    font-size: clamp(0.78rem, 3.4vw, 0.95rem) !important;
     font-weight: 600 !important;
-    line-height: 1.2 !important;
+    line-height: 1.25 !important;
     letter-spacing: -0.01em !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -355,17 +379,23 @@
   .hero-arrow {
     display: none !important;
   }
-  /* Position minimal indicators at top-right on mobile so bottom-left is fully for title */
+  /* Position minimal indicators at bottom-right inline with title */
   .hero-nav-indicators {
-    top: 0.5rem !important;
-    bottom: auto !important;
+    top: auto !important;
+    bottom: 0.65rem !important;
     left: auto !important;
-    right: 0.65rem !important;
-    gap: 0.25rem !important;
+    right: 0.85rem !important;
+    font-size: clamp(0.78rem, 3.4vw, 0.95rem) !important;
+    height: 1.25em !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
+    z-index: 5 !important;
   }
   .hero-nav-pill {
-    width: 14px !important;
-    height: 3px !important;
+    width: 13px !important;
+    height: 3.5px !important;
+    border-radius: 999px !important;
   }
   .hero-nav-pill.active {
     width: 22px !important;
@@ -2796,26 +2826,112 @@ textarea.form-control {
   }
 }
 
-@media (max-width: 640px) {
+/* Mobile: Significantly compact Launch Offer Strip */
+@media (max-width: 768px) {
   .launch-offer-strip {
-    padding: 1.25rem 0;
+    padding: 0.55rem 0 !important;
   }
   .launch-offer-inner {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 0.38rem !important;
   }
   .launch-offer-lead {
-    align-items: center;
+    align-items: center !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    gap: 0.12rem !important;
+  }
+  .launch-offer-badge {
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    margin-bottom: 0.05rem !important;
+    line-height: 1 !important;
+  }
+  .launch-offer-title {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    line-height: 1.22 !important;
+    margin: 0 !important;
+  }
+  .launch-offer-desc {
+    font-size: 0.74rem !important;
+    line-height: 1.3 !important;
+    max-width: 380px !important;
+    margin: 0 auto !important;
+  }
+  .launch-offer-countdown-wrap {
+    width: auto !important;
+    margin: 0 !important;
   }
   .countdown-editorial-clock {
-    width: 100%;
-    padding: 0.6rem 1rem;
+    width: auto !important;
+    padding: 0.22rem 0.65rem !important;
+    background: hsla(35, 28%, 95%, 0.75) !important;
+    border: 1px solid hsla(30, 18%, 86%, 0.85) !important;
+    border-radius: 6px !important;
+  }
+  /* Hide the stacked clock header on mobile for one-line compact display */
+  .countdown-clock-header {
+    display: none !important;
+  }
+  /* One horizontal line with small, clearly readable time units */
+  .countdown-clock-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.3rem !important;
+    white-space: nowrap !important;
+  }
+  .countdown-slot {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    min-width: auto !important;
+    gap: 3px !important;
+    text-align: left !important;
+  }
+  .countdown-slot-val {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: var(--color-black) !important;
+  }
+  .countdown-slot-tag {
+    font-size: 0.58rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    color: var(--color-grey-600) !important;
+    margin-top: 0 !important;
+    line-height: 1 !important;
+  }
+  .countdown-slot-divider {
+    font-size: 0.72rem !important;
+    font-weight: 400 !important;
+    color: var(--color-grey-400) !important;
+    transform: none !important;
+    margin: 0 2px !important;
+    line-height: 1 !important;
+  }
+  .launch-offer-action {
+    width: auto !important;
+    margin: 0 !important;
+    justify-content: center !important;
   }
   .launch-cta-btn {
-    width: 100%;
-    text-align: center;
-    display: block;
+    width: auto !important;
+    padding: 0.36rem 0.95rem !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    line-height: 1.25 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 }
 
