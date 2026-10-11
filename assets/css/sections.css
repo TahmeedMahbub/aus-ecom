@@ -710,10 +710,10 @@
 
 .category-products-section .section-see-more:hover {
   color: var(--color-white);
-  background: var(--color-dark);
-  border-color: var(--color-dark);
+  background: var(--color-brand);
+  border-color: var(--color-brand);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(25, 20, 15, 0.14);
+  box-shadow: 0 4px 14px hsla(24, 55%, 45%, 0.25);
   gap: 0.7rem;
 }
 
@@ -770,10 +770,10 @@
 }
 
 .category-nav-arrow:hover {
-  background: var(--color-dark);
-  color: #FFFDF9;
-  border-color: var(--color-dark);
-  box-shadow: 0 6px 18px rgba(25, 20, 15, 0.22);
+  background: var(--color-brand);
+  color: var(--color-white, #FFFDF9);
+  border-color: var(--color-brand);
+  box-shadow: 0 6px 18px hsla(24, 55%, 40%, 0.3);
   transform: translateY(-50%) scale(1.08);
 }
 
