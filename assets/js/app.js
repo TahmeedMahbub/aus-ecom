@@ -2120,7 +2120,7 @@
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
       checkoutBtn.addEventListener('click', () => {
-        showToast('Proceeding to checkout...');
+        window.location.href = 'checkout.html';
       });
     }
 
