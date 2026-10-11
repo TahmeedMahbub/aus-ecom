@@ -82,8 +82,8 @@
   --space-5xl:          8rem;
 
   /* ── Layout ── */
-  --max-width:          1320px;
-  --container-padding:  clamp(1rem, 3vw, 2rem);
+  --max-width:          1480px;
+  --container-padding:  clamp(1rem, 1.8vw, 1.5rem);
 
   /* ── Borders / Radius ── */
   --radius-sm:          4px;

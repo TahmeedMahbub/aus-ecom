@@ -598,28 +598,107 @@
   window.createProductCardHTML = createProductCardHTML;
   window.bindProductCardEvents = bindProductCardEvents;
 
-  function renderProducts(filter = 'all') {
+  function getStablePopularProducts(products, count = 8) {
+    if (!Array.isArray(products) || products.length === 0) return [];
+    const storageKey = 'bongo_popular_product_ids_v2';
+    try {
+      const cached = sessionStorage.getItem(storageKey);
+      if (cached) {
+        const ids = JSON.parse(cached);
+        if (Array.isArray(ids) && ids.length === Math.min(count, products.length)) {
+          const selected = ids.map(id => products.find(p => p.id === id)).filter(Boolean);
+          if (selected.length === Math.min(count, products.length)) {
+            return selected;
+          }
+        }
+      }
+    } catch(e) {}
+
+    // Deterministic/Random shuffle that stays stable for the session
+    const copy = [...products];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    const selected = copy.slice(0, count);
+    try {
+      sessionStorage.setItem(storageKey, JSON.stringify(selected.map(p => p.id)));
+    } catch(e) {}
+    return selected;
+  }
+
+  function renderProducts() {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
     const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll() : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
-    let filtered = sourceProducts.filter(p => !p.isDisabled);
+    const available = sourceProducts.filter(p => !p.isDisabled);
 
-    if (filter === 'preorder') {
-      filtered = filtered.filter(p => p.badge === 'preorder' || p.availability === 'preorder');
-    } else if (filter !== 'all') {
-      filtered = filtered.filter(p => p.category === filter);
-    }
-
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: var(--space-2xl); color: var(--color-grey-500);">No products found in this category.</div>`;
+    if (available.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: var(--space-2xl); color: var(--color-grey-500);">No products found.</div>`;
       return;
     }
 
-    // Limit to maximum 8 products on home page featured collection
-    const displayed = filtered.slice(0, 8);
+    const displayed = getStablePopularProducts(available, 8);
     grid.innerHTML = displayed.map(p => createProductCardHTML(p)).join('');
     bindProductCardEvents(grid);
+
+    // Update bottom-left Explore XX More Products link
+    const exploreLink = document.getElementById('popular-explore-more-link');
+    if (exploreLink) {
+      const additionalCount = Math.max(0, available.length - displayed.length);
+      exploreLink.innerHTML = `Explore ${additionalCount} More Products &rarr;`;
+      exploreLink.href = 'products.html';
+    }
+  }
+
+  function renderCategoryProductSections() {
+    const container = document.getElementById('category-product-sections');
+    if (!container) return;
+
+    const categories = (window.BongoCategories && typeof window.BongoCategories.getAll === 'function')
+      ? window.BongoCategories.getAll().filter(c => !c.isDisabled)
+      : (typeof CATEGORIES !== 'undefined' ? CATEGORIES : []);
+
+    const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll().filter(p => !p.isDisabled) : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+
+    // Filter categories that have at least 5 products available
+    const eligibleCategories = categories.filter(cat => {
+      const count = sourceProducts.filter(p => p.category === cat.slug).length;
+      return count >= 5;
+    });
+
+    if (eligibleCategories.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    container.innerHTML = eligibleCategories.map(cat => {
+      const catProducts = sourceProducts.filter(p => p.category === cat.slug).slice(0, 5);
+      const categoryUrl = `products.html?category=${cat.slug}`;
+
+      return `
+        <section class="section category-products-section fade-up visible" id="category-section-${cat.slug}">
+          <div class="container">
+            <div class="section-header">
+              <div class="section-header-top">
+                <div class="section-header-title">
+                  <h2>${cat.name}</h2>
+                </div>
+                <a href="${categoryUrl}" class="section-see-more">Show All &rarr;</a>
+              </div>
+            </div>
+            <div class="product-grid product-grid-5">
+              ${catProducts.map(p => createProductCardHTML(p)).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.product-grid').forEach(grid => {
+      bindProductCardEvents(grid);
+    });
   }
 
   function filterProducts(filterCategory) {
@@ -638,12 +717,7 @@
       showMoreLink.href = categoryUrl;
     }
 
-    const viewAllBtn = document.getElementById('featured-view-all-link');
-    if (viewAllBtn) {
-      viewAllBtn.href = categoryUrl;
-    }
-
-    renderProducts(filterCategory);
+    renderProducts();
   }
 
   function initFilterTabs() {
@@ -2677,7 +2751,8 @@
     renderBottomNav();
     renderHero();
     renderCategories();
-    renderProducts('all');
+    renderProducts();
+    renderCategoryProductSections();
     initFilterTabs();
     renderPreorderPreview();
     renderHomeLivingShowcase();

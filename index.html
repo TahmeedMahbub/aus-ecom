@@ -138,72 +138,62 @@
   <main class="main-content">
 
   <!-- ═══════════════════════════════════════════════════════
-       1. HERO SECTION (3:1 ASPECT RATIO BANNER)
+       1. HERO SECTION (2:1 BANNER + LAUNCH OFFER COUNTDOWN)
        ═══════════════════════════════════════════════════════ -->
   <section class="hero-section" id="hero-section">
     <div class="container hero-container">
-      <div class="hero" id="hero" role="region" aria-label="Featured Collection Highlights" aria-roledescription="carousel">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       LAUNCH OFFER STRIP (EDITORIAL COUNTDOWN)
-       ═══════════════════════════════════════════════════════ -->
-  <section class="launch-offer-strip" id="launch-offer-strip" aria-label="Limited Launch Promotion">
-    <div class="container">
-      <div class="launch-offer-inner fade-up visible">
-        <div class="launch-offer-lead">
-          <div class="launch-offer-badge">INAUGURAL OFFER · 25% OFF</div>
-          <h3 class="launch-offer-title">Celebrate Our Australian Launch</h3>
-          <p class="launch-offer-desc">Enjoy 25% off selected introductory ranges. Applied automatically at checkout.</p>
-        </div>
-
-        <div class="launch-offer-countdown-wrap" id="launch-offer-timer" role="timer" aria-live="polite">
+      <div class="hero-desktop-grid">
+        <!-- Left Column (~2/3 width): Hero Carousel Banner (2:1) -->
+        <div class="hero" id="hero" role="region" aria-label="Featured Collection Highlights" aria-roledescription="carousel">
           <!-- Rendered by JS -->
         </div>
 
-        <div class="launch-offer-action">
-          <a href="#products-section" class="btn btn-primary launch-cta-btn">Shop Curated Range &rarr;</a>
+        <!-- Right Column (~1/3 width): Launch Offer Countdown Card -->
+        <div class="launch-offer-strip" id="launch-offer-strip" aria-label="Limited Launch Promotion">
+          <div class="launch-offer-inner fade-up visible">
+            <div class="launch-offer-lead">
+              <div class="launch-offer-badge">INAUGURAL OFFER · 25% OFF</div>
+              <h3 class="launch-offer-title">Celebrate Our Australian Launch</h3>
+              <p class="launch-offer-desc">Enjoy 25% off selected introductory ranges. Applied automatically at checkout.</p>
+            </div>
+
+            <div class="launch-offer-countdown-wrap" id="launch-offer-timer" role="timer" aria-live="polite">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div class="launch-offer-action">
+              <a href="#products-section" class="btn btn-primary launch-cta-btn">Shop Curated Range &rarr;</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       2. FEATURED COLLECTION
+       2. POPULAR RIGHT NOW
        ═══════════════════════════════════════════════════════ -->
   <section class="section products-section" id="products-section">
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-header-top">
           <div class="section-header-title">
-            <!-- <span class="section-kicker">CURATED SELECTION</span> -->
-            <h2>Featured Collection</h2>
+            <h2>Popular Right Now</h2>
           </div>
-          <a href="./products.html" class="section-see-more">Show More &rarr;</a>
+          <a href="./products.html" class="section-see-more">Show All &rarr;</a>
         </div>
         <p class="section-header-desc">A selection of pieces we're excited to bring to Australia.</p>
       </div>
 
-      <!-- Category Filter Tabs -->
-      <div class="filter-tabs fade-up" id="product-filter-tabs">
-        <button class="filter-btn active" data-filter="all">All Items</button>
-        <button class="filter-btn" data-filter="fashion">Fashion</button>
-        <button class="filter-btn" data-filter="home-decor">Home Decor</button>
-        <button class="filter-btn" data-filter="jute">Jute</button>
-        <button class="filter-btn" data-filter="handicrafts">Handcrafted</button>
-        <button class="filter-btn" data-filter="lifestyle">Gifts</button>
-      </div>
-
       <div class="product-grid" id="product-grid">
-        <!-- Rendered by JS -->
+        <!-- Rendered by JS: 8 randomly selected products -->
       </div>
 
-      <!-- <div class="products-section-footer fade-up" style="text-align: center; margin-top: 2.5rem;">
-        <a href="./products.html" class="btn btn-outline" id="featured-view-all-link">View All Products &rarr;</a>
-      </div> -->
+      <div class="popular-section-footer fade-up">
+        <a href="./products.html" class="popular-explore-more-link" id="popular-explore-more-link">
+          Explore More Products &rarr;
+        </a>
+      </div>
     </div>
   </section>
 
@@ -227,6 +217,13 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       4. CATEGORY-WISE PRODUCT SECTIONS (Rendered by JS)
+       ═══════════════════════════════════════════════════════ -->
+  <div id="category-product-sections">
+    <!-- Rendered dynamically for each category with at least 5 products -->
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════
        5. HOME & LIVING
