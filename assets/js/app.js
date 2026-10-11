@@ -598,9 +598,9 @@
   window.createProductCardHTML = createProductCardHTML;
   window.bindProductCardEvents = bindProductCardEvents;
 
-  function getStablePopularProducts(products, count = 8) {
+  function getStablePopularProducts(products, count = 5) {
     if (!Array.isArray(products) || products.length === 0) return [];
-    const storageKey = 'bongo_popular_product_ids_v2';
+    const storageKey = 'bongo_popular_product_ids_v5';
     try {
       const cached = sessionStorage.getItem(storageKey);
       if (cached) {
@@ -639,7 +639,7 @@
       return;
     }
 
-    const displayed = getStablePopularProducts(available, 8);
+    const displayed = getStablePopularProducts(available, 5);
     grid.innerHTML = displayed.map(p => createProductCardHTML(p)).join('');
     bindProductCardEvents(grid);
 
@@ -652,6 +652,59 @@
     }
   }
 
+  // Category slider interaction state store
+  const categorySliderState = {};
+
+  function initCategorySliderInteractions(container) {
+    container.querySelectorAll('.category-nav-arrow').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const catSlug = btn.dataset.category;
+        const categoryUrl = btn.dataset.url || `products.html?category=${catSlug}`;
+        const totalPages = parseInt(btn.dataset.totalPages, 10) || 1;
+
+        if (!categorySliderState[catSlug]) {
+          categorySliderState[catSlug] = { step: 0, isAnimating: false };
+        }
+        const state = categorySliderState[catSlug];
+
+        // Prevent repeated rapid clicks from breaking animation
+        if (state.isAnimating) return;
+
+        // If no additional products (totalPages <= 1) OR user has advanced twice (state.step >= 2) OR reached last page:
+        // On third click or when at the end -> navigate to that category's full product listing page!
+        if (totalPages <= 1 || state.step >= 2 || state.step >= totalPages - 1) {
+          window.location.href = categoryUrl;
+          return;
+        }
+
+        // Advance to next set of products (up to 2 advances per category)
+        const track = document.getElementById(`category-track-${catSlug}`);
+        if (!track) {
+          window.location.href = categoryUrl;
+          return;
+        }
+
+        state.isAnimating = true;
+        state.step += 1;
+        track.style.transform = `translateX(-${state.step * 100}%)`;
+
+        // Update button aria-label & title if next click will navigate to full listing
+        if (state.step >= 2 || state.step >= totalPages - 1) {
+          btn.setAttribute('title', 'View all products');
+          btn.setAttribute('aria-label', `View all ${btn.dataset.categoryName || ''} products`);
+          btn.classList.add('is-final-step');
+        }
+
+        setTimeout(() => {
+          state.isAnimating = false;
+        }, 520);
+      });
+    });
+  }
+
   function renderCategoryProductSections() {
     const container = document.getElementById('category-product-sections');
     if (!container) return;
@@ -660,12 +713,13 @@
       ? window.BongoCategories.getAll().filter(c => !c.isDisabled)
       : (typeof CATEGORIES !== 'undefined' ? CATEGORIES : []);
 
-    const sourceProducts = window.BongoProducts ? window.BongoProducts.getAll().filter(p => !p.isDisabled) : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+    const sourceProducts = window.BongoProducts 
+      ? window.BongoProducts.getAll().filter(p => !p.isDisabled) 
+      : (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
 
-    // Filter categories that have at least 5 products available
+    // Render all available categories that have products dynamically
     const eligibleCategories = categories.filter(cat => {
-      const count = sourceProducts.filter(p => p.category === cat.slug).length;
-      return count >= 5;
+      return sourceProducts.some(p => p.category === cat.slug);
     });
 
     if (eligibleCategories.length === 0) {
@@ -674,8 +728,59 @@
     }
 
     container.innerHTML = eligibleCategories.map(cat => {
-      const catProducts = sourceProducts.filter(p => p.category === cat.slug).slice(0, 5);
+      const allCatProducts = sourceProducts.filter(p => p.category === cat.slug);
       const categoryUrl = `products.html?category=${cat.slug}`;
+
+      // Divide products into pages of up to 5 products each (max 3 pages for homepage)
+      const pages = [];
+      const pageSize = 5;
+      const maxPages = 3; // Allow up to 2 advances (pages 0, 1, 2)
+      for (let i = 0; i < allCatProducts.length && pages.length < maxPages; i += pageSize) {
+        pages.push(allCatProducts.slice(i, i + pageSize));
+      }
+      if (pages.length === 0 && allCatProducts.length > 0) {
+        pages.push(allCatProducts.slice(0, 5));
+      }
+
+      const totalPages = pages.length;
+      categorySliderState[cat.slug] = { step: 0, isAnimating: false };
+
+      const mobileEndCardHTML = `
+        <a href="${categoryUrl}" class="category-mobile-end-card" aria-label="View all ${cat.name} products">
+          <div class="category-mobile-end-arrow-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+          <span class="category-mobile-end-text">View All</span>
+        </a>
+      `;
+
+      const pagesHTML = pages.map((pageProducts, pageIdx) => `
+        <div class="category-product-page product-grid product-grid-5" data-page="${pageIdx}">
+          ${pageProducts.map(p => createProductCardHTML(p)).join('')}
+          ${pageIdx === 0 ? mobileEndCardHTML : ''}
+        </div>
+      `).join('');
+
+      // Right arrow control positioned at the right side of each category's product row
+      const arrowTitle = totalPages > 1 ? `View next ${cat.name} products` : `View all ${cat.name} products`;
+      const arrowHTML = `
+        <button type="button" 
+                class="category-nav-arrow" 
+                data-category="${cat.slug}"
+                data-category-name="${cat.name}"
+                data-url="${categoryUrl}"
+                data-total-pages="${totalPages}"
+                title="${arrowTitle}"
+                aria-label="${arrowTitle}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      `;
 
       return `
         <section class="section category-products-section fade-up visible" id="category-section-${cat.slug}">
@@ -688,8 +793,14 @@
                 <a href="${categoryUrl}" class="section-see-more">Show All &rarr;</a>
               </div>
             </div>
-            <div class="product-grid product-grid-5">
-              ${catProducts.map(p => createProductCardHTML(p)).join('')}
+
+            <div class="category-slider-wrapper" data-category="${cat.slug}">
+              ${arrowHTML}
+              <div class="category-slider-viewport">
+                <div class="category-slider-track" id="category-track-${cat.slug}">
+                  ${pagesHTML}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -699,6 +810,8 @@
     container.querySelectorAll('.product-grid').forEach(grid => {
       bindProductCardEvents(grid);
     });
+
+    initCategorySliderInteractions(container);
   }
 
   function filterProducts(filterCategory) {
