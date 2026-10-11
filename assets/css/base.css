@@ -301,7 +301,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-grey-100); }
-::-webkit-scrollbar-thumb { background: var(--color-grey-300); border-radius: var(--radius-full); }
-::-webkit-scrollbar-thumb:hover { background: var(--color-grey-500); }
+::-webkit-scrollbar-thumb { background: var(--color-brand); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-hover); }

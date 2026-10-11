@@ -727,7 +727,7 @@
       return;
     }
 
-    container.innerHTML = eligibleCategories.map(cat => {
+    container.innerHTML = eligibleCategories.map((cat, catIdx) => {
       const allCatProducts = sourceProducts.filter(p => p.category === cat.slug);
       const categoryUrl = `products.html?category=${cat.slug}`;
 
@@ -782,15 +782,17 @@
         </button>
       `;
 
+      const isAltBg = catIdx % 2 === 1;
+
       return `
-        <section class="section category-products-section fade-up visible" id="category-section-${cat.slug}">
+        <section class="section category-products-section ${isAltBg ? 'category-section-alt' : ''} fade-up visible" id="category-section-${cat.slug}">
           <div class="container">
             <div class="section-header">
               <div class="section-header-top">
                 <div class="section-header-title">
                   <h2>${cat.name}</h2>
                 </div>
-                <a href="${categoryUrl}" class="section-see-more">Show All &rarr;</a>
+                <a href="${categoryUrl}" class="section-see-more" aria-label="Show all ${cat.name} products">Show All &rarr;</a>
               </div>
             </div>
 

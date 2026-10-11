@@ -121,11 +121,17 @@
 .nav-link .chevron-down {
   width: 12px;
   height: 12px;
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), stroke var(--transition-fast);
+  stroke: var(--color-grey-700);
 }
 
 .nav-item:hover .chevron-down {
   transform: rotate(180deg);
+  stroke: var(--color-brand);
+}
+
+.nav-item:hover .nav-link .chevron-down {
+  stroke: var(--color-brand);
 }
 
 /* ── Navbar Actions ── */
