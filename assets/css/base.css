@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-header-top {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   gap: var(--space-md);
@@ -121,21 +121,29 @@ h1, h2, h3, h4, h5, h6 {
 .section-see-more {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: var(--fs-xs);
+  gap: 0.45rem;
+  font-size: 0.875rem;
   font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-wide);
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--color-brand);
+  background: hsla(24, 55%, 48%, 0.08);
+  border: 1px solid hsla(24, 55%, 48%, 0.28);
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
   white-space: nowrap;
   flex-shrink: 0;
-  transition: gap var(--transition-fast), color var(--transition-fast);
-  margin-bottom: 0.3rem;
+  line-height: 1.25;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 2px hsla(25, 20%, 20%, 0.03);
 }
 
 .section-see-more:hover {
-  gap: 0.6rem;
-  color: var(--color-brand-dark);
+  background: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-brand);
+  gap: 0.65rem;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px hsla(24, 55%, 40%, 0.2);
 }
 
 /* ── Buttons ── */

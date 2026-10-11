@@ -285,31 +285,217 @@
   };
 
   /* ══════════════════════════════════════════════════════════
-     1. HERO SLIDER
+     1. HERO SLIDER (3:1 Editorial Ken Burns Carousel)
      ══════════════════════════════════════════════════════════ */
+  let heroState = {
+    currentIndex: 0,
+    timer: null,
+    isPaused: false
+  };
+
   function renderHero() {
     const heroEl = document.getElementById('hero');
     if (!heroEl) return;
 
+    if (!Array.isArray(HERO_SLIDES) || HERO_SLIDES.length === 0) return;
+
     let slidesHTML = HERO_SLIDES.map((slide, i) => `
-      <div class="hero-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
+      <a href="${slide.ctaLink}" class="hero-slide ${i === 0 ? 'active' : ''}" data-slide="${i}" role="group" aria-roledescription="slide" aria-label="Slide ${i + 1} of ${HERO_SLIDES.length}: ${slide.headline}" aria-hidden="${i === 0 ? 'false' : 'true'}">
         <div class="hero-slide-bg" style="background-image: url('${slide.image}')"></div>
         <div class="hero-slide-overlay"></div>
-        <div class="hero-content container">
+        <div class="hero-content">
           <div class="hero-text">
-            <div class="hero-label">${slide.label}</div>
+            <span class="hero-label">${slide.label}</span>
             <h1 class="hero-headline">${slide.headline}</h1>
             <p class="hero-subtext">${slide.subtext}</p>
-            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-              <a href="${slide.ctaLink}" class="btn btn-white">${slide.cta}</a>
-              <a href="${slide.secondaryCtaLink}" class="btn btn-outline-white">${slide.secondaryCta}</a>
+            <div class="hero-ctas">
+              <span class="btn btn-white">${slide.cta}</span>
+              ${slide.secondaryCta ? `<span class="btn btn-outline-white hero-secondary-btn" data-secondary-link="${slide.secondaryCtaLink}">${slide.secondaryCta}</span>` : ''}
             </div>
           </div>
         </div>
-      </div>
+      </a>
     `).join('');
 
-    heroEl.innerHTML = slidesHTML;
+    let indicatorsHTML = `
+      <div class="hero-nav-indicators" role="tablist" aria-label="Carousel slide controls">
+        ${HERO_SLIDES.map((_, i) => `
+          <button class="hero-nav-pill ${i === 0 ? 'active' : ''}" data-slide-index="${i}" role="tab" aria-selected="${i === 0 ? 'true' : 'false'}" aria-label="Go to slide ${i + 1}">
+          </button>
+        `).join('')}
+      </div>
+    `;
+
+    let arrowsHTML = `
+      <button class="hero-arrow hero-arrow-prev" aria-label="Previous slide" data-direction="prev">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="hero-arrow hero-arrow-next" aria-label="Next slide" data-direction="next">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    `;
+
+    heroEl.innerHTML = slidesHTML + indicatorsHTML + arrowsHTML;
+
+    bindHeroEvents(heroEl);
+    startHeroAutoRotation();
+  }
+
+  function goToSlide(index) {
+    const heroEl = document.getElementById('hero');
+    if (!heroEl) return;
+
+    const slides = heroEl.querySelectorAll('.hero-slide');
+    const pills = heroEl.querySelectorAll('.hero-nav-pill');
+    if (!slides.length) return;
+
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+
+    heroState.currentIndex = index;
+
+    slides.forEach((slide, i) => {
+      const isActive = i === index;
+      if (isActive) {
+        const bg = slide.querySelector('.hero-slide-bg');
+        if (bg && !slide.classList.contains('active')) {
+          bg.style.animation = 'none';
+          void bg.offsetWidth; // Force reflow to cleanly restart Ken Burns animation
+          bg.style.animation = '';
+        }
+        slide.classList.add('active');
+        slide.setAttribute('aria-hidden', 'false');
+      } else {
+        slide.classList.remove('active');
+        slide.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    pills.forEach((pill, i) => {
+      const isActive = i === index;
+      pill.classList.toggle('active', isActive);
+      pill.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
+  function nextSlide() {
+    goToSlide(heroState.currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(heroState.currentIndex - 1);
+  }
+
+  function startHeroAutoRotation() {
+    stopHeroAutoRotation();
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    heroState.timer = setInterval(() => {
+      if (!heroState.isPaused) {
+        nextSlide();
+      }
+    }, 5500); // 5.5s rotation
+  }
+
+  function stopHeroAutoRotation() {
+    if (heroState.timer) {
+      clearInterval(heroState.timer);
+      heroState.timer = null;
+    }
+  }
+
+  function bindHeroEvents(heroEl) {
+    // Secondary CTA clicks: prevent parent slide click, navigate to secondary link
+    heroEl.querySelectorAll('.hero-secondary-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const secLink = btn.dataset.secondaryLink;
+        if (secLink) window.location.href = secLink;
+      });
+    });
+
+    // Indicator pills
+    heroEl.querySelectorAll('.hero-nav-pill').forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const idx = parseInt(pill.dataset.slideIndex, 10);
+        goToSlide(idx);
+        startHeroAutoRotation();
+      });
+    });
+
+    // Arrow navigation
+    const prevBtn = heroEl.querySelector('.hero-arrow-prev');
+    const nextBtn = heroEl.querySelector('.hero-arrow-next');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        prevSlide();
+        startHeroAutoRotation();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        nextSlide();
+        startHeroAutoRotation();
+      });
+    }
+
+    // Pause auto-rotation on mouse enter / keyboard focus
+    heroEl.addEventListener('mouseenter', () => {
+      heroState.isPaused = true;
+    });
+    heroEl.addEventListener('mouseleave', () => {
+      heroState.isPaused = false;
+    });
+    heroEl.addEventListener('focusin', () => {
+      heroState.isPaused = true;
+    });
+    heroEl.addEventListener('focusout', () => {
+      heroState.isPaused = false;
+    });
+
+    // Mobile swipe handling (distinguish swipe from tap)
+    let startX = 0;
+    let isSwiping = false;
+
+    heroEl.addEventListener('touchstart', (e) => {
+      startX = e.changedTouches[0].screenX;
+      isSwiping = false;
+      heroState.isPaused = true;
+    }, { passive: true });
+
+    heroEl.addEventListener('touchmove', (e) => {
+      const diffX = Math.abs(e.changedTouches[0].screenX - startX);
+      if (diffX > 10) {
+        isSwiping = true;
+      }
+    }, { passive: true });
+
+    heroEl.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].screenX;
+      heroState.isPaused = false;
+      const diff = endX - startX;
+      if (Math.abs(diff) > 35) {
+        if (diff < 0) nextSlide();
+        else prevSlide();
+        startHeroAutoRotation();
+      }
+    }, { passive: true });
+
+    // Prevent navigation if a swipe gesture was performed
+    heroEl.addEventListener('click', (e) => {
+      if (isSwiping) {
+        e.preventDefault();
+        isSwiping = false;
+      }
+    });
   }
 
   /* ══════════════════════════════════════════════════════════
@@ -430,7 +616,9 @@
       return;
     }
 
-    grid.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+    // Limit to maximum 8 products on home page featured collection
+    const displayed = filtered.slice(0, 8);
+    grid.innerHTML = displayed.map(p => createProductCardHTML(p)).join('');
     bindProductCardEvents(grid);
   }
 
@@ -440,6 +628,20 @@
     document.querySelectorAll('#product-filter-tabs .filter-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.filter === filterCategory);
     });
+
+    const categoryUrl = (filterCategory && filterCategory !== 'all') 
+      ? `products.html?category=${filterCategory}` 
+      : 'products.html';
+
+    const showMoreLink = document.querySelector('#products-section .section-see-more');
+    if (showMoreLink) {
+      showMoreLink.href = categoryUrl;
+    }
+
+    const viewAllBtn = document.getElementById('featured-view-all-link');
+    if (viewAllBtn) {
+      viewAllBtn.href = categoryUrl;
+    }
 
     renderProducts(filterCategory);
   }
@@ -2359,19 +2561,34 @@
     setTimeout(() => toast.remove(), 400);
   }
 
+  let launchOfferTimerInterval = null;
+
   function renderLaunchOfferCountdown() {
     const el = document.getElementById('launch-offer-timer');
+    const strip = document.getElementById('launch-offer-strip');
     if (!el) return;
 
-    // Launch offer end date (October 15, 2026)
+    if (launchOfferTimerInterval) {
+      clearInterval(launchOfferTimerInterval);
+      launchOfferTimerInterval = null;
+    }
+
+    // Launch offer end date: October 15, 2026, 23:59:59 AEST (+10:00)
     const offerEndDate = new Date('2026-10-15T23:59:59+10:00').getTime();
 
     function update() {
-      const now = new Date().getTime();
+      const now = Date.now();
       const diff = offerEndDate - now;
 
       if (diff <= 0) {
-        el.innerHTML = '<span style="font-size:0.75rem; color:var(--color-grey-600)">Offer Ended</span>';
+        if (launchOfferTimerInterval) {
+          clearInterval(launchOfferTimerInterval);
+          launchOfferTimerInterval = null;
+        }
+        el.innerHTML = '<div class="countdown-expired-msg">Launch offer has concluded. Explore our full permanent collection below.</div>';
+        if (strip) {
+          strip.classList.add('offer-expired');
+        }
         return;
       }
 
@@ -2381,18 +2598,35 @@
       const secs = Math.floor((diff / 1000) % 60);
 
       el.innerHTML = `
-        <div class="timer-unit-box"><div class="timer-unit-num">${String(days).padStart(2, '0')}</div><div class="timer-unit-label">Days</div></div>
-        <span class="timer-unit-sep">:</span>
-        <div class="timer-unit-box"><div class="timer-unit-num">${String(hours).padStart(2, '0')}</div><div class="timer-unit-label">Hrs</div></div>
-        <span class="timer-unit-sep">:</span>
-        <div class="timer-unit-box"><div class="timer-unit-num">${String(mins).padStart(2, '0')}</div><div class="timer-unit-label">Min</div></div>
-        <span class="timer-unit-sep">:</span>
-        <div class="timer-unit-box"><div class="timer-unit-num">${String(secs).padStart(2, '0')}</div><div class="timer-unit-label">Sec</div></div>
+        <div class="countdown-editorial-clock">
+          <span class="countdown-clock-header">Limited Time Remaining</span>
+          <div class="countdown-clock-row">
+            <div class="countdown-slot" aria-label="${days} days remaining">
+              <span class="countdown-slot-val">${String(days).padStart(2, '0')}</span>
+              <span class="countdown-slot-tag">Days</span>
+            </div>
+            <span class="countdown-slot-divider" aria-hidden="true">:</span>
+            <div class="countdown-slot" aria-label="${hours} hours remaining">
+              <span class="countdown-slot-val">${String(hours).padStart(2, '0')}</span>
+              <span class="countdown-slot-tag">Hours</span>
+            </div>
+            <span class="countdown-slot-divider" aria-hidden="true">:</span>
+            <div class="countdown-slot" aria-label="${mins} minutes remaining">
+              <span class="countdown-slot-val">${String(mins).padStart(2, '0')}</span>
+              <span class="countdown-slot-tag">Mins</span>
+            </div>
+            <span class="countdown-slot-divider" aria-hidden="true">:</span>
+            <div class="countdown-slot" aria-label="${secs} seconds remaining">
+              <span class="countdown-slot-val">${String(secs).padStart(2, '0')}</span>
+              <span class="countdown-slot-tag">Secs</span>
+            </div>
+          </div>
+        </div>
       `;
     }
 
     update();
-    setInterval(update, 1000);
+    launchOfferTimerInterval = setInterval(update, 1000);
   }
 
   function initNewsletter() {

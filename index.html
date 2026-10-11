@@ -138,31 +138,34 @@
   <main class="main-content">
 
   <!-- ═══════════════════════════════════════════════════════
-       1. HERO SECTION
+       1. HERO SECTION (3:1 ASPECT RATIO BANNER)
        ═══════════════════════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <!-- Rendered by JS -->
+  <section class="hero-section" id="hero-section">
+    <div class="container hero-container">
+      <div class="hero" id="hero" role="region" aria-label="Featured Collection Highlights" aria-roledescription="carousel">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       LAUNCH OFFER STRIP (COMPACT)
+       LAUNCH OFFER STRIP (EDITORIAL COUNTDOWN)
        ═══════════════════════════════════════════════════════ -->
-  <section class="launch-offer-strip" id="launch-offer-strip">
+  <section class="launch-offer-strip" id="launch-offer-strip" aria-label="Limited Launch Promotion">
     <div class="container">
       <div class="launch-offer-inner fade-up visible">
-        <div class="launch-offer-left">
-          <span class="launch-offer-eyebrow">LIMITED LAUNCH OFFER</span>
-          <div class="launch-offer-content">
-            <span class="launch-offer-discount">25% OFF</span>
-            <span class="launch-offer-text">Save 25% on selected products for a limited time.</span>
-          </div>
+        <div class="launch-offer-lead">
+          <div class="launch-offer-badge">INAUGURAL OFFER · 25% OFF</div>
+          <h3 class="launch-offer-title">Celebrate Our Australian Launch</h3>
+          <p class="launch-offer-desc">Enjoy 25% off selected introductory ranges. Applied automatically at checkout.</p>
         </div>
 
-        <div class="launch-offer-right">
-          <div class="launch-offer-timer" id="launch-offer-timer">
-            <!-- Rendered by JS -->
-          </div>
-          <a href="#products-section" class="btn btn-primary">Shop Now</a>
+        <div class="launch-offer-countdown-wrap" id="launch-offer-timer" role="timer" aria-live="polite">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="launch-offer-action">
+          <a href="#products-section" class="btn btn-primary launch-cta-btn">Shop Curated Range &rarr;</a>
         </div>
       </div>
     </div>
@@ -197,6 +200,10 @@
       <div class="product-grid" id="product-grid">
         <!-- Rendered by JS -->
       </div>
+
+      <!-- <div class="products-section-footer fade-up" style="text-align: center; margin-top: 2.5rem;">
+        <a href="./products.html" class="btn btn-outline" id="featured-view-all-link">View All Products &rarr;</a>
+      </div> -->
     </div>
   </section>
 
@@ -341,17 +348,6 @@
         </div> -->
 
       </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       10. DISCOVER SOMETHING DIFFERENT (SOCIAL PROOF)
-       ═══════════════════════════════════════════════════════ -->
-  <section class="section reviews-section" id="reviews-section" style="padding: 3rem 0; background: var(--color-surface-alt);">
-    <div class="container" style="text-align: center; max-width: 640px; margin: 0 auto;">
-      <span class="section-kicker">OUR COMMITMENT</span>
-      <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Discover Something Different</h2>
-      <p style="color: var(--color-grey-700); font-size: 1rem;">Thoughtfully selected artisan products, brought to Australia.</p>
     </div>
   </section>
 
