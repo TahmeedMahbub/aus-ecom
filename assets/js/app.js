@@ -655,6 +655,43 @@
   // Category slider interaction state store
   const categorySliderState = {};
 
+  function updateCategorySliderControls(catSlug, totalPages, catName) {
+    const wrapper = document.querySelector(`.category-slider-wrapper[data-category="${catSlug}"]`);
+    if (!wrapper) return;
+    const prevBtn = wrapper.querySelector('.category-nav-arrow-prev');
+    const nextBtn = wrapper.querySelector('.category-nav-arrow-next');
+    const state = categorySliderState[catSlug] || { step: 0 };
+
+    if (prevBtn) {
+      if (state.step <= 0) {
+        prevBtn.setAttribute('disabled', 'true');
+        prevBtn.setAttribute('aria-disabled', 'true');
+        prevBtn.classList.add('is-disabled');
+      } else {
+        prevBtn.removeAttribute('disabled');
+        prevBtn.removeAttribute('aria-disabled');
+        prevBtn.classList.remove('is-disabled');
+        const prevTitle = `View previous ${catName} products`;
+        prevBtn.setAttribute('title', prevTitle);
+        prevBtn.setAttribute('aria-label', prevTitle);
+      }
+    }
+
+    if (nextBtn) {
+      const isFinal = totalPages <= 1 || state.step >= 2 || state.step >= totalPages - 1;
+      if (isFinal) {
+        nextBtn.setAttribute('title', 'View all products');
+        nextBtn.setAttribute('aria-label', `View all ${catName} products`);
+        nextBtn.classList.add('is-final-step');
+      } else {
+        const nextTitle = `View next ${catName} products`;
+        nextBtn.setAttribute('title', nextTitle);
+        nextBtn.setAttribute('aria-label', nextTitle);
+        nextBtn.classList.remove('is-final-step');
+      }
+    }
+  }
+
   function initCategorySliderInteractions(container) {
     container.querySelectorAll('.category-nav-arrow').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -662,8 +699,10 @@
         e.stopPropagation();
 
         const catSlug = btn.dataset.category;
+        const catName = btn.dataset.categoryName || '';
         const categoryUrl = btn.dataset.url || `products.html?category=${catSlug}`;
         const totalPages = parseInt(btn.dataset.totalPages, 10) || 1;
+        const direction = btn.dataset.direction || (btn.classList.contains('category-nav-arrow-prev') ? 'prev' : 'next');
 
         if (!categorySliderState[catSlug]) {
           categorySliderState[catSlug] = { step: 0, isAnimating: false };
@@ -673,34 +712,44 @@
         // Prevent repeated rapid clicks from breaking animation
         if (state.isAnimating) return;
 
-        // If no additional products (totalPages <= 1) OR user has advanced twice (state.step >= 2) OR reached last page:
-        // On third click or when at the end -> navigate to that category's full product listing page!
-        if (totalPages <= 1 || state.step >= 2 || state.step >= totalPages - 1) {
-          window.location.href = categoryUrl;
-          return;
-        }
-
-        // Advance to next set of products (up to 2 advances per category)
         const track = document.getElementById(`category-track-${catSlug}`);
-        if (!track) {
-          window.location.href = categoryUrl;
-          return;
+
+        if (direction === 'prev') {
+          // Left arrow: reverse movement back to previous product page
+          if (state.step <= 0) return;
+          if (!track) return;
+
+          state.isAnimating = true;
+          state.step -= 1;
+          track.style.transform = `translateX(-${state.step * 100}%)`;
+
+          updateCategorySliderControls(catSlug, totalPages, catName);
+
+          setTimeout(() => {
+            state.isAnimating = false;
+          }, 520);
+        } else {
+          // Right arrow: advance forward to next products or navigate to category page if at end
+          if (totalPages <= 1 || state.step >= 2 || state.step >= totalPages - 1) {
+            window.location.href = categoryUrl;
+            return;
+          }
+
+          if (!track) {
+            window.location.href = categoryUrl;
+            return;
+          }
+
+          state.isAnimating = true;
+          state.step += 1;
+          track.style.transform = `translateX(-${state.step * 100}%)`;
+
+          updateCategorySliderControls(catSlug, totalPages, catName);
+
+          setTimeout(() => {
+            state.isAnimating = false;
+          }, 520);
         }
-
-        state.isAnimating = true;
-        state.step += 1;
-        track.style.transform = `translateX(-${state.step * 100}%)`;
-
-        // Update button aria-label & title if next click will navigate to full listing
-        if (state.step >= 2 || state.step >= totalPages - 1) {
-          btn.setAttribute('title', 'View all products');
-          btn.setAttribute('aria-label', `View all ${btn.dataset.categoryName || ''} products`);
-          btn.classList.add('is-final-step');
-        }
-
-        setTimeout(() => {
-          state.isAnimating = false;
-        }, 520);
       });
     });
   }
@@ -764,17 +813,39 @@
         </div>
       `).join('');
 
-      // Right arrow control positioned at the right side of each category's product row
-      const arrowTitle = totalPages > 1 ? `View next ${cat.name} products` : `View all ${cat.name} products`;
-      const arrowHTML = `
+      // Left & Right arrow controls positioned at the sides of each category's product row
+      const nextArrowTitle = totalPages > 1 ? `View next ${cat.name} products` : `View all ${cat.name} products`;
+      const prevArrowTitle = `View previous ${cat.name} products`;
+
+      const prevArrowHTML = `
         <button type="button" 
-                class="category-nav-arrow" 
+                class="category-nav-arrow category-nav-arrow-prev is-disabled" 
                 data-category="${cat.slug}"
                 data-category-name="${cat.name}"
+                data-direction="prev"
                 data-url="${categoryUrl}"
                 data-total-pages="${totalPages}"
-                title="${arrowTitle}"
-                aria-label="${arrowTitle}">
+                title="${prevArrowTitle}"
+                aria-label="${prevArrowTitle}"
+                disabled
+                aria-disabled="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+      `;
+
+      const nextArrowHTML = `
+        <button type="button" 
+                class="category-nav-arrow category-nav-arrow-next ${totalPages <= 1 ? 'is-final-step' : ''}" 
+                data-category="${cat.slug}"
+                data-category-name="${cat.name}"
+                data-direction="next"
+                data-url="${categoryUrl}"
+                data-total-pages="${totalPages}"
+                title="${nextArrowTitle}"
+                aria-label="${nextArrowTitle}">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -797,7 +868,8 @@
             </div>
 
             <div class="category-slider-wrapper" data-category="${cat.slug}">
-              ${arrowHTML}
+              ${prevArrowHTML}
+              ${nextArrowHTML}
               <div class="category-slider-viewport">
                 <div class="category-slider-track" id="category-track-${cat.slug}">
                   ${pagesHTML}
