@@ -5,6 +5,7 @@
 
 const SITE = {
   brandName: 'Bongo Curated',
+  logo: 'assets/logos/logo.png',
   tagline: 'Artisan Crafted. Curated for Australia.',
   announcementMessage: 'Discover distinctive handcrafted pieces, curated for Australia.',
   announcementLink: '#products-section',

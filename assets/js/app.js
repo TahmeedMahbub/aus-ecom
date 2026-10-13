@@ -1571,7 +1571,9 @@
 
     footerGrid.innerHTML = `
       <div class="footer-brand">
-        <div class="brand-name">${SITE.brandName}</div>
+        <a href="index.html" class="footer-logo-link" aria-label="${SITE.brandName}">
+          <img src="assets/logos/logo.png" alt="${SITE.brandName}" class="footer-logo">
+        </a>
         <p>An Australian ecommerce brand offering thoughtfully curated lifestyle pieces — from fashion and handcrafted decor to natural jute items and gifts.</p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">${ICONS.facebook}</a>

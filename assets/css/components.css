@@ -50,6 +50,58 @@
   gap: 0.375rem;
   flex-shrink: 0;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.navbar-brand .navbar-logo,
+.navbar-brand .brand-logo {
+  height: 34px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar-brand:hover .navbar-logo,
+.navbar-brand:hover .brand-logo {
+  opacity: 0.85;
+}
+
+.mobile-nav-header .mobile-nav-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.mobile-nav-header .navbar-logo,
+.mobile-nav-header .brand-logo {
+  height: 28px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-brand .footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: var(--space-sm);
+}
+
+.footer-brand .footer-logo,
+.footer-brand .brand-logo {
+  height: 38px;
+  width: auto;
+  max-width: 190px;
+  object-fit: contain;
+  display: block;
+  transition: opacity var(--transition-fast);
+}
+
+.footer-brand .footer-logo:hover,
+.footer-brand .brand-logo:hover {
+  opacity: 0.85;
 }
 
 .navbar-brand .brand-name {
@@ -67,6 +119,14 @@
   border-radius: 50%;
   background-color: var(--color-brand);
   display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand .navbar-logo,
+  .navbar-brand .brand-logo {
+    height: 28px;
+    max-width: 140px;
+  }
 }
 
 /* Main Nav */
