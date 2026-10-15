@@ -146,7 +146,7 @@ const HERO_SLIDES = [
     ctaLink: '#products-section',
     secondaryCta: 'Explore Categories',
     secondaryCtaLink: '#categories-section',
-    image: 'assets/images/hero/hero-1.png',
+    image: 'https://res.cloudinary.com/crgeslfr/image/upload/f_auto,q_auto/hero-1',
   },
   {
     id: 2,
