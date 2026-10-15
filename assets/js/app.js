@@ -2774,12 +2774,50 @@
     }
   }
 
-  function toggleMobileNav() {
+  function getMobileNavOverlay() {
+    let overlay = document.getElementById('mobile-nav-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'mobile-nav-overlay';
+      overlay.className = 'mobile-nav-overlay';
+      const nav = document.getElementById('mobile-nav');
+      if (nav && nav.parentNode) {
+        nav.parentNode.insertBefore(overlay, nav);
+      } else {
+        document.body.appendChild(overlay);
+      }
+      overlay.addEventListener('click', closeMobileNav);
+    }
+    return overlay;
+  }
+
+  function openMobileNav() {
     const nav = document.getElementById('mobile-nav');
     const hamburger = document.getElementById('hamburger');
-    nav.classList.toggle('open');
-    hamburger.classList.toggle('active');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+    const overlay = getMobileNavOverlay();
+    if (nav) nav.classList.add('open');
+    if (hamburger) hamburger.classList.add('active');
+    if (overlay) overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNav() {
+    const nav = document.getElementById('mobile-nav');
+    const hamburger = document.getElementById('hamburger');
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (nav) nav.classList.remove('open');
+    if (hamburger) hamburger.classList.remove('active');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobile-nav');
+    if (nav && nav.classList.contains('open')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
   }
 
   function showToast(message, actionText, actionCallback) {
@@ -2954,10 +2992,38 @@
 
     // Event bindings
     const hamburger = document.getElementById('hamburger');
-    if (hamburger) hamburger.addEventListener('click', toggleMobileNav);
+    if (hamburger) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileNav();
+      });
+    }
 
     const mobileNavClose = document.getElementById('mobile-nav-close');
-    if (mobileNavClose) mobileNavClose.addEventListener('click', toggleMobileNav);
+    if (mobileNavClose) mobileNavClose.addEventListener('click', closeMobileNav);
+
+    const mobileNavOverlay = getMobileNavOverlay();
+    if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+    // Close when clicking outside mobile nav
+    document.addEventListener('click', (e) => {
+      const nav = document.getElementById('mobile-nav');
+      const hamb = document.getElementById('hamburger');
+      if (!nav || !nav.classList.contains('open')) return;
+      if (!nav.contains(e.target) && (!hamb || !hamb.contains(e.target))) {
+        closeMobileNav();
+      }
+    });
+
+    // Close mobile nav when resizing to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) {
+        const nav = document.getElementById('mobile-nav');
+        if (nav && nav.classList.contains('open')) {
+          closeMobileNav();
+        }
+      }
+    });
 
     const modalClose = document.getElementById('modal-close');
     if (modalClose) modalClose.addEventListener('click', closeQuickView);
@@ -3012,7 +3078,7 @@
         const searchOverlay = document.getElementById('search-overlay');
         if (searchOverlay && searchOverlay.classList.contains('open')) toggleSearch();
         const mobileNav = document.getElementById('mobile-nav');
-        if (mobileNav && mobileNav.classList.contains('open')) toggleMobileNav();
+        if (mobileNav && mobileNav.classList.contains('open')) closeMobileNav();
       }
     });
 
@@ -3021,7 +3087,10 @@
     });
   }
 
-  // Expose wishlist API globally
+  // Expose mobile nav and wishlist API globally
+  window.openMobileNav = openMobileNav;
+  window.closeMobileNav = closeMobileNav;
+  window.toggleMobileNav = toggleMobileNav;
   window.openWishlist = openWishlist;
   window.closeWishlist = closeWishlist;
   window.toggleWishlistDrawer = toggleWishlistDrawer;

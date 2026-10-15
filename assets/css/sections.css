@@ -3752,19 +3752,26 @@ textarea.form-control {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 340px;
-  max-width: 88vw;
+  width: 80%;
+  max-width: 80vw;
   background: var(--color-surface-card);
   z-index: calc(var(--z-modal) + 1);
   transform: translateX(100%);
   transition: transform var(--transition-base);
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-lg);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
 }
 
 .filter-drawer.open {
   transform: translateX(0);
+}
+
+@media (min-width: 993px) {
+  .filter-drawer,
+  .filter-drawer-overlay {
+    display: none !important;
+  }
 }
 
 .filter-drawer-header {

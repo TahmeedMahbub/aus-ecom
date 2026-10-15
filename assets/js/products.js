@@ -362,19 +362,24 @@
     const closeBtn = document.getElementById('filter-drawer-close');
     const applyBtn = document.getElementById('btn-apply-mobile-filter');
 
-    if (triggerBtn) {
-      triggerBtn.addEventListener('click', () => {
-        if (drawerOverlay) drawerOverlay.classList.add('open');
-        if (drawer) drawer.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    }
+    const openDrawer = () => {
+      if (drawerOverlay) drawerOverlay.classList.add('open');
+      if (drawer) drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
 
     const closeDrawer = () => {
       if (drawerOverlay) drawerOverlay.classList.remove('open');
       if (drawer) drawer.classList.remove('open');
       document.body.style.overflow = '';
     };
+
+    if (triggerBtn) {
+      triggerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openDrawer();
+      });
+    }
 
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
@@ -384,6 +389,28 @@
         closeDrawer();
       });
     }
+
+    // Close when clicking outside filter drawer
+    document.addEventListener('click', (e) => {
+      if (!drawer || !drawer.classList.contains('open')) return;
+      if (!drawer.contains(e.target) && (!triggerBtn || !triggerBtn.contains(e.target))) {
+        closeDrawer();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+
+    // Close drawer when resized to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 992 && drawer && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
   }
 
   function clearAllFilters() {

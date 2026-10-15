@@ -48,16 +48,17 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
   white-space: nowrap;
   text-decoration: none;
 }
 
 .navbar-brand .navbar-logo,
 .navbar-brand .brand-logo {
-  height: 34px;
+  height: 24px;
   width: auto;
-  max-width: 180px;
+  max-width: 120px;
   object-fit: contain;
   display: block;
   transition: opacity var(--transition-fast);
@@ -72,13 +73,14 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  min-width: 0;
 }
 
 .mobile-nav-header .navbar-logo,
 .mobile-nav-header .brand-logo {
-  height: 28px;
+  height: 20px;
   width: auto;
-  max-width: 150px;
+  max-width: 100px;
   object-fit: contain;
   display: block;
 }
@@ -91,9 +93,9 @@
 
 .footer-brand .footer-logo,
 .footer-brand .brand-logo {
-  height: 38px;
+  height: 28px;
   width: auto;
-  max-width: 190px;
+  max-width: 135px;
   object-fit: contain;
   display: block;
   transition: opacity var(--transition-fast);
@@ -106,7 +108,7 @@
 
 .navbar-brand .brand-name {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-tight);
   color: var(--color-black);
@@ -124,8 +126,16 @@
 @media (max-width: 768px) {
   .navbar-brand .navbar-logo,
   .navbar-brand .brand-logo {
-    height: 28px;
-    max-width: 140px;
+    height: 18px;
+    max-width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand .navbar-logo,
+  .navbar-brand .brand-logo {
+    height: 16px;
+    max-width: 80px;
   }
 }
 
@@ -324,30 +334,64 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ── Mobile Nav Panel ── */
+/* ── Mobile Nav Overlay & Panel ── */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: calc(var(--z-overlay) - 1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .mobile-nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
+  max-width: 80vw;
   height: 100%;
   background-color: var(--color-surface-card);
   z-index: var(--z-overlay);
   transform: translateX(-100%);
   transition: transform var(--transition-slow);
   overflow-y: auto;
-  padding: var(--space-xl);
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-lg);
   padding-top: 80px;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
 }
 
 .mobile-nav.open {
   transform: translateX(0);
 }
 
-.mobile-nav-close {
+.mobile-nav-header {
   position: absolute;
-  top: var(--space-lg);
-  right: var(--space-lg);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  border-bottom: 1px solid var(--color-grey-200);
+  background: var(--color-surface-card);
+}
+
+.mobile-nav-close {
+  position: static;
   width: 40px;
   height: 40px;
   display: flex;
@@ -355,6 +399,22 @@
   justify-content: center;
   font-size: 1.5rem;
   color: var(--color-dark);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.mobile-nav-close:hover {
+  background-color: var(--color-grey-100);
+}
+
+@media (min-width: 1025px) {
+  .mobile-nav,
+  .mobile-nav-overlay {
+    display: none !important;
+  }
 }
 
 .mobile-nav-item {
@@ -2368,7 +2428,23 @@ body.search-modal-open {
     display: block;
   }
   .navbar-inner {
-    height: 56px;
+    height: 54px;
+    gap: 0.35rem;
+  }
+  .navbar-actions {
+    gap: 2px;
+  }
+  .navbar-action-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .navbar-action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .hamburger {
+    width: 34px;
+    height: 34px;
   }
   body {
     padding-bottom: 60px;
