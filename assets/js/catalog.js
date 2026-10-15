@@ -591,13 +591,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnRemove) {
       btnRemove.addEventListener('click', function () {
         if (colors.length <= 1) {
-          alert('You must have at least one color for color variants.');
           return;
         }
-        const proceed = (typeof window.confirm === 'function')
-          ? window.confirm(`Are you sure you want to remove color "${color.name}"? This will remove configured variants for this color.`)
-          : true;
-        if (!proceed) return;
         colors = colors.filter(c => c.id !== color.id);
         renderColorsList();
         renderVariantsMatrix();
@@ -1019,10 +1014,6 @@ document.addEventListener('DOMContentLoaded', function () {
     variantsTableBody.querySelectorAll('.btn-remove-variant').forEach(btn => {
       btn.addEventListener('click', function () {
         const key = this.dataset.key;
-        const proceed = (typeof window.confirm === 'function')
-          ? window.confirm(`Are you sure you want to remove variant "${key}"?`)
-          : true;
-        if (!proceed) return;
         if (variantsStore[key]) {
           delete variantsStore[key];
         }
@@ -1133,53 +1124,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Variant scenario change handler with user warning & data preservation
-  function handleVariantScenarioChange(radio, e) {
+  // Variant scenario change handler with seamless data preservation
+  function handleVariantScenarioChange(radio) {
     if (!radio.checked) return;
     const targetMode = radio.value;
     if (targetMode === activeVariantMode) return;
-
-    // Check if configured variants exist that will be restructured / removed from view
-    const hasConfiguredRows = variantsTableBody && variantsTableBody.querySelectorAll('tr.variant-tr').length > 0;
-    const hasConfiguredData = Object.keys(variantsStore).length > 0;
-
-    if (hasConfiguredRows || hasConfiguredData) {
-      const confirmMsg = "Warning: Switching variant scenarios will change the variant structure and update configured variants in the matrix. Do you want to proceed?";
-      const proceed = (typeof window.confirm === 'function') ? window.confirm(confirmMsg) : true;
-      if (!proceed) {
-        if (e && e.preventDefault) e.preventDefault();
-        const prevRadio = document.querySelector(`input[name="variantMode"][value="${activeVariantMode}"]`);
-        if (prevRadio) {
-          prevRadio.checked = true;
-        }
-        return false;
-      }
-    }
 
     activeVariantMode = targetMode;
     syncVariantModeUI();
   }
 
-  // Toggle Has Variants handler with warning when disabling active variants
-  function handleToggleVariantsChange(checkbox, e) {
+  // Toggle Has Variants handler
+  function handleToggleVariantsChange(checkbox) {
     const isNowChecked = checkbox.checked;
     if (isNowChecked === variantsEnabled) return;
-
-    if (!isNowChecked) {
-      // Disabling variants: check if configured variants exist
-      const hasConfiguredRows = variantsTableBody && variantsTableBody.querySelectorAll('tr.variant-tr').length > 0;
-      const hasConfiguredData = Object.keys(variantsStore).length > 0;
-
-      if (hasConfiguredRows || hasConfiguredData) {
-        const confirmMsg = "Warning: Disabling variants will hide the variant section and switch to product-level SKU, price, and stock. Configured variants will be removed from view. Do you want to proceed?";
-        const proceed = (typeof window.confirm === 'function') ? window.confirm(confirmMsg) : true;
-        if (!proceed) {
-          if (e && e.preventDefault) e.preventDefault();
-          checkbox.checked = true;
-          return false;
-        }
-      }
-    }
 
     variantsEnabled = isNowChecked;
     syncVariantModeUI();
@@ -1187,21 +1145,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Feature switches
   if (toggleVariants) {
-    toggleVariants.addEventListener('click', function (e) {
-      handleToggleVariantsChange(this, e);
-    });
-    toggleVariants.addEventListener('change', function (e) {
-      handleToggleVariantsChange(this, e);
+    toggleVariants.addEventListener('change', function () {
+      handleToggleVariantsChange(this);
     });
   }
 
   if (variantModeRadios) {
     variantModeRadios.forEach(radio => {
-      radio.addEventListener('click', function (e) {
-        handleVariantScenarioChange(this, e);
-      });
-      radio.addEventListener('change', function (e) {
-        handleVariantScenarioChange(this, e);
+      radio.addEventListener('change', function () {
+        handleVariantScenarioChange(this);
       });
     });
   }
