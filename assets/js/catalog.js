@@ -1196,36 +1196,242 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ====================================================
-  // 8. Size Guide Table Rows Builder
+  // 8. Catalog Size Guide Integration
   // ====================================================
-  const btnAddSizeGuideRow = document.getElementById('btnAddSizeGuideRow');
-  const sizeGuideTableBody = document.getElementById('sizeGuideTableBody');
+  const productSizeGuideSelect = document.getElementById('productSizeGuideSelect');
+  const btnClearSizeGuide = document.getElementById('btnClearSizeGuide');
+  const btnOpenGuideModalPreview = document.getElementById('btnOpenGuideModalPreview');
+  const productSizeGuidePreviewContainer = document.getElementById('productSizeGuidePreviewContainer');
+  const assignedGuideBadge = document.getElementById('assignedGuideBadge');
+  const guideUnitIndicator = document.getElementById('guideUnitIndicator');
 
-  if (btnAddSizeGuideRow && sizeGuideTableBody) {
-    btnAddSizeGuideRow.addEventListener('click', function () {
-      const tr = document.createElement('tr');
-      tr.className = 'align-middle';
-      tr.innerHTML = `
-        <td><input type="text" class="form-control form-control-sm" value="L"></td>
-        <td><input type="text" class="form-control form-control-sm" value="100 - 105"></td>
-        <td><input type="text" class="form-control form-control-sm" value="85 - 90"></td>
-        <td><input type="text" class="form-control form-control-sm" value="75"></td>
-        <td class="text-end">
-          <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-sg-row"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
-        </td>
-      `;
-      sizeGuideTableBody.appendChild(tr);
-      tr.querySelector('.btn-remove-sg-row').addEventListener('click', function () {
-        tr.remove();
-      });
+  // Customer Preview Modal Elements
+  const previewModalGuideTitle = document.getElementById('previewModalGuideTitle');
+  const previewModalSubtitle = document.getElementById('previewModalSubtitle');
+  const previewModalBody = document.getElementById('previewModalBody');
+
+  let selectedSizeGuideId = '';
+
+  function populateSizeGuideDropdown() {
+    if (!productSizeGuideSelect) return;
+    if (typeof window.SizeGuideStore === 'undefined') return;
+
+    const guides = window.SizeGuideStore.getAll();
+    productSizeGuideSelect.innerHTML = '<option value="">-- No Size Guide Assigned --</option>';
+
+    guides.forEach(g => {
+      const opt = document.createElement('option');
+      opt.value = g.id;
+      const unit = g.attributes && g.attributes[0] ? g.attributes[0].unit : 'cm';
+      const statusSuffix = g.status !== 'Active' ? ` [${g.status}]` : '';
+      opt.textContent = `${g.title} (${g.id}) • ${unit.toUpperCase()}${statusSuffix}`;
+      productSizeGuideSelect.appendChild(opt);
     });
 
-    document.querySelectorAll('.btn-remove-sg-row').forEach(btn => {
-      btn.addEventListener('click', function () {
-        this.closest('tr').remove();
+    // Default to SG-1003 (Dining Tables) on demo product pages if available
+    const defaultGuide = guides.find(g => g.id === 'SG-1003');
+    if (defaultGuide) {
+      selectedSizeGuideId = defaultGuide.id;
+      productSizeGuideSelect.value = defaultGuide.id;
+      renderAssignedSizeGuide(defaultGuide.id);
+    } else {
+      renderAssignedSizeGuide('');
+    }
+  }
+
+  function renderAssignedSizeGuide(guideId) {
+    selectedSizeGuideId = guideId || '';
+    if (!productSizeGuidePreviewContainer) return;
+
+    if (!guideId || typeof window.SizeGuideStore === 'undefined') {
+      if (assignedGuideBadge) {
+        assignedGuideBadge.className = 'badge bg-label-secondary fs-9';
+        assignedGuideBadge.textContent = 'None Assigned';
+      }
+      if (guideUnitIndicator) guideUnitIndicator.style.display = 'none';
+      if (btnOpenGuideModalPreview) btnOpenGuideModalPreview.disabled = true;
+
+      productSizeGuidePreviewContainer.innerHTML = `
+        <div class="text-center py-4 rounded border border-dashed" style="background-color: var(--beige-bg-alt); border-color: var(--beige-border-subtle) !important;">
+          <i class="mdi mdi-ruler-square fs-2 text-muted mb-2 d-block"></i>
+          <div class="fw-semibold text-dark fs-8 mb-1">No Size Guide Assigned</div>
+          <p class="text-muted fs-9 mb-0">Select an existing catalog size guide above to display measurements to your customers.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Retrieve public guide: strictly strips adminDetails
+    const publicGuide = window.SizeGuideStore.getPublicGuide(guideId, true);
+    if (!publicGuide) {
+      productSizeGuidePreviewContainer.innerHTML = `
+        <div class="alert alert-warning py-2 px-3 fs-8 mb-0">
+          <i class="mdi mdi-alert-circle-outline me-1"></i> Selected size guide was not found in the catalog.
+        </div>
+      `;
+      return;
+    }
+
+    const primaryUnit = (publicGuide.attributes && publicGuide.attributes[0]) ? publicGuide.attributes[0].unit : 'cm';
+
+    if (assignedGuideBadge) {
+      assignedGuideBadge.className = publicGuide.status === 'Active' ? 'badge bg-label-success fs-9' : 'badge bg-label-secondary fs-9';
+      assignedGuideBadge.textContent = `${publicGuide.title} (${publicGuide.status})`;
+    }
+
+    if (guideUnitIndicator) {
+      guideUnitIndicator.textContent = `Unit: ${primaryUnit.toUpperCase()}`;
+      guideUnitIndicator.style.display = 'inline-block';
+    }
+
+    if (btnOpenGuideModalPreview) btnOpenGuideModalPreview.disabled = false;
+
+    // Build attributes columns
+    const attributes = publicGuide.attributes || [];
+    const sizes = publicGuide.sizes || [];
+
+    let tableHeadersHTML = '<th style="min-width: 110px;">Size</th>';
+    attributes.forEach(attr => {
+      tableHeadersHTML += `<th>${attr.name} <span class="badge bg-label-secondary fs-9 ms-1">${attr.unit}</span></th>`;
+    });
+
+    let tableRowsHTML = '';
+    if (sizes.length === 0) {
+      tableRowsHTML = `<tr><td colspan="${attributes.length + 1}" class="text-center py-3 text-muted">No measurement sizes defined.</td></tr>`;
+    } else {
+      sizes.forEach(s => {
+        tableRowsHTML += `<tr><td class="fw-bold text-dark">${s.size}</td>`;
+        attributes.forEach(attr => {
+          const val = (s.measurements && s.measurements[attr.key]) ? s.measurements[attr.key] : '—';
+          tableRowsHTML += `<td>${val}</td>`;
+        });
+        tableRowsHTML += `</tr>`;
       });
+    }
+
+    const customerNotesHTML = publicGuide.customerDetails ? `
+      <div class="alert alert-secondary py-2 px-3 fs-9 mb-3 d-flex align-items-start gap-2" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle); color: var(--beige-text-primary);">
+        <i class="mdi mdi-information-outline text-primary fs-6 mt-0"></i>
+        <div>
+          <strong>Customer Notes:</strong> ${publicGuide.customerDetails}
+        </div>
+      </div>
+    ` : '';
+
+    productSizeGuidePreviewContainer.innerHTML = `
+      ${customerNotesHTML}
+      <div class="table-responsive rounded border mb-2" style="border-color: var(--beige-border-subtle) !important;">
+        <table class="table align-middle fs-8 mb-0 table-striped">
+          <thead class="table-light">
+            <tr>${tableHeadersHTML}</tr>
+          </thead>
+          <tbody>
+            ${tableRowsHTML}
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex align-items-center justify-content-between pt-2">
+        <small class="text-muted fs-9"><i class="mdi mdi-tag-outline me-1"></i> Key: <code>${publicGuide.key}</code></small>
+        <a href="size-guide-details.html?id=${publicGuide.id}" target="_blank" class="fs-9 text-primary hover-underline">
+          <i class="mdi mdi-open-in-new me-1"></i> View Full Guide Specifications
+        </a>
+      </div>
+    `;
+  }
+
+  function openCustomerGuideModal() {
+    if (!selectedSizeGuideId || typeof window.SizeGuideStore === 'undefined') return;
+    const publicGuide = window.SizeGuideStore.getPublicGuide(selectedSizeGuideId, true);
+    if (!publicGuide) return;
+
+    if (previewModalGuideTitle) {
+      previewModalGuideTitle.textContent = publicGuide.title;
+    }
+    if (previewModalSubtitle) {
+      previewModalSubtitle.textContent = `${publicGuide.category || 'Apparel & Goods'} • Storefront Customer View`;
+    }
+
+    if (previewModalBody) {
+      const attributes = publicGuide.attributes || [];
+      const sizes = publicGuide.sizes || [];
+
+      let thHTML = '<th style="min-width: 100px;">Size</th>';
+      attributes.forEach(attr => {
+        thHTML += `<th>${attr.name} (${attr.unit})</th>`;
+      });
+
+      let trHTML = '';
+      sizes.forEach(s => {
+        trHTML += `<tr><td class="fw-bold text-dark">${s.size}</td>`;
+        attributes.forEach(attr => {
+          const val = (s.measurements && s.measurements[attr.key]) ? s.measurements[attr.key] : '—';
+          trHTML += `<td>${val}</td>`;
+        });
+        trHTML += `</tr>`;
+      });
+
+      previewModalBody.innerHTML = `
+        <div class="alert alert-light border d-flex align-items-center gap-2 mb-3 py-2 px-3 fs-8" style="background-color: var(--beige-bg-alt); border-color: var(--beige-border-subtle) !important;">
+          <i class="mdi mdi-shield-check text-success fs-5"></i>
+          <div>
+            <strong>Storefront Safe:</strong> Only customer measurements and guidance are displayed. All admin-only details remain strictly confidential.
+          </div>
+        </div>
+
+        ${publicGuide.customerDetails ? `
+          <div class="mb-3">
+            <h6 class="fs-8 fw-bold text-dark mb-1"><i class="mdi mdi-text-box-outline text-primary me-1"></i> Fit & Measurement Guidance</h6>
+            <p class="text-muted fs-8 mb-0">${publicGuide.customerDetails}</p>
+          </div>
+        ` : ''}
+
+        <h6 class="fs-8 fw-bold text-dark mb-2"><i class="mdi mdi-table me-1 text-primary"></i> Measurement Chart (${attributes[0]?.unit || 'cm'})</h6>
+        <div class="table-responsive rounded border mb-3">
+          <table class="table table-sm align-middle fs-8 mb-0 table-striped">
+            <thead class="table-light">
+              <tr>${thHTML}</tr>
+            </thead>
+            <tbody>
+              ${trHTML}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="p-3 rounded" style="background-color: var(--beige-bg-alt); border: 1px solid var(--beige-border-subtle);">
+          <div class="fw-bold fs-8 text-dark mb-1"><i class="mdi mdi-help-circle-outline text-primary me-1"></i> How to Measure for Best Fit</div>
+          <p class="text-muted fs-9 mb-0">For best accuracy, measure using a soft tape measure while standing naturally. Compare your body measurements with the chart above to find your recommended size.</p>
+        </div>
+      `;
+    }
+
+    const modalEl = document.getElementById('modalCustomerSizeGuide');
+    if (modalEl && typeof bootstrap !== 'undefined') {
+      const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+      modal.show();
+    }
+  }
+
+  if (productSizeGuideSelect) {
+    productSizeGuideSelect.addEventListener('change', function () {
+      renderAssignedSizeGuide(this.value);
     });
   }
+
+  if (btnClearSizeGuide) {
+    btnClearSizeGuide.addEventListener('click', function () {
+      if (productSizeGuideSelect) {
+        productSizeGuideSelect.value = '';
+        renderAssignedSizeGuide('');
+      }
+    });
+  }
+
+  if (btnOpenGuideModalPreview) {
+    btnOpenGuideModalPreview.addEventListener('click', openCustomerGuideModal);
+  }
+
+  // Populate dropdown on startup
+  populateSizeGuideDropdown();
 
   // ====================================================
   // 9. Custom Attributes Builder
@@ -1276,6 +1482,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const activeVariants = Object.values(variantsStore).filter(v => v.active).length;
         msg += `\nActive Sellable Variants: ${activeVariants}`;
       }
+      if (selectedSizeGuideId) {
+        msg += `\nAssigned Size Guide: ${selectedSizeGuideId}`;
+      }
       alert(msg);
       window.location.href = 'products.html';
     });
@@ -1300,6 +1509,15 @@ document.addEventListener('DOMContentLoaded', function () {
     set activeVariantMode(val) { activeVariantMode = val; },
     get variantsEnabled() { return variantsEnabled; },
     set variantsEnabled(val) { variantsEnabled = val; },
+    get selectedSizeGuideId() { return selectedSizeGuideId; },
+    set selectedSizeGuideId(val) { 
+      selectedSizeGuideId = val;
+      if (productSizeGuideSelect) productSizeGuideSelect.value = val;
+      renderAssignedSizeGuide(val);
+    },
+    populateSizeGuideDropdown,
+    renderAssignedSizeGuide,
+    openCustomerGuideModal,
     handleVariantScenarioChange,
     handleToggleVariantsChange,
     renderMainImage,

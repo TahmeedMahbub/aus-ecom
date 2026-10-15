@@ -79,6 +79,7 @@
                 <li class="menu-item"><a href="categories.html" class="menu-link"><div>Categories</div></a></li>
                 <li class="menu-item"><a href="subcategories.html" class="menu-link"><div>Subcategories</div></a></li>
                 <li class="menu-item"><a href="brands.html" class="menu-link"><div>Brands</div></a></li>
+                <li class="menu-item"><a href="size-guides.html" class="menu-link"><div>Size Guides</div></a></li>
               </ul>
             </li>
             <li class="menu-item"><a href="javascript:void(0);" class="menu-link menu-toggle"><i class="menu-icon tf-icons mdi mdi-cart-outline"></i><div>Sales</div></a>
@@ -336,50 +337,49 @@
                       </div>
                     </div>
 
-                    <!-- 6. Size Guide Builder -->
+                    <!-- 6. Size Guide Assignment Card -->
                     <div class="card mb-4" id="cardSizeGuide">
                       <div class="card-header border-bottom py-3 d-flex align-items-center justify-content-between">
-                        <h5 class="card-title mb-0 fs-6"><table class="mdi mdi-table-furniture me-2 text-primary"></table> Optional Size Guide Chart</h5>
-                        <button type="button" class="btn btn-sm btn-outline-beige" id="btnAddSizeGuideRow"><i class="mdi mdi-plus me-1"></i> Add Measurement Row</button>
+                        <div class="d-flex align-items-center gap-2">
+                          <h5 class="card-title mb-0 fs-6"><i class="mdi mdi-ruler-square me-2 text-primary"></i> Size Guide</h5>
+                          <span class="badge bg-label-secondary fs-9" id="assignedGuideBadge">None Assigned</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                          <a href="size-guides.html" target="_blank" class="btn btn-xs btn-outline-beige"><i class="mdi mdi-open-in-new me-1"></i> Manage Guides</a>
+                        </div>
                       </div>
                       <div class="card-body pt-3">
-                        <div class="mb-3">
-                          <label class="form-label fw-bold fs-8">Size Guide Title</label>
-                          <input type="text" class="form-control" value="Dining Table Dimension Chart">
+                        <p class="fs-8 text-muted mb-3">
+                          Assign a standardized size & measurement guide from your Catalog to help customers choose their best fit on the storefront.
+                        </p>
+
+                        <div class="row g-3 mb-3">
+                          <div class="col-12 col-md-8">
+                            <label class="form-label fw-bold fs-8" for="productSizeGuideSelect">Assigned Catalog Guide</label>
+                            <div class="input-group">
+                              <span class="input-group-text bg-white"><i class="mdi mdi-format-list-bulleted-type text-primary"></i></span>
+                              <select class="form-select" id="productSizeGuideSelect">
+                                <option value="">-- No Size Guide Assigned --</option>
+                              </select>
+                              <button type="button" class="btn btn-outline-secondary btn-sm" id="btnClearSizeGuide">Clear</button>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-4 d-flex align-items-end">
+                            <button type="button" class="btn btn-outline-beige w-100" id="btnOpenGuideModalPreview" disabled>
+                              <i class="mdi mdi-eye-outline me-1"></i> Storefront Preview
+                            </button>
+                          </div>
                         </div>
 
-                        <div class="table-responsive">
-                          <table class="table align-middle fs-8 border mb-0">
-                            <thead>
-                              <tr>
-                                <th>Size</th>
-                                <th>Length (cm)</th>
-                                <th>Width (cm)</th>
-                                <th>Seating Capacity</th>
-                                <th class="text-end">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody id="sizeGuideTableBody">
-                              <tr>
-                                <td><input type="text" class="form-control form-control-sm" value="6-Seater"></td>
-                                <td><input type="text" class="form-control form-control-sm" value="180 cm"></td>
-                                <td><input type="text" class="form-control form-control-sm" value="90 cm"></td>
-                                <td><input type="text" class="form-control form-control-sm" value="6 Persons"></td>
-                                <td class="text-end">
-                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-sg-row"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><input type="text" class="form-control form-control-sm" value="8-Seater"></td>
-                                <td><input type="text" class="form-control form-control-sm" value="220 cm"></td>
-                                <td><input type="text" class="form-control form-control-sm" value="100 cm"></td>
-                                <td><input type="text" class="form-control form-control-sm" value="8 Persons"></td>
-                                <td class="text-end">
-                                  <button type="button" class="btn btn-sm btn-icon text-danger btn-remove-sg-row"><i class="mdi mdi-trash-can-outline fs-5"></i></button>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                        <!-- Storefront Privacy Disclaimer -->
+                        <div class="d-flex align-items-center justify-content-between p-2 rounded mb-3 bg-label-secondary fs-9">
+                          <span><i class="mdi mdi-shield-check-outline text-success me-1"></i> <strong>Storefront Privacy:</strong> Only customer measurements and notes are published. Internal admin notes remain private.</span>
+                          <span class="badge bg-label-primary fs-9" id="guideUnitIndicator" style="display: none;">Unit: cm</span>
+                        </div>
+
+                        <!-- Dynamic Measurement Preview Container -->
+                        <div id="productSizeGuidePreviewContainer">
+                          <!-- Populated dynamically by catalog.js -->
                         </div>
                       </div>
                     </div>
@@ -636,6 +636,31 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
 
+    <!-- Storefront Customer Size Guide Modal Preview -->
+    <div class="modal fade" id="modalCustomerSizeGuide" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 12px; border: 1px solid var(--beige-border-subtle);">
+          <div class="modal-header border-bottom py-3">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-label-primary p-2 rounded"><i class="mdi mdi-ruler-square fs-5"></i></span>
+              <div>
+                <h5 class="modal-title fs-6 fw-bold mb-0 text-dark" id="previewModalGuideTitle">Size & Measurement Guide</h5>
+                <small class="text-muted fs-9" id="previewModalSubtitle">Storefront Customer View</small>
+              </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4" id="previewModalBody">
+            <!-- Dynamic Public Content -->
+          </div>
+          <div class="modal-footer border-top py-2 px-4 d-flex justify-content-between">
+            <span class="text-muted fs-9"><i class="mdi mdi-shield-check-outline text-success me-1"></i> 🔒 Private admin notes excluded</span>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- CORE JS -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
     <script src="assets/vendor/libs/popper/popper.js"></script>
@@ -645,6 +670,9 @@
     <script src="assets/vendor/js/menu.js"></script>
     <script src="assets/js/main.js"></script>
     
+    <!-- SIZE GUIDE STORE -->
+    <script src="assets/js/size-guide-store.js"></script>
+
     <!-- CATALOG SPECIFIC JS -->
     <script src="assets/js/catalog.js"></script>
   </body>
